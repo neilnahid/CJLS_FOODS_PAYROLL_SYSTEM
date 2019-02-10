@@ -12,7 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using CJLS_FOODS_PAYROLL_SYSTEM.Models;
+using CJLS_FOODS_PAYROLL_SYSTEM.Views;
 namespace CJLS_FOODS_PAYROLL_SYSTEM {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -46,6 +47,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM {
                 if(result.Count > 0) {
                     //successful login
                     MessageBox.Show("Successfully logged in!");
+                    Form_Dashboard form_Dashboard = new Form_Dashboard();
+                    MessageBox.Show(result[0].Username);
+                    Controls.Session.userID = result[0].UserID;
+                    Controls.Session.employeeID = (int)result[0].EmployeeID;
+                    Controls.Session.userName = result[0].Username;
+                    form_Dashboard.Show();
+                    this.Hide();
                 }
                 else {
                     //incorrect credentials
@@ -54,6 +62,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM {
                     txtbox_userName.Text = "";
                 }
             }
+        }
+
+        private void Window_RequestBringIntoView(object sender, RequestBringIntoViewEventArgs e) {
+
         }
     }
 }

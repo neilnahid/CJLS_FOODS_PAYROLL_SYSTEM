@@ -1,0 +1,46 @@
+﻿<Window x:Class="CJLS_FOODS_PAYROLL_SYSTEM.Views.Form_Dashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.Views"
+        mc:Ignorable="d"
+        Title="Form_Dashboard" Height="450" Width="800">
+    <TabControl>
+        <TabItem Header="Employees
+">
+            <Grid Background="#FFE5E5E5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="21*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="175*"/>
+                    <RowDefinition Height="110*"/>
+                    <RowDefinition Height="32*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="12*"/>
+                    <ColumnDefinition Width="80*"/>
+                    <ColumnDefinition Width="200*"/>
+                    <ColumnDefinition Width="429*"/>
+                    <ColumnDefinition Width="65*"/>
+                </Grid.ColumnDefinitions>
+                <WrapPanel Grid.Row="1" Grid.Column="2"/>
+                <Viewbox Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Stretch="Fill">
+                    <ListBox Height="100" Width="100"/>
+                </Viewbox>
+                <Viewbox Grid.Column="2" Grid.Row="1" Stretch="Fill">
+                    <TextBox Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
+                </Viewbox>
+                <Viewbox Grid.Column="1" Grid.Row="1" Stretch="Fill">
+                    <Label Content="Search :"/>
+                </Viewbox>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Payroll">
+            <Grid Background="#FFE5E5E5"/>
+        </TabItem>
+        <TabItem Header="Reports">
+            <Grid Background="#FFE5E5E5"/>
+        </TabItem>
+    </TabControl>
+</Window>
