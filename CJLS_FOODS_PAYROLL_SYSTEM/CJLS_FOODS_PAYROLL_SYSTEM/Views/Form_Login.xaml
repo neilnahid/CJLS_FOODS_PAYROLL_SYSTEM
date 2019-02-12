@@ -5,42 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM"
         mc:Ignorable="d"
-        Title="MainWindow" Height="395" Width="500">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="130*"/>
-            <RowDefinition Height="45*"/>
-            <RowDefinition Height="45*"/>
-            <RowDefinition Height="45*"/>
-            <RowDefinition Height="130*"/>
-
-        </Grid.RowDefinitions>
+        Title="CJLS Foods Company" Height="570" Width="450" WindowStyle="ToolWindow" Background="#EFF9F0" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid OverridesDefaultStyle ="True" KeyDown="PressedEnterKey">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#CDF7F6" Offset="1"/>
+                <GradientStop Color="#8FB8DE" Offset="0.764"/>
+                <GradientStop Color="#F1F1F2" Offset="0.112"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="130*"/>
-            <ColumnDefinition Width="100*"/>
-            <ColumnDefinition Width="120*"/>
-            <ColumnDefinition Width="160*"/>
-        </Grid.ColumnDefinitions>
-        <Viewbox Grid.Column="1" Grid.Row="1" UseLayoutRounding="False" Stretch="Fill">
-            <Label x:Name="lbl_username" Content="Username :" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Width="124" />
-        </Viewbox>
-        <Viewbox Grid.Column="2" Grid.Row="1">
-            <TextBox x:Name="txtbox_userName" Height="23" TextWrapping="Wrap" Text="" Width="135" TabIndex="1"/>
-        </Viewbox>
+            <ColumnDefinition Width="25*"/>
+            <ColumnDefinition Width="39*"/>
+            <ColumnDefinition Width="26*"/>
 
-        <Viewbox Grid.Column="1" Grid.Row="2" Stretch="Fill">
-            <Label x:Name="lbl_password" Content="Password :" Width="123" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
-        </Viewbox>
-        <Viewbox Grid.Column="2" Grid.Row="2">
-            <TextBox x:Name="txtbox_password" Height="23" TextWrapping="Wrap" Text="" Width="135" TabIndex="2"/>
-        </Viewbox>
-        <Viewbox Grid.Column="1" Grid.Row="3" Stretch="Fill">
-            <Label x:Name="lbl_forgetPassword" Content="Forgot Password?" MouseLeave="Lbl_forgetPassword_MouseLeave" MouseEnter="Lbl_forgetPassword_MouseEnter" HorizontalContentAlignment="Stretch"/>
-        </Viewbox>
-        <Viewbox Grid.Column="2" Grid.Row="3" Stretch="Fill">
-            <Viewbox x:Name="viewbox_btn_Login" HorizontalAlignment="Right" Width="278" Height="87">
-                <Button x:Name="btn_login" Content="Login" Click="Btn_login_Click" TabIndex="3" VerticalContentAlignment="Stretch" HorizontalAlignment="Center" Width="75" VerticalAlignment="Center"/>
-            </Viewbox>
-        </Viewbox>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="74*"/>
+            <RowDefinition Height="101*"/>
+            <RowDefinition Height="33*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="37*"/>
+            <RowDefinition Height="11*"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="224*"/>
+        </Grid.RowDefinitions>
+        <Label Content="LOGIN" FontSize="48" VerticalContentAlignment="Bottom"  HorizontalContentAlignment="Center"  Background="#5DB7DE" Foreground="#171A21" Grid.ColumnSpan="3"/>
+        <TextBox Padding="10,0,0,0" x:Name="txtbox_username" Grid.Column="1" Grid.Row="2"  Background="{x:Null}" VerticalContentAlignment="Center" TextWrapping="Wrap" HorizontalContentAlignment="Left" Text="Enter username"  Foreground="Gray" BorderBrush="#171A21"  BorderThickness="1" GotFocus="textBox_GotFocus" LostFocus="textBox_LeaveFocus" />
+        <TextBox x:Name="txtbox_password" Padding="10,0,0,0" Grid.Column="1" Grid.Row="4"  Background="{x:Null}" VerticalContentAlignment="Center" TextWrapping="Wrap" HorizontalContentAlignment="Left" Text="Enter password"  Foreground="Gray" BorderBrush="#171A21"  BorderThickness="1" GotFocus="textBox_GotFocus" LostFocus="textBox_LeaveFocus"/>
+        <Button x:Name="btn_login" Content="Login" Grid.Row="6" Grid.Column="1" FontSize="20" Background="#1A535C" Foreground="#F7FFF7" BorderThickness="1" BorderBrush="#1A535C" Click="btn_login_Click"/>
+        <Image Stretch="Uniform" Margin="89,3,0,2" Grid.Row="4">
+            <Image.Source>
+                <BitmapImage UriSource="/Assets/password-key.png"/>
+            </Image.Source>
+        </Image>
+        <Image Stretch="Uniform" Margin="89,3,0,2" Grid.Row="2">
+            <Image.Source>
+                <BitmapImage UriSource="/Assets/user-login-icon.png"/>
+            </Image.Source>
+        </Image>
     </Grid>
 </Window>
