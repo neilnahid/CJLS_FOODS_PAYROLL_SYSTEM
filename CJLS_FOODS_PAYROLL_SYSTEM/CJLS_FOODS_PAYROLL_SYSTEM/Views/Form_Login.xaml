@@ -31,8 +31,9 @@
             <RowDefinition Height="224*"/>
         </Grid.RowDefinitions>
         <Label Content="LOGIN" FontSize="48" VerticalContentAlignment="Bottom"  HorizontalContentAlignment="Center"  Background="#5DB7DE" Foreground="#171A21" Grid.ColumnSpan="3"/>
-        <TextBox Padding="10,0,0,0" x:Name="txtbox_username" Grid.Column="1" Grid.Row="2"  Background="{x:Null}" VerticalContentAlignment="Center" TextWrapping="Wrap" HorizontalContentAlignment="Left" Text="Enter username"  Foreground="Gray" BorderBrush="#171A21"  BorderThickness="1" GotFocus="textBox_GotFocus" LostFocus="textBox_LeaveFocus" />
+        <TextBox Padding="10,0,0,0" x:Name="txtbox_username" Grid.Column="1" Grid.Row="2"  Background="{x:Null}" VerticalContentAlignment="Center" TextWrapping="Wrap" HorizontalContentAlignment="Left" Text="Enter username"  Foreground="Gray" BorderBrush="#171A21"  BorderThickness="1" GotFocus="textBox_GotFocus" LostFocus="textBox_LeaveFocus" GotKeyboardFocus="textBox_GotFocus" />
         <TextBox x:Name="txtbox_password" Padding="10,0,0,0" Grid.Column="1" Grid.Row="4"  Background="{x:Null}" VerticalContentAlignment="Center" TextWrapping="Wrap" HorizontalContentAlignment="Left" Text="Enter password"  Foreground="Gray" BorderBrush="#171A21"  BorderThickness="1" GotFocus="textBox_GotFocus" LostFocus="textBox_LeaveFocus"/>
+        
         <Button x:Name="btn_login" Content="Login" Grid.Row="6" Grid.Column="1" FontSize="20" Background="#1A535C" Foreground="#F7FFF7" BorderThickness="1" BorderBrush="#1A535C" Click="btn_login_Click"/>
         <Image Stretch="Uniform" Margin="89,3,0,2" Grid.Row="4">
             <Image.Source>

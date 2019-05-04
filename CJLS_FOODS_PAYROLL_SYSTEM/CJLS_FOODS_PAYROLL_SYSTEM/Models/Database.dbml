@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CJLSFOODSPAYROLL" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=NEIL\SQLEXPRESS;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True" SettingsObjectName="CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings" SettingsPropertyName="CJLSFOODSPAYROLLConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.tbl_ContributionsLog" Member="tbl_ContributionsLogs">
-    <Type Name="tbl_ContributionsLog">
-      <Column Name="ContributionsLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ContributionsTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="tbl_ContributionsType_tbl_ContributionsLog" Member="tbl_ContributionsType" ThisKey="ContributionsTypeID" OtherKey="ContributionsTypeID" Type="tbl_ContributionsType" IsForeignKey="true" />
-      <Association Name="tbl_Employee_tbl_ContributionsLog" Member="tbl_Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="tbl_Employee" IsForeignKey="true" />
+  <Table Name="dbo.tbl_Deductions" Member="tbl_Deductions">
+    <Type Name="tbl_Deduction">
+      <Column Name="DeductionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DeductionName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DeductionFlatRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DeductionPercentRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="tbl_Deduction_tbl_DeductionsLog" Member="tbl_DeductionsLogs" ThisKey="DeductionID" OtherKey="DeductionID" Type="tbl_DeductionsLog" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Users" Member="tbl_Users">
@@ -20,31 +20,14 @@
       <Association Name="tbl_Employee_tbl_User" Member="tbl_Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="tbl_Employee" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tbl_ContributionsType" Member="tbl_ContributionsTypes">
-    <Type Name="tbl_ContributionsType">
-      <Column Name="ContributionsTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="ContributionName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="ContributionFlatRate" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="ContributionPercentRate" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Association Name="tbl_ContributionsType_tbl_ContributionsLog" Member="tbl_ContributionsLogs" ThisKey="ContributionsTypeID" OtherKey="ContributionsTypeID" Type="tbl_ContributionsLog" />
-    </Type>
-  </Table>
   <Table Name="dbo.tbl_DeductionsLog" Member="tbl_DeductionsLogs">
     <Type Name="tbl_DeductionsLog">
-      <Column Name="DeductionsLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DeductionsLogID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DeductionTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="tbl_DeductionsType_tbl_DeductionsLog" Member="tbl_DeductionsType" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="tbl_DeductionsType" IsForeignKey="true" />
+      <Column Name="DeductionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateApplied" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="tbl_Deduction_tbl_DeductionsLog" Member="tbl_Deduction" ThisKey="DeductionID" OtherKey="DeductionID" Type="tbl_Deduction" IsForeignKey="true" />
       <Association Name="tbl_Employee_tbl_DeductionsLog" Member="tbl_Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="tbl_Employee" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbl_DeductionsType" Member="tbl_DeductionsTypes">
-    <Type Name="tbl_DeductionsType">
-      <Column Name="DeductionTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="DeductionName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="DeductionFlatRate" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="DeductionPercentRate" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Association Name="tbl_DeductionsType_tbl_DeductionsLog" Member="tbl_DeductionsLogs" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="tbl_DeductionsLog" />
     </Type>
   </Table>
   <Table Name="dbo.tbl_Employees" Member="tbl_Employees">
@@ -59,7 +42,6 @@
       <Column Name="Gender" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="AvailableLeaves" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="EmployeeTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="tbl_Employee_tbl_ContributionsLog" Member="tbl_ContributionsLogs" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="tbl_ContributionsLog" />
       <Association Name="tbl_Employee_tbl_User" Member="tbl_Users" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="tbl_User" />
       <Association Name="tbl_Employee_tbl_DeductionsLog" Member="tbl_DeductionsLogs" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="tbl_DeductionsLog" />
       <Association Name="tbl_Employee_tbl_Payroll" Member="tbl_Payrolls" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="tbl_Payroll" />
@@ -79,7 +61,6 @@
       <Column Name="PayrollID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TotalDeductions" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="TotalContributions" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="NumberOfHoursWorked" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="OvertimeWorked" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="OvertimePay" Type="System.Double" DbType="Float" CanBeNull="true" />

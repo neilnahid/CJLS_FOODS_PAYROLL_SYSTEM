@@ -30,21 +30,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Inserttbl_ContributionsLog(tbl_ContributionsLog instance);
-    partial void Updatetbl_ContributionsLog(tbl_ContributionsLog instance);
-    partial void Deletetbl_ContributionsLog(tbl_ContributionsLog instance);
+    partial void Inserttbl_Deduction(tbl_Deduction instance);
+    partial void Updatetbl_Deduction(tbl_Deduction instance);
+    partial void Deletetbl_Deduction(tbl_Deduction instance);
     partial void Inserttbl_User(tbl_User instance);
     partial void Updatetbl_User(tbl_User instance);
     partial void Deletetbl_User(tbl_User instance);
-    partial void Inserttbl_ContributionsType(tbl_ContributionsType instance);
-    partial void Updatetbl_ContributionsType(tbl_ContributionsType instance);
-    partial void Deletetbl_ContributionsType(tbl_ContributionsType instance);
     partial void Inserttbl_DeductionsLog(tbl_DeductionsLog instance);
     partial void Updatetbl_DeductionsLog(tbl_DeductionsLog instance);
     partial void Deletetbl_DeductionsLog(tbl_DeductionsLog instance);
-    partial void Inserttbl_DeductionsType(tbl_DeductionsType instance);
-    partial void Updatetbl_DeductionsType(tbl_DeductionsType instance);
-    partial void Deletetbl_DeductionsType(tbl_DeductionsType instance);
     partial void Inserttbl_Employee(tbl_Employee instance);
     partial void Updatetbl_Employee(tbl_Employee instance);
     partial void Deletetbl_Employee(tbl_Employee instance);
@@ -86,11 +80,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<tbl_ContributionsLog> tbl_ContributionsLogs
+		public System.Data.Linq.Table<tbl_Deduction> tbl_Deductions
 		{
 			get
 			{
-				return this.GetTable<tbl_ContributionsLog>();
+				return this.GetTable<tbl_Deduction>();
 			}
 		}
 		
@@ -102,27 +96,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 			}
 		}
 		
-		public System.Data.Linq.Table<tbl_ContributionsType> tbl_ContributionsTypes
-		{
-			get
-			{
-				return this.GetTable<tbl_ContributionsType>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tbl_DeductionsLog> tbl_DeductionsLogs
 		{
 			get
 			{
 				return this.GetTable<tbl_DeductionsLog>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tbl_DeductionsType> tbl_DeductionsTypes
-		{
-			get
-			{
-				return this.GetTable<tbl_DeductionsType>();
 			}
 		}
 		
@@ -158,174 +136,132 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_ContributionsLog")]
-	public partial class tbl_ContributionsLog : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Deductions")]
+	public partial class tbl_Deduction : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _ContributionsLogID;
+		private int _DeductionID;
 		
-		private System.Nullable<int> _EmployeeID;
+		private string _DeductionName;
 		
-		private System.Nullable<int> _ContributionsTypeID;
+		private System.Nullable<double> _DeductionFlatRate;
 		
-		private EntityRef<tbl_ContributionsType> _tbl_ContributionsType;
+		private System.Nullable<double> _DeductionPercentRate;
 		
-		private EntityRef<tbl_Employee> _tbl_Employee;
+		private EntitySet<tbl_DeductionsLog> _tbl_DeductionsLogs;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnContributionsLogIDChanging(int value);
-    partial void OnContributionsLogIDChanged();
-    partial void OnEmployeeIDChanging(System.Nullable<int> value);
-    partial void OnEmployeeIDChanged();
-    partial void OnContributionsTypeIDChanging(System.Nullable<int> value);
-    partial void OnContributionsTypeIDChanged();
+    partial void OnDeductionIDChanging(int value);
+    partial void OnDeductionIDChanged();
+    partial void OnDeductionNameChanging(string value);
+    partial void OnDeductionNameChanged();
+    partial void OnDeductionFlatRateChanging(System.Nullable<double> value);
+    partial void OnDeductionFlatRateChanged();
+    partial void OnDeductionPercentRateChanging(System.Nullable<double> value);
+    partial void OnDeductionPercentRateChanged();
     #endregion
 		
-		public tbl_ContributionsLog()
+		public tbl_Deduction()
 		{
-			this._tbl_ContributionsType = default(EntityRef<tbl_ContributionsType>);
-			this._tbl_Employee = default(EntityRef<tbl_Employee>);
+			this._tbl_DeductionsLogs = new EntitySet<tbl_DeductionsLog>(new Action<tbl_DeductionsLog>(this.attach_tbl_DeductionsLogs), new Action<tbl_DeductionsLog>(this.detach_tbl_DeductionsLogs));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContributionsLogID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ContributionsLogID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int DeductionID
 		{
 			get
 			{
-				return this._ContributionsLogID;
+				return this._DeductionID;
 			}
 			set
 			{
-				if ((this._ContributionsLogID != value))
+				if ((this._DeductionID != value))
 				{
-					this.OnContributionsLogIDChanging(value);
+					this.OnDeductionIDChanging(value);
 					this.SendPropertyChanging();
-					this._ContributionsLogID = value;
-					this.SendPropertyChanged("ContributionsLogID");
-					this.OnContributionsLogIDChanged();
+					this._DeductionID = value;
+					this.SendPropertyChanged("DeductionID");
+					this.OnDeductionIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="Int")]
-		public System.Nullable<int> EmployeeID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionName", DbType="VarChar(50)")]
+		public string DeductionName
 		{
 			get
 			{
-				return this._EmployeeID;
+				return this._DeductionName;
 			}
 			set
 			{
-				if ((this._EmployeeID != value))
+				if ((this._DeductionName != value))
 				{
-					if (this._tbl_Employee.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEmployeeIDChanging(value);
+					this.OnDeductionNameChanging(value);
 					this.SendPropertyChanging();
-					this._EmployeeID = value;
-					this.SendPropertyChanged("EmployeeID");
-					this.OnEmployeeIDChanged();
+					this._DeductionName = value;
+					this.SendPropertyChanged("DeductionName");
+					this.OnDeductionNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContributionsTypeID", DbType="Int")]
-		public System.Nullable<int> ContributionsTypeID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionFlatRate", DbType="Float")]
+		public System.Nullable<double> DeductionFlatRate
 		{
 			get
 			{
-				return this._ContributionsTypeID;
+				return this._DeductionFlatRate;
 			}
 			set
 			{
-				if ((this._ContributionsTypeID != value))
+				if ((this._DeductionFlatRate != value))
 				{
-					if (this._tbl_ContributionsType.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnContributionsTypeIDChanging(value);
+					this.OnDeductionFlatRateChanging(value);
 					this.SendPropertyChanging();
-					this._ContributionsTypeID = value;
-					this.SendPropertyChanged("ContributionsTypeID");
-					this.OnContributionsTypeIDChanged();
+					this._DeductionFlatRate = value;
+					this.SendPropertyChanged("DeductionFlatRate");
+					this.OnDeductionFlatRateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_ContributionsType_tbl_ContributionsLog", Storage="_tbl_ContributionsType", ThisKey="ContributionsTypeID", OtherKey="ContributionsTypeID", IsForeignKey=true)]
-		public tbl_ContributionsType tbl_ContributionsType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionPercentRate", DbType="Float")]
+		public System.Nullable<double> DeductionPercentRate
 		{
 			get
 			{
-				return this._tbl_ContributionsType.Entity;
+				return this._DeductionPercentRate;
 			}
 			set
 			{
-				tbl_ContributionsType previousValue = this._tbl_ContributionsType.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_ContributionsType.HasLoadedOrAssignedValue == false)))
+				if ((this._DeductionPercentRate != value))
 				{
+					this.OnDeductionPercentRateChanging(value);
 					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_ContributionsType.Entity = null;
-						previousValue.tbl_ContributionsLogs.Remove(this);
-					}
-					this._tbl_ContributionsType.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_ContributionsLogs.Add(this);
-						this._ContributionsTypeID = value.ContributionsTypeID;
-					}
-					else
-					{
-						this._ContributionsTypeID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("tbl_ContributionsType");
+					this._DeductionPercentRate = value;
+					this.SendPropertyChanged("DeductionPercentRate");
+					this.OnDeductionPercentRateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Employee_tbl_ContributionsLog", Storage="_tbl_Employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
-		public tbl_Employee tbl_Employee
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Deduction_tbl_DeductionsLog", Storage="_tbl_DeductionsLogs", ThisKey="DeductionID", OtherKey="DeductionID")]
+		public EntitySet<tbl_DeductionsLog> tbl_DeductionsLogs
 		{
 			get
 			{
-				return this._tbl_Employee.Entity;
+				return this._tbl_DeductionsLogs;
 			}
 			set
 			{
-				tbl_Employee previousValue = this._tbl_Employee.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Employee.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Employee.Entity = null;
-						previousValue.tbl_ContributionsLogs.Remove(this);
-					}
-					this._tbl_Employee.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_ContributionsLogs.Add(this);
-						this._EmployeeID = value.EmployeeID;
-					}
-					else
-					{
-						this._EmployeeID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("tbl_Employee");
-				}
+				this._tbl_DeductionsLogs.Assign(value);
 			}
 		}
 		
@@ -347,6 +283,18 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_tbl_DeductionsLogs(tbl_DeductionsLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Deduction = this;
+		}
+		
+		private void detach_tbl_DeductionsLogs(tbl_DeductionsLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Deduction = null;
 		}
 	}
 	
@@ -573,168 +521,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_ContributionsType")]
-	public partial class tbl_ContributionsType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ContributionsTypeID;
-		
-		private string _ContributionName;
-		
-		private System.Nullable<double> _ContributionFlatRate;
-		
-		private System.Nullable<double> _ContributionPercentRate;
-		
-		private EntitySet<tbl_ContributionsLog> _tbl_ContributionsLogs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnContributionsTypeIDChanging(int value);
-    partial void OnContributionsTypeIDChanged();
-    partial void OnContributionNameChanging(string value);
-    partial void OnContributionNameChanged();
-    partial void OnContributionFlatRateChanging(System.Nullable<double> value);
-    partial void OnContributionFlatRateChanged();
-    partial void OnContributionPercentRateChanging(System.Nullable<double> value);
-    partial void OnContributionPercentRateChanged();
-    #endregion
-		
-		public tbl_ContributionsType()
-		{
-			this._tbl_ContributionsLogs = new EntitySet<tbl_ContributionsLog>(new Action<tbl_ContributionsLog>(this.attach_tbl_ContributionsLogs), new Action<tbl_ContributionsLog>(this.detach_tbl_ContributionsLogs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContributionsTypeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ContributionsTypeID
-		{
-			get
-			{
-				return this._ContributionsTypeID;
-			}
-			set
-			{
-				if ((this._ContributionsTypeID != value))
-				{
-					this.OnContributionsTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._ContributionsTypeID = value;
-					this.SendPropertyChanged("ContributionsTypeID");
-					this.OnContributionsTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContributionName", DbType="VarChar(50)")]
-		public string ContributionName
-		{
-			get
-			{
-				return this._ContributionName;
-			}
-			set
-			{
-				if ((this._ContributionName != value))
-				{
-					this.OnContributionNameChanging(value);
-					this.SendPropertyChanging();
-					this._ContributionName = value;
-					this.SendPropertyChanged("ContributionName");
-					this.OnContributionNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContributionFlatRate", DbType="Float")]
-		public System.Nullable<double> ContributionFlatRate
-		{
-			get
-			{
-				return this._ContributionFlatRate;
-			}
-			set
-			{
-				if ((this._ContributionFlatRate != value))
-				{
-					this.OnContributionFlatRateChanging(value);
-					this.SendPropertyChanging();
-					this._ContributionFlatRate = value;
-					this.SendPropertyChanged("ContributionFlatRate");
-					this.OnContributionFlatRateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContributionPercentRate", DbType="Float")]
-		public System.Nullable<double> ContributionPercentRate
-		{
-			get
-			{
-				return this._ContributionPercentRate;
-			}
-			set
-			{
-				if ((this._ContributionPercentRate != value))
-				{
-					this.OnContributionPercentRateChanging(value);
-					this.SendPropertyChanging();
-					this._ContributionPercentRate = value;
-					this.SendPropertyChanged("ContributionPercentRate");
-					this.OnContributionPercentRateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_ContributionsType_tbl_ContributionsLog", Storage="_tbl_ContributionsLogs", ThisKey="ContributionsTypeID", OtherKey="ContributionsTypeID")]
-		public EntitySet<tbl_ContributionsLog> tbl_ContributionsLogs
-		{
-			get
-			{
-				return this._tbl_ContributionsLogs;
-			}
-			set
-			{
-				this._tbl_ContributionsLogs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_ContributionsLogs(tbl_ContributionsLog entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_ContributionsType = this;
-		}
-		
-		private void detach_tbl_ContributionsLogs(tbl_ContributionsLog entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_ContributionsType = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_DeductionsLog")]
 	public partial class tbl_DeductionsLog : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -745,9 +531,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 		
 		private System.Nullable<int> _EmployeeID;
 		
-		private System.Nullable<int> _DeductionTypeID;
+		private System.Nullable<int> _DeductionID;
 		
-		private EntityRef<tbl_DeductionsType> _tbl_DeductionsType;
+		private System.Nullable<System.DateTime> _DateApplied;
+		
+		private EntityRef<tbl_Deduction> _tbl_Deduction;
 		
 		private EntityRef<tbl_Employee> _tbl_Employee;
 		
@@ -759,18 +547,20 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
     partial void OnDeductionsLogIDChanged();
     partial void OnEmployeeIDChanging(System.Nullable<int> value);
     partial void OnEmployeeIDChanged();
-    partial void OnDeductionTypeIDChanging(System.Nullable<int> value);
-    partial void OnDeductionTypeIDChanged();
+    partial void OnDeductionIDChanging(System.Nullable<int> value);
+    partial void OnDeductionIDChanged();
+    partial void OnDateAppliedChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateAppliedChanged();
     #endregion
 		
 		public tbl_DeductionsLog()
 		{
-			this._tbl_DeductionsType = default(EntityRef<tbl_DeductionsType>);
+			this._tbl_Deduction = default(EntityRef<tbl_Deduction>);
 			this._tbl_Employee = default(EntityRef<tbl_Employee>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionsLogID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionsLogID", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int DeductionsLogID
 		{
 			get
@@ -814,60 +604,80 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionTypeID", DbType="Int")]
-		public System.Nullable<int> DeductionTypeID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionID", DbType="Int")]
+		public System.Nullable<int> DeductionID
 		{
 			get
 			{
-				return this._DeductionTypeID;
+				return this._DeductionID;
 			}
 			set
 			{
-				if ((this._DeductionTypeID != value))
+				if ((this._DeductionID != value))
 				{
-					if (this._tbl_DeductionsType.HasLoadedOrAssignedValue)
+					if (this._tbl_Deduction.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnDeductionTypeIDChanging(value);
+					this.OnDeductionIDChanging(value);
 					this.SendPropertyChanging();
-					this._DeductionTypeID = value;
-					this.SendPropertyChanged("DeductionTypeID");
-					this.OnDeductionTypeIDChanged();
+					this._DeductionID = value;
+					this.SendPropertyChanged("DeductionID");
+					this.OnDeductionIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_DeductionsType_tbl_DeductionsLog", Storage="_tbl_DeductionsType", ThisKey="DeductionTypeID", OtherKey="DeductionTypeID", IsForeignKey=true)]
-		public tbl_DeductionsType tbl_DeductionsType
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateApplied", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateApplied
 		{
 			get
 			{
-				return this._tbl_DeductionsType.Entity;
+				return this._DateApplied;
 			}
 			set
 			{
-				tbl_DeductionsType previousValue = this._tbl_DeductionsType.Entity;
+				if ((this._DateApplied != value))
+				{
+					this.OnDateAppliedChanging(value);
+					this.SendPropertyChanging();
+					this._DateApplied = value;
+					this.SendPropertyChanged("DateApplied");
+					this.OnDateAppliedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Deduction_tbl_DeductionsLog", Storage="_tbl_Deduction", ThisKey="DeductionID", OtherKey="DeductionID", IsForeignKey=true)]
+		public tbl_Deduction tbl_Deduction
+		{
+			get
+			{
+				return this._tbl_Deduction.Entity;
+			}
+			set
+			{
+				tbl_Deduction previousValue = this._tbl_Deduction.Entity;
 				if (((previousValue != value) 
-							|| (this._tbl_DeductionsType.HasLoadedOrAssignedValue == false)))
+							|| (this._tbl_Deduction.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._tbl_DeductionsType.Entity = null;
+						this._tbl_Deduction.Entity = null;
 						previousValue.tbl_DeductionsLogs.Remove(this);
 					}
-					this._tbl_DeductionsType.Entity = value;
+					this._tbl_Deduction.Entity = value;
 					if ((value != null))
 					{
 						value.tbl_DeductionsLogs.Add(this);
-						this._DeductionTypeID = value.DeductionTypeID;
+						this._DeductionID = value.DeductionID;
 					}
 					else
 					{
-						this._DeductionTypeID = default(Nullable<int>);
+						this._DeductionID = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("tbl_DeductionsType");
+					this.SendPropertyChanged("tbl_Deduction");
 				}
 			}
 		}
@@ -927,168 +737,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_DeductionsType")]
-	public partial class tbl_DeductionsType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _DeductionTypeID;
-		
-		private string _DeductionName;
-		
-		private System.Nullable<double> _DeductionFlatRate;
-		
-		private System.Nullable<double> _DeductionPercentRate;
-		
-		private EntitySet<tbl_DeductionsLog> _tbl_DeductionsLogs;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnDeductionTypeIDChanging(int value);
-    partial void OnDeductionTypeIDChanged();
-    partial void OnDeductionNameChanging(string value);
-    partial void OnDeductionNameChanged();
-    partial void OnDeductionFlatRateChanging(System.Nullable<double> value);
-    partial void OnDeductionFlatRateChanged();
-    partial void OnDeductionPercentRateChanging(System.Nullable<double> value);
-    partial void OnDeductionPercentRateChanged();
-    #endregion
-		
-		public tbl_DeductionsType()
-		{
-			this._tbl_DeductionsLogs = new EntitySet<tbl_DeductionsLog>(new Action<tbl_DeductionsLog>(this.attach_tbl_DeductionsLogs), new Action<tbl_DeductionsLog>(this.detach_tbl_DeductionsLogs));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionTypeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int DeductionTypeID
-		{
-			get
-			{
-				return this._DeductionTypeID;
-			}
-			set
-			{
-				if ((this._DeductionTypeID != value))
-				{
-					this.OnDeductionTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._DeductionTypeID = value;
-					this.SendPropertyChanged("DeductionTypeID");
-					this.OnDeductionTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionName", DbType="VarChar(50)")]
-		public string DeductionName
-		{
-			get
-			{
-				return this._DeductionName;
-			}
-			set
-			{
-				if ((this._DeductionName != value))
-				{
-					this.OnDeductionNameChanging(value);
-					this.SendPropertyChanging();
-					this._DeductionName = value;
-					this.SendPropertyChanged("DeductionName");
-					this.OnDeductionNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionFlatRate", DbType="Float")]
-		public System.Nullable<double> DeductionFlatRate
-		{
-			get
-			{
-				return this._DeductionFlatRate;
-			}
-			set
-			{
-				if ((this._DeductionFlatRate != value))
-				{
-					this.OnDeductionFlatRateChanging(value);
-					this.SendPropertyChanging();
-					this._DeductionFlatRate = value;
-					this.SendPropertyChanged("DeductionFlatRate");
-					this.OnDeductionFlatRateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionPercentRate", DbType="Float")]
-		public System.Nullable<double> DeductionPercentRate
-		{
-			get
-			{
-				return this._DeductionPercentRate;
-			}
-			set
-			{
-				if ((this._DeductionPercentRate != value))
-				{
-					this.OnDeductionPercentRateChanging(value);
-					this.SendPropertyChanging();
-					this._DeductionPercentRate = value;
-					this.SendPropertyChanged("DeductionPercentRate");
-					this.OnDeductionPercentRateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_DeductionsType_tbl_DeductionsLog", Storage="_tbl_DeductionsLogs", ThisKey="DeductionTypeID", OtherKey="DeductionTypeID")]
-		public EntitySet<tbl_DeductionsLog> tbl_DeductionsLogs
-		{
-			get
-			{
-				return this._tbl_DeductionsLogs;
-			}
-			set
-			{
-				this._tbl_DeductionsLogs.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_DeductionsLogs(tbl_DeductionsLog entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_DeductionsType = this;
-		}
-		
-		private void detach_tbl_DeductionsLogs(tbl_DeductionsLog entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_DeductionsType = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbl_Employees")]
 	public partial class tbl_Employee : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1114,8 +762,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 		private System.Nullable<int> _AvailableLeaves;
 		
 		private System.Nullable<int> _EmployeeTypeID;
-		
-		private EntitySet<tbl_ContributionsLog> _tbl_ContributionsLogs;
 		
 		private EntitySet<tbl_User> _tbl_Users;
 		
@@ -1153,7 +799,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 		
 		public tbl_Employee()
 		{
-			this._tbl_ContributionsLogs = new EntitySet<tbl_ContributionsLog>(new Action<tbl_ContributionsLog>(this.attach_tbl_ContributionsLogs), new Action<tbl_ContributionsLog>(this.detach_tbl_ContributionsLogs));
 			this._tbl_Users = new EntitySet<tbl_User>(new Action<tbl_User>(this.attach_tbl_Users), new Action<tbl_User>(this.detach_tbl_Users));
 			this._tbl_DeductionsLogs = new EntitySet<tbl_DeductionsLog>(new Action<tbl_DeductionsLog>(this.attach_tbl_DeductionsLogs), new Action<tbl_DeductionsLog>(this.detach_tbl_DeductionsLogs));
 			this._tbl_Payrolls = new EntitySet<tbl_Payroll>(new Action<tbl_Payroll>(this.attach_tbl_Payrolls), new Action<tbl_Payroll>(this.detach_tbl_Payrolls));
@@ -1365,19 +1010,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Employee_tbl_ContributionsLog", Storage="_tbl_ContributionsLogs", ThisKey="EmployeeID", OtherKey="EmployeeID")]
-		public EntitySet<tbl_ContributionsLog> tbl_ContributionsLogs
-		{
-			get
-			{
-				return this._tbl_ContributionsLogs;
-			}
-			set
-			{
-				this._tbl_ContributionsLogs.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Employee_tbl_User", Storage="_tbl_Users", ThisKey="EmployeeID", OtherKey="EmployeeID")]
 		public EntitySet<tbl_User> tbl_Users
 		{
@@ -1469,18 +1101,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_tbl_ContributionsLogs(tbl_ContributionsLog entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Employee = this;
-		}
-		
-		private void detach_tbl_ContributionsLogs(tbl_ContributionsLog entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Employee = null;
 		}
 		
 		private void attach_tbl_Users(tbl_User entity)
@@ -1670,8 +1290,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 		
 		private System.Nullable<double> _TotalDeductions;
 		
-		private System.Nullable<double> _TotalContributions;
-		
 		private System.Nullable<double> _NumberOfHoursWorked;
 		
 		private System.Nullable<double> _OvertimeWorked;
@@ -1692,8 +1310,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
     partial void OnEmployeeIDChanged();
     partial void OnTotalDeductionsChanging(System.Nullable<double> value);
     partial void OnTotalDeductionsChanged();
-    partial void OnTotalContributionsChanging(System.Nullable<double> value);
-    partial void OnTotalContributionsChanged();
     partial void OnNumberOfHoursWorkedChanging(System.Nullable<double> value);
     partial void OnNumberOfHoursWorkedChanged();
     partial void OnOvertimeWorkedChanging(System.Nullable<double> value);
@@ -1770,26 +1386,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Models
 					this._TotalDeductions = value;
 					this.SendPropertyChanged("TotalDeductions");
 					this.OnTotalDeductionsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalContributions", DbType="Float")]
-		public System.Nullable<double> TotalContributions
-		{
-			get
-			{
-				return this._TotalContributions;
-			}
-			set
-			{
-				if ((this._TotalContributions != value))
-				{
-					this.OnTotalContributionsChanging(value);
-					this.SendPropertyChanging();
-					this._TotalContributions = value;
-					this.SendPropertyChanged("TotalContributions");
-					this.OnTotalContributionsChanged();
 				}
 			}
 		}

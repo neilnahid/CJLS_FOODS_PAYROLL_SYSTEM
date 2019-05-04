@@ -86,5 +86,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM {
             }
         }
 
+        private void textBox_GotFocus(object sender, KeyboardFocusChangedEventArgs e) {
+
+        }
+
+        private void textBox_GotFocus(object sender, MouseEventArgs e) {
+
+        }
     }
 }

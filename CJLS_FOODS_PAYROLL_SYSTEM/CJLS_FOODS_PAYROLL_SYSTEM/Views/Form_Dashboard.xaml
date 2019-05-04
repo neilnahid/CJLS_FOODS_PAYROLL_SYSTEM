@@ -6,41 +6,20 @@
         xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.Views"
         mc:Ignorable="d"
         Title="Form_Dashboard" Height="450" Width="800">
-    <TabControl>
-        <TabItem Header="Employees
-">
-            <Grid Background="#FFE5E5E5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="21*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="175*"/>
-                    <RowDefinition Height="110*"/>
-                    <RowDefinition Height="32*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="12*"/>
-                    <ColumnDefinition Width="80*"/>
-                    <ColumnDefinition Width="200*"/>
-                    <ColumnDefinition Width="429*"/>
-                    <ColumnDefinition Width="65*"/>
-                </Grid.ColumnDefinitions>
-                <WrapPanel Grid.Row="1" Grid.Column="2"/>
-                <Viewbox Grid.Column="2" Grid.Row="2" Grid.RowSpan="2" Stretch="Fill">
-                    <ListBox Height="100" Width="100"/>
-                </Viewbox>
-                <Viewbox Grid.Column="2" Grid.Row="1" Stretch="Fill">
-                    <TextBox Height="23" TextWrapping="Wrap" Text="TextBox" Width="120"/>
-                </Viewbox>
-                <Viewbox Grid.Column="1" Grid.Row="1" Stretch="Fill">
-                    <Label Content="Search :"/>
-                </Viewbox>
-            </Grid>
-        </TabItem>
-        <TabItem Header="Payroll">
-            <Grid Background="#FFE5E5E5"/>
-        </TabItem>
-        <TabItem Header="Reports">
-            <Grid Background="#FFE5E5E5"/>
-        </TabItem>
-    </TabControl>
+    <Grid>
+        <TabControl TabStripPlacement="Left">
+            <TabItem Header="Employees" Margin="0" FontSize="20">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Payroll" FontSize="20" Margin="0">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Deductions" FontSize="20" Margin="0">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Contributions" FontSize="20" Margin="0">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
 </Window>
