@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CJLSFOODSPAYROLL" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=NEIL\SQLEXPRESS;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True" SettingsObjectName="CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings" SettingsPropertyName="CJLSFOODSPAYROLLConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.DeductionLogs" Member="DeductionLogs">
+    <Type Name="DeductionLog">
+      <Column Name="DeductionsLogId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DeductionTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DateApplied" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="DeductionsType_DeductionLog" Member="DeductionsType" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="DeductionsType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Payrolls" Member="Payrolls">
+    <Type Name="Payroll">
+      <Column Name="PayrollID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalDeductions" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TotalContributions" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NumberOfHoursWorked" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="OvertimeWorked" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="OvertimePay" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="Netpay" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Employee_Payroll" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DeductionsTypes" Member="DeductionsTypes">
+    <Type Name="DeductionsType">
+      <Column Name="DeductionTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DeductionName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DeductionReferenceId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="DeductionsType_DeductionLog" Member="DeductionLogs" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="DeductionLog" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Employees" Member="Employees">
+    <Type Name="Employee">
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Age" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ContactNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Address" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="AvailableLeaves" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmployeeTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="Employee_Payroll" Member="Payrolls" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Payroll" />
+      <Association Name="EmployeeType_Employee" Member="EmployeeType" ThisKey="EmployeeTypeID" OtherKey="EmployeeTypesID" Type="EmployeeType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmployeeTypes" Member="EmployeeTypes">
+    <Type Name="EmployeeType">
+      <Column Name="EmployeeTypesID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeNameTitle" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SalaryRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="EmployeeType_Employee" Member="Employees" ThisKey="EmployeeTypesID" OtherKey="EmployeeTypeID" Type="Employee" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.sp_checkLogin" Method="sp_checkLogin">
+    <Parameter Name="username" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="sp_checkLoginResult">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

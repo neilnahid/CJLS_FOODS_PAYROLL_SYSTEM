@@ -23,5 +23,22 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e) {
         }
+
+        private void MenuToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+        private void Btn_Payroll_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Content = new Views.Employee.PayrollDetails();
+            Title.Text = "Payroll Details";
+        }
+
+        private void Btn_Employee_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Content = new Views.Employee.EmployeeList();
+            Title.Text = "Employee List";
+        }
     }
 }

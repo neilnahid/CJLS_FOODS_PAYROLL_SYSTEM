@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\Neil Francis Nahid\Documents\GitHub\CJLS_FOODS_PAYROLL_SYSTEM\CJLS_FOODS_PAYROLL_SYSTEM\CJLS_FOODS_PAYROLL_SYSTEM\App.xaml
-2-829104553
+4-147579232
 
-8-1226619340
-181064445269
-Views\Form_Dashboard.xaml;Views\Form_Login.xaml;
+15-779414769
+201996950253
+Views\Payroll\PayrollDetails.xaml;Views\Employee\EmployeeList.xaml;Views\Form_Dashboard.xaml;Views\Form_Login.xaml;
 
 False
 

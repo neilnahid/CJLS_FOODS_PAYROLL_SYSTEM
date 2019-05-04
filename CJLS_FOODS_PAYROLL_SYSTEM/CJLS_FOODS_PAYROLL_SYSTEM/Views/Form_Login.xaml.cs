@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CJLS_FOODS_PAYROLL_SYSTEM.Models;
+using CJLS_FOODS_PAYROLL_SYSTEM.Model;
 using CJLS_FOODS_PAYROLL_SYSTEM.Views;
 namespace CJLS_FOODS_PAYROLL_SYSTEM {
     /// <summary>
@@ -67,15 +67,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM {
             else {
                 var result = db.sp_checkLogin(txtbox_username.Text, txtbox_password.Text).ToList();
                 if (result.Count > 0) {
-                    //successful login
-                    MessageBox.Show("Successfully logged in!");
-                    Form_Dashboard form_Dashboard = new Form_Dashboard();
-                    MessageBox.Show(result[0].Username);
-                    Controls.Session.userID = result[0].UserID;
-                    Controls.Session.employeeID = (int)result[0].EmployeeID;
-                    Controls.Session.userName = result[0].Username;
-                    form_Dashboard.Show();
-                    this.Hide();
+                    ////successful login
+                    //MessageBox.Show("Successfully logged in!");
+                    //Form_Dashboard form_Dashboard = new Form_Dashboard();
+                    //MessageBox.Show(result[0].Username);
+                    //Controls.Session.userID = result[0].UserID;
+                    //Controls.Session.employeeID = (int)result[0].EmployeeID;
+                    //Controls.Session.userName = result[0].Username;
+                    //form_Dashboard.Show();
+                    //this.Hide();
                 }
                 else {
                     //incorrect credentials
