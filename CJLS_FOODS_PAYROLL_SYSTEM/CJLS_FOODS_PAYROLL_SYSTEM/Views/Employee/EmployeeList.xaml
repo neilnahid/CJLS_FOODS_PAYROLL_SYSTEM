@@ -9,24 +9,33 @@
     Title="EmployeeCreateNewEmployee"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    DataContext="{StaticResource EmployeeViewModel}"
     mc:Ignorable="d">
-
     <materialDesign:DialogHost>
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="50">
                 <TextBox
                     materialDesign:HintAssist.Hint="First Name"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Employee.FirstName}" />
+                    Text="{Binding Employee.FirstName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox
+                    materialDesign:HintAssist.Hint="Middle Name"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding Employee.MiddleName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBox
                     materialDesign:HintAssist.Hint="Last Name"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Employee.FirstName}" />
+                    Text="{Binding Employee.LastName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
                 <DatePicker
                     materialDesign:HintAssist.Hint="Date Of Birth"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                    Text="{Binding Employee.FirstName}" />
-                <Grid>
+                    Text="{Binding Employee.DateOfBirth, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox
+                    materialDesign:HintAssist.Hint="Address"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding Employee.Address, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox materialDesign:HintAssist.Hint="Contact Number" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <Grid Margin="0,10,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
@@ -50,7 +59,6 @@
                             Style="{StaticResource MaterialDesignRadioButton}" />
                     </StackPanel>
                 </Grid>
-                <TextBox materialDesign:HintAssist.Hint="Contact Number" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
                         Click="Btn_createNewEmployee_Click"
@@ -94,9 +102,13 @@
                     Grid.Column="1"
                     FontSize="24"
                     Header="Employee List">
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Employees}">
+                    <DataGrid
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        CanUserResizeColumns="False"
+                        ItemsSource="{Binding Employees}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Remarks}" Header="EmployeeID" />
+                            <DataGridTextColumn Binding="{Binding EmployeeID}" Header="EmployeeID" />
                             <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
                             <DataGridTextColumn Binding="{Binding MiddleName}" Header="Middle Name" />
                             <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
@@ -109,7 +121,6 @@
                 x:Name="btn_createNewEmployee"
                 Grid.Row="2"
                 Margin="744,4.8,0,1.6"
-                Click="Btn_createNewEmployee_Click_1"
                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                 Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
                 ToolTip="Add New Employee">

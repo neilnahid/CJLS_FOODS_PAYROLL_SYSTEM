@@ -26,10 +26,17 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public EmployeeViewModel()
         {
             Employees = new ObservableCollection<Employee>(GetEmployeeList());
+            Employee = new Employee();
         }
         public List<Employee> GetEmployeeList()
         {
             return (from employee in DatabaseHelper.db.Employees select employee).ToList();
+        }
+        public void CreateNewEmployee()
+        {
+            DatabaseHelper.db.Employees.InsertOnSubmit(Employee);
+            Employees.Add(Employee);
+            DatabaseHelper.db.SubmitChanges();
         }
     }
 }

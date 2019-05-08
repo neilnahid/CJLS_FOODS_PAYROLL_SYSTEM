@@ -72,15 +72,22 @@
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
     <Compile Include="DatabaseHelper.cs" />
-    <Compile Include="Models\EmployeeViewModel.cs" />
+    <Compile Include="View Models\EmployeeViewModel.cs" />
     <Compile Include="Models\ModelPropertyChanged.cs" />
     <Compile Include="View Models\CreateEmployeeViewModel.cs" />
+    <Compile Include="Views\Employee\EmployeeDetails.xaml.cs">
+      <DependentUpon>EmployeeDetails.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Payroll\PayrollDetails.xaml.cs">
       <DependentUpon>PayrollDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmployeeList.xaml.cs">
       <DependentUpon>EmployeeList.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Employee\EmployeeDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Payroll\PayrollDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

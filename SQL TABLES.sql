@@ -71,3 +71,5 @@ values('Sales Short','DED_SALE_SHORT'),
 ('Incomplete Uniform','DED_INC_UNIFROM'),
 ('Cash Advance/Loan','DED_CA_'),
 ('Late','DED_LATE')
+
+select * from Employees

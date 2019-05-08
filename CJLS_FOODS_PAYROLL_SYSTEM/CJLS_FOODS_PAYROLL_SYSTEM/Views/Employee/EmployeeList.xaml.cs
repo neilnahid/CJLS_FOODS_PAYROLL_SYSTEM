@@ -30,21 +30,20 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void Btn_createNewEmployee_Click(object sender, RoutedEventArgs e)
         {
+            VM.CreateNewEmployee();
+            MessageBox.Show("Successfully created new employee");
         }
 
         private void RdButtonMale_Checked(object sender, RoutedEventArgs e)
         {
             rdButtonFemale.IsChecked = false;
+            VM.Employee.Gender = "Male";
         }
 
         private void RdButtonFemale_Checked(object sender, RoutedEventArgs e)
         {
             rdButtonMale.IsChecked = false;
-        }
-
-        private void Btn_createNewEmployee_Click_1(object sender, RoutedEventArgs e)
-        {
-
+            VM.Employee.Gender = "Female";
         }
     }
 }
