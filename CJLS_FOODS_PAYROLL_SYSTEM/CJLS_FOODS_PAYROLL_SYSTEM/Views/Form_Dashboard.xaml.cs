@@ -37,6 +37,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
 
         private void Btn_Employee_Click(object sender, RoutedEventArgs e)
         {
+            draweHost.IsLeftDrawerOpen = false;
             Frame.Content = new Views.Employee.EmployeeList();
             Title.Text = "Employee List";
         }
