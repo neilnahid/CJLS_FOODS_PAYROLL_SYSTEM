@@ -67,12 +67,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             return (from et in Helper.db.EmployeeTypes select et).ToList();
         }
         public void DeleteEmployee(Employee employee) {
-            var result = (from emp in Helper.db.Employees where emp.EmployeeID == employee.EmployeeID select emp).FirstOrDefault();
-            Helper.db.Employees.DeleteOnSubmit(result);
-            Helper.db.SubmitChanges();
+            Helper.db.Employees.DeleteOnSubmit(Employee);
             Employees.Remove(Employee);
             Employee = new Employee();
-            MessageBox.Show("Successfully deleted Employee");
+            Helper.db.SubmitChanges();
+            MessageBox.Show("Successfully Deleted Employee");
+        }
+        public void UpdateEmployee() {
+            Helper.db.SubmitChanges();
         }
     }
 }

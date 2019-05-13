@@ -176,16 +176,11 @@
         </materialDesign:DialogHost.DialogContent>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="65*" />
                 <RowDefinition Height="323*" />
                 <RowDefinition Height="62*" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="1" Margin="0,1.2,0,0.2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="74*" />
-                    <ColumnDefinition Width="655*" />
-                    <ColumnDefinition Width="70*" />
-                </Grid.ColumnDefinitions>
+            <Grid Grid.Row="0" Margin="0,1.2,0,0.2">
+                <Grid.ColumnDefinitions />
                 <GroupBox
                     Grid.Column="1"
                     FontSize="24"

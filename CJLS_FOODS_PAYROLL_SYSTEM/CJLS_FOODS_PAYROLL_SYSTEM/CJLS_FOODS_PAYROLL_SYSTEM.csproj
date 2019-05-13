@@ -77,7 +77,7 @@
     <Compile Include="Helper.cs" />
     <Compile Include="View Models\EmployeeViewModel.cs" />
     <Compile Include="Model\ModelPropertyChanged.cs" />
-    <Compile Include="View Models\CreateEmployeeViewModel.cs" />
+    <Compile Include="View Models\UserAdminViewModel.cs" />
     <Compile Include="Views\Accounts\UserList.xaml.cs">
       <DependentUpon>UserList.xaml</DependentUpon>
     </Compile>

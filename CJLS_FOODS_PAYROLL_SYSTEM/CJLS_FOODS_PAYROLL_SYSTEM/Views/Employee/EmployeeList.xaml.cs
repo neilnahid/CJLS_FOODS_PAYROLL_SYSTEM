@@ -34,7 +34,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
         private void Btn_Edit_Click(object sender, RoutedEventArgs e) {
             DialogHeader.Text = "Update Employee";
             btn_dialogConfirm.Content = "UPDATE";
-            Helper.db.SubmitChanges();
+            VM.UpdateEmployee();
         }
 
         private void Btn_deleteEmployee_Click(object sender, RoutedEventArgs e) {
