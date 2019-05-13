@@ -37,9 +37,21 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
 
         private void Btn_Employee_Click(object sender, RoutedEventArgs e)
         {
-            draweHost.IsLeftDrawerOpen = false;
-            Frame.Content = new Views.Employee.EmployeeList();
-            Title.Text = "Employee List";
+            
+        }
+
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
+            TreeViewItem tvi = (TreeViewItem)((TreeView)sender).SelectedItem;
+            if(tvi.Header.ToString() == "Employees") {
+                draweHost.IsLeftDrawerOpen = false;
+                Frame.Content = new Views.Employee.EmployeeList();
+                Title.Text = "Employee List";
+            }
+            if(tvi.Header.ToString() == "Users") {
+                draweHost.IsLeftDrawerOpen = false;
+                Frame.Content = new Views.Accounts.UserList();
+                Title.Text = "Users List";
+            }
         }
     }
 }

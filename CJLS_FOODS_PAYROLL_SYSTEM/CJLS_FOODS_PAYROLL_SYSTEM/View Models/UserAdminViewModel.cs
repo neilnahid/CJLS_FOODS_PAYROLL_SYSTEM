@@ -41,6 +41,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         }
         public void AddNewUser() {
             Helper.db.Users.InsertOnSubmit(User);
+            Users.Add(User);
             Helper.db.SubmitChanges();
         }
         public void UpdateUser() {
@@ -51,7 +52,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             Users.Remove(User);
             User = new User();
             Helper.db.SubmitChanges();
-            MessageBox.Show("Successfully Deleted User");
         }
     }
 }

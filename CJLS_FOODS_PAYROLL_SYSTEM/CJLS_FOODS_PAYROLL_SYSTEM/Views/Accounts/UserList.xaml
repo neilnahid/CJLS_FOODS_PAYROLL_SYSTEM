@@ -12,7 +12,7 @@
     DataContext="{StaticResource UserAdminViewModel}"
     mc:Ignorable="d">
 
-    <materialDesign:DialogHost x:Name="dialogHost">
+    <materialDesign:DialogHost x:Name="dialogHost" DialogClosing="DialogHost_DialogClosing">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="50">
                 <TextBlock
@@ -21,7 +21,7 @@
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignHeadlineTextBlock}"
                     Text="Header" />
-                <StackPanel>
+                <StackPanel x:Name="sp_dialogFields">
                     <TextBox
                         materialDesign:HintAssist.Hint="UserID"
                         IsReadOnly="True"
@@ -29,33 +29,29 @@
                         Text="{Binding User.UserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox
                         materialDesign:HintAssist.Hint="FullName"
-                        IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox
-                        materialDesign:HintAssist.Hint="UserID"
-                        IsReadOnly="True"
+                        materialDesign:HintAssist.Hint="Username"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <PasswordBox
                         x:Name="passwordBox"
-                        materialDesign:HintAssist.Hint="UserID"
-                        PasswordChanged="PasswordBox_PasswordChanged"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        materialDesign:HintAssist.Hint="Password"
+                        PasswordChanged="PasswordBox_PasswordChanged" />
                     <TextBox
                         materialDesign:HintAssist.Hint="Secret Question"
-                        IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.SecretQuestion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox
                         materialDesign:HintAssist.Hint="Secret Answer"
-                        IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.SecretAnswer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
                         x:Name="btn_dialogConfirm"
+                        Click="btn_DialogConfirm_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
                         IsDefault="True"
                         Style="{StaticResource MaterialDesignFlatButton}">
@@ -96,7 +92,8 @@
                         CanUserDeleteRows="false"
                         CanUserResizeColumns="False"
                         IsReadOnly="True"
-                        ItemsSource="{Binding Users}">
+                        ItemsSource="{Binding Users}"
+                        SelectedItem="{Binding User}">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
@@ -122,6 +119,7 @@
                                             x:Name="btn_deleteUser"
                                             materialDesign:HintAssist.Hint="Delete User"
                                             Click="Btn_deleteUser_Click"
+                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                                             Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                                             <materialDesign:PackIcon
                                                 Width="24"
@@ -136,12 +134,14 @@
                 </GroupBox>
             </Grid>
             <Button
-                x:Name="btn_createNewEmployee"
+                x:Name="btn_OpenDialogCreate"
                 Grid.Row="2"
-                Width="Auto"
-                Height="Auto"
-                Margin="744,5,0,1.6"
-                Click="btn_CreateNewUser_Click"
+                Width="56"
+                Height="55"
+                Margin="744,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="Btn_OpenDialogCreate_Click"
                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                 Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
                 ToolTip="Add New Employee">
