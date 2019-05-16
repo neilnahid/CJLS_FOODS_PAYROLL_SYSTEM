@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Attendance"
     d:DesignHeight="450"
@@ -13,10 +14,10 @@
 
     <Grid Margin="0,0,0,-0.4">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="173*" />
-            <ColumnDefinition Width="27*" />
+            <ColumnDefinition Width="16*" />
+            <ColumnDefinition Width="9*" />
         </Grid.ColumnDefinitions>
-        <DataGrid Margin="0,0,9,0" ItemsSource="{Binding Month.Weeks}">
+        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Month.Weeks}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="1*" Header="Sunday">
                     <DataGridTemplateColumn.CellTemplate>
@@ -83,5 +84,72 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Grid Grid.Column="1">
+            <GroupBox Margin="0,0,0,-0.4" Header="Attendance Details">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="195*" />
+                        <RowDefinition Height="135*" />
+                        <RowDefinition Height="68*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Margin="0,0,0.4,3.2" Header="Deductions">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="39*" />
+                                <RowDefinition Height="8*" />
+                            </Grid.RowDefinitions>
+                            <DataGrid>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Description}" Header="Description" />
+                                    <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                <TextBlock Text="Total Deductions: " />
+                                <TextBlock Text="{Binding Deductions.Total}" />
+                            </StackPanel>
+                        </Grid>
+                    </GroupBox>
+                    <materialDesign:PopupBox
+                        Grid.Row="2"
+                        Width="56"
+                        Height="56"
+                        Margin="0,0,0.4,0.4"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        PlacementMode="TopAndAlignCentres"
+                        Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}"
+                        ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionPopupBox"
+                        ToolTipService.Placement="Right">
+                        <StackPanel>
+                            <Button ToolTip="Add Deduction">
+                                <materialDesign:PackIcon
+                                    Width="24"
+                                    Height="24"
+                                    Kind="AlphabetD" />
+                            </Button>
+                            <Button ToolTip="Save Attendance">
+                                <materialDesign:PackIcon
+                                    Width="24"
+                                    Height="24"
+                                    Kind="ContentSaveAll" />
+                            </Button>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                    <Grid Grid.Row="1">
+                        <StackPanel Orientation="Vertical">
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Regular Hours Worked"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="5" />
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Overtime Hours Worked"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="2" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </GroupBox>
+        </Grid>
     </Grid>
 </Page>
