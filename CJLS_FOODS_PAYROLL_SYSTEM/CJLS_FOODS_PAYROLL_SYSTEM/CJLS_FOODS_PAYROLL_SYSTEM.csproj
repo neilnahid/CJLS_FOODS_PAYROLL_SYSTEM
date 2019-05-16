@@ -75,11 +75,18 @@
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
+    <Compile Include="Model\Day.cs" />
+    <Compile Include="Model\Month.cs" />
+    <Compile Include="Model\Week.cs" />
+    <Compile Include="View Models\AttendanceViewModel.cs" />
     <Compile Include="View Models\EmployeeViewModel.cs" />
     <Compile Include="Model\ModelPropertyChanged.cs" />
     <Compile Include="View Models\UserAdminViewModel.cs" />
     <Compile Include="Views\Accounts\UserList.xaml.cs">
       <DependentUpon>UserList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\Attendance.xaml.cs">
+      <DependentUpon>Attendance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmployeeDetails.xaml.cs">
       <DependentUpon>EmployeeDetails.xaml</DependentUpon>
@@ -91,6 +98,10 @@
       <DependentUpon>EmployeeList.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Accounts\UserList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employee\Attendance.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
