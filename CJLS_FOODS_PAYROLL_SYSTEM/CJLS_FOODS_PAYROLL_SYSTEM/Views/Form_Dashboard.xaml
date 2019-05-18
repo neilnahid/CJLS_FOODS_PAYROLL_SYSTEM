@@ -10,27 +10,18 @@
     Width="800"
     Height="450"
     mc:Ignorable="d">
-    <materialDesign:DrawerHost Grid.RowSpan="2" Margin="0,0,-0.4,0">
+    <materialDesign:DrawerHost
+        x:Name="draweHost"
+        Grid.RowSpan="2"
+        Margin="0,0,-0.4,0"
+        IsLeftDrawerOpen="True">
         <materialDesign:DrawerHost.LeftDrawerContent>
-            <StackPanel Margin="20">
-                <Button
-                    x:Name="btn_Employee"
-                    Click="Btn_Employee_Click"
-                    Style="{DynamicResource MaterialDesignFlatButton}">
-                    Employees
-                </Button>
-                <Button
-                    x:Name="btn_Payroll"
-                    Click="Btn_Payroll_Click"
-                    Style="{DynamicResource MaterialDesignFlatButton}">
-                    Payroll
-                </Button>
-                <Button Style="{DynamicResource MaterialDesignFlatButton}">
-                    Deductions
-                </Button>
-                <Button Style="{DynamicResource MaterialDesignFlatButton}">
-                    Contributions
-                </Button>
+            <StackPanel>
+                <TreeView SelectedItemChanged="TreeView_SelectedItemChanged">
+                    <TreeViewItem Header="Employees" />
+                    <TreeViewItem Header="Users" />
+                    <TreeViewItem Header="Attendance" />
+                </TreeView>
             </StackPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>
         <Grid>
@@ -63,7 +54,10 @@
                     Main Dashboard
                 </TextBlock>
             </Grid>
-            <Frame x:Name="Frame" Grid.Row="1" />
+            <Frame
+                x:Name="Frame"
+                Grid.Row="1"
+                NavigationUIVisibility="Hidden" />
         </Grid>
     </materialDesign:DrawerHost>
 

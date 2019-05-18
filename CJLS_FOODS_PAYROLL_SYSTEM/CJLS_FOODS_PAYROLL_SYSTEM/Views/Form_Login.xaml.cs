@@ -29,61 +29,61 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM {
         }
 
         private void PressedEnterKey(object sender, KeyEventArgs e) {
-            if (e.Key == Key.Enter)
-                btn_login_Click(sender, e);
+            //if (e.Key == Key.Enter)
+            //    btn_login_Click(sender, e);
         }
 
         private void textBox_GotFocus(object sender, RoutedEventArgs e) {
-            var txtbox = (TextBox)sender;
-            txtbox.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#171A21"));
-            if (txtbox.Text == "Enter username" || txtbox.Text == "Enter password") {
-                txtbox.Text = "";
-            }
-            else {
-                txtbox.SelectAll();
-            }
+            //var txtbox = (textbox)sender;
+            //txtbox.foreground = new solidcolorbrush((color)colorconverter.convertfromstring("#171a21"));
+            //if (txtbox.text == "enter username" || txtbox.text == "enter password") {
+            //    txtbox.text = "";
+            //}
+            //else {
+            //    txtbox.selectall();
+            //}
         }
         private void textBox_LeaveFocus(object sender, RoutedEventArgs e) {
-            var txtbox = (TextBox)sender;
-            if (txtbox.Name == "txtbox_username" && txtbox.Text == "") {
-                txtbox.Foreground = new SolidColorBrush(Colors.Gray);
-                txtbox.Text = "Enter username";
-            }
-            else if (txtbox.Name == "txtbox_password" && txtbox.Text == "") {
-                txtbox.Foreground = new SolidColorBrush(Colors.Gray);
-                txtbox.Text = "Enter password";
-            }
+            //var txtbox = (TextBox)sender;
+            //if (txtbox.Name == "txtbox_username" && txtbox.Text == "") {
+            //    txtbox.Foreground = new SolidColorBrush(Colors.Gray);
+            //    txtbox.Text = "Enter username";
+            //}
+            //else if (txtbox.Name == "txtbox_password" && txtbox.Text == "") {
+            //    txtbox.Foreground = new SolidColorBrush(Colors.Gray);
+            //    txtbox.Text = "Enter password";
+            //}
         }
         private void btn_login_Click(object sender, RoutedEventArgs e) {
-            if (txtbox_password.Text == "" && txtbox_username.Text == "") {
-                MessageBox.Show("You must provide username and password.");
-            }
-            else if (txtbox_username.Text == "") {
-                MessageBox.Show("You must provide a username.");
-            }
-            else if (txtbox_password.Text == "") {
-                MessageBox.Show("You must provide a password");
-            }
-            else {
-                var result = db.sp_checkLogin(txtbox_username.Text, txtbox_password.Text).ToList();
-                if (result.Count > 0) {
-                    ////successful login
-                    //MessageBox.Show("Successfully logged in!");
-                    //Form_Dashboard form_Dashboard = new Form_Dashboard();
-                    //MessageBox.Show(result[0].Username);
-                    //Controls.Session.userID = result[0].UserID;
-                    //Controls.Session.employeeID = (int)result[0].EmployeeID;
-                    //Controls.Session.userName = result[0].Username;
-                    //form_Dashboard.Show();
-                    //this.Hide();
-                }
-                else {
-                    //incorrect credentials
-                    MessageBox.Show("Incorrect Credentials, try again.");
-                    txtbox_password.Text = "Enter password";
-                    txtbox_username.Text = "Enter username";
-                }
-            }
+            //if (txtbox_password.Text == "" && txtbox_username.Text == "") {
+            //    MessageBox.Show("You must provide username and password.");
+            //}
+            //else if (txtbox_username.Text == "") {
+            //    MessageBox.Show("You must provide a username.");
+            //}
+            //else if (txtbox_password.Text == "") {
+            //    MessageBox.Show("You must provide a password");
+            //}
+            //else {
+            //    var result = db.sp_checkLogin(txtbox_username.Text, txtbox_password.Text).ToList();
+            //    if (result.Count > 0) {
+            //        ////successful login
+            //        //MessageBox.Show("Successfully logged in!");
+            //        //Form_Dashboard form_Dashboard = new Form_Dashboard();
+            //        //MessageBox.Show(result[0].Username);
+            //        //Controls.Session.userID = result[0].UserID;
+            //        //Controls.Session.employeeID = (int)result[0].EmployeeID;
+            //        //Controls.Session.userName = result[0].Username;
+            //        //form_Dashboard.Show();
+            //        //this.Hide();
+            //    }
+            //    else {
+            //        //incorrect credentials
+            //        MessageBox.Show("Incorrect Credentials, try again.");
+            //        txtbox_password.Text = "Enter password";
+            //        txtbox_username.Text = "Enter username";
+            //    }
+            //}
         }
 
         private void textBox_GotFocus(object sender, KeyboardFocusChangedEventArgs e) {
