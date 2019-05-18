@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.25, 11.625" name="Database">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.25, 10.125" name="Database">
   <DataContextMoniker Name="/DatabaseDataContext" />
   <nestedChildShapes>
     <classShape Id="7c5d5248-9f16-4c1d-86d9-bf61ca07e7bd" absoluteBounds="6.25, 3.25, 2, 1.7708968098958327">
@@ -20,10 +20,10 @@
         <elementListCompartment Id="8b990e17-2bba-45fc-aa34-b869b5ddb24c" absoluteBounds="9.015, 4.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="d756eca5-713e-49ac-9767-e5d1552989fd" absoluteBounds="6.25, 10, 2, 1.3862939453124987">
+    <classShape Id="d756eca5-713e-49ac-9767-e5d1552989fd" absoluteBounds="8.25, 8.5, 2, 1.3862939453124987">
       <DataClassMoniker Name="/DatabaseDataContext/DeductionsType" />
       <nestedChildShapes>
-        <elementListCompartment Id="8551a77b-6def-4968-942b-947e7bb10fb1" absoluteBounds="6.265, 10.46, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8551a77b-6def-4968-942b-947e7bb10fb1" absoluteBounds="8.265, 8.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="546bcaf7-1d1b-4f74-8579-d95146dc39b6" absoluteBounds="3.5, 2.5, 2, 4.2708154296874987">
@@ -57,7 +57,7 @@
         <classShapeMoniker Id="2e8045b2-7d24-4d9c-ba40-87571dfbe61b" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 10.6931469726562); (10 : 10.6931469726562); (10 : 5.7131982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(9.625 : 8.5); (9.625 : 5.7131982421875)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DatabaseDataContext/DeductionsType/DeductionsType_Deduction" />
       <nodes>
         <classShapeMoniker Id="d756eca5-713e-49ac-9767-e5d1552989fd" />
