@@ -90,9 +90,6 @@
     <Compile Include="Views\Employee\EmployeeDetails.xaml.cs">
       <DependentUpon>EmployeeDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Payroll\PayrollDetails.xaml.cs">
-      <DependentUpon>PayrollDetails.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Employee\EmployeeList.xaml.cs">
       <DependentUpon>EmployeeList.xaml</DependentUpon>
     </Compile>
@@ -105,10 +102,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Employee\EmployeeDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Payroll\PayrollDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
