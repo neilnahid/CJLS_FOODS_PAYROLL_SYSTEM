@@ -31,8 +31,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
 
         private void Btn_Payroll_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Content = new Views.Employee.PayrollDetails();
-            Title.Text = "Payroll Details";
+            //Frame.Content = new Views.Employee.PayrollDetails();
+            //Title.Text = "Payroll Details";
         }
 
         private void Btn_Employee_Click(object sender, RoutedEventArgs e)
