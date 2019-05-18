@@ -3,9 +3,11 @@
   <Table Name="dbo.Attendance" Member="Attendances">
     <Type Name="Attendance">
       <Column Name="AttendanceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="NumOfHoursWorked" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NumOfHoursWorked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="OverWorkedHours" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="OverWorkedHours" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AttendanceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Association Name="Attendance_Deduction" Member="Deductions" ThisKey="AttendanceID" OtherKey="AttendanceID" Type="Deduction" />
       <Association Name="Employee_Attendance" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
     </Type>
   </Table>
@@ -19,15 +21,17 @@
       <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.DeductionLogs" Member="DeductionLogs">
-    <Type Name="DeductionLog">
+  <Table Name="dbo.Deduction" Member="Deductions">
+    <Type Name="Deduction">
       <Column Name="DeductionsLogId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="DeductionTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="DateApplied" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="DeductionsType_DeductionLog" Member="DeductionsType" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="DeductionsType" IsForeignKey="true" />
-      <Association Name="Employee_DeductionLog" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+      <Column Name="AttendanceID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Attendance_Deduction" Member="Attendance" ThisKey="AttendanceID" OtherKey="AttendanceID" Type="Attendance" IsForeignKey="true" />
+      <Association Name="DeductionsType_Deduction" Member="DeductionsType" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="DeductionsType" IsForeignKey="true" />
+      <Association Name="Employee_Deduction" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.DeductionsTypes" Member="DeductionsTypes">
@@ -35,7 +39,7 @@
       <Column Name="DeductionTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="DeductionName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="DeductionReferenceId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="DeductionsType_DeductionLog" Member="DeductionLogs" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="DeductionLog" />
+      <Association Name="DeductionsType_Deduction" Member="Deductions" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="Deduction" />
     </Type>
   </Table>
   <Table Name="dbo.Employees" Member="Employees">
@@ -59,7 +63,7 @@
       <Column Name="Branch" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Employee_Attendance" Member="Attendances" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Attendance" />
-      <Association Name="Employee_DeductionLog" Member="DeductionLogs" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="DeductionLog" />
+      <Association Name="Employee_Deduction" Member="Deductions" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Deduction" />
       <Association Name="Employee_Leave" Member="Leaves" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Leave" />
       <Association Name="Employee_Payroll" Member="Payrolls" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Payroll" />
       <Association Name="EmployeeType_Employee" Member="EmployeeType" ThisKey="EmployeeTypeID" OtherKey="EmployeeTypesID" Type="EmployeeType" IsForeignKey="true" />

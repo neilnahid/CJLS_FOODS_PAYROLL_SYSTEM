@@ -20,6 +20,7 @@
                 <TreeView SelectedItemChanged="TreeView_SelectedItemChanged">
                     <TreeViewItem Header="Employees" />
                     <TreeViewItem Header="Users" />
+                    <TreeViewItem Header="Attendance" />
                 </TreeView>
             </StackPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>

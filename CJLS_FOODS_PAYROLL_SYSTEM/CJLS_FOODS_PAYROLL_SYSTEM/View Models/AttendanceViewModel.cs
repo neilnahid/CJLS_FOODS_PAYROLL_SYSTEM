@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
     public class AttendanceViewModel : Model.ModelPropertyChange {
         public AttendanceViewModel() {
-            startDate = new DateTime(2019, 5, 1);
-            endDate = startDate.AddMonths(1);
+            Attendances = new List<Attendance>();
+
+            startDate = new DateTime(2019, 6, 1);
+            endDate = StartDate.AddDays(7);
             Month = GetMonthRange();
+            SelectedWeek = new Model.Week();
+            DeductionsTypes = GetDeductionTypes();
+            Deduction = new Deduction();
         }
         private DateTime startDate;
 
@@ -66,9 +73,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 }
             }
         }
-        private DeductionLog deduction;
+        private Deduction deduction;
 
-        public DeductionLog Deduction {
+        public Deduction Deduction {
             get { return deduction; }
             set {
                 if (deduction != value) {
@@ -77,9 +84,42 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 }
             }
         }
-        private List<DeductionLog> deductions;
+        private Model.Week selectedWeek;
 
-        public List<DeductionLog> Deductions {
+        public Model.Week SelectedWeek {
+            get { return selectedWeek; }
+            set {
+                if (selectedWeek != value) {
+                    selectedWeek = value;
+                    RaisePropertyChanged("SelectedWeek");
+                }
+            }
+        }
+        private StackPanel currentStackPanel;
+
+        public StackPanel CurrentStackPanel {
+            get { return currentStackPanel; }
+            set {
+                if (currentStackPanel != value) {
+                    currentStackPanel = value;
+                    RaisePropertyChanged("CurrentStackPanel");
+                }
+            }
+        }
+        private List<DeductionsType> deductionsTypes;
+
+        public List<DeductionsType> DeductionsTypes {
+            get { return deductionsTypes; }
+            set {
+                if (deductionsTypes != value) {
+                    deductionsTypes = value;
+                    RaisePropertyChanged("DeductionsTypes");
+                }
+            }
+        }
+        private ObservableCollection<Deduction> deductions;
+
+        public ObservableCollection<Deduction> Deductions {
             get { return deductions; }
             set {
                 if (deductions != value) {
@@ -97,15 +137,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             for (int j = 0; j < (EndDate - StartDate).TotalDays; j++) {
                 if (startDate.AddDays(j).DayOfWeek == DayOfWeek.Saturday) {
                     var currentDay = month.Weeks[weekCounter].Days[(int)startDate.AddDays(j).DayOfWeek];
-                    currentDay.DateTime = startDate.AddDays(j);
-                    currentDay.MonthNumber = startDate.AddDays(j).Day;
+                    currentDay.AttendanceDate = startDate.AddDays(j);
+                    Attendances.Add(currentDay);
                     month.Weeks.Add(new Model.Week());
                     weekCounter++;
                 }
                 else {
                     var currentDay = month.Weeks[weekCounter].Days[(int)startDate.AddDays(j).DayOfWeek];
-                    currentDay.DateTime = startDate.AddDays(j);
-                    currentDay.MonthNumber = startDate.AddDays(j).Day;
+                    currentDay.AttendanceDate = startDate.AddDays(j);
+                    Attendances.Add(currentDay);
                 }
             }
             return month;
@@ -114,17 +154,20 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             Helper.db.Attendances.InsertAllOnSubmit(Attendances);
             Helper.db.SubmitChanges();
         }
-        public void AddAttendance(Attendance attendance) {
-            Attendances.Add(attendance);
+        //public void AddAttendance(Attendance attendance) {
+        //    Attendances.Add(attendance);
+        //}
+        //public void RemoveAttendance(Attendance attendance) {
+        //    Attendances.Remove(attendance);
+        //}
+        public void AddDeduction(Attendance a, Deduction d) {
+            a.Deductions.Add(d);
         }
-        public void RemoveAttendance(Attendance attendance) {
-            Attendances.Remove(attendance);
-        }
-        public void AddDeduction(DeductionLog deduction) {
-            Deductions.Add(deduction);
-        }
-        public void RemoveDeduction(DeductionLog deduction) {
-            deductions.Remove(deduction);
+        //public void RemoveDeduction(Attendance attendance) {
+        //    attendance.Deductions.Remove(deduction);
+        //}
+        private List<DeductionsType> GetDeductionTypes() {
+            return (from i in Helper.db.DeductionsTypes select i).ToList();
         }
     }
 }

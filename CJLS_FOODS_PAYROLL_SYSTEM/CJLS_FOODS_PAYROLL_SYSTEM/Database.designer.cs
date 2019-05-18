@@ -30,12 +30,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertAttendance(Attendance instance);
+    partial void UpdateAttendance(Attendance instance);
+    partial void DeleteAttendance(Attendance instance);
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
-    partial void InsertDeductionLog(DeductionLog instance);
-    partial void UpdateDeductionLog(DeductionLog instance);
-    partial void DeleteDeductionLog(DeductionLog instance);
+    partial void InsertDeduction(Deduction instance);
+    partial void UpdateDeduction(Deduction instance);
+    partial void DeleteDeduction(Deduction instance);
     partial void InsertDeductionsType(DeductionsType instance);
     partial void UpdateDeductionsType(DeductionsType instance);
     partial void DeleteDeductionsType(DeductionsType instance);
@@ -96,11 +99,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		public System.Data.Linq.Table<DeductionLog> DeductionLogs
+		public System.Data.Linq.Table<Deduction> Deductions
 		{
 			get
 			{
-				return this.GetTable<DeductionLog>();
+				return this.GetTable<Deduction>();
 			}
 		}
 		
@@ -146,19 +149,46 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Attendance")]
-	public partial class Attendance
+	public partial class Attendance : INotifyPropertyChanging, INotifyPropertyChanged
 	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private System.Nullable<System.DateTime> _AttendanceDate;
 		
-		private System.Nullable<double> _NumOfHoursWorked;
+		private int _NumOfHoursWorked;
 		
 		private System.Nullable<int> _EmployeeID;
 		
-		private System.Nullable<double> _OverWorkedHours;
+		private int _OverWorkedHours;
+		
+		private int _AttendanceID;
+		
+		private EntitySet<Deduction> _Deductions;
+		
+		private EntityRef<Employee> _Employee;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAttendanceDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnAttendanceDateChanged();
+    partial void OnNumOfHoursWorkedChanging(int value);
+    partial void OnNumOfHoursWorkedChanged();
+    partial void OnEmployeeIDChanging(System.Nullable<int> value);
+    partial void OnEmployeeIDChanged();
+    partial void OnOverWorkedHoursChanging(int value);
+    partial void OnOverWorkedHoursChanged();
+    partial void OnAttendanceIDChanging(int value);
+    partial void OnAttendanceIDChanged();
+    #endregion
 		
 		public Attendance()
 		{
+			this._Deductions = new EntitySet<Deduction>(new Action<Deduction>(this.attach_Deductions), new Action<Deduction>(this.detach_Deductions));
+			this._Employee = default(EntityRef<Employee>);
+			OnCreated();
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AttendanceDate", DbType="DateTime")]
@@ -172,13 +202,17 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			{
 				if ((this._AttendanceDate != value))
 				{
+					this.OnAttendanceDateChanging(value);
+					this.SendPropertyChanging();
 					this._AttendanceDate = value;
+					this.SendPropertyChanged("AttendanceDate");
+					this.OnAttendanceDateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumOfHoursWorked", DbType="Float")]
-		public System.Nullable<double> NumOfHoursWorked
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumOfHoursWorked", DbType="Int NOT NULL")]
+		public int NumOfHoursWorked
 		{
 			get
 			{
@@ -188,7 +222,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			{
 				if ((this._NumOfHoursWorked != value))
 				{
+					this.OnNumOfHoursWorkedChanging(value);
+					this.SendPropertyChanging();
 					this._NumOfHoursWorked = value;
+					this.SendPropertyChanged("NumOfHoursWorked");
+					this.OnNumOfHoursWorkedChanged();
 				}
 			}
 		}
@@ -204,13 +242,21 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			{
 				if ((this._EmployeeID != value))
 				{
+					if (this._Employee.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEmployeeIDChanging(value);
+					this.SendPropertyChanging();
 					this._EmployeeID = value;
+					this.SendPropertyChanged("EmployeeID");
+					this.OnEmployeeIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OverWorkedHours", DbType="Float")]
-		public System.Nullable<double> OverWorkedHours
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OverWorkedHours", DbType="Int NOT NULL")]
+		public int OverWorkedHours
 		{
 			get
 			{
@@ -220,9 +266,112 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			{
 				if ((this._OverWorkedHours != value))
 				{
+					this.OnOverWorkedHoursChanging(value);
+					this.SendPropertyChanging();
 					this._OverWorkedHours = value;
+					this.SendPropertyChanged("OverWorkedHours");
+					this.OnOverWorkedHoursChanged();
 				}
 			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AttendanceID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AttendanceID
+		{
+			get
+			{
+				return this._AttendanceID;
+			}
+			set
+			{
+				if ((this._AttendanceID != value))
+				{
+					this.OnAttendanceIDChanging(value);
+					this.SendPropertyChanging();
+					this._AttendanceID = value;
+					this.SendPropertyChanged("AttendanceID");
+					this.OnAttendanceIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Attendance_Deduction", Storage="_Deductions", ThisKey="AttendanceID", OtherKey="AttendanceID")]
+		public EntitySet<Deduction> Deductions
+		{
+			get
+			{
+				return this._Deductions;
+			}
+			set
+			{
+				this._Deductions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Attendance", Storage="_Employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
+		public Employee Employee
+		{
+			get
+			{
+				return this._Employee.Entity;
+			}
+			set
+			{
+				Employee previousValue = this._Employee.Entity;
+				if (((previousValue != value) 
+							|| (this._Employee.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Employee.Entity = null;
+						previousValue.Attendances.Remove(this);
+					}
+					this._Employee.Entity = value;
+					if ((value != null))
+					{
+						value.Attendances.Add(this);
+						this._EmployeeID = value.EmployeeID;
+					}
+					else
+					{
+						this._EmployeeID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Employee");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Deductions(Deduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.Attendance = this;
+		}
+		
+		private void detach_Deductions(Deduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.Attendance = null;
 		}
 	}
 	
@@ -408,8 +557,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DeductionLogs")]
-	public partial class DeductionLog : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Deduction")]
+	public partial class Deduction : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -423,6 +572,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		private System.Nullable<System.DateTime> _DateApplied;
 		
 		private System.Nullable<int> _EmployeeID;
+		
+		private System.Nullable<int> _AttendanceID;
+		
+		private EntityRef<Attendance> _Attendance;
 		
 		private EntityRef<DeductionsType> _DeductionsType;
 		
@@ -442,10 +595,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnDateAppliedChanged();
     partial void OnEmployeeIDChanging(System.Nullable<int> value);
     partial void OnEmployeeIDChanged();
+    partial void OnAttendanceIDChanging(System.Nullable<int> value);
+    partial void OnAttendanceIDChanged();
     #endregion
 		
-		public DeductionLog()
+		public Deduction()
 		{
+			this._Attendance = default(EntityRef<Attendance>);
 			this._DeductionsType = default(EntityRef<DeductionsType>);
 			this._Employee = default(EntityRef<Employee>);
 			OnCreated();
@@ -559,7 +715,65 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DeductionsType_DeductionLog", Storage="_DeductionsType", ThisKey="DeductionTypeID", OtherKey="DeductionTypeID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AttendanceID", DbType="Int")]
+		public System.Nullable<int> AttendanceID
+		{
+			get
+			{
+				return this._AttendanceID;
+			}
+			set
+			{
+				if ((this._AttendanceID != value))
+				{
+					if (this._Attendance.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAttendanceIDChanging(value);
+					this.SendPropertyChanging();
+					this._AttendanceID = value;
+					this.SendPropertyChanged("AttendanceID");
+					this.OnAttendanceIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Attendance_Deduction", Storage="_Attendance", ThisKey="AttendanceID", OtherKey="AttendanceID", IsForeignKey=true)]
+		public Attendance Attendance
+		{
+			get
+			{
+				return this._Attendance.Entity;
+			}
+			set
+			{
+				Attendance previousValue = this._Attendance.Entity;
+				if (((previousValue != value) 
+							|| (this._Attendance.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Attendance.Entity = null;
+						previousValue.Deductions.Remove(this);
+					}
+					this._Attendance.Entity = value;
+					if ((value != null))
+					{
+						value.Deductions.Add(this);
+						this._AttendanceID = value.AttendanceID;
+					}
+					else
+					{
+						this._AttendanceID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Attendance");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DeductionsType_Deduction", Storage="_DeductionsType", ThisKey="DeductionTypeID", OtherKey="DeductionTypeID", IsForeignKey=true)]
 		public DeductionsType DeductionsType
 		{
 			get
@@ -576,12 +790,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					if ((previousValue != null))
 					{
 						this._DeductionsType.Entity = null;
-						previousValue.DeductionLogs.Remove(this);
+						previousValue.Deductions.Remove(this);
 					}
 					this._DeductionsType.Entity = value;
 					if ((value != null))
 					{
-						value.DeductionLogs.Add(this);
+						value.Deductions.Add(this);
 						this._DeductionTypeID = value.DeductionTypeID;
 					}
 					else
@@ -593,7 +807,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_DeductionLog", Storage="_Employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Deduction", Storage="_Employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
 		public Employee Employee
 		{
 			get
@@ -610,12 +824,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					if ((previousValue != null))
 					{
 						this._Employee.Entity = null;
-						previousValue.DeductionLogs.Remove(this);
+						previousValue.Deductions.Remove(this);
 					}
 					this._Employee.Entity = value;
 					if ((value != null))
 					{
-						value.DeductionLogs.Add(this);
+						value.Deductions.Add(this);
 						this._EmployeeID = value.EmployeeID;
 					}
 					else
@@ -660,7 +874,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private string _DeductionReferenceId;
 		
-		private EntitySet<DeductionLog> _DeductionLogs;
+		private EntitySet<Deduction> _Deductions;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -676,7 +890,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		public DeductionsType()
 		{
-			this._DeductionLogs = new EntitySet<DeductionLog>(new Action<DeductionLog>(this.attach_DeductionLogs), new Action<DeductionLog>(this.detach_DeductionLogs));
+			this._Deductions = new EntitySet<Deduction>(new Action<Deduction>(this.attach_Deductions), new Action<Deduction>(this.detach_Deductions));
 			OnCreated();
 		}
 		
@@ -740,16 +954,16 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DeductionsType_DeductionLog", Storage="_DeductionLogs", ThisKey="DeductionTypeID", OtherKey="DeductionTypeID")]
-		public EntitySet<DeductionLog> DeductionLogs
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="DeductionsType_Deduction", Storage="_Deductions", ThisKey="DeductionTypeID", OtherKey="DeductionTypeID")]
+		public EntitySet<Deduction> Deductions
 		{
 			get
 			{
-				return this._DeductionLogs;
+				return this._Deductions;
 			}
 			set
 			{
-				this._DeductionLogs.Assign(value);
+				this._Deductions.Assign(value);
 			}
 		}
 		
@@ -773,13 +987,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		private void attach_DeductionLogs(DeductionLog entity)
+		private void attach_Deductions(Deduction entity)
 		{
 			this.SendPropertyChanging();
 			entity.DeductionsType = this;
 		}
 		
-		private void detach_DeductionLogs(DeductionLog entity)
+		private void detach_Deductions(Deduction entity)
 		{
 			this.SendPropertyChanging();
 			entity.DeductionsType = null;
@@ -828,7 +1042,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private string _Status;
 		
-		private EntitySet<DeductionLog> _DeductionLogs;
+		private EntitySet<Attendance> _Attendances;
+		
+		private EntitySet<Deduction> _Deductions;
 		
 		private EntitySet<Payroll> _Payrolls;
 		
@@ -878,7 +1094,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		public Employee()
 		{
-			this._DeductionLogs = new EntitySet<DeductionLog>(new Action<DeductionLog>(this.attach_DeductionLogs), new Action<DeductionLog>(this.detach_DeductionLogs));
+			this._Attendances = new EntitySet<Attendance>(new Action<Attendance>(this.attach_Attendances), new Action<Attendance>(this.detach_Attendances));
+			this._Deductions = new EntitySet<Deduction>(new Action<Deduction>(this.attach_Deductions), new Action<Deduction>(this.detach_Deductions));
 			this._Payrolls = new EntitySet<Payroll>(new Action<Payroll>(this.attach_Payrolls), new Action<Payroll>(this.detach_Payrolls));
 			this._EmployeeType = default(EntityRef<EmployeeType>);
 			OnCreated();
@@ -1248,16 +1465,29 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_DeductionLog", Storage="_DeductionLogs", ThisKey="EmployeeID", OtherKey="EmployeeID")]
-		public EntitySet<DeductionLog> DeductionLogs
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Attendance", Storage="_Attendances", ThisKey="EmployeeID", OtherKey="EmployeeID")]
+		public EntitySet<Attendance> Attendances
 		{
 			get
 			{
-				return this._DeductionLogs;
+				return this._Attendances;
 			}
 			set
 			{
-				this._DeductionLogs.Assign(value);
+				this._Attendances.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Deduction", Storage="_Deductions", ThisKey="EmployeeID", OtherKey="EmployeeID")]
+		public EntitySet<Deduction> Deductions
+		{
+			get
+			{
+				return this._Deductions;
+			}
+			set
+			{
+				this._Deductions.Assign(value);
 			}
 		}
 		
@@ -1328,13 +1558,25 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		private void attach_DeductionLogs(DeductionLog entity)
+		private void attach_Attendances(Attendance entity)
 		{
 			this.SendPropertyChanging();
 			entity.Employee = this;
 		}
 		
-		private void detach_DeductionLogs(DeductionLog entity)
+		private void detach_Attendances(Attendance entity)
+		{
+			this.SendPropertyChanging();
+			entity.Employee = null;
+		}
+		
+		private void attach_Deductions(Deduction entity)
+		{
+			this.SendPropertyChanging();
+			entity.Employee = this;
+		}
+		
+		private void detach_Deductions(Deduction entity)
 		{
 			this.SendPropertyChanging();
 			entity.Employee = null;
