@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
     public class AttendanceViewModel : Model.ModelPropertyChange {
-
         public AttendanceViewModel() {
             startDate = new DateTime(2019, 5, 1);
             endDate = startDate.AddMonths(1);
@@ -45,6 +44,51 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 }
             }
         }
+        private List<Attendance> attendances;
+
+        public List<Attendance> Attendances {
+            get { return attendances; }
+            set {
+                if (attendances != value) {
+                    attendances = value;
+                    RaisePropertyChanged("Attendances");
+                }
+            }
+        }
+        private Attendance attendance;
+
+        public Attendance Attendance {
+            get { return attendance; }
+            set {
+                if (attendance != value) {
+                    attendance = value;
+                    RaisePropertyChanged("Attendance");
+                }
+            }
+        }
+        private DeductionLog deduction;
+
+        public DeductionLog Deduction {
+            get { return deduction; }
+            set {
+                if (deduction != value) {
+                    deduction = value;
+                    RaisePropertyChanged("Deduction");
+                }
+            }
+        }
+        private List<DeductionLog> deductions;
+
+        public List<DeductionLog> Deductions {
+            get { return deductions; }
+            set {
+                if (deductions != value) {
+                    deductions = value;
+                    RaisePropertyChanged("Deductions");
+                }
+            }
+        }
+
         public Model.Month GetMonthRange() {
             var month = new Model.Month();
             month.Weeks = new List<Model.Week>();
@@ -65,6 +109,22 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 }
             }
             return month;
+        }
+        public void SaveAttendance() {
+            Helper.db.Attendances.InsertAllOnSubmit(Attendances);
+            Helper.db.SubmitChanges();
+        }
+        public void AddAttendance(Attendance attendance) {
+            Attendances.Add(attendance);
+        }
+        public void RemoveAttendance(Attendance attendance) {
+            Attendances.Remove(attendance);
+        }
+        public void AddDeduction(DeductionLog deduction) {
+            Deductions.Add(deduction);
+        }
+        public void RemoveDeduction(DeductionLog deduction) {
+            deductions.Remove(deduction);
         }
     }
 }
