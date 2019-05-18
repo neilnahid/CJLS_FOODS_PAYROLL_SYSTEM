@@ -4,12 +4,24 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 {
     public class EmployeeViewModel : Model.ModelPropertyChange
     {
         private ObservableCollection<Employee> employees;
+        private List<EmployeeType> employeeTypes;
+
+        public List<EmployeeType> EmployeeTypes {
+            get { return employeeTypes; }
+            set {
+                if (employeeTypes != value) {
+                    employeeTypes = value;
+                    RaisePropertyChanged("EmployeeTypes");
+                }
+            }
+        }
 
         public ObservableCollection<Employee> Employees {
             get { return employees; }
@@ -21,22 +33,48 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 }
             }
         }
+        private Employee employee;
 
-        public Employee Employee { get; set; }
+        public Employee Employee {
+            get { return employee; }
+            set {
+                if (employee != value) {
+                    employee = value;
+                    RaisePropertyChanged("Employee");
+                }
+            }
+        }
+
         public EmployeeViewModel()
         {
             Employees = new ObservableCollection<Employee>(GetEmployeeList());
             Employee = new Employee();
-        }
+            EmployeeTypes = GetEmployeeTypes();
+        }   
         public List<Employee> GetEmployeeList()
         {
-            return (from employee in DatabaseHelper.db.Employees select employee).ToList();
+            var result = (from employee in Helper.db.Employees select employee).ToList();
+            return result;
         }
         public void CreateNewEmployee()
         {
-            DatabaseHelper.db.Employees.InsertOnSubmit(Employee);
+            Helper.db.Employees.InsertOnSubmit(Employee);
             Employees.Add(Employee);
-            DatabaseHelper.db.SubmitChanges();
+            Helper.db.SubmitChanges();
+            MessageBox.Show("Successfully created new employee");
+        }
+        public List<EmployeeType> GetEmployeeTypes() {
+            return (from et in Helper.db.EmployeeTypes select et).ToList();
+        }
+        public void DeleteEmployee(Employee employee) {
+            Helper.db.Employees.DeleteOnSubmit(Employee);
+            Employees.Remove(Employee);
+            Employee = new Employee();
+            Helper.db.SubmitChanges();
+            MessageBox.Show("Successfully Deleted Employee");
+        }
+        public void UpdateEmployee() {
+            Helper.db.SubmitChanges();
         }
     }
 }
