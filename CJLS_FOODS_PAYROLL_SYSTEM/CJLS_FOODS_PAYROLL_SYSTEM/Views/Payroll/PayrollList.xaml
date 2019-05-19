@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee.Payroll"
+    x:Class="CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee.PayrollList"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -19,8 +19,7 @@
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignHeadlineTextBlock}"
                     Text="Header" />
-                <StackPanel x:Name="sp_dialogFields">
-                </StackPanel>
+                <StackPanel x:Name="sp_dialogFields" />
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
                         x:Name="btn_dialogConfirm"
@@ -64,9 +63,7 @@
                         CanUserAddRows="False"
                         CanUserDeleteRows="false"
                         CanUserResizeColumns="False"
-                        IsReadOnly="True"
-                        ItemsSource="{Binding Users}"
-                        SelectedItem="{Binding User}">
+                        IsReadOnly="True">
                         <DataGrid.Columns />
                     </DataGrid>
                 </GroupBox>

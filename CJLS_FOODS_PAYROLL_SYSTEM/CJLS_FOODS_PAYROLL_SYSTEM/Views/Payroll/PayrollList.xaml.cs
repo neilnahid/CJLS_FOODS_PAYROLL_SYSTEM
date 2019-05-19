@@ -17,13 +17,21 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
     /// <summary>
     /// Interaction logic for Payroll.xaml
     /// </summary>
-    public partial class Payroll : Page {
-        public Payroll() {
+    public partial class PayrollList : Page {
+        public PayrollList() {
             InitializeComponent();
         }
 
         private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e) {
 
+        }
+
+        private void DialogHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs) {
+
+        }
+
+        private void btn_DialogConfirm_Click(object sender, RoutedEventArgs e) {
+                
         }
     }
 }

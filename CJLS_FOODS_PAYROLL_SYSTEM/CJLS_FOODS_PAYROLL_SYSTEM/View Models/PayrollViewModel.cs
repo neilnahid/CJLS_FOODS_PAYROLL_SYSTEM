@@ -30,7 +30,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             }
         }
         public List<Payroll> GetPayrollList() {
-
+            return (from p in Helper.db.Payrolls select p).ToList();
         }
     }
 }
