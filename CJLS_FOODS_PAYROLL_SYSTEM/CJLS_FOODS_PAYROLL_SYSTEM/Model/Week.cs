@@ -10,7 +10,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
         public Week() {
             Days = new ObservableCollection<Attendance>();
             for(int i = 0; i < 7; i++) {
-                Days.Add(new Attendance() { NumOfHoursWorked = 8 });
+                Days.Add(new Attendance() { RegularHoursWorked = 8 });
             }
         }
         private ObservableCollection<Attendance> days;

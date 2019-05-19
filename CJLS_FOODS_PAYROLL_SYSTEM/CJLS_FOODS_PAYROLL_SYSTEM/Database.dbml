@@ -3,22 +3,30 @@
   <Table Name="dbo.Attendance" Member="Attendances">
     <Type Name="Attendance">
       <Column Name="AttendanceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="NumOfHoursWorked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RegularHoursWorked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="OverWorkedHours" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OverTimeHoursWorked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="AttendanceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PayrollID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Attendance_Deduction" Member="Deductions" ThisKey="AttendanceID" OtherKey="AttendanceID" Type="Deduction" />
       <Association Name="Employee_Attendance" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+      <Association Name="Payroll_Attendance" Member="Payroll" ThisKey="PayrollID" OtherKey="PayrollID" Type="Payroll" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+  <Table Name="dbo.PayrollDetails" Member="PayrollDetails">
+    <Type Name="PayrollDetail">
+      <Column Name="PayrollDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="PayrollID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalDeductions" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TotalContributions" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TotalRegularHours" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TotalOverTimeHours" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="OvertimePay" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NetPay" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="GrossPay" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Employee_PayrollDetail" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+      <Association Name="Payroll_PayrollDetail" Member="Payroll" ThisKey="PayrollID" OtherKey="PayrollID" Type="Payroll" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Deduction" Member="Deductions">
@@ -42,7 +50,7 @@
       <Association Name="DeductionsType_Deduction" Member="Deductions" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="Deduction" />
     </Type>
   </Table>
-  <Table Name="dbo.Employees" Member="Employees">
+  <Table Name="dbo.Employee" Member="Employees">
     <Type Name="Employee">
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="FirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -63,6 +71,7 @@
       <Column Name="Branch" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="Employee_Attendance" Member="Attendances" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Attendance" />
+      <Association Name="Employee_PayrollDetail" Member="PayrollDetails" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="PayrollDetail" />
       <Association Name="Employee_Deduction" Member="Deductions" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Deduction" />
       <Association Name="Employee_Leave" Member="Leaves" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Leave" />
       <Association Name="Employee_Payroll" Member="Payrolls" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Payroll" />
@@ -84,17 +93,23 @@
       <Association Name="Employee_Leave" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Payrolls" Member="Payrolls">
+  <Table Name="dbo.Payroll" Member="Payrolls">
     <Type Name="Payroll">
       <Column Name="PayrollID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TotalDeductions" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="TotalContributions" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="NumberOfHoursWorked" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="OvertimeWorked" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="OvertimePay" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="Netpay" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Association Name="Payroll_Attendance" Member="Attendances" ThisKey="PayrollID" OtherKey="PayrollID" Type="Attendance" />
+      <Association Name="Payroll_PayrollDetail" Member="PayrollDetails" ThisKey="PayrollID" OtherKey="PayrollID" Type="PayrollDetail" />
       <Association Name="Employee_Payroll" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

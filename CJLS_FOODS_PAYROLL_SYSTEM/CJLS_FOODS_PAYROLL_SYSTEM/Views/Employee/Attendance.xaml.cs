@@ -38,19 +38,19 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
                 var colIndex = DataGridCalendar.CurrentCell.Column.DisplayIndex;
                 VM.Attendance = VM.SelectedWeek.Days[colIndex];
                 VM.Deductions = new System.Collections.ObjectModel.ObservableCollection<Deduction>(VM.Attendance.Deductions.ToList());
-                if(VM.Attendance.NumOfHoursWorked == 8) {
+                if(VM.Attendance.RegularHoursWorked == 8) {
                     ((Rectangle)VM.CurrentStackPanel.Children[1]).Fill = new SolidColorBrush(Color.FromRgb(0, 128, 0));
                     VM.CurrentStackPanel.Children[1].Visibility = Visibility.Visible;
                 }
             }
         }
         private void Txtbox_regularHours_TextChanged(object sender, TextChangedEventArgs e) {
-            if (VM.Attendance.NumOfHoursWorked == 8) {
+            if (VM.Attendance.RegularHoursWorked == 8) {
                 ((Rectangle)VM.CurrentStackPanel.Children[1]).Fill = new SolidColorBrush(Color.FromRgb(0, 128, 0));
 
                 VM.CurrentStackPanel.Children[1].Visibility = Visibility.Visible;
             }
-            else if(VM.Attendance.NumOfHoursWorked == 0) {
+            else if(VM.Attendance.RegularHoursWorked == 0) {
                 ((Rectangle)VM.CurrentStackPanel.Children[1]).Fill = new SolidColorBrush(Color.FromRgb(0, 0, 0));
                 VM.CurrentStackPanel.Children[1].Visibility = Visibility.Visible;
             }
@@ -60,7 +60,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
         }
 
         private void Txtbox_overtimeHours_TextChanged(object sender, TextChangedEventArgs e) {
-            if (VM.Attendance.OverWorkedHours > 0) {
+            if (VM.Attendance.RegularHoursWorked > 0) {
                 VM.CurrentStackPanel.Children[2].Visibility = Visibility.Visible;
             }
             else {
