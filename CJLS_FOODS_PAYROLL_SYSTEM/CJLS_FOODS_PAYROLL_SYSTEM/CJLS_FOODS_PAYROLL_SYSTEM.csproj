@@ -80,7 +80,7 @@
     <Compile Include="View Models\AttendanceViewModel.cs" />
     <Compile Include="View Models\EmployeeViewModel.cs" />
     <Compile Include="Model\ModelPropertyChanged.cs" />
-    <Compile Include="View Models\PayrollDetails.cs" />
+    <Compile Include="View Models\PayrolLDetailsViewModel.cs" />
     <Compile Include="View Models\PayrollViewModel.cs" />
     <Compile Include="View Models\UserAdminViewModel.cs" />
     <Compile Include="Views\Accounts\UserList.xaml.cs">

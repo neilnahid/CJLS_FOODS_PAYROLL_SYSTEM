@@ -19,8 +19,9 @@
             <StackPanel>
                 <TreeView SelectedItemChanged="TreeView_SelectedItemChanged">
                     <TreeViewItem Header="Employees" />
-                    <TreeViewItem Header="Users" />
                     <TreeViewItem Header="Attendance" />
+                    <TreeViewItem Header="Payroll" />
+                    <TreeViewItem Header="Users" />
                 </TreeView>
             </StackPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>

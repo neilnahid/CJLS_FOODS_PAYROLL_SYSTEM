@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
-    class PayrollDetails : Model.ModelPropertyChange{
-        public PayrollDetails() {
+    class PayrolLDetailsViewModel : Model.ModelPropertyChange{
+        public PayrolLDetailsViewModel() {
         }
         private Payroll payroll;
 
