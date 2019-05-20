@@ -1,0 +1,24 @@
+﻿<Application
+    x:Class="CJLS_FOODS_PAYROLL_SYSTEM.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:VM="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.View_Models"
+    xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM"
+    StartupUri="Views/Form_Dashboard.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <VM:EmployeeViewModel x:Key="EmployeeViewModel" />
+            <VM:AttendanceViewModel x:Key="AttendanceViewModel" />
+            <VM:UserAdminViewModel x:Key="UserAdminViewModel" />
+            <VM:PayrolLDetailsViewModel x:Key="PayrollDetailsViewModel" />
+            <VM:PayrollViewModel x:Key="PayrollViewModel" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
