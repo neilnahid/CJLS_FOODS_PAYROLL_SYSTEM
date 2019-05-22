@@ -8,14 +8,16 @@ using System.Threading.Tasks;
 namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
     public class Week : ModelPropertyChange {
         public Week() {
-            Days = new ObservableCollection<Attendance>();
+            Days = new ObservableCollection<Model.ExtendedAttendance>();
             for(int i = 0; i < 7; i++) {
-                Days.Add(new Attendance() { RegularHoursWorked = 8 });
+                Days.Add(new ExtendedAttendance() { Attendance = new Attendance { RegularHoursWorked = 8, OverTimeHoursWorked = 0},  });
             }
         }
-        private ObservableCollection<Attendance> days;
+        public Week(List<Attendance> attendances) {
+        }
+        private ObservableCollection<Model.ExtendedAttendance> days;
 
-        public ObservableCollection<Attendance> Days {
+        public ObservableCollection<Model.ExtendedAttendance> Days {
             get { return days; }
             set {
                 if (days != value) {

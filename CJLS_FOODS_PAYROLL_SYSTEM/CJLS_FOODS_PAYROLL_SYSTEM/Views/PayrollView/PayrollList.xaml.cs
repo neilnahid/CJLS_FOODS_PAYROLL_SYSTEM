@@ -35,5 +35,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
 
         private void btn_DialogConfirm_Click(object sender, RoutedEventArgs e) {
         }
+
+        private void Btn_viewPayroll_Click(object sender, RoutedEventArgs e) {
+            NavigationService.Navigate(new Views.PayrollView.PayrollDetails(VM.Payroll));
+        }
     }
 }

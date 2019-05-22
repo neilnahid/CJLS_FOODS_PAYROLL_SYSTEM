@@ -84,6 +84,7 @@
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
+    <Compile Include="Model\ExtendedAttendance.cs" />
     <Compile Include="Model\Month.cs" />
     <Compile Include="Model\Week.cs" />
     <Compile Include="View Models\AttendanceViewModel.cs" />

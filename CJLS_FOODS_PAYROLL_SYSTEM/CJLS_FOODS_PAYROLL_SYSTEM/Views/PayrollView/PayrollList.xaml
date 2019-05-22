@@ -58,15 +58,36 @@
                 <GroupBox
                     Margin="0,10,0,0"
                     FontSize="24"
-                    Header="Payroll History List">
+                    Header="Payroll List">
                     <DataGrid
+                        AutoGenerateColumns="False"
                         CanUserAddRows="False"
                         CanUserDeleteRows="false"
                         CanUserResizeColumns="False"
                         IsReadOnly="True"
                         ItemsSource="{Binding Payrolls}"
                         SelectedItem="{Binding Payroll}">
-                        <DataGrid.Columns />
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding PayrollID}" Header="PayrollID" />
+                            <DataGridTextColumn Binding="{Binding StartDate}" Header="StartDate" />
+                            <DataGridTextColumn Binding="{Binding EndDate}" Header="EndDate" />
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                            x:Name="btn_viewPayroll"
+                                            Click="Btn_viewPayroll_Click"
+                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                            ToolTip="View Payroll">
+                                            <materialDesign:PackIcon
+                                                Width="24"
+                                                Height="24"
+                                                Kind="Eye" />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>
             </Grid>

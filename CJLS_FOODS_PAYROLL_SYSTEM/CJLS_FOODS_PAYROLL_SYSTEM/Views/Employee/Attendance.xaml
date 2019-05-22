@@ -82,25 +82,25 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Name="Sunday">
-                                    <TextBlock Text="{Binding Days[0].AttendanceDate.Day}" />
+                                    <TextBlock Text="{Binding Days[0].Attendance.AttendanceDate.Day}" />
                                     <Rectangle
                                         x:Name="Regular"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Green"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[0].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Blue"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[0].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Red"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[0].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -109,25 +109,25 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel x:Name="Monday">
-                                    <TextBlock Text="{Binding Days[1].AttendanceDate.Day}" />
+                                    <TextBlock Text="{Binding Days[1].Attendance.AttendanceDate.Day}" />
                                     <Rectangle
                                         x:Name="Regular"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Green"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[1].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Blue"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[1].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Red"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[1].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -136,25 +136,25 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel x:Name="Tuesday">
-                                    <TextBlock Text="{Binding Days[2].AttendanceDate.Day}" />
+                                    <TextBlock Text="{Binding Days[2].Attendance.AttendanceDate.Day}" />
                                     <Rectangle
                                         x:Name="Regular"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Green"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[2].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Blue"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[2].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Red"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[2].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -163,25 +163,25 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel x:Name="Wednesday">
-                                    <TextBlock Text="{Binding Days[3].AttendanceDate.Day}" />
+                                    <TextBlock Text="{Binding Days[3].Attendance.AttendanceDate.Day}" />
                                     <Rectangle
                                         x:Name="Regular"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Green"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[3].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Blue"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[3].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Red"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[3].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -190,25 +190,25 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel x:Name="Thursday">
-                                    <TextBlock Text="{Binding Days[4].AttendanceDate.Day}" />
+                                    <TextBlock Text="{Binding Days[4].Attendance.AttendanceDate.Day}" />
                                     <Rectangle
                                         x:Name="Regular"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Green"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[4].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Blue"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[4].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Red"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[4].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -217,25 +217,25 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel x:Name="Friday">
-                                    <TextBlock Text="{Binding Days[5].AttendanceDate.Day}" />
+                                    <TextBlock Text="{Binding Days[5].Attendance.AttendanceDate.Day}" />
                                     <Rectangle
                                         x:Name="Regular"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Green"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[5].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Blue"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[5].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Red"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[5].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -244,25 +244,25 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel x:Name="Saturday">
-                                    <TextBlock Text="{Binding Days[6].AttendanceDate.Day}" />
+                                    <TextBlock Text="{Binding Days[6].Attendance.AttendanceDate.Day}" />
                                     <Rectangle
                                         x:Name="Regular"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Green"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[6].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Blue"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[6].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Red"
-                                        Visibility="Collapsed" />
+                                        Visibility="{Binding Days[6].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -288,7 +288,7 @@
                                     CanUserAddRows="False"
                                     CanUserDeleteRows="False"
                                     CanUserResizeRows="False"
-                                    ItemsSource="{Binding .Deductions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    ItemsSource="{Binding Deductions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding DeductionsType.DeductionName}" Header="Description" />
                                         <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
@@ -296,7 +296,7 @@
                                 </DataGrid>
                                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                                     <TextBlock Text="Total Deductions: " />
-                                    <TextBlock Text="{Binding Deductions}" />
+                                    <TextBlock Text="{Binding Deductions.Sum}" />
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
@@ -335,13 +335,13 @@
                                     Name="txtbox_regularHours"
                                     materialDesign:HintAssist.Hint="Regular Hours Worked"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding Attendance.RegularHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding Attendance.Attendance.RegularHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextChanged="Txtbox_regularHours_TextChanged" />
                                 <TextBox
                                     Name="txtbox_overtimeHours"
                                     materialDesign:HintAssist.Hint="Overtime Hours Worked"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding Attendance.Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextChanged="Txtbox_overtimeHours_TextChanged" />
                             </StackPanel>
                         </Grid>

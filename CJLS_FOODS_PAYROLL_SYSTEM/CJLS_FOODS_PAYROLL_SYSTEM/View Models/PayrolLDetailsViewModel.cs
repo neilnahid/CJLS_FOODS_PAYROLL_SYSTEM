@@ -44,11 +44,16 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         }
 
         public void InstantiatePayrollDetails() {
-            var employees = (from e in Helper.db.Employees select e);
-            foreach(var employee in employees) {
-                this.Payroll.PayrollDetails.Add(new PayrollDetail { Employee = employee, EmployeeID = employee.EmployeeID });
+            PayrollDetails = new ObservableCollection<PayrollDetail>(GetPayrollDetailList());
+        }
+        private List<PayrollDetail> GetPayrollDetailList() {
+            if (Payroll.PayrollDetails.Count == 0) {
+                var employees = (from e in Helper.db.Employees select e);
+                foreach (var employee in employees) {
+                    this.Payroll.PayrollDetails.Add(new PayrollDetail { Employee = employee, EmployeeID = employee.EmployeeID });
+                }
             }
-            PayrollDetails = new ObservableCollection<PayrollDetail>(Payroll.PayrollDetails);
+            return Payroll.PayrollDetails.ToList();
         }
     }
 }
