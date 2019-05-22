@@ -12,9 +12,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
             int weekCounter = 0;
             //assign each attendance to their corresponding dayofweek
             foreach(var a in attendances) {
-                var currentDay = Weeks[weekCounter].Days[(int)a.AttendanceDate.DayOfWeek];
+                var currentDay = Weeks[weekCounter].Days[(int)a.AttendanceDate.Value.DayOfWeek];
                 currentDay.Attendance = a;
-                if(a.AttendanceDate.DayOfWeek == DayOfWeek.Saturday) {
+                if(a.AttendanceDate.Value.DayOfWeek == DayOfWeek.Saturday) {
                     weekCounter++;
                     Weeks.Add(new Week());
                 }

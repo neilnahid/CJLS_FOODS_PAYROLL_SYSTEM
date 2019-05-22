@@ -138,21 +138,23 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             return (from i in Helper.db.DeductionsTypes select i).ToList();
         }
         public void UpdateFlagsOf(Model.ExtendedAttendance attendance) {
-            if (attendance.Attendance.RegularHoursWorked == 8)
-                attendance.RegularHoursFlag = Visibility.Visible;
-            else
-                attendance.RegularHoursFlag = Visibility.Collapsed;
+            if(attendance.Attendance.AttendanceDate != null) {
+                if (attendance.Attendance.RegularHoursWorked == 8)
+                    attendance.RegularHoursFlag = Visibility.Visible;
+                else
+                    attendance.RegularHoursFlag = Visibility.Collapsed;
 
-            if (attendance.Attendance.OverTimeHoursWorked > 0)
-                attendance.OverTimeHoursFlag = Visibility.Visible;
-            else
-                attendance.OverTimeHoursFlag = Visibility.Collapsed;
+                if (attendance.Attendance.OverTimeHoursWorked > 0)
+                    attendance.OverTimeHoursFlag = Visibility.Visible;
+                else
+                    attendance.OverTimeHoursFlag = Visibility.Collapsed;
 
-            if (attendance.Attendance.Deductions.Count > 0) {
-                attendance.DeductionsFlag = Visibility.Visible;
+                if (attendance.Attendance.Deductions.Count > 0) {
+                    attendance.DeductionsFlag = Visibility.Visible;
+                }
+                else
+                    attendance.DeductionsFlag = Visibility.Collapsed;
             }
-            else
-                attendance.DeductionsFlag = Visibility.Collapsed;
         }
         public void UpdateFlagsOfEveryAttendance() {
             foreach(var w in Month.Weeks) {
