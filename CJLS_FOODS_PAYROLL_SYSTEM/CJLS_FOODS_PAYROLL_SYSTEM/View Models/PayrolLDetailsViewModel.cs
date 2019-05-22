@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
-    class PayrolLDetailsViewModel : Model.ModelPropertyChange{
-        public PayrolLDetailsViewModel() {
+    class PayrollDetailsViewModel : Model.ModelPropertyChange{
+        public PayrollDetailsViewModel() {
         }
         private Payroll payroll;
 
@@ -19,8 +20,35 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 }
             }
         }
-        public Payroll GetPayroll(int PayrollID) {
-            return (from p in Helper.db.Payrolls where p.PayrollID == PayrollID select p).First();
+        private PayrollDetail payrollDetail;
+
+        public PayrollDetail PayrollDetail {
+            get { return payrollDetail; }
+            set {
+                if (payrollDetail != value) {
+                    payrollDetail = value;
+                    RaisePropertyChanged("PayrollDetail");
+                }
+            }
+        }
+        private ObservableCollection<PayrollDetail> payrollDetails;
+
+        public ObservableCollection<PayrollDetail> PayrollDetails {
+            get { return payrollDetails; }
+            set {
+                if (payrollDetails != value) {
+                    payrollDetails = value;
+                    RaisePropertyChanged("PayrollDetails");
+                }
+            }
+        }
+
+        public void InstantiatePayrollDetails() {
+            var employees = (from e in Helper.db.Employees select e);
+            foreach(var employee in employees) {
+                this.Payroll.PayrollDetails.Add(new PayrollDetail { Employee = employee, EmployeeID = employee.EmployeeID });
+            }
+            PayrollDetails = new ObservableCollection<PayrollDetail>(Payroll.PayrollDetails);
         }
     }
 }

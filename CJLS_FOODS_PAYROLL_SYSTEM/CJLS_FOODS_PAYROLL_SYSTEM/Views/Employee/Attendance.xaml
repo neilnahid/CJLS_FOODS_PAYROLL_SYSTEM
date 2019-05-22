@@ -335,13 +335,13 @@
                                     Name="txtbox_regularHours"
                                     materialDesign:HintAssist.Hint="Regular Hours Worked"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding Attendance.NumOfHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding Attendance.RegularHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextChanged="Txtbox_regularHours_TextChanged" />
                                 <TextBox
                                     Name="txtbox_overtimeHours"
                                     materialDesign:HintAssist.Hint="Overtime Hours Worked"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding Attendance.OverWorkedHours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextChanged="Txtbox_overtimeHours_TextChanged" />
                             </StackPanel>
                         </Grid>

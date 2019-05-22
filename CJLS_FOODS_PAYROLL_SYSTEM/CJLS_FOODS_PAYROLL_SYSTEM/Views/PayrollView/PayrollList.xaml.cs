@@ -13,17 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
+namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
     /// <summary>
     /// Interaction logic for Payroll.xaml
     /// </summary>
     public partial class PayrollList : Page {
+        View_Models.PayrollViewModel VM = new View_Models.PayrollViewModel();
         public PayrollList() {
             InitializeComponent();
+            VM = (View_Models.PayrollViewModel)DataContext;
         }
 
         private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e) {
-
+            VM.Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
+            NavigationService.Navigate(new Views.PayrollView.PayrollDetails(VM.Payroll));
         }
 
         private void DialogHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs) {
@@ -31,7 +34,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
         }
 
         private void btn_DialogConfirm_Click(object sender, RoutedEventArgs e) {
-                
         }
     }
 }

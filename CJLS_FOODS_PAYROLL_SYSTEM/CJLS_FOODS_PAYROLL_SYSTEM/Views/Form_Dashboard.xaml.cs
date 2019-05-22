@@ -24,20 +24,17 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e) {
         }
 
-        private void MenuToggleButton_Checked(object sender, RoutedEventArgs e)
-        {
-            
+        private void MenuToggleButton_Checked(object sender, RoutedEventArgs e) {
+
         }
 
-        private void Btn_Payroll_Click(object sender, RoutedEventArgs e)
-        {
+        private void Btn_Payroll_Click(object sender, RoutedEventArgs e) {
             //Frame.Content = new Views.Employee.PayrollDetails();
             //Title.Text = "Payroll Details";
         }
 
-        private void Btn_Employee_Click(object sender, RoutedEventArgs e)
-        {
-            
+        private void Btn_Employee_Click(object sender, RoutedEventArgs e) {
+
         }
 
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
@@ -52,10 +49,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
                 Frame.Content = new Views.Accounts.UserList();
                 Title.Text = "Users List";
             }
-            else if (tvi.Header.ToString() == "Attendance"){
+            else if (tvi.Header.ToString() == "Payroll") {
                 draweHost.IsLeftDrawerOpen = false;
-                Frame.Content = new Views.Employee.Attendance();
-                Title.Text = "Attendance";
+                Frame.Content = new Views.PayrollView.PayrollList();
+                Title.Text = "Payroll";
             }
         }
     }

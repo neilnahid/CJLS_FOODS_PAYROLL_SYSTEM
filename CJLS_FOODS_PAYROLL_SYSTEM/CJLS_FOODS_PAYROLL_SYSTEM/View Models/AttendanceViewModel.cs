@@ -8,38 +8,29 @@ using System.Windows.Controls;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
     public class AttendanceViewModel : Model.ModelPropertyChange {
-        public AttendanceViewModel() {
-            Attendances = new List<Attendance>();
+        private Payroll payroll;
 
-            startDate = new DateTime(2019, 6, 1);
-            endDate = StartDate.AddDays(7);
-            Month = GetMonthRange();
-            SelectedWeek = new Model.Week();
-            DeductionsTypes = GetDeductionTypes();
-            Deduction = new Deduction();
-        }
-        private DateTime startDate;
-
-        public DateTime StartDate {
-            get { return startDate; }
+        public Payroll Payroll {
+            get { return payroll; }
             set {
-                if (startDate != value) {
-                    startDate = value;
-                    RaisePropertyChanged("StartDate");
+                if (payroll != value) {
+                    payroll = value;
+                    RaisePropertyChanged("Payroll");
                 }
             }
         }
-        private DateTime endDate;
+        private PayrollDetail payrollDetail;
 
-        public DateTime EndDate {
-            get { return endDate; }
+        public PayrollDetail PayrollDetail {
+            get { return payrollDetail; }
             set {
-                if (endDate != value) {
-                    endDate = value;
-                    RaisePropertyChanged("EndDate");
+                if (payrollDetail != value) {
+                    payrollDetail = value;
+                    RaisePropertyChanged("PayrollDetail");
                 }
             }
         }
+
         private Model.Month month;
 
         public Model.Month Month {
@@ -134,17 +125,21 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             month.Weeks = new List<Model.Week>();
             month.Weeks.Add(new Model.Week());
             int weekCounter = 0;
-            for (int j = 0; j < (EndDate - StartDate).TotalDays; j++) {
-                if (startDate.AddDays(j).DayOfWeek == DayOfWeek.Saturday) {
-                    var currentDay = month.Weeks[weekCounter].Days[(int)startDate.AddDays(j).DayOfWeek];
-                    currentDay.AttendanceDate = startDate.AddDays(j);
+            for (int j = 0; j < (Payroll.EndDate - Payroll.StartDate).TotalDays; j++) {
+                if (Payroll.StartDate.AddDays(j).DayOfWeek == DayOfWeek.Saturday) {
+                    var currentDay = month.Weeks[weekCounter].Days[(int)Payroll.StartDate.AddDays(j).DayOfWeek];
+                    currentDay.AttendanceDate = Payroll.StartDate.AddDays(j);
+                    currentDay.PayrollDetail = PayrollDetail;
+                    currentDay.PayrollDetailsID = PayrollDetail.PayrollDetailID;
                     Attendances.Add(currentDay);
                     month.Weeks.Add(new Model.Week());
                     weekCounter++;
                 }
                 else {
-                    var currentDay = month.Weeks[weekCounter].Days[(int)startDate.AddDays(j).DayOfWeek];
-                    currentDay.AttendanceDate = startDate.AddDays(j);
+                    var currentDay = month.Weeks[weekCounter].Days[(int)Payroll.StartDate.AddDays(j).DayOfWeek];
+                    currentDay.AttendanceDate = Payroll.StartDate.AddDays(j);
+                    currentDay.PayrollDetail = PayrollDetail;
+                    currentDay.PayrollDetailsID = PayrollDetail.PayrollDetailID;
                     Attendances.Add(currentDay);
                 }
             }
@@ -154,20 +149,20 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             Helper.db.Attendances.InsertAllOnSubmit(Attendances);
             Helper.db.SubmitChanges();
         }
-        //public void AddAttendance(Attendance attendance) {
-        //    Attendances.Add(attendance);
-        //}
-        //public void RemoveAttendance(Attendance attendance) {
-        //    Attendances.Remove(attendance);
-        //}
         public void AddDeduction(Attendance a, Deduction d) {
             a.Deductions.Add(d);
         }
-        //public void RemoveDeduction(Attendance attendance) {
-        //    attendance.Deductions.Remove(deduction);
-        //}
         private List<DeductionsType> GetDeductionTypes() {
             return (from i in Helper.db.DeductionsTypes select i).ToList();
+        }
+        public void InstantiateViewModel(Payroll payroll, PayrollDetail selectedPayrollDetail) {
+            Attendances = new List<Attendance>();
+            Payroll = payroll;
+            PayrollDetail = selectedPayrollDetail;
+            Month = GetMonthRange();
+            SelectedWeek = new Model.Week();
+            DeductionsTypes = GetDeductionTypes();
+            Deduction = new Deduction();
         }
     }
 }

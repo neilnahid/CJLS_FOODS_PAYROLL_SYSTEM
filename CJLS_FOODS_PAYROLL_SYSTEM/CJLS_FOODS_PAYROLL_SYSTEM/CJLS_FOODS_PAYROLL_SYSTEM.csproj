@@ -38,6 +38,12 @@
     <Reference Include="AutoMapper, Version=8.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.8.1.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -45,9 +51,12 @@
       <HintPath>..\packages\MaterialDesignThemes.2.5.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -80,7 +89,7 @@
     <Compile Include="View Models\AttendanceViewModel.cs" />
     <Compile Include="View Models\EmployeeViewModel.cs" />
     <Compile Include="Model\ModelPropertyChanged.cs" />
-    <Compile Include="View Models\PayrolLDetailsViewModel.cs" />
+    <Compile Include="View Models\PayrollDetailsViewModel.cs" />
     <Compile Include="View Models\PayrollViewModel.cs" />
     <Compile Include="View Models\UserAdminViewModel.cs" />
     <Compile Include="Views\Accounts\UserList.xaml.cs">
@@ -111,11 +120,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Payroll\PayrollDetails.xaml">
+    <Page Include="Views\PayrollView\PayrollDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Payroll\PayrollList.xaml">
+    <Page Include="Views\PayrollView\PayrollList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,10 +142,10 @@
     </Compile>
     <Compile Include="Controls\Session.cs" />
     <Compile Include="View Models\MainDashboardViewModel.cs" />
-    <Compile Include="Views\Payroll\PayrollDetails.xaml.cs">
+    <Compile Include="Views\PayrollView\PayrollDetails.xaml.cs">
       <DependentUpon>PayrollDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Payroll\PayrollList.xaml.cs">
+    <Compile Include="Views\PayrollView\PayrollList.xaml.cs">
       <DependentUpon>PayrollList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Form_Dashboard.xaml.cs">
@@ -184,6 +193,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DatabaseHelper\" />

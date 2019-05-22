@@ -19,9 +19,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
     /// </summary>
     public partial class Attendance : Page {
         View_Models.AttendanceViewModel VM = new View_Models.AttendanceViewModel();
-        public Attendance() {
+        public Attendance(Payroll payroll, PayrollDetail selectedPayrolLDetail) {
             InitializeComponent();
             VM = (View_Models.AttendanceViewModel)DataContext;
+            VM.InstantiateViewModel(payroll, selectedPayrolLDetail);
         }
 
         private void DataGridCalendar_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
