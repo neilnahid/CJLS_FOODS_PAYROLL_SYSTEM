@@ -121,8 +121,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         }
 
         public Model.PayrollRange GetMonthRange() {
-            if (PayrollDetail.Attendances.HasLoadedOrAssignedValues) {
-                return new Model.PayrollRange(PayrollDetail.Attendances.ToList());
+            if (PayrollDetail.Attendances.Count>0) {
+                return new Model.PayrollRange(PayrollDetail);
             }
             else
             return new Model.PayrollRange(Payroll.StartDate, Payroll.EndDate);
@@ -138,7 +138,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             return (from i in Helper.db.DeductionsTypes select i).ToList();
         }
         public void UpdateFlagsOf(Model.ExtendedAttendance attendance) {
-            if(attendance.Attendance.AttendanceDate != null) {
+            if(attendance != null && attendance.Attendance.AttendanceDate != null) {
                 if (attendance.Attendance.RegularHoursWorked == 8)
                     attendance.RegularHoursFlag = Visibility.Visible;
                 else
