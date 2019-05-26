@@ -87,6 +87,7 @@
     <Compile Include="Model\ExtendedAttendance.cs" />
     <Compile Include="Model\Month.cs" />
     <Compile Include="Model\Week.cs" />
+    <Compile Include="StaticValues.cs" />
     <Compile Include="View Models\AttendanceViewModel.cs" />
     <Compile Include="View Models\EmployeeViewModel.cs" />
     <Compile Include="Model\ModelPropertyChanged.cs" />

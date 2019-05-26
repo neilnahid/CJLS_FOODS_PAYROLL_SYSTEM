@@ -45,6 +45,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
 
         public void InstantiatePayrollDetails() {
             PayrollDetails = new ObservableCollection<PayrollDetail>(GetPayrollDetailList());
+            foreach(PayrollDetail p in PayrollDetails) {
+                ComputePayrollDetails(p);
+            }
         }
         private List<PayrollDetail> GetPayrollDetailList() {
             if (Payroll.PayrollDetails.Count == 0) {
@@ -54,6 +57,33 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 }
             }
             return Payroll.PayrollDetails.ToList();
+        }
+        private void ComputeTotalDeductionsOf(PayrollDetail pd) {
+            foreach(var a in pd.Attendances) {
+                pd.TotalDeductions += (from d in a.Deductions select d.Amount).Sum();
+            }
+        }
+        private void ComputeTotalRegularHours(PayrollDetail pd) {
+            pd.TotalRegularHours = (from a in pd.Attendances select a.RegularHoursWorked).Sum();
+        }
+        private void ComputeTotalOverTimeHours(PayrollDetail pd) {
+            pd.TotalOverTimeHours = (from a in pd.Attendances select a.OverTimeHoursWorked).Sum();
+        }
+        private void ComputePayrollDetails(PayrollDetail pd) {
+            ComputeTotalDeductionsOf(pd);
+            ComputeTotalOverTimeHours(pd);
+            ComputeTotalRegularHours(pd);
+            ComputeGrossPayOf(pd);
+            ComputeNetPayOf(pd);
+        }
+        private void ComputeGrossPayOf(PayrollDetail pd) {
+            pd.GrossPay = (pd.TotalRegularHours * pd.Employee.hourlyrate) + ComputeOverTimePayOf(pd);
+        }
+        private void ComputeNetPayOf(PayrollDetail pd) {
+            pd.NetPay = pd.GrossPay - pd.TotalDeductions;
+        }
+        private double ComputeOverTimePayOf(PayrollDetail pd) {
+            return (double)(pd.Employee.SalaryRate * StaticValues.OVERTIME_RATE * pd.TotalOverTimeHours);
         }
     }
 }
