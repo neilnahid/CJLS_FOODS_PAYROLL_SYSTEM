@@ -75,15 +75,19 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             ComputeTotalRegularHours(pd);
             ComputeGrossPayOf(pd);
             ComputeNetPayOf(pd);
+            pd.OvertimePay = ComputeOverTimePayOf(pd);
+            Helper.db.SubmitChanges();
+
         }
         private void ComputeGrossPayOf(PayrollDetail pd) {
-            pd.GrossPay = (pd.TotalRegularHours * pd.Employee.hourlyrate) + ComputeOverTimePayOf(pd);
+            pd.GrossPay = (pd.TotalRegularHours * pd.Employee.HourlyRate) + ComputeOverTimePayOf(pd);
         }
         private void ComputeNetPayOf(PayrollDetail pd) {
             pd.NetPay = pd.GrossPay - pd.TotalDeductions;
         }
         private double ComputeOverTimePayOf(PayrollDetail pd) {
-            return (double)(pd.Employee.SalaryRate * StaticValues.OVERTIME_RATE * pd.TotalOverTimeHours);
+            pd.OvertimePay = pd.Employee.HourlyRate * StaticValues.OVERTIME_RATE * pd.TotalOverTimeHours;
+            return (double)pd.OvertimePay;
         }
     }
 }

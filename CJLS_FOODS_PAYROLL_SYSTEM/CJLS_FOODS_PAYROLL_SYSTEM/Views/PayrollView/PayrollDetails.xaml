@@ -71,6 +71,7 @@
                     Header="Payroll Details">
                     <DataGrid
                         Margin="0,0,0,-0.2"
+                        AutoGenerateColumns="False"
                         CanUserAddRows="False"
                         CanUserDeleteRows="false"
                         CanUserResizeColumns="False"
@@ -78,6 +79,21 @@
                         ItemsSource="{Binding PayrollDetails}"
                         SelectedItem="{Binding PayrollDetail}">
                         <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Name">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Margin="0,0,5,0" Text="{Binding Employee.FirstName}" />
+                                            <TextBlock Text="{Binding Employee.LastName}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Binding="{Binding TotalRegularHours}" Header="Total Regular Hours" />
+                            <DataGridTextColumn Binding="{Binding TotalOverTimeHours}" Header="Total Overtime Hours" />
+                            <DataGridTextColumn Binding="{Binding TotalDeductions}" Header="Total Deductions" />
+                            <DataGridTextColumn Binding="{Binding GrossPay}" Header="Gross Pay" />
+                            <DataGridTextColumn Binding="{Binding NetPay}" Header="Net Pay" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
