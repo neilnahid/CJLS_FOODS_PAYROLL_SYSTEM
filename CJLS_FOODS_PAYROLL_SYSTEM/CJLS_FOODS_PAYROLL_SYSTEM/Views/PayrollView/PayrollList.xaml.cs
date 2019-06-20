@@ -26,7 +26,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
 
         private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e) {
             VM.Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
-            NavigationService.Navigate(new Views.PayrollView.PayrollDetails());
+            NavigationService.Navigate(new Views.PayrollView.PayrollDetails(VM.Payroll));
         }
 
         private void DialogHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs) {

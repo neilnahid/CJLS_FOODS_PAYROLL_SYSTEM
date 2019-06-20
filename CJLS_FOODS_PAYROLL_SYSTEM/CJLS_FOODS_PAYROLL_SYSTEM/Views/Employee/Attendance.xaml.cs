@@ -26,11 +26,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
         }
 
         private void DataGridCalendar_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e) {
-            if(DataGridCalendar.CurrentCell.Column != null) {
-                var colIndex = DataGridCalendar.CurrentCell.Column.DisplayIndex;
-                VM.Attendance = VM.SelectedWeek.Days[colIndex];
-                VM.Deductions = new System.Collections.ObjectModel.ObservableCollection<Deduction>(VM.Attendance.Attendance.Deductions.ToList());
-            }
+            var colIndex = DataGridCalendar.CurrentCell.Column.DisplayIndex;
+            VM.Attendance = VM.SelectedWeek.Days[colIndex];
+            VM.Deductions = new System.Collections.ObjectModel.ObservableCollection<Deduction>(VM.Attendance.Attendance.Deductions.ToList());
         }
 
         private void DataGridCalendar_CurrentCellChanged(object sender, EventArgs e) {
