@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
     public class PayrollRange : ModelPropertyChange {
-        public PayrollRange(List<Attendance> attendances) {
+        public PayrollRange(PayrollDetail payrollDetails) {
             Weeks = new List<Week>();
             Weeks.Add(new Week());
             int weekCounter = 0;
             //assign each attendance to their corresponding dayofweek
-            foreach(var a in attendances) {
+            foreach(var a in payrollDetails.Attendances) {
                 var currentDay = Weeks[weekCounter].Days[(int)a.AttendanceDate.Value.DayOfWeek];
                 currentDay.Attendance = a;
                 if(a.AttendanceDate.Value.DayOfWeek == DayOfWeek.Saturday) {
