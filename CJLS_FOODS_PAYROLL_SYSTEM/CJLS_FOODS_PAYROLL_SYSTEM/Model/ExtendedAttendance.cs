@@ -17,6 +17,18 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
                 }
             }
         }
+        private Visibility underTimeFlag;
+
+        public Visibility UnderTimeFlag {
+            get { return underTimeFlag; }
+            set {
+                if (underTimeFlag != value) {
+                    underTimeFlag = value;
+                    RaisePropertyChanged("UnderTimeFlag");
+                }
+            }
+        }
+
         private Visibility regularHoursFlag;
 
         public Visibility RegularHoursFlag {

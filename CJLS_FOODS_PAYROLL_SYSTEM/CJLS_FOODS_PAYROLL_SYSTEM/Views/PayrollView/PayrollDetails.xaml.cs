@@ -26,13 +26,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
             VM.InstantiatePayrollDetails();
             dialogHost.IsOpen = false;
         }
-        public PayrollDetails() {
-            InitializeComponent();
-            VM = (View_Models.PayrollDetailsViewModel)DataContext;
-            VM.Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
-            VM.InstantiatePayrollDetails();
-        }
-
         private void DialogHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs) {
 
         }

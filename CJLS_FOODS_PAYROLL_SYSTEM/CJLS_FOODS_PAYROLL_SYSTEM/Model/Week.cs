@@ -4,13 +4,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows;
 namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
     public class Week : ModelPropertyChange {
         public Week() {
             Days = new ObservableCollection<Model.ExtendedAttendance>();
-            for(int i = 0; i < 7; i++) {
-                Days.Add(new ExtendedAttendance() { Attendance = new Attendance { RegularHoursWorked = 8, OverTimeHoursWorked = 0}, RegularHoursFlag = System.Windows.Visibility.Collapsed, OverTimeHoursFlag = System.Windows.Visibility.Collapsed, DeductionsFlag = System.Windows.Visibility.Collapsed  });
+            for (int i = 0; i < 7; i++) {
+                Days.Add(new ExtendedAttendance() { Attendance = new Attendance { RegularHoursWorked = 8, OverTimeHoursWorked = 0 }, RegularHoursFlag = Visibility.Collapsed, OverTimeHoursFlag = Visibility.Collapsed, DeductionsFlag = Visibility.Collapsed, UnderTimeFlag = Visibility.Collapsed });
             }
         }
         public Week(List<Attendance> attendances) {

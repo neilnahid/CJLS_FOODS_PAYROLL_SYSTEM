@@ -10,7 +10,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
     public class PayrollViewModel : Model.ModelPropertyChange {
         public PayrollViewModel() {
             Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
-            Payrolls = new ObservableCollection<Payroll>(GetPayrollList());
+            Payrolls = FetchPayrollList();
         }
         private ObservableCollection<Payroll> payrolls;
         private Payroll payroll;
@@ -34,8 +34,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 }
             }
         }
-        public List<Payroll> GetPayrollList() {
-            return (from p in Helper.db.Payrolls select p).ToList();
+        public ObservableCollection<Payroll> FetchPayrollList() {
+            return new ObservableCollection<Payroll>(((from p in Helper.db.Payrolls select p).ToList()));
         }
     }
 }

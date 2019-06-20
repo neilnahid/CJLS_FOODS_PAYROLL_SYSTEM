@@ -19,14 +19,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
                     Weeks.Add(new Week());
                 }
             }
-            //sort attendance per week according to their
-        }
-        public PayrollRange() {
         }
         public PayrollRange(DateTime StartDate, DateTime EndDate) {
             Weeks = new List<Model.Week>();
             Weeks.Add(new Model.Week());
             int weekCounter = 0;
+            //assign each attendance to their corresponding dayofweek
             for (int i = 0; i < (EndDate-StartDate).TotalDays; i++) {
                 var currentDay = Weeks[weekCounter].Days[(int)StartDate.AddDays(i).DayOfWeek];
                 currentDay.Attendance.AttendanceDate = StartDate.AddDays(i);

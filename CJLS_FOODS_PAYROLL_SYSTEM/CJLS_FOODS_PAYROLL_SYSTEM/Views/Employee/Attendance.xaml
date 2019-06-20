@@ -73,7 +73,7 @@
                 CanUserDeleteRows="False"
                 CanUserResizeRows="False"
                 CurrentCellChanged="DataGridCalendar_CurrentCellChanged"
-                ItemsSource="{Binding Month.Weeks}"
+                ItemsSource="{Binding PayrollRange.Weeks}"
                 SelectedCellsChanged="DataGridCalendar_SelectedCellsChanged"
                 SelectedItem="{Binding SelectedWeek}"
                 SelectionMode="Extended">
@@ -93,7 +93,7 @@
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
-                                        Fill="Blue"
+                                        Fill="SkyBlue"
                                         Visibility="{Binding Days[0].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
@@ -101,6 +101,12 @@
                                         Height="20"
                                         Fill="Red"
                                         Visibility="{Binding Days[0].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Rectangle
+                                        x:Name="UnderTime"
+                                        Width="Auto"
+                                        Height="20"
+                                        Fill="Orange"
+                                        Visibility="{Binding Days[0].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -120,7 +126,7 @@
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
-                                        Fill="Blue"
+                                        Fill="SkyBlue"
                                         Visibility="{Binding Days[1].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
@@ -128,6 +134,12 @@
                                         Height="20"
                                         Fill="Red"
                                         Visibility="{Binding Days[1].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Rectangle
+                                        x:Name="UnderTime"
+                                        Width="Auto"
+                                        Height="20"
+                                        Fill="Orange"
+                                        Visibility="{Binding Days[1].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -147,7 +159,7 @@
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
-                                        Fill="Blue"
+                                        Fill="SkyBlue"
                                         Visibility="{Binding Days[2].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
@@ -155,6 +167,12 @@
                                         Height="20"
                                         Fill="Red"
                                         Visibility="{Binding Days[2].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Rectangle
+                                        x:Name="UnderTime"
+                                        Width="Auto"
+                                        Height="20"
+                                        Fill="Orange"
+                                        Visibility="{Binding Days[2].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -174,7 +192,7 @@
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
-                                        Fill="Blue"
+                                        Fill="SkyBlue"
                                         Visibility="{Binding Days[3].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
@@ -182,6 +200,12 @@
                                         Height="20"
                                         Fill="Red"
                                         Visibility="{Binding Days[3].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Rectangle
+                                        x:Name="UnderTime"
+                                        Width="Auto"
+                                        Height="20"
+                                        Fill="Orange"
+                                        Visibility="{Binding Days[3].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -201,7 +225,7 @@
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
-                                        Fill="Blue"
+                                        Fill="SkyBlue"
                                         Visibility="{Binding Days[4].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
@@ -209,6 +233,12 @@
                                         Height="20"
                                         Fill="Red"
                                         Visibility="{Binding Days[4].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Rectangle
+                                        x:Name="UnderTime"
+                                        Width="Auto"
+                                        Height="20"
+                                        Fill="Orange"
+                                        Visibility="{Binding Days[4].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -228,7 +258,7 @@
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
-                                        Fill="Blue"
+                                        Fill="SkyBlue"
                                         Visibility="{Binding Days[5].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
@@ -236,6 +266,12 @@
                                         Height="20"
                                         Fill="Red"
                                         Visibility="{Binding Days[5].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Rectangle
+                                        x:Name="UnderTime"
+                                        Width="Auto"
+                                        Height="20"
+                                        Fill="Orange"
+                                        Visibility="{Binding Days[5].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
@@ -255,7 +291,7 @@
                                         x:Name="OverTime"
                                         Width="Auto"
                                         Height="20"
-                                        Fill="Blue"
+                                        Fill="SkyBlue"
                                         Visibility="{Binding Days[6].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
@@ -263,6 +299,12 @@
                                         Height="20"
                                         Fill="Red"
                                         Visibility="{Binding Days[6].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Rectangle
+                                        x:Name="UnderTime"
+                                        Width="Auto"
+                                        Height="20"
+                                        Fill="Orange"
+                                        Visibility="{Binding Days[6].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

@@ -18,10 +18,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
     /// Interaction logic for Payroll.xaml
     /// </summary>
     public partial class PayrollList : Page {
-        View_Models.PayrollViewModel VM = new View_Models.PayrollViewModel();
+        View_Models.PayrollViewModel VM;
         public PayrollList() {
             InitializeComponent();
             VM = (View_Models.PayrollViewModel)DataContext;
+            VM.Payrolls = VM.FetchPayrollList();
         }
 
         private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e) {
@@ -34,11 +35,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
         }
 
         private void btn_DialogConfirm_Click(object sender, RoutedEventArgs e) {
+            Helper.db.Payrolls.InsertOnSubmit(VM.Payroll);
+            Helper.db.SubmitChanges();
             NavigationService.Navigate(new Views.PayrollView.PayrollDetails(VM.Payroll));
+            VM.Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
         }
 
         private void Btn_viewPayroll_Click(object sender, RoutedEventArgs e) {
             NavigationService.Navigate(new Views.PayrollView.PayrollDetails(VM.Payroll));
+            VM.Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
         }
     }
 }
