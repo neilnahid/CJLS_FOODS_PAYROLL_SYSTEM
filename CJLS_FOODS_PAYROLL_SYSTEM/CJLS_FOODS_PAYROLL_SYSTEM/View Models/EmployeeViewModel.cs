@@ -5,52 +5,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-
+using System.ComponentModel;
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 {
-    public class EmployeeViewModel : Model.ModelPropertyChange
+    public class EmployeeViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Employee> employees;
-        private List<EmployeeType> employeeTypes;
-
-        public List<EmployeeType> EmployeeTypes {
-            get { return employeeTypes; }
-            set {
-                if (employeeTypes != value) {
-                    employeeTypes = value;
-                    RaisePropertyChanged("EmployeeTypes");
-                }
-            }
-        }
-
-        public ObservableCollection<Employee> Employees {
-            get { return employees; }
-            set {
-                if (employees != value)
-                {
-                    employees = value;
-                    RaisePropertyChanged("Employees");
-                }
-            }
-        }
-        private Employee employee;
-
-        public Employee Employee {
-            get { return employee; }
-            set {
-                if (employee != value) {
-                    employee = value;
-                    RaisePropertyChanged("Employee");
-                }
-            }
-        }
-
+        #region properties
+        public event PropertyChangedEventHandler PropertyChanged;
+        public List<EmployeeType> EmployeeTypes { get; set; }
+        public ObservableCollection<Employee> Employees { get; set; }
+        public Employee Employee { get; set; }
+        #endregion
+        #region constructor
         public EmployeeViewModel()
         {
             Employees = new ObservableCollection<Employee>(GetEmployeeList());
             Employee = new Employee();
             EmployeeTypes = GetEmployeeTypes();
-        }   
+        }
+        #endregion
+
+
+        #region methods/functions
         public List<Employee> GetEmployeeList()
         {
             var result = (from employee in Helper.db.Employees select employee).ToList();
@@ -76,5 +52,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public void UpdateEmployee() {
             Helper.db.SubmitChanges();
         }
+        #endregion
     }
 }

@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.ComponentModel;
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
 
-    public class AttendanceViewModel : Model.ModelPropertyChange {
+    public class AttendanceViewModel : INotifyPropertyChanged {
         public void InstantiateViewModel(Payroll payroll, PayrollDetail selectedPayrollDetail) {
             Attendances = new List<Attendance>();
             Payroll = payroll;
@@ -20,131 +20,27 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             Deduction = new Deduction();
             UpdateFlagsOfEveryAttendance();
         }
-        private float totalOvertimeHours;
+        public float TotalOverTimeHours { get; set; }
 
-        public float TotalOverTImeHours {
-            get { return totalOvertimeHours; }
-            set {
-                if (totalOvertimeHours != value) {
-                    totalOvertimeHours = value;
-                    RaisePropertyChanged("TotalOverTImeHours");
-                }
-            }
-        }
+        public float TotalRegularHours { get; set; }
 
-        private float totalRegularHours;
+        public Payroll Payroll { get; set; }
 
-        public float TotalRegularHours {
-            get { return totalRegularHours; }
-            set {
-                if (totalRegularHours != value) {
-                    totalRegularHours = value;
-                    RaisePropertyChanged("TotalRegularHours");
-                }
-            }
-        }
+        public PayrollDetail PayrollDetail { get; set; }
+        public Model.PayrollRange PayrollRange { get; set; }
 
-        private Payroll payroll;
+        public List<Attendance> Attendances { get; set; }
+        public Model.ExtendedAttendance Attendance { get; set; }
 
-        public Payroll Payroll {
-            get { return payroll; }
-            set {
-                if (payroll != value) {
-                    payroll = value;
-                    RaisePropertyChanged("Payroll");
-                }
-            }
-        }
-        private PayrollDetail payrollDetail;
+        public Deduction Deduction { get; set; }
+        public Model.Week SelectedWeek { get; set; }
+        public List<DeductionsType> DeductionsTypes { get; set; }
+        public ObservableCollection<Deduction> Deductions { get; set; }
 
-        public PayrollDetail PayrollDetail {
-            get { return payrollDetail; }
-            set {
-                if (payrollDetail != value) {
-                    payrollDetail = value;
-                    RaisePropertyChanged("PayrollDetail");
-                }
-            }
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        private Model.PayrollRange payrollRange;
 
-        public Model.PayrollRange PayrollRange {
-            get { return payrollRange; }
-            set {
-                if (payrollRange != value) {
-                    payrollRange = value;
-                    RaisePropertyChanged("PayrollRange");
-                }
-            }
-        }
-        private List<Attendance> attendances;
-
-        public List<Attendance> Attendances {
-            get { return attendances; }
-            set {
-                if (attendances != value) {
-                    attendances = value;
-                    RaisePropertyChanged("Attendances");
-                }
-            }
-        }
-        private Model.ExtendedAttendance attendance;
-
-        public Model.ExtendedAttendance Attendance {
-            get { return attendance; }
-            set {
-                if (attendance != value) {
-                    attendance = value;
-                    RaisePropertyChanged("Attendance");
-                }
-            }
-        }
-        private Deduction deduction;
-
-        public Deduction Deduction {
-            get { return deduction; }
-            set {
-                if (deduction != value) {
-                    deduction = value;
-                    RaisePropertyChanged("Deduction");
-                }
-            }
-        }
-        private Model.Week selectedWeek;
-
-        public Model.Week SelectedWeek {
-            get { return selectedWeek; }
-            set {
-                if (selectedWeek != value) {
-                    selectedWeek = value;
-                    RaisePropertyChanged("SelectedWeek");
-                }
-            }
-        }
-        private List<DeductionsType> deductionsTypes;
-
-        public List<DeductionsType> DeductionsTypes {
-            get { return deductionsTypes; }
-            set {
-                if (deductionsTypes != value) {
-                    deductionsTypes = value;
-                    RaisePropertyChanged("DeductionsTypes");
-                }
-            }
-        }
-        private ObservableCollection<Deduction> deductions;
-
-        public ObservableCollection<Deduction> Deductions {
-            get { return deductions; }
-            set {
-                if (deductions != value) {
-                    deductions = value;
-                    RaisePropertyChanged("Deductions");
-                }
-            }
-        }
-
+        #region Methods/Functions
         public Model.PayrollRange GetPayrollRange() {
             if (PayrollDetail.Attendances.Count > 0) {
                 return new Model.PayrollRange(PayrollDetail);
@@ -209,6 +105,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             else
                 a.DeductionsFlag = Visibility.Collapsed;
         }
+        #endregion
         #endregion
     }
 }

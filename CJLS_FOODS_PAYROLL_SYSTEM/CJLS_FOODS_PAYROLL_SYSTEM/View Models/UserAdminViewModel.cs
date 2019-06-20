@@ -1,37 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
-    public class UserAdminViewModel : Model.ModelPropertyChange {
-        private ObservableCollection<User> users;
+    public class UserAdminViewModel : INotifyPropertyChanged {
 
-        public ObservableCollection<User> Users {
-            get { return users; }
-            set {
-                if (users != value) {
-                    users = value;
-                    this.RaisePropertyChanged("Users");
-                }
-            }
+        //properties
+        public ObservableCollection<User> Users { get; set; }
+        public User User { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        }
-        private User user;
 
-        public User User {
-            get { return user; }
-            set {
-                if (user != value) {
-                    user = value;
-                    this.RaisePropertyChanged("User");
-                }
-            }
-        }
 
+        //methods
         public UserAdminViewModel() {
             Users = new ObservableCollection<User>(GetAllUsers());
             User = new User();

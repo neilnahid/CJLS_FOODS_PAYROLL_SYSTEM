@@ -4,45 +4,19 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.ComponentModel;
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
-    class PayrollDetailsViewModel : Model.ModelPropertyChange{
+    class PayrollDetailsViewModel : INotifyPropertyChanged{
+        #region properties
         public PayrollDetailsViewModel() {
         }
-        private Payroll payroll;
+        public Payroll Payroll { get; set; }
+        public PayrollDetail PayrollDetail { get; set; }
+        public ObservableCollection<PayrollDetail> PayrollDetails { get; set; }
 
-        public Payroll Payroll {
-            get { return payroll; }
-            set {
-                if (payroll != value) {
-                    payroll = value;
-                    RaisePropertyChanged("Payroll");
-                }
-            }
-        }
-        private PayrollDetail payrollDetail;
-
-        public PayrollDetail PayrollDetail {
-            get { return payrollDetail; }
-            set {
-                if (payrollDetail != value) {
-                    payrollDetail = value;
-                    RaisePropertyChanged("PayrollDetail");
-                }
-            }
-        }
-        private ObservableCollection<PayrollDetail> payrollDetails;
-
-        public ObservableCollection<PayrollDetail> PayrollDetails {
-            get { return payrollDetails; }
-            set {
-                if (payrollDetails != value) {
-                    payrollDetails = value;
-                    RaisePropertyChanged("PayrollDetails");
-                }
-            }
-        }
-
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+        #region methods/functions
         public void InstantiatePayrollDetails() {
             PayrollDetails = new ObservableCollection<PayrollDetail>(GetPayrollDetailList());
             foreach(PayrollDetail p in PayrollDetails) {
@@ -88,5 +62,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 pd.OvertimePay = (double)pd.Employee.HourlyRate * StaticValues.OVERTIME_RATE * pd.TotalOverTimeHours;
                 return (double)pd.OvertimePay;
         }
+        #endregion
     }
 }
