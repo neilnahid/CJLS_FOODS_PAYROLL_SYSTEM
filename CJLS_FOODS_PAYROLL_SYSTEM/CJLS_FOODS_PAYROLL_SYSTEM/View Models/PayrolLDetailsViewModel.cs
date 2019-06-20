@@ -70,24 +70,23 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             pd.TotalOverTimeHours = (from a in pd.Attendances select a.OverTimeHoursWorked).Sum();
         }
         private void ComputePayrollDetails(PayrollDetail pd) {
-            ComputeTotalDeductionsOf(pd);
-            ComputeTotalOverTimeHours(pd);
-            ComputeTotalRegularHours(pd);
-            ComputeGrossPayOf(pd);
-            ComputeNetPayOf(pd);
-            pd.OvertimePay = ComputeOverTimePayOf(pd);
-            Helper.db.SubmitChanges();
-
+                ComputeTotalDeductionsOf(pd);
+                ComputeTotalOverTimeHours(pd);
+                ComputeTotalRegularHours(pd);
+                ComputeGrossPayOf(pd);
+                ComputeNetPayOf(pd);
+                pd.OvertimePay = ComputeOverTimePayOf(pd);
+                Helper.db.SubmitChanges();
         }
         private void ComputeGrossPayOf(PayrollDetail pd) {
-            pd.GrossPay = (pd.TotalRegularHours * pd.Employee.HourlyRate) + ComputeOverTimePayOf(pd);
+            pd.GrossPay = (pd.TotalRegularHours * (double)pd.Employee.HourlyRate) + ComputeOverTimePayOf(pd);
         }
         private void ComputeNetPayOf(PayrollDetail pd) {
             pd.NetPay = pd.GrossPay - pd.TotalDeductions;
         }
         private double ComputeOverTimePayOf(PayrollDetail pd) {
-            pd.OvertimePay = pd.Employee.HourlyRate * StaticValues.OVERTIME_RATE * pd.TotalOverTimeHours;
-            return (double)pd.OvertimePay;
+                pd.OvertimePay = (double)pd.Employee.HourlyRate * StaticValues.OVERTIME_RATE * pd.TotalOverTimeHours;
+                return (double)pd.OvertimePay;
         }
     }
 }

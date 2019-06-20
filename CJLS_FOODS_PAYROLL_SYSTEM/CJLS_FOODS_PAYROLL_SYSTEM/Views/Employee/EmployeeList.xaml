@@ -99,7 +99,7 @@
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Salary Rate(Per hour)"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            Text="{Binding Employee.SalaryRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            Text="{Binding Employee.HourlyRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <TextBox
                             Grid.Column="2"
                             materialDesign:HintAssist.Hint="Available Leaves"

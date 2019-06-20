@@ -25,8 +25,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
         }
 
         private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e) {
-            VM.Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
-            NavigationService.Navigate(new Views.PayrollView.PayrollDetails());
+            DialogHeader.Text = "Create New Payroll";
+            btn_dialogConfirm.Content = "CREATE";
         }
 
         private void DialogHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs) {
@@ -34,6 +34,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
         }
 
         private void btn_DialogConfirm_Click(object sender, RoutedEventArgs e) {
+            NavigationService.Navigate(new Views.PayrollView.PayrollDetails(VM.Payroll));
         }
 
         private void Btn_viewPayroll_Click(object sender, RoutedEventArgs e) {

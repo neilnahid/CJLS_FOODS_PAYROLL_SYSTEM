@@ -20,7 +20,16 @@
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignHeadlineTextBlock}"
                     Text="Header" />
-                <StackPanel x:Name="sp_dialogFields" />
+                <StackPanel x:Name="sp_dateSelect">
+                    <DatePicker
+                        materialDesign:HintAssist.Hint="Start Date"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        Text="{Binding Payroll.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <DatePicker
+                        materialDesign:HintAssist.Hint="End Date"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        Text="{Binding Payroll.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
                         x:Name="btn_dialogConfirm"
@@ -106,8 +115,9 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Click="Btn_OpenDialogCreate_Click"
+                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                 Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
-                ToolTip="Add New Employee">
+                ToolTip="Create New Payroll">
                 <materialDesign:PackIcon
                     Width="24"
                     Height="24"

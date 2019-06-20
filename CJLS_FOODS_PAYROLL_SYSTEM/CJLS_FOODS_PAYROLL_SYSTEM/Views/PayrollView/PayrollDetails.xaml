@@ -11,57 +11,9 @@
     d:DesignWidth="800"
     DataContext="{StaticResource PayrollDetailsViewModel}"
     mc:Ignorable="d">
-    <materialDesign:DialogHost
-        x:Name="dialogHost"
-        DialogClosing="DialogHost_DialogClosing"
-        IsOpen="True">
+    <materialDesign:DialogHost x:Name="dialogHost" DialogClosing="DialogHost_DialogClosing">
         <materialDesign:DialogHost.DialogContent>
-            <StackPanel>
-                <TextBlock
-                    x:Name="DialogHeader"
-                    Margin="0,0,0,25"
-                    HorizontalAlignment="Center"
-                    Style="{StaticResource MaterialDesignHeadlineTextBlock}"
-                    Text="Header" />
-                <StackPanel x:Name="sp_dateSelect">
-                    <DatePicker
-                        Width="100"
-                        materialDesign:HintAssist.Hint="Start Date"
-                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                        Text="{Binding Payroll.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <DatePicker
-                        Width="100"
-                        materialDesign:HintAssist.Hint="End Date"
-                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                        Text="{Binding Payroll.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                </StackPanel>
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button
-                        x:Name="btn_dialogConfirm"
-                        Click="btn_DialogConfirm_Click"
-                        Command="materialDesign:DialogHost.CloseDialogCommand"
-                        IsDefault="True"
-                        Style="{StaticResource MaterialDesignFlatButton}">
-                        <Button.CommandParameter>
-                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                True
-                            </system:Boolean>
-                        </Button.CommandParameter>
-                        ACCEPT
-                    </Button>
-                    <Button
-                        Command="materialDesign:DialogHost.CloseDialogCommand"
-                        IsCancel="True"
-                        Style="{StaticResource MaterialDesignFlatButton}">
-                        <Button.CommandParameter>
-                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                False
-                            </system:Boolean>
-                        </Button.CommandParameter>
-                        CANCEL
-                    </Button>
-                </StackPanel>
-            </StackPanel>
+            <StackPanel />
         </materialDesign:DialogHost.DialogContent>
         <Grid>
             <Grid>
@@ -79,6 +31,7 @@
                         ItemsSource="{Binding PayrollDetails}"
                         SelectedItem="{Binding PayrollDetail}">
                         <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding PayrollDetailID}" />
                             <DataGridTemplateColumn Header="Name">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
