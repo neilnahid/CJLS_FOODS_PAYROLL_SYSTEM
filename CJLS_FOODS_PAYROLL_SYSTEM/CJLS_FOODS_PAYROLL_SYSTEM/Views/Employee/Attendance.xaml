@@ -7,8 +7,8 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Attendance"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    d:DesignHeight="585.196"
+    d:DesignWidth="875.978"
     DataContext="{StaticResource AttendanceViewModel}"
     mc:Ignorable="d">
     <materialDesign:DialogHost x:Name="dialogHost">
@@ -312,7 +312,11 @@
                 </DataGrid.Columns>
             </DataGrid>
             <Grid Grid.Column="1">
-                <GroupBox Margin="0,0,0,-0.4" Header="Attendance Details">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="22*" />
+                    <RowDefinition Height="17*" />
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" Header="Attendance Details">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="195*" />
@@ -342,35 +346,6 @@
                                 </StackPanel>
                             </Grid>
                         </GroupBox>
-                        <materialDesign:PopupBox
-                            Grid.Row="2"
-                            Width="56"
-                            Height="56"
-                            Margin="0,0,0.4,0.4"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            PlacementMode="TopAndAlignCentres"
-                            Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}"
-                            ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionPopupBox"
-                            ToolTipService.Placement="Right">
-                            <StackPanel>
-                                <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" ToolTip="Add Deduction">
-                                    <materialDesign:PackIcon
-                                        Width="24"
-                                        Height="24"
-                                        Kind="AlphabetD" />
-                                </Button>
-                                <Button
-                                    Name="btn_saveAttendance"
-                                    Click="Btn_saveAttendance_Click"
-                                    ToolTip="Save Attendance">
-                                    <materialDesign:PackIcon
-                                        Width="24"
-                                        Height="24"
-                                        Kind="ContentSaveAll" />
-                                </Button>
-                            </StackPanel>
-                        </materialDesign:PopupBox>
                         <Grid Grid.Row="1">
                             <StackPanel Orientation="Vertical">
                                 <TextBox
@@ -386,6 +361,53 @@
                                     Text="{Binding Attendance.Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextChanged="Txtbox_overtimeHours_TextChanged" />
                             </StackPanel>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="Summary">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="144*" />
+                            <RowDefinition Height="59*" />
+                        </Grid.RowDefinitions>
+                        <StackPanel>
+                            <TextBox materialDesign:HintAssist.Hint="Total Regular Hours" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox materialDesign:HintAssist.Hint="Total Overtime Hours" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox materialDesign:HintAssist.Hint="Total Deductions" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="26*" />
+                                <ColumnDefinition Width="7*" />
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PopupBox
+                                Grid.Column="1"
+                                Width="56"
+                                Height="Auto"
+                                Margin="5,0,0,3"
+                                HorizontalAlignment="Left"
+                                PlacementMode="TopAndAlignCentres"
+                                Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}"
+                                ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionPopupBox"
+                                ToolTipService.Placement="Right">
+                                <StackPanel>
+                                    <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" ToolTip="Add Deduction">
+                                        <materialDesign:PackIcon
+                                            Width="24"
+                                            Height="24"
+                                            Kind="AlphabetD" />
+                                    </Button>
+                                    <Button
+                                        Name="btn_saveAttendance"
+                                        Click="Btn_saveAttendance_Click"
+                                        ToolTip="Save Attendance">
+                                        <materialDesign:PackIcon
+                                            Width="24"
+                                            Height="24"
+                                            Kind="ContentSaveAll" />
+                                    </Button>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
                         </Grid>
                     </Grid>
                 </GroupBox>

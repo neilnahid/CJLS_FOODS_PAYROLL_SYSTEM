@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
+
     public class AttendanceViewModel : Model.ModelPropertyChange {
         public void InstantiateViewModel(Payroll payroll, PayrollDetail selectedPayrollDetail) {
             Attendances = new List<Attendance>();
@@ -19,6 +20,30 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             Deduction = new Deduction();
             UpdateFlagsOfEveryAttendance();
         }
+        private float totalOvertimeHours;
+
+        public float TotalOverTImeHours {
+            get { return totalOvertimeHours; }
+            set {
+                if (totalOvertimeHours != value) {
+                    totalOvertimeHours = value;
+                    RaisePropertyChanged("TotalOverTImeHours");
+                }
+            }
+        }
+
+        private float totalRegularHours;
+
+        public float TotalRegularHours {
+            get { return totalRegularHours; }
+            set {
+                if (totalRegularHours != value) {
+                    totalRegularHours = value;
+                    RaisePropertyChanged("TotalRegularHours");
+                }
+            }
+        }
+
         private Payroll payroll;
 
         public Payroll Payroll {
