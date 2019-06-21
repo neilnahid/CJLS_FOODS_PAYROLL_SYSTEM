@@ -371,9 +371,18 @@
                             <RowDefinition Height="59*" />
                         </Grid.RowDefinitions>
                         <StackPanel>
-                            <TextBox materialDesign:HintAssist.Hint="Total Regular Hours" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                            <TextBox materialDesign:HintAssist.Hint="Total Overtime Hours" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                            <TextBox materialDesign:HintAssist.Hint="Total Deductions" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Total Regular Hours"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding TotalRegularHours, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Total Overtime Hours"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding TotalOverTimeHours, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Total Deductions"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding TotalDeductions, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>

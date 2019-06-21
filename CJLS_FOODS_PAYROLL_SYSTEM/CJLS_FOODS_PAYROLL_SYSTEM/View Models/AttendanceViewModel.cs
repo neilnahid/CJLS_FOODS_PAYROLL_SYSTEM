@@ -11,18 +11,22 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
 
     public class AttendanceViewModel : INotifyPropertyChanged {
         public void InstantiateViewModel(Payroll payroll, PayrollDetail selectedPayrollDetail) {
-            Attendances = new List<Attendance>();
+            Attendances = new List<Attendance>(); //instantiates attendances
             Payroll = payroll;
             PayrollDetail = selectedPayrollDetail;
-            PayrollRange = GetPayrollRange();
-            SelectedWeek = new Model.Week();
-            DeductionsTypes = GetDeductionTypes();
-            Deduction = new Deduction();
-            UpdateFlagsOfEveryAttendance();
+            PayrollRange = GetPayrollRange(); // returns the weeks which contains days starting from payroll startdate to enddate
+            AddToAttendances(PayrollRange); // references the attendance object attached to the Day object to the Attendances property
+            GetSummaryNumbers();
+            SelectedWeek = new Model.Week(); // instantiate
+            DeductionsTypes = GetDeductionTypes(); // gets deduction types
+            Deduction = new Deduction(); // instantiate
+            UpdateFlagsOfEveryAttendance(); // instantiate the flags according to the extended attendance's value
         }
-        public float TotalOverTimeHours { get; set; }
+        #region properties
+        public double TotalOverTimeHours { get; set; }
 
-        public float TotalRegularHours { get; set; }
+        public double TotalRegularHours { get; set; }
+        public double TotalDeductions { get; set; }
 
         public Payroll Payroll { get; set; }
 
@@ -38,18 +42,20 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         public ObservableCollection<Deduction> Deductions { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
+        #endregion
 
         #region Methods/Functions
         public Model.PayrollRange GetPayrollRange() {
             if (PayrollDetail.Attendances.Count > 0) {
                 return new Model.PayrollRange(PayrollDetail);
             }
-            else
+            else {
                 return new Model.PayrollRange(Payroll.StartDate, Payroll.EndDate);
+            }
         }
         public void SaveAttendance() {
             AddToAttendances(PayrollRange);
+            GetSummaryNumbers();
             PayrollDetail.Attendances.AddRange(Attendances);
             Helper.db.SubmitChanges();
         }
@@ -82,6 +88,17 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 }
             }
         }
+        public void GetSummaryNumbers() {
+            TotalRegularHours = 0;
+            TotalDeductions = 0;
+            TotalOverTimeHours = 0;
+            foreach (var a in Attendances) {
+                TotalRegularHours += a.RegularHoursWorked;
+                TotalDeductions += (from d in a.Deductions select d.Amount).Sum();
+                TotalOverTimeHours += a.OverTimeHoursWorked;
+            }
+        }
+
         #region UpdateFlags Functions
         private void UpdateRegularHoursFlag(Model.ExtendedAttendance a) {
             if (a.Attendance.RegularHoursWorked >= 8) {

@@ -42,10 +42,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
         }
         private void Txtbox_regularHours_TextChanged(object sender, TextChangedEventArgs e) {
             VM.UpdateFlagsOf(VM.Attendance);
+            VM.GetSummaryNumbers();
         }
 
         private void Txtbox_overtimeHours_TextChanged(object sender, TextChangedEventArgs e) {
             VM.UpdateFlagsOf(VM.Attendance);
+            VM.GetSummaryNumbers();
         }
 
         private void Btn_dialogConfirm_Click(object sender, RoutedEventArgs e) {
@@ -53,6 +55,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
             VM.Deduction = new Deduction();
             VM.Deductions = new System.Collections.ObjectModel.ObservableCollection<Deduction>(VM.Attendance.Attendance.Deductions.ToList());
             VM.UpdateFlagsOf(VM.Attendance);
+            VM.GetSummaryNumbers();
+
         }
 
         private void Btn_saveAttendance_Click(object sender, RoutedEventArgs e) {
