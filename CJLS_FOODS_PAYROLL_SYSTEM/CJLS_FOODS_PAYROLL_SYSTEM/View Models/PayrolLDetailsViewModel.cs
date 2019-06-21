@@ -33,6 +33,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             return Payroll.PayrollDetails.ToList();
         }
         private void ComputeTotalDeductionsOf(PayrollDetail pd) {
+            pd.TotalDeductions = 0;
             foreach(var a in pd.Attendances) {
                 pd.TotalDeductions += (from d in a.Deductions select d.Amount).Sum();
             }

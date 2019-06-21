@@ -88,14 +88,18 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 }
             }
         }
+
+        //this method must be placed AFTER the AddToAttendances
         public void GetSummaryNumbers() {
             TotalRegularHours = 0;
             TotalDeductions = 0;
             TotalOverTimeHours = 0;
-            foreach (var a in Attendances) {
-                TotalRegularHours += a.RegularHoursWorked;
-                TotalDeductions += (from d in a.Deductions select d.Amount).Sum();
-                TotalOverTimeHours += a.OverTimeHoursWorked;
+            if(Attendances != null){
+                foreach (var a in Attendances) {
+                    TotalRegularHours += a.RegularHoursWorked;
+                    TotalDeductions += (from d in a.Deductions select d.Amount).Sum();
+                    TotalOverTimeHours += a.OverTimeHoursWorked;
+                }
             }
         }
 
