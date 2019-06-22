@@ -106,9 +106,6 @@
     <Compile Include="Views\Employee\Attendance.xaml.cs">
       <DependentUpon>Attendance.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Employee\EmployeeDetails.xaml.cs">
-      <DependentUpon>EmployeeDetails.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Employee\EmployeeList.xaml.cs">
       <DependentUpon>EmployeeList.xaml</DependentUpon>
     </Compile>
@@ -120,19 +117,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Employee\EmployeeDetails.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Employee\EmployeeList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PayrollView\PayrollDetails.xaml">
+    <Page Include="Views\Payroll\PayrollDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\PayrollView\PayrollList.xaml">
+    <Page Include="Views\Payroll\PayrollList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -150,10 +143,10 @@
     </Compile>
     <Compile Include="Controls\Session.cs" />
     <Compile Include="View Models\MainDashboardViewModel.cs" />
-    <Compile Include="Views\PayrollView\PayrollDetails.xaml.cs">
+    <Compile Include="Views\Payroll\PayrollDetails.xaml.cs">
       <DependentUpon>PayrollDetails.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PayrollView\PayrollList.xaml.cs">
+    <Compile Include="Views\Payroll\PayrollList.xaml.cs">
       <DependentUpon>PayrollList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Form_Dashboard.xaml.cs">
