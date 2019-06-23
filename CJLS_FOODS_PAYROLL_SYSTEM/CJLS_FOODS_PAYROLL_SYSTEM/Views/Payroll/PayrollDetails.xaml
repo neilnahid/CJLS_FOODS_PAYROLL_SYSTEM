@@ -18,8 +18,8 @@
         <Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
                 <GroupBox
                     Grid.Column="1"
@@ -52,10 +52,13 @@
                     Header="Payroll Details">
                     <DataGrid
                         Margin="0,0,0,-0.2"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Stretch"
                         AutoGenerateColumns="False"
                         CanUserAddRows="False"
                         CanUserDeleteRows="false"
                         CanUserResizeColumns="False"
+                        ColumnWidth="*"
                         IsReadOnly="True"
                         ItemsSource="{Binding PayrollDetails}"
                         SelectedItem="{Binding PayrollDetail}">
@@ -93,6 +96,27 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+                            <DataGridCheckBoxColumn
+                                Binding="{Binding Employee.IsPhilhealthActive}"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                Header="Philhealth" />
+                            <DataGridCheckBoxColumn
+                                Binding="{Binding Employee.IsSSSActive}"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                Header="SSS" />
+                            <DataGridCheckBoxColumn
+                                Binding="{Binding Employee.IsPagibigActive}"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                Header="PAG-IBIG" />
+                            <DataGridCheckBoxColumn
+                                Binding="{Binding Employee.IsIncomeTaxActive}"
+                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                Header="Income Tax" />
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>

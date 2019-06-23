@@ -129,23 +129,72 @@
                     </Grid>
 
                 </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        Grid.Column="0"
+                        materialDesign:HintAssist.Hint="SSS Id"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding Employee.SSSID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <CheckBox
+                        Grid.Column="1"
+                        Margin="0,20,0,0"
+                        IsChecked="{Binding Employee.IsSSSActive}">
+                        Active
+                    </CheckBox>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Pagibig Id"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding Employee.PagIbigID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <CheckBox
+                        Grid.Column="1"
+                        Margin="0,20,0,0"
+                        IsChecked="{Binding Employee.IsPagibigActive}">
+                        Active
+                    </CheckBox>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Philhealth Id"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding Employee.PhilhealthID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <CheckBox
+                        Grid.Column="1"
+                        Margin="0,20,0,0"
+                        IsChecked="{Binding Employee.IsPhilhealthActive}">
+                        Active
+                    </CheckBox>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="TIN Id"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding Employee.TINID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <CheckBox
+                        Grid.Column="1"
+                        Margin="0,20,0,0"
+                        IsChecked="{Binding Employee.IsIncomeTax    Active}">
+                        Active
+                    </CheckBox>
+                </Grid>
 
-                <TextBox
-                    materialDesign:HintAssist.Hint="SSS Id"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Employee.SSSID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox
-                    materialDesign:HintAssist.Hint="Pagibig Id"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Employee.PagIbigID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox
-                    materialDesign:HintAssist.Hint="Philhealth Id"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Employee.PhilhealthID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox
-                    materialDesign:HintAssist.Hint="TIN Id"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Employee.TINID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
                         x:Name="btn_dialogConfirm"

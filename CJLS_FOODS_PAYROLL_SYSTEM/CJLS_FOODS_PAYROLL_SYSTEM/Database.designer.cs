@@ -36,6 +36,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void InsertUser(User instance);
     partial void UpdateUser(User instance);
     partial void DeleteUser(User instance);
+    partial void InsertContribution(Contribution instance);
+    partial void UpdateContribution(Contribution instance);
+    partial void DeleteContribution(Contribution instance);
+    partial void InsertContributionType(ContributionType instance);
+    partial void UpdateContributionType(ContributionType instance);
+    partial void DeleteContributionType(ContributionType instance);
     partial void InsertDeduction(Deduction instance);
     partial void UpdateDeduction(Deduction instance);
     partial void DeleteDeduction(Deduction instance);
@@ -102,6 +108,22 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			get
 			{
 				return this.GetTable<User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Contribution> Contributions
+		{
+			get
+			{
+				return this.GetTable<Contribution>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ContributionType> ContributionTypes
+		{
+			get
+			{
+				return this.GetTable<ContributionType>();
 			}
 		}
 		
@@ -571,6 +593,336 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Contribution")]
+	public partial class Contribution : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ContributionLogID;
+		
+		private System.Nullable<int> _ContributionTypeID;
+		
+		private System.Nullable<int> _PayrollDetailID;
+		
+		private EntityRef<ContributionType> _ContributionType;
+		
+		private EntityRef<PayrollDetail> _PayrollDetail;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnContributionLogIDChanging(int value);
+    partial void OnContributionLogIDChanged();
+    partial void OnContributionTypeIDChanging(System.Nullable<int> value);
+    partial void OnContributionTypeIDChanged();
+    partial void OnPayrollDetailIDChanging(System.Nullable<int> value);
+    partial void OnPayrollDetailIDChanged();
+    #endregion
+		
+		public Contribution()
+		{
+			this._ContributionType = default(EntityRef<ContributionType>);
+			this._PayrollDetail = default(EntityRef<PayrollDetail>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContributionLogID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ContributionLogID
+		{
+			get
+			{
+				return this._ContributionLogID;
+			}
+			set
+			{
+				if ((this._ContributionLogID != value))
+				{
+					this.OnContributionLogIDChanging(value);
+					this.SendPropertyChanging();
+					this._ContributionLogID = value;
+					this.SendPropertyChanged("ContributionLogID");
+					this.OnContributionLogIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContributionTypeID", DbType="Int")]
+		public System.Nullable<int> ContributionTypeID
+		{
+			get
+			{
+				return this._ContributionTypeID;
+			}
+			set
+			{
+				if ((this._ContributionTypeID != value))
+				{
+					if (this._ContributionType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnContributionTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._ContributionTypeID = value;
+					this.SendPropertyChanged("ContributionTypeID");
+					this.OnContributionTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayrollDetailID", DbType="Int")]
+		public System.Nullable<int> PayrollDetailID
+		{
+			get
+			{
+				return this._PayrollDetailID;
+			}
+			set
+			{
+				if ((this._PayrollDetailID != value))
+				{
+					if (this._PayrollDetail.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnPayrollDetailIDChanging(value);
+					this.SendPropertyChanging();
+					this._PayrollDetailID = value;
+					this.SendPropertyChanged("PayrollDetailID");
+					this.OnPayrollDetailIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContributionType_Contribution", Storage="_ContributionType", ThisKey="ContributionTypeID", OtherKey="ContributionTypeID", IsForeignKey=true)]
+		public ContributionType ContributionType
+		{
+			get
+			{
+				return this._ContributionType.Entity;
+			}
+			set
+			{
+				ContributionType previousValue = this._ContributionType.Entity;
+				if (((previousValue != value) 
+							|| (this._ContributionType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ContributionType.Entity = null;
+						previousValue.Contributions.Remove(this);
+					}
+					this._ContributionType.Entity = value;
+					if ((value != null))
+					{
+						value.Contributions.Add(this);
+						this._ContributionTypeID = value.ContributionTypeID;
+					}
+					else
+					{
+						this._ContributionTypeID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("ContributionType");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollDetail_Contribution", Storage="_PayrollDetail", ThisKey="PayrollDetailID", OtherKey="PayrollDetailID", IsForeignKey=true)]
+		public PayrollDetail PayrollDetail
+		{
+			get
+			{
+				return this._PayrollDetail.Entity;
+			}
+			set
+			{
+				PayrollDetail previousValue = this._PayrollDetail.Entity;
+				if (((previousValue != value) 
+							|| (this._PayrollDetail.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._PayrollDetail.Entity = null;
+						previousValue.Contributions.Remove(this);
+					}
+					this._PayrollDetail.Entity = value;
+					if ((value != null))
+					{
+						value.Contributions.Add(this);
+						this._PayrollDetailID = value.PayrollDetailID;
+					}
+					else
+					{
+						this._PayrollDetailID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("PayrollDetail");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ContributionType")]
+	public partial class ContributionType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ContributionTypeID;
+		
+		private string _Name;
+		
+		private System.Nullable<double> _PercentageRate;
+		
+		private EntitySet<Contribution> _Contributions;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnContributionTypeIDChanging(int value);
+    partial void OnContributionTypeIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnPercentageRateChanging(System.Nullable<double> value);
+    partial void OnPercentageRateChanged();
+    #endregion
+		
+		public ContributionType()
+		{
+			this._Contributions = new EntitySet<Contribution>(new Action<Contribution>(this.attach_Contributions), new Action<Contribution>(this.detach_Contributions));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContributionTypeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ContributionTypeID
+		{
+			get
+			{
+				return this._ContributionTypeID;
+			}
+			set
+			{
+				if ((this._ContributionTypeID != value))
+				{
+					this.OnContributionTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._ContributionTypeID = value;
+					this.SendPropertyChanged("ContributionTypeID");
+					this.OnContributionTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PercentageRate", DbType="Float")]
+		public System.Nullable<double> PercentageRate
+		{
+			get
+			{
+				return this._PercentageRate;
+			}
+			set
+			{
+				if ((this._PercentageRate != value))
+				{
+					this.OnPercentageRateChanging(value);
+					this.SendPropertyChanging();
+					this._PercentageRate = value;
+					this.SendPropertyChanged("PercentageRate");
+					this.OnPercentageRateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContributionType_Contribution", Storage="_Contributions", ThisKey="ContributionTypeID", OtherKey="ContributionTypeID")]
+		public EntitySet<Contribution> Contributions
+		{
+			get
+			{
+				return this._Contributions;
+			}
+			set
+			{
+				this._Contributions.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Contributions(Contribution entity)
+		{
+			this.SendPropertyChanging();
+			entity.ContributionType = this;
+		}
+		
+		private void detach_Contributions(Contribution entity)
+		{
+			this.SendPropertyChanging();
+			entity.ContributionType = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Deduction")]
 	public partial class Deduction : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -795,7 +1147,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private int _DeductionTypeID;
 		
-		private string _DeductionName;
+		private string _Name;
 		
 		private string _DeductionReferenceId;
 		
@@ -807,8 +1159,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnCreated();
     partial void OnDeductionTypeIDChanging(int value);
     partial void OnDeductionTypeIDChanged();
-    partial void OnDeductionNameChanging(string value);
-    partial void OnDeductionNameChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
     partial void OnDeductionReferenceIdChanging(string value);
     partial void OnDeductionReferenceIdChanged();
     #endregion
@@ -839,22 +1191,22 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DeductionName", DbType="VarChar(50)")]
-		public string DeductionName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
 		{
 			get
 			{
-				return this._DeductionName;
+				return this._Name;
 			}
 			set
 			{
-				if ((this._DeductionName != value))
+				if ((this._Name != value))
 				{
-					this.OnDeductionNameChanging(value);
+					this.OnNameChanging(value);
 					this.SendPropertyChanging();
-					this._DeductionName = value;
-					this.SendPropertyChanged("DeductionName");
-					this.OnDeductionNameChanged();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
@@ -967,6 +1319,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private string _Status;
 		
+		private System.Nullable<bool> _IsPhilhealthActive;
+		
+		private System.Nullable<bool> _IsSSSActive;
+		
+		private System.Nullable<bool> _IsIncomeTaxActive;
+		
+		private System.Nullable<bool> _IsPagibigActive;
+		
 		private EntitySet<Leave> _Leaves;
 		
 		private EntitySet<PayrollDetail> _PayrollDetails;
@@ -1013,6 +1373,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnBranchChanged();
     partial void OnStatusChanging(string value);
     partial void OnStatusChanged();
+    partial void OnIsPhilhealthActiveChanging(System.Nullable<bool> value);
+    partial void OnIsPhilhealthActiveChanged();
+    partial void OnIsSSSActiveChanging(System.Nullable<bool> value);
+    partial void OnIsSSSActiveChanged();
+    partial void OnIsIncomeTaxActiveChanging(System.Nullable<bool> value);
+    partial void OnIsIncomeTaxActiveChanged();
+    partial void OnIsPagibigActiveChanging(System.Nullable<bool> value);
+    partial void OnIsPagibigActiveChanged();
     #endregion
 		
 		public Employee()
@@ -1383,6 +1751,86 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._Status = value;
 					this.SendPropertyChanged("Status");
 					this.OnStatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPhilhealthActive", DbType="Bit")]
+		public System.Nullable<bool> IsPhilhealthActive
+		{
+			get
+			{
+				return this._IsPhilhealthActive;
+			}
+			set
+			{
+				if ((this._IsPhilhealthActive != value))
+				{
+					this.OnIsPhilhealthActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsPhilhealthActive = value;
+					this.SendPropertyChanged("IsPhilhealthActive");
+					this.OnIsPhilhealthActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSSSActive", DbType="Bit")]
+		public System.Nullable<bool> IsSSSActive
+		{
+			get
+			{
+				return this._IsSSSActive;
+			}
+			set
+			{
+				if ((this._IsSSSActive != value))
+				{
+					this.OnIsSSSActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsSSSActive = value;
+					this.SendPropertyChanged("IsSSSActive");
+					this.OnIsSSSActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsIncomeTaxActive", DbType="Bit")]
+		public System.Nullable<bool> IsIncomeTaxActive
+		{
+			get
+			{
+				return this._IsIncomeTaxActive;
+			}
+			set
+			{
+				if ((this._IsIncomeTaxActive != value))
+				{
+					this.OnIsIncomeTaxActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsIncomeTaxActive = value;
+					this.SendPropertyChanged("IsIncomeTaxActive");
+					this.OnIsIncomeTaxActiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPagibigActive", DbType="Bit")]
+		public System.Nullable<bool> IsPagibigActive
+		{
+			get
+			{
+				return this._IsPagibigActive;
+			}
+			set
+			{
+				if ((this._IsPagibigActive != value))
+				{
+					this.OnIsPagibigActiveChanging(value);
+					this.SendPropertyChanging();
+					this._IsPagibigActive = value;
+					this.SendPropertyChanged("IsPagibigActive");
+					this.OnIsPagibigActiveChanged();
 				}
 			}
 		}
@@ -1971,6 +2419,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private EntitySet<Attendance> _Attendances;
 		
+		private EntitySet<Contribution> _Contributions;
+		
 		private EntityRef<Employee> _Employee;
 		
 		private EntityRef<Payroll> _Payroll;
@@ -2004,6 +2454,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		public PayrollDetail()
 		{
 			this._Attendances = new EntitySet<Attendance>(new Action<Attendance>(this.attach_Attendances), new Action<Attendance>(this.detach_Attendances));
+			this._Contributions = new EntitySet<Contribution>(new Action<Contribution>(this.attach_Contributions), new Action<Contribution>(this.detach_Contributions));
 			this._Employee = default(EntityRef<Employee>);
 			this._Payroll = default(EntityRef<Payroll>);
 			OnCreated();
@@ -2230,6 +2681,19 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollDetail_Contribution", Storage="_Contributions", ThisKey="PayrollDetailID", OtherKey="PayrollDetailID")]
+		public EntitySet<Contribution> Contributions
+		{
+			get
+			{
+				return this._Contributions;
+			}
+			set
+			{
+				this._Contributions.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_PayrollDetail", Storage="_Employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
 		public Employee Employee
 		{
@@ -2325,6 +2789,18 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		}
 		
 		private void detach_Attendances(Attendance entity)
+		{
+			this.SendPropertyChanging();
+			entity.PayrollDetail = null;
+		}
+		
+		private void attach_Contributions(Contribution entity)
+		{
+			this.SendPropertyChanging();
+			entity.PayrollDetail = this;
+		}
+		
+		private void detach_Contributions(Contribution entity)
 		{
 			this.SendPropertyChanging();
 			entity.PayrollDetail = null;

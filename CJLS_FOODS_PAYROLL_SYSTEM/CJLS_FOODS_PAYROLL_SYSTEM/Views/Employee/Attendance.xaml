@@ -23,7 +23,7 @@
                 <StackPanel x:Name="sp_dialogFields">
                     <ComboBox
                         materialDesign:HintAssist.Hint="Deduction Type"
-                        DisplayMemberPath="DeductionName"
+                        DisplayMemberPath="Name"
                         ItemsSource="{Binding DeductionsTypes}"
                         SelectedItem="{Binding Deduction.DeductionsType}"
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
@@ -336,7 +336,7 @@
                                     CanUserResizeRows="False"
                                     ItemsSource="{Binding Deductions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding DeductionsType.DeductionName}" Header="Description" />
+                                        <DataGridTextColumn Binding="{Binding DeductionsType.Name}" Header="Description" />
                                         <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
                                     </DataGrid.Columns>
                                 </DataGrid>
