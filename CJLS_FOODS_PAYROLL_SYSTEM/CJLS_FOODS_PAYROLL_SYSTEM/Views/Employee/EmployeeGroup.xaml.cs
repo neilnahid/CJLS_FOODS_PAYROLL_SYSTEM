@@ -15,36 +15,36 @@ using System.Windows.Shapes;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
     /// <summary>
-    /// Interaction logic for EmployeeCreateNewEmployee.xaml
+    /// Interaction logic for EmployeeGroup.xaml
     /// </summary>
-    public partial class EmployeeList : Page {
-        View_Models.EmployeeViewModel VM;
-        public EmployeeList() {
+    public partial class EmployeeGroup : Page {
+        View_Models.EmployeeGroupViewModel VM;
+        public EmployeeGroup() {
             InitializeComponent();
-            VM = (View_Models.EmployeeViewModel)DataContext;
+            VM = (View_Models.EmployeeGroupViewModel)DataContext;
         }
-
         private void btn_dialogConfirm_Click(object sender, RoutedEventArgs e) {
             switch (btn_dialogConfirm.Content.ToString()) {
                 case "UPDATE": Helper.db.SubmitChanges(); MessageBox.Show("Successfully Updated Employee"); break;
-                case "CREATE": VM.CreateNewEmployee(); break;
+                case "CREATE": VM.CreateNewEmployeeGroup(); break;
                 default: MessageBox.Show("command invalid"); break;
             }
-        }   
+        }
+
         private void Btn_Edit_Click(object sender, RoutedEventArgs e) {
-            DialogHeader.Text = "Update Employee";
+            DialogHeader.Text = "Update Employe Group";
             btn_dialogConfirm.Content = "UPDATE";
-            VM.UpdateEmployee();
+            VM.UpdateEmployeeGroup();
         }
 
-        private void Btn_deleteEmployee_Click(object sender, RoutedEventArgs e) {
-            DialogHeader.Text = "Delete Employee";
+        private void Btn_deleteEmployeeGroup_Click(object sender, RoutedEventArgs e) {
+            DialogHeader.Text = "Delete Employee Group";
             btn_dialogConfirm.Content = "DELETE";
-            VM.DeleteEmployee(VM.Employee);
+            VM.DeleteEmployeeGroup(VM.EmployeeGroup);
         }
 
-        private void Btn_createNewEmployee_Click(object sender, RoutedEventArgs e) {
-            DialogHeader.Text = "Create New Employee";
+        private void Btn_CreateNewEmployeeGroup_Click(object sender, RoutedEventArgs e) {
+            DialogHeader.Text = "Create Employee Group";
             btn_dialogConfirm.Content = "CREATE";
         }
     }

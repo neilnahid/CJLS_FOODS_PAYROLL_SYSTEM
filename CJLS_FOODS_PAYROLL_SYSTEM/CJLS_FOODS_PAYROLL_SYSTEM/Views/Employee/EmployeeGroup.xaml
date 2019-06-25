@@ -1,0 +1,137 @@
+﻿<Page
+    x:Class="CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee.EmployeeGroup"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="EmployeeGroup"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{StaticResource EmployeeGroupViewModel}"
+    mc:Ignorable="d">
+    <materialDesign:DialogHost x:Name="dialogHost">
+        <materialDesign:DialogHost.DialogContent>
+            <StackPanel Margin="50">
+                <TextBlock
+                    x:Name="DialogHeader"
+                    Margin="0,0,0,25"
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource MaterialDesignHeadlineTextBlock}"
+                    Text="Header" />
+                <TextBox
+                    materialDesign:HintAssist.Hint="Group Name"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding EmployeeGroup.Name}" />
+
+                <!--  SP for buttons  -->
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button
+                        x:Name="btn_dialogConfirm"
+                        Click="btn_dialogConfirm_Click"
+                        Command="materialDesign:DialogHost.CloseDialogCommand"
+                        IsDefault="True"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                        <Button.CommandParameter>
+                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                True
+                            </system:Boolean>
+                        </Button.CommandParameter>
+                        ACCEPT
+                    </Button>
+                    <Button
+                        Command="materialDesign:DialogHost.CloseDialogCommand"
+                        IsCancel="True"
+                        Style="{StaticResource MaterialDesignFlatButton}">
+                        <Button.CommandParameter>
+                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                False
+                            </system:Boolean>
+                        </Button.CommandParameter>
+                        CANCEL
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:DialogHost.DialogContent>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="323*" />
+                <RowDefinition Height="62*" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Margin="0,1.2,0,0.2">
+                <Grid.ColumnDefinitions />
+                <GroupBox
+                    Grid.Column="1"
+                    FontSize="24"
+                    Header="Employee Groups">
+                    <DataGrid
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="false"
+                        CanUserResizeColumns="False"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding EmployeeGroups}"
+                        SelectedItem="{Binding EmployeeGroup}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding EmployeeGroupID}" Header="EmployeeGroupID" />
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                            x:Name="btn_Edit"
+                                            materialDesign:HintAssist.Hint="Edit Employee"
+                                            Click="Btn_Edit_Click"
+                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                            <materialDesign:PackIcon
+                                                Width="24"
+                                                Height="24"
+                                                Kind="Edit" />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                            x:Name="btn_deleteEmployeeGroup"
+                                            materialDesign:HintAssist.Hint="Delete Employee"
+                                            Click="Btn_deleteEmployeeGroup_Click"
+                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                            <materialDesign:PackIcon
+                                                Width="24"
+                                                Height="24"
+                                                Kind="Delete" />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+            </Grid>
+            <Button
+                x:Name="btn_CreateNewEmployeeGroup"
+                Grid.Row="2"
+                Margin="744,4.8,0,1.6"
+                Click="Btn_CreateNewEmployeeGroup_Click"
+                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                ToolTip="Add New Employee">
+                <materialDesign:PackIcon
+                    Width="24"
+                    Height="24"
+                    Kind="Add" />
+            </Button>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="17*" />
+                    <ColumnDefinition Width="8*" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </Grid>
+    </materialDesign:DialogHost>
+</Page>

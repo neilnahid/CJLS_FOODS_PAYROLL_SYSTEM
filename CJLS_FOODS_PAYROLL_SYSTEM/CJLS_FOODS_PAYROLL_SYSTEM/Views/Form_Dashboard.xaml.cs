@@ -39,10 +39,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
 
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
             TreeViewItem tvi = (TreeViewItem)((TreeView)sender).SelectedItem;
-            if (tvi.Header.ToString() == "Employees") {
+            if (tvi.Header.ToString() == "Employee List") {
                 draweHost.IsLeftDrawerOpen = false;
                 Frame.Content = new Views.Employee.EmployeeList();
                 Title.Text = "Employee List";
+            }
+            else if(tvi.Header.ToString() == "Employee Groups") {
+                draweHost.IsLeftDrawerOpen = false;
+                Frame.Content = new Views.Employee.EmployeeGroup();
+                Title.Text = "Employee Groups";
             }
             else if (tvi.Header.ToString() == "Users") {
                 draweHost.IsLeftDrawerOpen = false;
