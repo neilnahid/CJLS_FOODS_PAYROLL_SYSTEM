@@ -1,16 +1,17 @@
 ﻿<Page
-    x:Class="CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee.EmployeeGroup"
+    x:Class="CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee.PayrollGroup"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="EmployeeGroup"
+    Title="PayrollGroup"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    DataContext="{StaticResource EmployeeGroupViewModel}"
+    DataContext="{StaticResource PayrollGroupViewModel}"
     mc:Ignorable="d">
+
     <materialDesign:DialogHost x:Name="dialogHost">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="50">
@@ -23,7 +24,7 @@
                 <TextBox
                     materialDesign:HintAssist.Hint="Group Name"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding EmployeeGroup.Name}" />
+                    Text="{Binding PayrollGroup.Name}" />
 
                 <!--  SP for buttons  -->
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
@@ -71,10 +72,10 @@
                         CanUserDeleteRows="false"
                         CanUserResizeColumns="False"
                         IsReadOnly="True"
-                        ItemsSource="{Binding EmployeeGroups}"
-                        SelectedItem="{Binding EmployeeGroup}">
+                        ItemsSource="{Binding PayrollGroups}"
+                        SelectedItem="{Binding PayrollGroup}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding EmployeeGroupID}" Header="EmployeeGroupID" />
+                            <DataGridTextColumn Binding="{Binding PayrollGroupID}" Header="PayrollGroupID" />
                             <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
@@ -97,9 +98,9 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button
-                                            x:Name="btn_deleteEmployeeGroup"
+                                            x:Name="btn_deletePayrollGroup"
                                             materialDesign:HintAssist.Hint="Delete Employee"
-                                            Click="Btn_deleteEmployeeGroup_Click"
+                                            Click="Btn_deletePayrollGroup_Click"
                                             Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                                             <materialDesign:PackIcon
                                                 Width="24"
@@ -114,10 +115,10 @@
                 </GroupBox>
             </Grid>
             <Button
-                x:Name="btn_CreateNewEmployeeGroup"
+                x:Name="btn_CreateNewPayrollGroup"
                 Grid.Row="2"
                 Margin="744,4.8,0,1.6"
-                Click="Btn_CreateNewEmployeeGroup_Click"
+                Click="Btn_CreateNewPayrollGroup_Click"
                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                 Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
                 ToolTip="Add New Employee">

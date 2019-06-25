@@ -6,20 +6,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.ComponentModel;
-namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
-{
-    public class EmployeeViewModel : INotifyPropertyChanged
-    {
+namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
+    public class EmployeeViewModel : INotifyPropertyChanged {
         #region properties
         public event PropertyChangedEventHandler PropertyChanged;
         public List<EmployeeType> EmployeeTypes { get; set; }
         public ObservableCollection<Employee> Employees { get; set; }
         public Employee Employee { get; set; }
+        public PayrollGroup PayrollGroup { get; set; }
+        public List<PayrollGroup> PayrollGroups { get; set; }
         #endregion
         #region constructor
-        public EmployeeViewModel()
-        {
+        public EmployeeViewModel() {
             Employees = new ObservableCollection<Employee>(GetEmployeeList());
+            PayrollGroups = GetPayrollGroups();
             Employee = new Employee();
             EmployeeTypes = GetEmployeeTypes();
         }
@@ -27,13 +27,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 
 
         #region methods/functions
-        public List<Employee> GetEmployeeList()
-        {
+        public List<Employee> GetEmployeeList() {
             var result = (from employee in Helper.db.Employees select employee).ToList();
             return result;
         }
-        public void CreateNewEmployee()
-        {
+        public List<PayrollGroup> GetPayrollGroups() {
+            return (from pg in Helper.db.PayrollGroups select pg).ToList();
+        }
+        public void CreateNewEmployee() {
             Helper.db.Employees.InsertOnSubmit(Employee);
             Employees.Add(Employee);
             Helper.db.SubmitChanges();

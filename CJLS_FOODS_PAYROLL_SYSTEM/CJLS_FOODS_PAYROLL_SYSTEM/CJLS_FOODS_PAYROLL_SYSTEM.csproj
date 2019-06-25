@@ -96,7 +96,7 @@
     <Compile Include="Model\Week.cs" />
     <Compile Include="StaticValues.cs" />
     <Compile Include="View Models\AttendanceViewModel.cs" />
-    <Compile Include="View Models\EmployeeGroupViewModel.cs" />
+    <Compile Include="View Models\PayrollGroupViewModel.cs" />
     <Compile Include="View Models\EmployeeViewModel.cs" />
     <Compile Include="Model\ModelPropertyChanged.cs" />
     <Compile Include="View Models\PayrollDetailsViewModel.cs" />
@@ -107,9 +107,6 @@
     </Compile>
     <Compile Include="Views\Employee\Attendance.xaml.cs">
       <DependentUpon>Attendance.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Employee\EmployeeGroup.xaml.cs">
-      <DependentUpon>EmployeeGroup.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmployeeList.xaml.cs">
       <DependentUpon>EmployeeList.xaml</DependentUpon>
@@ -122,11 +119,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Employee\EmployeeGroup.xaml">
+    <Page Include="Views\Employee\EmployeeList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Employee\EmployeeList.xaml">
+    <Page Include="Views\Employee\PayrollGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,6 +149,9 @@
     </Compile>
     <Compile Include="Controls\Session.cs" />
     <Compile Include="View Models\MainDashboardViewModel.cs" />
+    <Compile Include="Views\Employee\PayrollGroup.xaml.cs">
+      <DependentUpon>PayrollGroup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Payroll\PayrollDetails.xaml.cs">
       <DependentUpon>PayrollDetails.xaml</DependentUpon>
     </Compile>
