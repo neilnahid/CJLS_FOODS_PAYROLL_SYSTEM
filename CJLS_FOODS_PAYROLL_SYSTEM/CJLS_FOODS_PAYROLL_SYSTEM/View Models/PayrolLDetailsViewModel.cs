@@ -29,7 +29,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         }
         private List<PayrollDetail> GetPayrollDetailList() {
             if (Payroll.PayrollDetails.Count == 0) {
-                var employees = (from e in Helper.db.Employees where e.PayrollGroup == Payroll.PayrollGroup && e.Status != "Terminated" || e.Status != "Inactive" select e );
+                var employees = (from e in Helper.db.Employees where e.PayrollGroup == Payroll.PayrollGroup && (e.Status != "Terminated" || e.Status != "Inactive") select e );
                 foreach (var employee in employees) {
                     this.Payroll.PayrollDetails.Add(new PayrollDetail { Employee = employee, EmployeeID = employee.EmployeeID });
                 }
