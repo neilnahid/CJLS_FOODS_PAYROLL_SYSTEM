@@ -22,6 +22,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
         public EmployeeList() {
             InitializeComponent();
             VM = (View_Models.EmployeeViewModel)DataContext;
+            VM.Instantiate();
         }
 
         private void btn_dialogConfirm_Click(object sender, RoutedEventArgs e) {

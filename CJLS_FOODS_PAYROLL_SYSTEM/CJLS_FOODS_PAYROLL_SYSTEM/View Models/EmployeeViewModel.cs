@@ -23,6 +23,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             Employee = new Employee();
             EmployeeTypes = GetEmployeeTypes();
         }
+        public void Instantiate() {
+            PayrollGroups = GetPayrollGroups();
+            EmployeeTypes = GetEmployeeTypes();
+        }
         #endregion
 
 

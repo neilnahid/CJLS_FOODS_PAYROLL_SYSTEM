@@ -21,9 +21,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         }
      
         public void CreateNewPayrollGroup() {
-            Helper.db.PayrollGroups.InsertOnSubmit(PayrollGroup);
-            PayrollGroups.Add(PayrollGroup);
-            Helper.db.SubmitChanges();
+            try {
+                Helper.db.PayrollGroups.InsertOnSubmit(PayrollGroup);
+                PayrollGroups.Add(PayrollGroup);
+                Helper.db.SubmitChanges();
+            }
+            catch(InvalidOperationException ex) {
+                MessageBox.Show("Payroll Group already exist");
+            }
+            
         }
         public void UpdatePayrollGroup() {
             Helper.db.SubmitChanges();
