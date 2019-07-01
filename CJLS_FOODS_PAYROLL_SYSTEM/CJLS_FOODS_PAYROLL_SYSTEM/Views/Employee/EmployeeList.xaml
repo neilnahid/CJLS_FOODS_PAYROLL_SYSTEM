@@ -251,7 +251,7 @@
                         CanUserResizeColumns="False"
                         IsReadOnly="True"
                         ItemsSource="{Binding Employees}"
-                        SelectedItem="{Binding Employee}">
+                        SelectedItem="{Binding Employee, Mode=TwoWay}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding EmployeeID}" Header="EmployeeID" />
                             <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />

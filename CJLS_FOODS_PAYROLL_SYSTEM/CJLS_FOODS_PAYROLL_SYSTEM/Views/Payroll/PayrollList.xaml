@@ -11,7 +11,10 @@
     d:DesignWidth="800"
     DataContext="{StaticResource PayrollViewModel}"
     mc:Ignorable="d">
-    <materialDesign:DialogHost x:Name="dialogHost" DialogClosing="DialogHost_DialogClosing">
+    <materialDesign:DialogHost
+        x:Name="dialogHost"
+        DialogClosing="DialogHost_DialogClosing"
+        IsOpen="True">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="50">
                 <TextBlock
@@ -29,6 +32,13 @@
                         materialDesign:HintAssist.Hint="End Date"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                         Text="{Binding Payroll.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <ComboBox
+                        materialDesign:HintAssist.Hint="Payroll Group"
+                        DisplayMemberPath="Name"
+                        IsEditable="False"
+                        ItemsSource="{Binding PayrollGroups}"
+                        SelectedItem="{Binding Payroll.PayrollGroup}"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button

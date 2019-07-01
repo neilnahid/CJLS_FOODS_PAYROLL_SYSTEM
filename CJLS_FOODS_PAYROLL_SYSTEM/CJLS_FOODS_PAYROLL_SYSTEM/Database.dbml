@@ -11,11 +11,14 @@
       <Association Name="PayrollDetail_Attendance" Member="PayrollDetail" ThisKey="PayrollDetailsID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.PayrollGroup" Member="PayrollGroups">
-    <Type Name="PayrollGroup">
-      <Column Name="PayrollGroupID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="PayrollGroup_Employee" Member="Employees" ThisKey="PayrollGroupID" OtherKey="EmployeeGroupID" Type="Employee" />
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Contribution" Member="Contributions">
@@ -80,8 +83,8 @@
       <Column Name="EmployeeGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Employee_Leave" Member="Leaves" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Leave" />
       <Association Name="Employee_PayrollDetail" Member="PayrollDetails" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="PayrollDetail" />
-      <Association Name="PayrollGroup_Employee" Member="PayrollGroup" ThisKey="EmployeeGroupID" OtherKey="PayrollGroupID" Type="PayrollGroup" IsForeignKey="true" />
       <Association Name="EmployeeType_Employee" Member="EmployeeType" ThisKey="EmployeeTypeID" OtherKey="EmployeeTypesID" Type="EmployeeType" IsForeignKey="true" />
+      <Association Name="PayrollGroup_Employee" Member="PayrollGroup" ThisKey="EmployeeGroupID" OtherKey="PayrollGroupID" Type="PayrollGroup" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.EmployeeTypes" Member="EmployeeTypes">
@@ -106,7 +109,9 @@
       <Column Name="PayrollID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="EndDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="PayrollGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Payroll_PayrollDetail" Member="PayrollDetails" ThisKey="PayrollID" OtherKey="PayrollID" Type="PayrollDetail" />
+      <Association Name="PayrollGroup_Payroll" Member="PayrollGroup" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="PayrollGroup" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.PayrollDetail" Member="PayrollDetails">
@@ -127,14 +132,12 @@
       <Association Name="Payroll_PayrollDetail" Member="Payroll" ThisKey="PayrollID" OtherKey="PayrollID" Type="Payroll" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+  <Table Name="dbo.PayrollGroup" Member="PayrollGroups">
+    <Type Name="PayrollGroup">
+      <Column Name="PayrollGroupID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="PayrollGroup_Employee" Member="Employees" ThisKey="PayrollGroupID" OtherKey="EmployeeGroupID" Type="Employee" />
+      <Association Name="PayrollGroup_Payroll" Member="Payrolls" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Payroll" />
     </Type>
   </Table>
 </Database>

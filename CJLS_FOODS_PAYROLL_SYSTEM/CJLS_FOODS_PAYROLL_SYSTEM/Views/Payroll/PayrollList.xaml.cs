@@ -23,6 +23,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
             InitializeComponent();
             VM = (View_Models.PayrollViewModel)DataContext;
             VM.Payrolls = VM.FetchPayrollList();
+            VM.FetchPayrollGroups();
         }
 
         private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e) {
