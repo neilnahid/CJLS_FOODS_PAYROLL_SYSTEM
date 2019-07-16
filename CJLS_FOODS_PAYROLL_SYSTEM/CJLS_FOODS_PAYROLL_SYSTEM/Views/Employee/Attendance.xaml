@@ -116,38 +116,30 @@
                             <DataTemplate>
                                 <StackPanel x:Name="Monday">
                                     <TextBlock Text="{Binding Days[1].Attendance.AttendanceDate.Day}" />
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="{Binding Days[1].MinutesLateWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                            <ColumnDefinition Width="{Binding Days[1].HoursWorkedWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                            <ColumnDefinition Width="{Binding Days[1].OverTimeHoursWorkedWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                        </Grid.ColumnDefinitions>
-                                        <Rectangle
-                                            x:Name="MinutesLate"
-                                            Grid.Column="0"
-                                            Width="Auto"
-                                            Height="20"
-                                            Fill="Red" />
-                                        <Rectangle
-                                            x:Name="Regular"
-                                            Grid.Column="0"
-                                            Width="Auto"
-                                            Height="20"
-                                            Fill="Green" />
-                                        <Rectangle
-                                            x:Name="OverTime"
-                                            Grid.Column="0"
-                                            Width="Auto"
-                                            Height="20"
-                                            Fill="SkyBlue" />
-
-                                    </Grid>
+                                    <Rectangle
+                                        x:Name="Regular"
+                                        Width="Auto"
+                                        Height="20"
+                                        Fill="Green"
+                                        Visibility="{Binding Days[1].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Rectangle
+                                        x:Name="OverTime"
+                                        Width="Auto"
+                                        Height="20"
+                                        Fill="SkyBlue"
+                                        Visibility="{Binding Days[2].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     <Rectangle
                                         x:Name="Deduction"
                                         Width="Auto"
                                         Height="20"
                                         Fill="Red"
-                                        Visibility="{Binding Days[1].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        Visibility="{Binding Days[3].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <Rectangle
+                                        x:Name="UnderTime"
+                                        Width="Auto"
+                                        Height="20"
+                                        Fill="Orange"
+                                        Visibility="{Binding Days[4].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

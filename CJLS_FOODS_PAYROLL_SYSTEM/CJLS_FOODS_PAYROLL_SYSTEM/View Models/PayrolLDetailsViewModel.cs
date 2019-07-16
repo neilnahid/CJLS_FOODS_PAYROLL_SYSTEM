@@ -75,7 +75,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             foreach (var pd in PayrollDetails) {
                 TotalGrossPay += pd.GrossPay;
                 TotalNetPay += pd.NetPay;
-                TotalContributions += pd.TotalContributions;
+                TotalContributions += (double)pd.TotalContributions;
                 TotalDeductions += pd.TotalDeductions;
             }
         }

@@ -61,6 +61,7 @@
     <Type Name="Employee">
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="EmployeeGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmployeeTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="FirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="MiddleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="LastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -83,7 +84,6 @@
       <Column Name="IsIncomeTaxActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IsPagibigActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Age" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="EmployeeTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Employee_Leave" Member="Leaves" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Leave" />
       <Association Name="Employee_PayrollDetail" Member="PayrollDetails" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="PayrollDetail" />
       <Association Name="EmployeeType_Employee" Member="EmployeeType" ThisKey="EmployeeTypeID" OtherKey="EmployeeTypeID" Type="EmployeeType" IsForeignKey="true" />
@@ -112,6 +112,7 @@
       <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="EndDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="PayrollGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TotalDays" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Payroll_PayrollDetail" Member="PayrollDetails" ThisKey="PayrollID" OtherKey="PayrollID" Type="PayrollDetail" />
       <Association Name="PayrollGroup_Payroll" Member="PayrollGroup" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="PayrollGroup" IsForeignKey="true" />
     </Type>
@@ -122,12 +123,12 @@
       <Column Name="PayrollID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TotalDeductions" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="TotalContributions" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="TotalRegularHours" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="TotalOverTimeHours" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="OvertimePay" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="NetPay" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="GrossPay" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="TotalContributions" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="PayrollDetail_Attendance" Member="Attendances" ThisKey="PayrollDetailID" OtherKey="PayrollDetailsID" Type="Attendance" />
       <Association Name="PayrollDetail_Contribution" Member="Contributions" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="Contribution" />
       <Association Name="Employee_PayrollDetail" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
