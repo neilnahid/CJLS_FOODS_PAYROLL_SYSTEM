@@ -11,7 +11,7 @@
     d:DesignWidth="800"
     DataContext="{StaticResource EmployeeViewModel}"
     mc:Ignorable="d">
-    <materialDesign:DialogHost x:Name="dialogHost">
+    <materialDesign:DialogHost x:Name="dialogHost" IsOpen="True">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="50">
                 <TextBlock
@@ -103,7 +103,14 @@
                             Text="{Binding Employee.HourlyRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <TextBox
                             Grid.Column="2"
-                            materialDesign:HintAssist.Hint="Available Leaves"
+                            Margin="0,0,15,0"
+                            materialDesign:HintAssist.Hint="Daily Required Hours"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding Employee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox
+                            Grid.Column="3"
+                            materialDesign:HintAssist.Hint="Monthly Salary (Read Only)"
+                            IsReadOnly="True"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.AvailableLeaves, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
@@ -112,15 +119,21 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBox
                             Grid.Column="0"
+                            materialDesign:HintAssist.Hint="Available Leaves"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding Employee.AvailableLeaves, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <TextBox
+                            Grid.Column="1"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Branch Assigned"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.Branch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         <ComboBox
-                            Grid.Column="1"
+                            Grid.Column="2"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Payroll Group"
                             DisplayMemberPath="Name"
@@ -128,7 +141,7 @@
                             SelectedItem="{Binding Employee.PayrollGroup}"
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                         <ComboBox
-                            Grid.Column="2"
+                            Grid.Column="3"
                             materialDesign:HintAssist.Hint="Employement Status"
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                             Text="{Binding Employee.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">

@@ -70,12 +70,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 UpdateRegularHoursFlag(attendance);
                 UpdateOverTimeHoursFlag(attendance);
                 UpdateDeductionsFlag(attendance);
+                SetProportionWidths(attendance);
             }
         }
         public void UpdateFlagsOfEveryAttendance() {
             foreach (var w in PayrollRange.Weeks) {
                 foreach (var d in w.Days) {
                     UpdateFlagsOf(d);
+                    SetProportionWidths(d);
                 }
             }
         }
@@ -125,6 +127,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 a.DeductionsFlag = Visibility.Visible;
             else
                 a.DeductionsFlag = Visibility.Collapsed;
+        }
+        public void SetProportionWidths(Model.ExtendedAttendance a) {
+            double minsWidth = (a.Attendance.MinutesLate / (a.Attendance.MinutesLate + a.Attendance.RegularHoursWorked + a.Attendance.OverTimeHoursWorked))*50;
+            var hourswidth = (a.Attendance.RegularHoursWorked / (a.Attendance.MinutesLate + a.Attendance.RegularHoursWorked + a.Attendance.OverTimeHoursWorked))*50;
+            var overtimeWidth = (a.Attendance.OverTimeHoursWorked / (a.Attendance.MinutesLate + a.Attendance.RegularHoursWorked + a.Attendance.OverTimeHoursWorked))*50;
+            a.MinutesLateWidth = String.Format("{0}*", minsWidth);
+            a.HoursWorkedWidth = String.Format("{0}*", hourswidth);
+            a.OverTimeHoursWorkedWidth = String.Format("{0}*", overtimeWidth);
+
         }
         #endregion
         #endregion

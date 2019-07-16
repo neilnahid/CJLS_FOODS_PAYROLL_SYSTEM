@@ -203,13 +203,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private System.Nullable<System.DateTime> _AttendanceDate;
 		
-		private int _RegularHoursWorked;
+		private double _RegularHoursWorked;
 		
-		private int _OverTimeHoursWorked;
+		private double _OverTimeHoursWorked;
 		
 		private int _AttendanceID;
 		
 		private System.Nullable<int> _PayrollDetailsID;
+		
+		private double _MinutesLate;
 		
 		private EntitySet<Deduction> _Deductions;
 		
@@ -221,14 +223,16 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnCreated();
     partial void OnAttendanceDateChanging(System.Nullable<System.DateTime> value);
     partial void OnAttendanceDateChanged();
-    partial void OnRegularHoursWorkedChanging(int value);
+    partial void OnRegularHoursWorkedChanging(double value);
     partial void OnRegularHoursWorkedChanged();
-    partial void OnOverTimeHoursWorkedChanging(int value);
+    partial void OnOverTimeHoursWorkedChanging(double value);
     partial void OnOverTimeHoursWorkedChanged();
     partial void OnAttendanceIDChanging(int value);
     partial void OnAttendanceIDChanged();
     partial void OnPayrollDetailsIDChanging(System.Nullable<int> value);
     partial void OnPayrollDetailsIDChanged();
+    partial void OnMinutesLateChanging(double value);
+    partial void OnMinutesLateChanged();
     #endregion
 		
 		public Attendance()
@@ -258,8 +262,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegularHoursWorked", DbType="Int NOT NULL")]
-		public int RegularHoursWorked
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RegularHoursWorked", DbType="Float NOT NULL")]
+		public double RegularHoursWorked
 		{
 			get
 			{
@@ -278,8 +282,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OverTimeHoursWorked", DbType="Int NOT NULL")]
-		public int OverTimeHoursWorked
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OverTimeHoursWorked", DbType="Float NOT NULL")]
+		public double OverTimeHoursWorked
 		{
 			get
 			{
@@ -338,6 +342,26 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._PayrollDetailsID = value;
 					this.SendPropertyChanged("PayrollDetailsID");
 					this.OnPayrollDetailsIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MinutesLate", DbType="Float NOT NULL")]
+		public double MinutesLate
+		{
+			get
+			{
+				return this._MinutesLate;
+			}
+			set
+			{
+				if ((this._MinutesLate != value))
+				{
+					this.OnMinutesLateChanging(value);
+					this.SendPropertyChanging();
+					this._MinutesLate = value;
+					this.SendPropertyChanged("MinutesLate");
+					this.OnMinutesLateChanged();
 				}
 			}
 		}
@@ -1296,27 +1320,31 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private int _EmployeeID;
 		
+		private System.Nullable<int> _EmployeeGroupID;
+		
+		private System.Nullable<int> _EmployeeTypeID;
+		
 		private string _FirstName;
+		
+		private string _MiddleName;
 		
 		private string _LastName;
 		
-		private System.Nullable<System.DateTime> _DateOfBirth;
+		private string _Gender;
 		
-		private System.Nullable<int> _Age;
+		private System.Nullable<System.DateTime> _DateOfBirth;
 		
 		private string _ContactNumber;
 		
 		private string _Address;
 		
-		private string _Gender;
-		
 		private System.Nullable<int> _AvailableLeaves;
 		
-		private System.Nullable<int> _EmployeeTypeID;
+		private double _HourlyRate;
 		
-		private string _MiddleName;
+		private double _DailyRequiredHours;
 		
-		private System.Nullable<double> _HourlyRate;
+		private double _MonthlySalary;
 		
 		private string _SSSID;
 		
@@ -1338,7 +1366,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private System.Nullable<bool> _IsPagibigActive;
 		
-		private System.Nullable<int> _EmployeeGroupID;
+		private System.Nullable<int> _Age;
 		
 		private EntitySet<Leave> _Leaves;
 		
@@ -1354,28 +1382,32 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnCreated();
     partial void OnEmployeeIDChanging(int value);
     partial void OnEmployeeIDChanged();
+    partial void OnEmployeeGroupIDChanging(System.Nullable<int> value);
+    partial void OnEmployeeGroupIDChanged();
+    partial void OnEmployeeTypeIDChanging(System.Nullable<int> value);
+    partial void OnEmployeeTypeIDChanged();
     partial void OnFirstNameChanging(string value);
     partial void OnFirstNameChanged();
+    partial void OnMiddleNameChanging(string value);
+    partial void OnMiddleNameChanged();
     partial void OnLastNameChanging(string value);
     partial void OnLastNameChanged();
+    partial void OnGenderChanging(string value);
+    partial void OnGenderChanged();
     partial void OnDateOfBirthChanging(System.Nullable<System.DateTime> value);
     partial void OnDateOfBirthChanged();
-    partial void OnAgeChanging(System.Nullable<int> value);
-    partial void OnAgeChanged();
     partial void OnContactNumberChanging(string value);
     partial void OnContactNumberChanged();
     partial void OnAddressChanging(string value);
     partial void OnAddressChanged();
-    partial void OnGenderChanging(string value);
-    partial void OnGenderChanged();
     partial void OnAvailableLeavesChanging(System.Nullable<int> value);
     partial void OnAvailableLeavesChanged();
-    partial void OnEmployeeTypeIDChanging(System.Nullable<int> value);
-    partial void OnEmployeeTypeIDChanged();
-    partial void OnMiddleNameChanging(string value);
-    partial void OnMiddleNameChanged();
-    partial void OnHourlyRateChanging(System.Nullable<double> value);
+    partial void OnHourlyRateChanging(double value);
     partial void OnHourlyRateChanged();
+    partial void OnDailyRequiredHoursChanging(double value);
+    partial void OnDailyRequiredHoursChanged();
+    partial void OnMonthlySalaryChanging(double value);
+    partial void OnMonthlySalaryChanged();
     partial void OnSSSIDChanging(string value);
     partial void OnSSSIDChanged();
     partial void OnPagIbigIDChanging(string value);
@@ -1396,8 +1428,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnIsIncomeTaxActiveChanged();
     partial void OnIsPagibigActiveChanging(System.Nullable<bool> value);
     partial void OnIsPagibigActiveChanged();
-    partial void OnEmployeeGroupIDChanging(System.Nullable<int> value);
-    partial void OnEmployeeGroupIDChanged();
+    partial void OnAgeChanging(System.Nullable<int> value);
+    partial void OnAgeChanged();
     #endregion
 		
 		public Employee()
@@ -1429,6 +1461,54 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeGroupID", DbType="Int")]
+		public System.Nullable<int> EmployeeGroupID
+		{
+			get
+			{
+				return this._EmployeeGroupID;
+			}
+			set
+			{
+				if ((this._EmployeeGroupID != value))
+				{
+					if (this._PayrollGroup.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEmployeeGroupIDChanging(value);
+					this.SendPropertyChanging();
+					this._EmployeeGroupID = value;
+					this.SendPropertyChanged("EmployeeGroupID");
+					this.OnEmployeeGroupIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", DbType="Int")]
+		public System.Nullable<int> EmployeeTypeID
+		{
+			get
+			{
+				return this._EmployeeTypeID;
+			}
+			set
+			{
+				if ((this._EmployeeTypeID != value))
+				{
+					if (this._EmployeeType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEmployeeTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._EmployeeTypeID = value;
+					this.SendPropertyChanged("EmployeeTypeID");
+					this.OnEmployeeTypeIDChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(50)")]
 		public string FirstName
 		{
@@ -1445,6 +1525,26 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._FirstName = value;
 					this.SendPropertyChanged("FirstName");
 					this.OnFirstNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="VarChar(50)")]
+		public string MiddleName
+		{
+			get
+			{
+				return this._MiddleName;
+			}
+			set
+			{
+				if ((this._MiddleName != value))
+				{
+					this.OnMiddleNameChanging(value);
+					this.SendPropertyChanging();
+					this._MiddleName = value;
+					this.SendPropertyChanged("MiddleName");
+					this.OnMiddleNameChanged();
 				}
 			}
 		}
@@ -1469,6 +1569,26 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="VarChar(25)")]
+		public string Gender
+		{
+			get
+			{
+				return this._Gender;
+			}
+			set
+			{
+				if ((this._Gender != value))
+				{
+					this.OnGenderChanging(value);
+					this.SendPropertyChanging();
+					this._Gender = value;
+					this.SendPropertyChanged("Gender");
+					this.OnGenderChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOfBirth", DbType="DateTime")]
 		public System.Nullable<System.DateTime> DateOfBirth
 		{
@@ -1485,26 +1605,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._DateOfBirth = value;
 					this.SendPropertyChanged("DateOfBirth");
 					this.OnDateOfBirthChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Age", DbType="Int")]
-		public System.Nullable<int> Age
-		{
-			get
-			{
-				return this._Age;
-			}
-			set
-			{
-				if ((this._Age != value))
-				{
-					this.OnAgeChanging(value);
-					this.SendPropertyChanging();
-					this._Age = value;
-					this.SendPropertyChanged("Age");
-					this.OnAgeChanged();
 				}
 			}
 		}
@@ -1549,26 +1649,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="VarChar(25)")]
-		public string Gender
-		{
-			get
-			{
-				return this._Gender;
-			}
-			set
-			{
-				if ((this._Gender != value))
-				{
-					this.OnGenderChanging(value);
-					this.SendPropertyChanging();
-					this._Gender = value;
-					this.SendPropertyChanged("Gender");
-					this.OnGenderChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AvailableLeaves", DbType="Int")]
 		public System.Nullable<int> AvailableLeaves
 		{
@@ -1589,52 +1669,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", DbType="Int")]
-		public System.Nullable<int> EmployeeTypeID
-		{
-			get
-			{
-				return this._EmployeeTypeID;
-			}
-			set
-			{
-				if ((this._EmployeeTypeID != value))
-				{
-					if (this._EmployeeType.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEmployeeTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._EmployeeTypeID = value;
-					this.SendPropertyChanged("EmployeeTypeID");
-					this.OnEmployeeTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="VarChar(50)")]
-		public string MiddleName
-		{
-			get
-			{
-				return this._MiddleName;
-			}
-			set
-			{
-				if ((this._MiddleName != value))
-				{
-					this.OnMiddleNameChanging(value);
-					this.SendPropertyChanging();
-					this._MiddleName = value;
-					this.SendPropertyChanged("MiddleName");
-					this.OnMiddleNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourlyRate", DbType="Float")]
-		public System.Nullable<double> HourlyRate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourlyRate", DbType="Float NOT NULL")]
+		public double HourlyRate
 		{
 			get
 			{
@@ -1649,6 +1685,46 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._HourlyRate = value;
 					this.SendPropertyChanged("HourlyRate");
 					this.OnHourlyRateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DailyRequiredHours", DbType="Float NOT NULL")]
+		public double DailyRequiredHours
+		{
+			get
+			{
+				return this._DailyRequiredHours;
+			}
+			set
+			{
+				if ((this._DailyRequiredHours != value))
+				{
+					this.OnDailyRequiredHoursChanging(value);
+					this.SendPropertyChanging();
+					this._DailyRequiredHours = value;
+					this.SendPropertyChanged("DailyRequiredHours");
+					this.OnDailyRequiredHoursChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MonthlySalary", AutoSync=AutoSync.Always, DbType="Float NOT NULL", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public double MonthlySalary
+		{
+			get
+			{
+				return this._MonthlySalary;
+			}
+			set
+			{
+				if ((this._MonthlySalary != value))
+				{
+					this.OnMonthlySalaryChanging(value);
+					this.SendPropertyChanging();
+					this._MonthlySalary = value;
+					this.SendPropertyChanged("MonthlySalary");
+					this.OnMonthlySalaryChanged();
 				}
 			}
 		}
@@ -1853,26 +1929,22 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeGroupID", DbType="Int")]
-		public System.Nullable<int> EmployeeGroupID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Age", AutoSync=AutoSync.Always, DbType="Int", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> Age
 		{
 			get
 			{
-				return this._EmployeeGroupID;
+				return this._Age;
 			}
 			set
 			{
-				if ((this._EmployeeGroupID != value))
+				if ((this._Age != value))
 				{
-					if (this._PayrollGroup.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEmployeeGroupIDChanging(value);
+					this.OnAgeChanging(value);
 					this.SendPropertyChanging();
-					this._EmployeeGroupID = value;
-					this.SendPropertyChanged("EmployeeGroupID");
-					this.OnEmployeeGroupIDChanged();
+					this._Age = value;
+					this.SendPropertyChanged("Age");
+					this.OnAgeChanged();
 				}
 			}
 		}
@@ -2026,7 +2098,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private string _EmployeeNameTitle;
 		
-		private System.Nullable<double> _SalaryRate;
+		private System.Nullable<double> _HourlyRate;
+		
+		private System.Nullable<double> _DailyRequiredHours;
 		
 		private EntitySet<Employee> _Employees;
 		
@@ -2038,8 +2112,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnEmployeeTypesIDChanged();
     partial void OnEmployeeNameTitleChanging(string value);
     partial void OnEmployeeNameTitleChanged();
-    partial void OnSalaryRateChanging(System.Nullable<double> value);
-    partial void OnSalaryRateChanged();
+    partial void OnHourlyRateChanging(System.Nullable<double> value);
+    partial void OnHourlyRateChanged();
+    partial void OnDailyRequiredHoursChanging(System.Nullable<double> value);
+    partial void OnDailyRequiredHoursChanged();
     #endregion
 		
 		public EmployeeType()
@@ -2088,22 +2164,42 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SalaryRate", DbType="Float")]
-		public System.Nullable<double> SalaryRate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourlyRate", DbType="Float")]
+		public System.Nullable<double> HourlyRate
 		{
 			get
 			{
-				return this._SalaryRate;
+				return this._HourlyRate;
 			}
 			set
 			{
-				if ((this._SalaryRate != value))
+				if ((this._HourlyRate != value))
 				{
-					this.OnSalaryRateChanging(value);
+					this.OnHourlyRateChanging(value);
 					this.SendPropertyChanging();
-					this._SalaryRate = value;
-					this.SendPropertyChanged("SalaryRate");
-					this.OnSalaryRateChanged();
+					this._HourlyRate = value;
+					this.SendPropertyChanged("HourlyRate");
+					this.OnHourlyRateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DailyRequiredHours", DbType="Float")]
+		public System.Nullable<double> DailyRequiredHours
+		{
+			get
+			{
+				return this._DailyRequiredHours;
+			}
+			set
+			{
+				if ((this._DailyRequiredHours != value))
+				{
+					this.OnDailyRequiredHoursChanging(value);
+					this.SendPropertyChanging();
+					this._DailyRequiredHours = value;
+					this.SendPropertyChanged("DailyRequiredHours");
+					this.OnDailyRequiredHoursChanged();
 				}
 			}
 		}

@@ -1,68 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
-    public class ExtendedAttendance : Model.ModelPropertyChange {
-        private Attendance attendance;
+    public class ExtendedAttendance : INotifyPropertyChanged {
 
-        public Attendance Attendance {
-            get { return attendance; }
-            set {
-                if (attendance != value) {
-                    attendance = value;
-                    RaisePropertyChanged("Attendance");
-                }
-            }
-        }
-        private Visibility underTimeFlag;
+        public Attendance Attendance { get; set; }
 
-        public Visibility UnderTimeFlag {
-            get { return underTimeFlag; }
-            set {
-                if (underTimeFlag != value) {
-                    underTimeFlag = value;
-                    RaisePropertyChanged("UnderTimeFlag");
-                }
-            }
-        }
-
-        private Visibility regularHoursFlag;
-
-        public Visibility RegularHoursFlag {
-            get { return regularHoursFlag; }
-            set {
-                if (regularHoursFlag != value) {
-                    regularHoursFlag = value;
-                    RaisePropertyChanged("RegularHoursFlag");
-                }
-            }
-        }
-        private Visibility overtimeHoursFlag;
-
-        public Visibility OverTimeHoursFlag {
-            get { return overtimeHoursFlag; }
-            set {
-                if (overtimeHoursFlag != value) {
-                    overtimeHoursFlag = value;
-                    RaisePropertyChanged("OverTimeHoursFlag");
-                }
-            }
-        }
-        private Visibility deductionsFlag;
-
-        public Visibility DeductionsFlag {
-            get { return deductionsFlag; }
-            set {
-                if (deductionsFlag != value) {
-                    deductionsFlag = value;
-                    RaisePropertyChanged("DeductionsFlag");
-                }
-            }
-        }
+        public Visibility UnderTimeFlag { get; set; }
 
 
+        public Visibility RegularHoursFlag { get; set; }
+
+        public Visibility OverTimeHoursFlag { get; set; }
+
+
+        public Visibility DeductionsFlag { get; set; }
+
+        public string MinutesLateWidth { get; set; }
+        public string HoursWorkedWidth { get; set; }
+        public string OverTimeHoursWorkedWidth { get; set; }
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

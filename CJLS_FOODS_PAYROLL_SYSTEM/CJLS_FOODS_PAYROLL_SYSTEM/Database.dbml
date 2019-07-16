@@ -3,10 +3,11 @@
   <Table Name="dbo.Attendance" Member="Attendances">
     <Type Name="Attendance">
       <Column Name="AttendanceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="RegularHoursWorked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="OverTimeHoursWorked" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="RegularHoursWorked" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="OverTimeHoursWorked" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="AttendanceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="PayrollDetailsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MinutesLate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="Attendance_Deduction" Member="Deductions" ThisKey="AttendanceID" OtherKey="AttendanceID" Type="Deduction" />
       <Association Name="PayrollDetail_Attendance" Member="PayrollDetail" ThisKey="PayrollDetailsID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" />
     </Type>
@@ -59,17 +60,19 @@
   <Table Name="dbo.Employee" Member="Employees">
     <Type Name="Employee">
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EmployeeTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="FirstName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="LastName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Gender" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="DateOfBirth" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Age" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="ContactNumber" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Address" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
-      <Column Name="Gender" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
       <Column Name="AvailableLeaves" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="EmployeeTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MiddleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="HourlyRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="HourlyRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="DailyRequiredHours" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="MonthlySalary" Type="System.Double" DbType="Float NOT NULL" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="SSSID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="PagIbigID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="PhilhealthID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
@@ -80,7 +83,7 @@
       <Column Name="IsSSSActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IsIncomeTaxActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="IsPagibigActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="EmployeeGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Age" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Employee_Leave" Member="Leaves" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Leave" />
       <Association Name="Employee_PayrollDetail" Member="PayrollDetails" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="PayrollDetail" />
       <Association Name="EmployeeType_Employee" Member="EmployeeType" ThisKey="EmployeeTypeID" OtherKey="EmployeeTypesID" Type="EmployeeType" IsForeignKey="true" />
@@ -91,7 +94,8 @@
     <Type Name="EmployeeType">
       <Column Name="EmployeeTypesID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="EmployeeNameTitle" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SalaryRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="HourlyRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DailyRequiredHours" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Association Name="EmployeeType_Employee" Member="Employees" ThisKey="EmployeeTypesID" OtherKey="EmployeeTypeID" Type="Employee" />
     </Type>
   </Table>
