@@ -29,7 +29,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             catch(InvalidOperationException ex) {
                 MessageBox.Show("Payroll Group already exist");
             }
-            
         }
         public void UpdatePayrollGroup() {
             Helper.db.SubmitChanges();

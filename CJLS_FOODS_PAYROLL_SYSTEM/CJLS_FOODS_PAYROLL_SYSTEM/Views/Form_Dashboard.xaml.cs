@@ -49,6 +49,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
                 Frame.Content = new Views.Employee.PayrollGroup();
                 Title.Text = "Employee Groups";
             }
+            else if (tvi.Header.ToString() == "Job Positions")
+            {
+                draweHost.IsLeftDrawerOpen = false;
+                Frame.Content = new Views.Employee.EmployeeTypeList();
+                Title.Text = "Job Positions";
+            }
             else if (tvi.Header.ToString() == "Users") {
                 draweHost.IsLeftDrawerOpen = false;
                 Frame.Content = new Views.Accounts.UserList();

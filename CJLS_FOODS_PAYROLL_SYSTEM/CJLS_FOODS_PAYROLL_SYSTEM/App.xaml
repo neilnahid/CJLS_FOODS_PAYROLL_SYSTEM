@@ -13,6 +13,7 @@
             <VM:PayrollDetailsViewModel x:Key="PayrollDetailsViewModel" />
             <VM:PayrollViewModel x:Key="PayrollViewModel" />
             <VM:PayrollGroupViewModel x:Key="PayrollGroupViewModel" />
+            <VM:EmployeeTypeViewModel x:Key="EmployeeTypeViewModel" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

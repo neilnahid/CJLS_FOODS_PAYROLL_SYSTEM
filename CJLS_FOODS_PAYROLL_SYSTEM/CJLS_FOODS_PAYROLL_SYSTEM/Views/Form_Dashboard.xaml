@@ -20,6 +20,7 @@
                 <TreeView SelectedItemChanged="TreeView_SelectedItemChanged">
                     <TreeViewItem Header="Employees">
                         <TreeViewItem Header="Employee Groups" />
+                        <TreeViewItem Header="Job Positions" />
                         <TreeViewItem Header="Employee List" />
                     </TreeViewItem>
                     <TreeViewItem Header="Attendance" />

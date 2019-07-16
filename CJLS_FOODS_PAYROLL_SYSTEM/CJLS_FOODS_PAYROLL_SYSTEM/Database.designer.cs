@@ -1322,8 +1322,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private System.Nullable<int> _EmployeeGroupID;
 		
-		private System.Nullable<int> _EmployeeTypeID;
-		
 		private string _FirstName;
 		
 		private string _MiddleName;
@@ -1368,6 +1366,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private System.Nullable<int> _Age;
 		
+		private System.Nullable<int> _EmployeeTypeID;
+		
 		private EntitySet<Leave> _Leaves;
 		
 		private EntitySet<PayrollDetail> _PayrollDetails;
@@ -1384,8 +1384,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnEmployeeIDChanged();
     partial void OnEmployeeGroupIDChanging(System.Nullable<int> value);
     partial void OnEmployeeGroupIDChanged();
-    partial void OnEmployeeTypeIDChanging(System.Nullable<int> value);
-    partial void OnEmployeeTypeIDChanged();
     partial void OnFirstNameChanging(string value);
     partial void OnFirstNameChanged();
     partial void OnMiddleNameChanging(string value);
@@ -1430,6 +1428,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnIsPagibigActiveChanged();
     partial void OnAgeChanging(System.Nullable<int> value);
     partial void OnAgeChanged();
+    partial void OnEmployeeTypeIDChanging(System.Nullable<int> value);
+    partial void OnEmployeeTypeIDChanged();
     #endregion
 		
 		public Employee()
@@ -1481,30 +1481,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._EmployeeGroupID = value;
 					this.SendPropertyChanged("EmployeeGroupID");
 					this.OnEmployeeGroupIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", DbType="Int")]
-		public System.Nullable<int> EmployeeTypeID
-		{
-			get
-			{
-				return this._EmployeeTypeID;
-			}
-			set
-			{
-				if ((this._EmployeeTypeID != value))
-				{
-					if (this._EmployeeType.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEmployeeTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._EmployeeTypeID = value;
-					this.SendPropertyChanged("EmployeeTypeID");
-					this.OnEmployeeTypeIDChanged();
 				}
 			}
 		}
@@ -1949,6 +1925,30 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", DbType="Int")]
+		public System.Nullable<int> EmployeeTypeID
+		{
+			get
+			{
+				return this._EmployeeTypeID;
+			}
+			set
+			{
+				if ((this._EmployeeTypeID != value))
+				{
+					if (this._EmployeeType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEmployeeTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._EmployeeTypeID = value;
+					this.SendPropertyChanged("EmployeeTypeID");
+					this.OnEmployeeTypeIDChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_Leave", Storage="_Leaves", ThisKey="EmployeeID", OtherKey="EmployeeID")]
 		public EntitySet<Leave> Leaves
 		{
@@ -1975,7 +1975,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EmployeeType_Employee", Storage="_EmployeeType", ThisKey="EmployeeTypeID", OtherKey="EmployeeTypesID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EmployeeType_Employee", Storage="_EmployeeType", ThisKey="EmployeeTypeID", OtherKey="EmployeeTypeID", IsForeignKey=true)]
 		public EmployeeType EmployeeType
 		{
 			get
@@ -1998,7 +1998,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					if ((value != null))
 					{
 						value.Employees.Add(this);
-						this._EmployeeTypeID = value.EmployeeTypesID;
+						this._EmployeeTypeID = value.EmployeeTypeID;
 					}
 					else
 					{
@@ -2088,19 +2088,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EmployeeTypes")]
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.EmployeeType")]
 	public partial class EmployeeType : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _EmployeeTypesID;
+		private int _EmployeeTypeID;
 		
-		private string _EmployeeNameTitle;
-		
-		private System.Nullable<double> _HourlyRate;
-		
-		private System.Nullable<double> _DailyRequiredHours;
+		private string _Name;
 		
 		private EntitySet<Employee> _Employees;
 		
@@ -2108,14 +2104,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnEmployeeTypesIDChanging(int value);
-    partial void OnEmployeeTypesIDChanged();
-    partial void OnEmployeeNameTitleChanging(string value);
-    partial void OnEmployeeNameTitleChanged();
-    partial void OnHourlyRateChanging(System.Nullable<double> value);
-    partial void OnHourlyRateChanged();
-    partial void OnDailyRequiredHoursChanging(System.Nullable<double> value);
-    partial void OnDailyRequiredHoursChanged();
+    partial void OnEmployeeTypeIDChanging(int value);
+    partial void OnEmployeeTypeIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
     #endregion
 		
 		public EmployeeType()
@@ -2124,87 +2116,47 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypesID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int EmployeeTypesID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int EmployeeTypeID
 		{
 			get
 			{
-				return this._EmployeeTypesID;
+				return this._EmployeeTypeID;
 			}
 			set
 			{
-				if ((this._EmployeeTypesID != value))
+				if ((this._EmployeeTypeID != value))
 				{
-					this.OnEmployeeTypesIDChanging(value);
+					this.OnEmployeeTypeIDChanging(value);
 					this.SendPropertyChanging();
-					this._EmployeeTypesID = value;
-					this.SendPropertyChanged("EmployeeTypesID");
-					this.OnEmployeeTypesIDChanged();
+					this._EmployeeTypeID = value;
+					this.SendPropertyChanged("EmployeeTypeID");
+					this.OnEmployeeTypeIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeNameTitle", DbType="VarChar(50)")]
-		public string EmployeeNameTitle
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
 		{
 			get
 			{
-				return this._EmployeeNameTitle;
+				return this._Name;
 			}
 			set
 			{
-				if ((this._EmployeeNameTitle != value))
+				if ((this._Name != value))
 				{
-					this.OnEmployeeNameTitleChanging(value);
+					this.OnNameChanging(value);
 					this.SendPropertyChanging();
-					this._EmployeeNameTitle = value;
-					this.SendPropertyChanged("EmployeeNameTitle");
-					this.OnEmployeeNameTitleChanged();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourlyRate", DbType="Float")]
-		public System.Nullable<double> HourlyRate
-		{
-			get
-			{
-				return this._HourlyRate;
-			}
-			set
-			{
-				if ((this._HourlyRate != value))
-				{
-					this.OnHourlyRateChanging(value);
-					this.SendPropertyChanging();
-					this._HourlyRate = value;
-					this.SendPropertyChanged("HourlyRate");
-					this.OnHourlyRateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DailyRequiredHours", DbType="Float")]
-		public System.Nullable<double> DailyRequiredHours
-		{
-			get
-			{
-				return this._DailyRequiredHours;
-			}
-			set
-			{
-				if ((this._DailyRequiredHours != value))
-				{
-					this.OnDailyRequiredHoursChanging(value);
-					this.SendPropertyChanging();
-					this._DailyRequiredHours = value;
-					this.SendPropertyChanged("DailyRequiredHours");
-					this.OnDailyRequiredHoursChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EmployeeType_Employee", Storage="_Employees", ThisKey="EmployeeTypesID", OtherKey="EmployeeTypeID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EmployeeType_Employee", Storage="_Employees", ThisKey="EmployeeTypeID", OtherKey="EmployeeTypeID")]
 		public EntitySet<Employee> Employees
 		{
 			get
