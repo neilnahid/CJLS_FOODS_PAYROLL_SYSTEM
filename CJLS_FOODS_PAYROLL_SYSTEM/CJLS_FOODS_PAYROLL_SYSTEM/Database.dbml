@@ -129,6 +129,7 @@
       <Column Name="OvertimePay" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="NetPay" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="GrossPay" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="TotalDays" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="TotalContributions" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="PayrollDetail_Attendance" Member="Attendances" ThisKey="PayrollDetailID" OtherKey="PayrollDetailsID" Type="Attendance" />
       <Association Name="PayrollDetail_Contribution" Member="Contributions" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="Contribution" />

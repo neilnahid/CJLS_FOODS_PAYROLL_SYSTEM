@@ -17,7 +17,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             PayrollRange = GetPayrollRange(); // returns the weeks which contains days starting from payroll startdate to enddate
             AddToAttendances(PayrollRange); // references the attendance object attached to the Day object to the Attendances property
             GetSummaryNumbers();
-            SelectedWeek = new Model.Week(); // instantiate
+            SelectedWeek = new Model.Week(selectedPayrollDetail); // instantiate
             DeductionsTypes = GetDeductionTypes(); // gets deduction types
             Deduction = new Deduction(); // instantiate
             UpdateFlagsOfEveryAttendance(); // instantiate the flags according to the extended attendance's value
@@ -50,7 +50,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
                 return new Model.PayrollRange(PayrollDetail);
             }
             else {
-                return new Model.PayrollRange(Payroll.StartDate, Payroll.EndDate);
+                return new Model.PayrollRange(Payroll.StartDate, Payroll.EndDate,PayrollDetail);
             }
         }
         public void SaveAttendance() {
@@ -107,7 +107,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
 
         #region UpdateFlags Functions
         private void UpdateRegularHoursFlag(Model.ExtendedAttendance a) {
-            if (a.Attendance.RegularHoursWorked >= 8) {
+            if (a.Attendance.RegularHoursWorked >= a.Attendance.PayrollDetail.Employee.DailyRequiredHours) {
                 a.RegularHoursFlag = Visibility.Visible;
                 a.UnderTimeFlag = Visibility.Collapsed;
             }

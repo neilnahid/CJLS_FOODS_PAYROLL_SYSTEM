@@ -2652,6 +2652,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private double _GrossPay;
 		
+		private System.Nullable<int> _TotalDays;
+		
 		private System.Nullable<double> _TotalContributions;
 		
 		private EntitySet<Attendance> _Attendances;
@@ -2684,6 +2686,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnNetPayChanged();
     partial void OnGrossPayChanging(double value);
     partial void OnGrossPayChanged();
+    partial void OnTotalDaysChanging(System.Nullable<int> value);
+    partial void OnTotalDaysChanged();
     partial void OnTotalContributionsChanging(System.Nullable<double> value);
     partial void OnTotalContributionsChanged();
     #endregion
@@ -2881,6 +2885,26 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._GrossPay = value;
 					this.SendPropertyChanged("GrossPay");
 					this.OnGrossPayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalDays", AutoSync=AutoSync.Always, DbType="Int", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> TotalDays
+		{
+			get
+			{
+				return this._TotalDays;
+			}
+			set
+			{
+				if ((this._TotalDays != value))
+				{
+					this.OnTotalDaysChanging(value);
+					this.SendPropertyChanging();
+					this._TotalDays = value;
+					this.SendPropertyChanged("TotalDays");
+					this.OnTotalDaysChanged();
 				}
 			}
 		}

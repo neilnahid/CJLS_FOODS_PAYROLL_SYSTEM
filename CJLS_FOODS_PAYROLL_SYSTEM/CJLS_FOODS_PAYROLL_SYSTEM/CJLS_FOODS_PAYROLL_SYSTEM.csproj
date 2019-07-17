@@ -92,7 +92,7 @@
     <Compile Include="Helper.cs" />
     <Compile Include="Model\Dialog.cs" />
     <Compile Include="Model\ExtendedAttendance.cs" />
-    <Compile Include="Model\Month.cs" />
+    <Compile Include="Model\PayrollRange.cs" />
     <Compile Include="Model\Week.cs" />
     <Compile Include="StaticValues.cs" />
     <Compile Include="View Models\AttendanceViewModel.cs" />

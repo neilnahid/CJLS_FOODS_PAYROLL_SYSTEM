@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using System.Windows;
 namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
     public class Week : ModelPropertyChange {
-        public Week() {
+        public Week(PayrollDetail pd) {
             Days = new ObservableCollection<Model.ExtendedAttendance>();
             for (int i = 0; i < 7; i++) {
-                Days.Add(new ExtendedAttendance() { Attendance = new Attendance { RegularHoursWorked = 8, OverTimeHoursWorked = 0 }, RegularHoursFlag = Visibility.Collapsed, OverTimeHoursFlag = Visibility.Collapsed, DeductionsFlag = Visibility.Collapsed, UnderTimeFlag = Visibility.Collapsed });
+                Days.Add(new ExtendedAttendance() { Attendance = new Attendance {PayrollDetail = pd, RegularHoursWorked = pd.Employee.DailyRequiredHours, OverTimeHoursWorked = 0 }, RegularHoursFlag = Visibility.Collapsed, OverTimeHoursFlag = Visibility.Collapsed, DeductionsFlag = Visibility.Collapsed, UnderTimeFlag = Visibility.Collapsed });
             }
         }
         public Week(List<Attendance> attendances) {

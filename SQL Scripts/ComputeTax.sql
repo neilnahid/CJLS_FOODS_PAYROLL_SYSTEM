@@ -40,3 +40,5 @@ if @DeductedMonthlySalary >= 666667
 
 return round(((@DeductedMonthlySalary-@CLAmount)*@TaxPercentRate+@Total)/@AverageWorkDaysAMonth*@TotalDays,2);
 end
+
+select dbo.ComputeTax(28688,21.75,22)
