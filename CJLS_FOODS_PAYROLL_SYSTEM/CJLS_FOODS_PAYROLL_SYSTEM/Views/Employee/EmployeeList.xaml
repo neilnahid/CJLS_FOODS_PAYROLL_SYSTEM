@@ -11,7 +11,7 @@
     d:DesignWidth="800"
     DataContext="{StaticResource EmployeeViewModel}"
     mc:Ignorable="d">
-    <materialDesign:DialogHost x:Name="dialogHost">
+    <materialDesign:DialogHost x:Name="dialogHost" IsOpen="True">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="50">
                 <TextBlock
@@ -86,6 +86,7 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <ComboBox
                             Grid.Column="0"
@@ -107,8 +108,23 @@
                             materialDesign:HintAssist.Hint="Daily Required Hours"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.DailyRequiredHours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBox
+                        <ComboBox
                             Grid.Column="3"
+                            Margin="0,0,15,0"
+                            materialDesign:HintAssist.Hint="Weekly Required Working Days"
+                            SelectedIndex="{Binding Employee.RequiredDaysAWeek, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                            <ComboBoxItem Visibility="Hidden" />
+                            <ComboBoxItem Content="1" />
+                            <ComboBoxItem Content="2" />
+                            <ComboBoxItem Content="3" />
+                            <ComboBoxItem Content="4" />
+                            <ComboBoxItem Content="5" />
+                            <ComboBoxItem Content="6" />
+
+                        </ComboBox>
+                        <TextBox
+                            Grid.Column="4"
                             materialDesign:HintAssist.Hint="Monthly Salary (Read Only)"
                             IsReadOnly="True"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"

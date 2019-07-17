@@ -1,4 +1,4 @@
-create function dbo.ComputeTax(@DeductedMonthlySalary float,@TotalDays float)
+create function dbo.ComputeTax(@DeductedMonthlySalary float, @AverageWorkDaysAMonth float,@TotalDays float)
 returns float
 as
 begin
@@ -38,5 +38,5 @@ if @DeductedMonthlySalary >= 666667
 	set @CLAmount = 666667;
 	end
 
-return ((@DeductedMonthlySalary-@CLAmount)*@TaxPercentRate+@Total)/30*@TotalDays;
+return round(((@DeductedMonthlySalary-@CLAmount)*@TaxPercentRate+@Total)/@AverageWorkDaysAMonth*@TotalDays,2);
 end

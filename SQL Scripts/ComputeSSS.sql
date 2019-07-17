@@ -17,5 +17,5 @@ ELSE
 				set @MSC = round(@MonthlySalary/500,0)*500 -- round off by 500 to get to nearest MSC
 			END
 	END
-return @MSC*@SSSRATE/30.0*@TotalDays
+return @MSC*@SSSRATE/30*@TotalDays
 END

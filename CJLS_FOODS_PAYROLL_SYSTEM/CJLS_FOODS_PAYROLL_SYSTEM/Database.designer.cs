@@ -1320,9 +1320,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private int _EmployeeID;
 		
-		private System.Nullable<int> _EmployeeGroupID;
+		private int _EmployeeGroupID;
 		
-		private System.Nullable<int> _EmployeeTypeID;
+		private int _EmployeeTypeID;
 		
 		private string _FirstName;
 		
@@ -1332,19 +1332,23 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private string _Gender;
 		
-		private System.Nullable<System.DateTime> _DateOfBirth;
+		private System.DateTime _DateOfBirth;
+		
+		private System.Nullable<int> _Age;
 		
 		private string _ContactNumber;
 		
 		private string _Address;
 		
-		private System.Nullable<int> _AvailableLeaves;
+		private int _AvailableLeaves;
 		
 		private double _HourlyRate;
 		
-		private double _DailyRequiredHours;
+		private int _DailyRequiredHours;
 		
-		private double _MonthlySalary;
+		private int _RequiredDaysAWeek;
+		
+		private System.Nullable<double> _MonthlySalary;
 		
 		private string _SSSID;
 		
@@ -1358,15 +1362,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private string _Status;
 		
-		private System.Nullable<bool> _IsPhilhealthActive;
+		private bool _IsPhilhealthActive;
 		
-		private System.Nullable<bool> _IsSSSActive;
+		private bool _IsSSSActive;
 		
-		private System.Nullable<bool> _IsIncomeTaxActive;
+		private bool _IsIncomeTaxActive;
 		
-		private System.Nullable<bool> _IsPagibigActive;
-		
-		private System.Nullable<int> _Age;
+		private bool _IsPagibigActive;
 		
 		private EntitySet<Leave> _Leaves;
 		
@@ -1382,9 +1384,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnCreated();
     partial void OnEmployeeIDChanging(int value);
     partial void OnEmployeeIDChanged();
-    partial void OnEmployeeGroupIDChanging(System.Nullable<int> value);
+    partial void OnEmployeeGroupIDChanging(int value);
     partial void OnEmployeeGroupIDChanged();
-    partial void OnEmployeeTypeIDChanging(System.Nullable<int> value);
+    partial void OnEmployeeTypeIDChanging(int value);
     partial void OnEmployeeTypeIDChanged();
     partial void OnFirstNameChanging(string value);
     partial void OnFirstNameChanged();
@@ -1394,19 +1396,23 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnLastNameChanged();
     partial void OnGenderChanging(string value);
     partial void OnGenderChanged();
-    partial void OnDateOfBirthChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateOfBirthChanging(System.DateTime value);
     partial void OnDateOfBirthChanged();
+    partial void OnAgeChanging(System.Nullable<int> value);
+    partial void OnAgeChanged();
     partial void OnContactNumberChanging(string value);
     partial void OnContactNumberChanged();
     partial void OnAddressChanging(string value);
     partial void OnAddressChanged();
-    partial void OnAvailableLeavesChanging(System.Nullable<int> value);
+    partial void OnAvailableLeavesChanging(int value);
     partial void OnAvailableLeavesChanged();
     partial void OnHourlyRateChanging(double value);
     partial void OnHourlyRateChanged();
-    partial void OnDailyRequiredHoursChanging(double value);
+    partial void OnDailyRequiredHoursChanging(int value);
     partial void OnDailyRequiredHoursChanged();
-    partial void OnMonthlySalaryChanging(double value);
+    partial void OnRequiredDaysAWeekChanging(int value);
+    partial void OnRequiredDaysAWeekChanged();
+    partial void OnMonthlySalaryChanging(System.Nullable<double> value);
     partial void OnMonthlySalaryChanged();
     partial void OnSSSIDChanging(string value);
     partial void OnSSSIDChanged();
@@ -1420,16 +1426,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnBranchChanged();
     partial void OnStatusChanging(string value);
     partial void OnStatusChanged();
-    partial void OnIsPhilhealthActiveChanging(System.Nullable<bool> value);
+    partial void OnIsPhilhealthActiveChanging(bool value);
     partial void OnIsPhilhealthActiveChanged();
-    partial void OnIsSSSActiveChanging(System.Nullable<bool> value);
+    partial void OnIsSSSActiveChanging(bool value);
     partial void OnIsSSSActiveChanged();
-    partial void OnIsIncomeTaxActiveChanging(System.Nullable<bool> value);
+    partial void OnIsIncomeTaxActiveChanging(bool value);
     partial void OnIsIncomeTaxActiveChanged();
-    partial void OnIsPagibigActiveChanging(System.Nullable<bool> value);
+    partial void OnIsPagibigActiveChanging(bool value);
     partial void OnIsPagibigActiveChanged();
-    partial void OnAgeChanging(System.Nullable<int> value);
-    partial void OnAgeChanged();
     #endregion
 		
 		public Employee()
@@ -1461,8 +1465,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeGroupID", DbType="Int")]
-		public System.Nullable<int> EmployeeGroupID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeGroupID", DbType="Int NOT NULL")]
+		public int EmployeeGroupID
 		{
 			get
 			{
@@ -1485,8 +1489,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", DbType="Int")]
-		public System.Nullable<int> EmployeeTypeID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", DbType="Int NOT NULL")]
+		public int EmployeeTypeID
 		{
 			get
 			{
@@ -1509,7 +1513,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string FirstName
 		{
 			get
@@ -1529,7 +1533,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string MiddleName
 		{
 			get
@@ -1549,7 +1553,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string LastName
 		{
 			get
@@ -1569,7 +1573,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="VarChar(25)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
 		public string Gender
 		{
 			get
@@ -1589,8 +1593,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOfBirth", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DateOfBirth
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOfBirth", DbType="DateTime NOT NULL")]
+		public System.DateTime DateOfBirth
 		{
 			get
 			{
@@ -1609,7 +1613,27 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactNumber", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Age", AutoSync=AutoSync.Always, DbType="Int", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<int> Age
+		{
+			get
+			{
+				return this._Age;
+			}
+			set
+			{
+				if ((this._Age != value))
+				{
+					this.OnAgeChanging(value);
+					this.SendPropertyChanging();
+					this._Age = value;
+					this.SendPropertyChanged("Age");
+					this.OnAgeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactNumber", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string ContactNumber
 		{
 			get
@@ -1629,7 +1653,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(255)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
 		public string Address
 		{
 			get
@@ -1649,8 +1673,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AvailableLeaves", DbType="Int")]
-		public System.Nullable<int> AvailableLeaves
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AvailableLeaves", DbType="Int NOT NULL")]
+		public int AvailableLeaves
 		{
 			get
 			{
@@ -1689,8 +1713,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DailyRequiredHours", DbType="Float NOT NULL")]
-		public double DailyRequiredHours
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DailyRequiredHours", DbType="Int NOT NULL")]
+		public int DailyRequiredHours
 		{
 			get
 			{
@@ -1709,8 +1733,28 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MonthlySalary", AutoSync=AutoSync.Always, DbType="Float NOT NULL", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public double MonthlySalary
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequiredDaysAWeek", DbType="Int NOT NULL")]
+		public int RequiredDaysAWeek
+		{
+			get
+			{
+				return this._RequiredDaysAWeek;
+			}
+			set
+			{
+				if ((this._RequiredDaysAWeek != value))
+				{
+					this.OnRequiredDaysAWeekChanging(value);
+					this.SendPropertyChanging();
+					this._RequiredDaysAWeek = value;
+					this.SendPropertyChanged("RequiredDaysAWeek");
+					this.OnRequiredDaysAWeekChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MonthlySalary", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> MonthlySalary
 		{
 			get
 			{
@@ -1829,7 +1873,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string Status
 		{
 			get
@@ -1849,8 +1893,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPhilhealthActive", DbType="Bit")]
-		public System.Nullable<bool> IsPhilhealthActive
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPhilhealthActive", DbType="Bit NOT NULL")]
+		public bool IsPhilhealthActive
 		{
 			get
 			{
@@ -1869,8 +1913,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSSSActive", DbType="Bit")]
-		public System.Nullable<bool> IsSSSActive
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSSSActive", DbType="Bit NOT NULL")]
+		public bool IsSSSActive
 		{
 			get
 			{
@@ -1889,8 +1933,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsIncomeTaxActive", DbType="Bit")]
-		public System.Nullable<bool> IsIncomeTaxActive
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsIncomeTaxActive", DbType="Bit NOT NULL")]
+		public bool IsIncomeTaxActive
 		{
 			get
 			{
@@ -1909,8 +1953,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPagibigActive", DbType="Bit")]
-		public System.Nullable<bool> IsPagibigActive
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPagibigActive", DbType="Bit NOT NULL")]
+		public bool IsPagibigActive
 		{
 			get
 			{
@@ -1925,26 +1969,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._IsPagibigActive = value;
 					this.SendPropertyChanged("IsPagibigActive");
 					this.OnIsPagibigActiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Age", AutoSync=AutoSync.Always, DbType="Int", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> Age
-		{
-			get
-			{
-				return this._Age;
-			}
-			set
-			{
-				if ((this._Age != value))
-				{
-					this.OnAgeChanging(value);
-					this.SendPropertyChanging();
-					this._Age = value;
-					this.SendPropertyChanged("Age");
-					this.OnAgeChanged();
 				}
 			}
 		}
@@ -2002,7 +2026,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					}
 					else
 					{
-						this._EmployeeTypeID = default(Nullable<int>);
+						this._EmployeeTypeID = default(int);
 					}
 					this.SendPropertyChanged("EmployeeType");
 				}
@@ -2036,7 +2060,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					}
 					else
 					{
-						this._EmployeeGroupID = default(Nullable<int>);
+						this._EmployeeGroupID = default(int);
 					}
 					this.SendPropertyChanged("PayrollGroup");
 				}

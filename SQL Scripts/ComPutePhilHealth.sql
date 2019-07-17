@@ -1,4 +1,4 @@
-CREATE FUNCTION dbo.ComputePhilHealth(@MonthlySalary float, @TotalDays float)
+CREATE FUNCTION dbo.ComputePhilHealth(@MonthlySalary float, @AverageWorkDaysAMonth float, @TotalDays float)
 RETURNS FLOAT
 AS
 BEGIN
@@ -11,5 +11,5 @@ BEGIN
 END
 declare @PhilHealthRate float;
 set @PhilHealthRate = (select PercentageRate from ContributionType where Name='PhilHealth')
-return @MonthlySalary*@PhilHealthRate/2/30*@TotalDays
+return round(@MonthlySalary*@PhilHealthRate/2/@AverageWorkDaysAMonth*@TotalDays,2)
 END

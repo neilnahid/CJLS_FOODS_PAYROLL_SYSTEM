@@ -1,4 +1,4 @@
-create function dbo.ComputePagIBIG(@MonthlySalary float, @TotalDays float)
+create function dbo.ComputePagIBIG(@MonthlySalary float, @AverageWorkDaysAMonth float, @TotalDays float)
 returns float
 as
 BEGIN
@@ -10,5 +10,5 @@ ELSE
 	set @PAGIBIGRate=0.02
 IF @MonthlySalary > 5000
 	set @MonthlySalary = 5000
-return @MonthlySalary*@PAGIBIGRate/30*@TotalDays
+return round(@MonthlySalary*@PAGIBIGRate/@AverageWorkDaysAMonth*@TotalDays,2)
 END
