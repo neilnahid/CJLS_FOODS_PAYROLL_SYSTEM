@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CJLSFOODSPAYROLL" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=NEIL\SQLEXPRESS;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True" SettingsObjectName="CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings" SettingsPropertyName="CJLSFOODSPAYROLLConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=NEIL2;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True" SettingsObjectName="CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings" SettingsPropertyName="CJLSFOODSPAYROLLConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Attendance" Member="Attendances">
     <Type Name="Attendance">
       <Column Name="AttendanceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -129,8 +129,8 @@
       <Column Name="OvertimePay" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="NetPay" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="GrossPay" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
-      <Column Name="TotalDays" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="TotalContributions" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TotalDays" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="PayrollDetail_Attendance" Member="Attendances" ThisKey="PayrollDetailID" OtherKey="PayrollDetailsID" Type="Attendance" />
       <Association Name="PayrollDetail_Contribution" Member="Contributions" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="Contribution" />
       <Association Name="Employee_PayrollDetail" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />

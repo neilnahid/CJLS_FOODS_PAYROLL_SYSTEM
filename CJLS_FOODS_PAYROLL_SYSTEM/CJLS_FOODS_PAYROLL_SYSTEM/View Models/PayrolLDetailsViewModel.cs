@@ -76,7 +76,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         }
         private void ComputeNetPayOf(PayrollDetail pd)
         {
-            pd.NetPay = pd.GrossPay - pd.TotalDeductions - pd.TotalContributions.Value;
+            pd.NetPay = pd.GrossPay - pd.TotalDeductions - (pd.TotalContributions.HasValue?pd.TotalContributions.Value:0);
         }
         private double ComputeOverTimePayOf(PayrollDetail pd)
         {

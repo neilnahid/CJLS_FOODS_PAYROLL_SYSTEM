@@ -56,6 +56,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         public void SaveAttendance() {
             AddToAttendances(PayrollRange);
             GetSummaryNumbers();
+            PayrollDetail.Attendances = new System.Data.Linq.EntitySet<Attendance>();
             PayrollDetail.Attendances.AddRange(Attendances);
             Helper.db.SubmitChanges();
         }
