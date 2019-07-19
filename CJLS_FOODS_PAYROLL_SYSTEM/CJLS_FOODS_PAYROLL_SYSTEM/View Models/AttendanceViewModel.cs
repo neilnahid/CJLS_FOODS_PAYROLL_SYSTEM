@@ -17,7 +17,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             PayrollRange = GetPayrollRange(); // returns the weeks which contains days starting from payroll startdate to enddate
             AddToAttendances(PayrollRange); // references the attendance object attached to the Day object to the Attendances property
             GetSummaryNumbers();
-            SelectedWeek = new Model.Week(selectedPayrollDetail); // instantiate
+            SelectedWeek = new Model.Week(); // instantiate
             DeductionsTypes = GetDeductionTypes(); // gets deduction types
             Deduction = new Deduction(); // instantiate
             UpdateFlagsOfEveryAttendance(); // instantiate the flags according to the extended attendance's value
@@ -54,6 +54,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             }
         }
         public void SaveAttendance() {
+            Attendances = new List<Attendance>();
             AddToAttendances(PayrollRange);
             GetSummaryNumbers();
             PayrollDetail.Attendances = new System.Data.Linq.EntitySet<Attendance>();

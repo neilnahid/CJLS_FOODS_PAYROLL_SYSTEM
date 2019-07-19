@@ -8,7 +8,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
     public class PayrollRange : ModelPropertyChange {
         public PayrollRange(PayrollDetail payrollDetails) {
             Weeks = new List<Week>();
-            Weeks.Add(new Week(payrollDetails));
+            Weeks.Add(new Week());
             int weekCounter = 0;
             //assign each attendance to their corresponding dayofweek
             foreach(var a in payrollDetails.Attendances) {
@@ -16,7 +16,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
                 currentDay.Attendance = a;
                 if(a.AttendanceDate.Value.DayOfWeek == DayOfWeek.Saturday) {
                     weekCounter++;
-                    Weeks.Add(new Week(payrollDetails));
+                    Weeks.Add(new Week());
                 }
             }
         }
