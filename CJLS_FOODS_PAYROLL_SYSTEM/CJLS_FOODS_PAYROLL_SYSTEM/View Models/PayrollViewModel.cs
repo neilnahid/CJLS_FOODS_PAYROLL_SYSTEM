@@ -31,6 +31,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         public void FetchPayrollGroups() {
             PayrollGroups = (from pg in Helper.db.PayrollGroups select pg).ToList();
         }
+
         #endregion
     }
 }

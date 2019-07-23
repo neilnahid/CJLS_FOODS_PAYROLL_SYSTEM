@@ -12,11 +12,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
             int weekCounter = 0;
             //assign each attendance to their corresponding dayofweek
             foreach(var a in payrollDetails.Attendances) {
-                var currentDay = Weeks[weekCounter].Days[(int)a.AttendanceDate.Value.DayOfWeek];
-                currentDay.Attendance = a;
-                if(a.AttendanceDate.Value.DayOfWeek == DayOfWeek.Saturday) {
-                    weekCounter++;
-                    Weeks.Add(new Week());
+                if (a.AttendanceDate.HasValue)
+                {
+                    var currentDay = Weeks[weekCounter].Days[(int)a.AttendanceDate.Value.DayOfWeek];
+                    currentDay.Attendance = a;
+                    if (a.AttendanceDate.Value.DayOfWeek == DayOfWeek.Saturday)
+                    {
+                        weekCounter++;
+                        Weeks.Add(new Week());
+                    }
                 }
             }
         }

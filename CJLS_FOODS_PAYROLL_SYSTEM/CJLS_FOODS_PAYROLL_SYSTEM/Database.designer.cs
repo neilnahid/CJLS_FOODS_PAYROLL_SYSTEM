@@ -2640,21 +2640,21 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private System.Nullable<int> _EmployeeID;
 		
-		private double _TotalDeductions;
-		
-		private double _TotalRegularHours;
-		
-		private double _TotalOverTimeHours;
-		
-		private double _OvertimePay;
-		
-		private double _NetPay;
-		
-		private double _GrossPay;
-		
 		private System.Nullable<int> _TotalDays;
 		
 		private System.Nullable<double> _TotalContributions;
+		
+		private System.Nullable<double> _GrossPay;
+		
+		private System.Nullable<double> _TotalRegularHours;
+		
+		private System.Nullable<double> _OvertimePay;
+		
+		private System.Nullable<double> _TotalDeductions;
+		
+		private System.Nullable<double> _TotalOverTimeHours;
+		
+		private System.Nullable<double> _NetPay;
 		
 		private EntitySet<Attendance> _Attendances;
 		
@@ -2674,22 +2674,22 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnPayrollIDChanged();
     partial void OnEmployeeIDChanging(System.Nullable<int> value);
     partial void OnEmployeeIDChanged();
-    partial void OnTotalDeductionsChanging(double value);
-    partial void OnTotalDeductionsChanged();
-    partial void OnTotalRegularHoursChanging(double value);
-    partial void OnTotalRegularHoursChanged();
-    partial void OnTotalOverTimeHoursChanging(double value);
-    partial void OnTotalOverTimeHoursChanged();
-    partial void OnOvertimePayChanging(double value);
-    partial void OnOvertimePayChanged();
-    partial void OnNetPayChanging(double value);
-    partial void OnNetPayChanged();
-    partial void OnGrossPayChanging(double value);
-    partial void OnGrossPayChanged();
     partial void OnTotalDaysChanging(System.Nullable<int> value);
     partial void OnTotalDaysChanged();
     partial void OnTotalContributionsChanging(System.Nullable<double> value);
     partial void OnTotalContributionsChanged();
+    partial void OnGrossPayChanging(System.Nullable<double> value);
+    partial void OnGrossPayChanged();
+    partial void OnTotalRegularHoursChanging(System.Nullable<double> value);
+    partial void OnTotalRegularHoursChanged();
+    partial void OnOvertimePayChanging(System.Nullable<double> value);
+    partial void OnOvertimePayChanged();
+    partial void OnTotalDeductionsChanging(System.Nullable<double> value);
+    partial void OnTotalDeductionsChanged();
+    partial void OnTotalOverTimeHoursChanging(System.Nullable<double> value);
+    partial void OnTotalOverTimeHoursChanged();
+    partial void OnNetPayChanging(System.Nullable<double> value);
+    partial void OnNetPayChanged();
     #endregion
 		
 		public PayrollDetail()
@@ -2769,126 +2769,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalDeductions", DbType="Float NOT NULL")]
-		public double TotalDeductions
-		{
-			get
-			{
-				return this._TotalDeductions;
-			}
-			set
-			{
-				if ((this._TotalDeductions != value))
-				{
-					this.OnTotalDeductionsChanging(value);
-					this.SendPropertyChanging();
-					this._TotalDeductions = value;
-					this.SendPropertyChanged("TotalDeductions");
-					this.OnTotalDeductionsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalRegularHours", DbType="Float NOT NULL")]
-		public double TotalRegularHours
-		{
-			get
-			{
-				return this._TotalRegularHours;
-			}
-			set
-			{
-				if ((this._TotalRegularHours != value))
-				{
-					this.OnTotalRegularHoursChanging(value);
-					this.SendPropertyChanging();
-					this._TotalRegularHours = value;
-					this.SendPropertyChanged("TotalRegularHours");
-					this.OnTotalRegularHoursChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalOverTimeHours", DbType="Float NOT NULL")]
-		public double TotalOverTimeHours
-		{
-			get
-			{
-				return this._TotalOverTimeHours;
-			}
-			set
-			{
-				if ((this._TotalOverTimeHours != value))
-				{
-					this.OnTotalOverTimeHoursChanging(value);
-					this.SendPropertyChanging();
-					this._TotalOverTimeHours = value;
-					this.SendPropertyChanged("TotalOverTimeHours");
-					this.OnTotalOverTimeHoursChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OvertimePay", DbType="Float NOT NULL")]
-		public double OvertimePay
-		{
-			get
-			{
-				return this._OvertimePay;
-			}
-			set
-			{
-				if ((this._OvertimePay != value))
-				{
-					this.OnOvertimePayChanging(value);
-					this.SendPropertyChanging();
-					this._OvertimePay = value;
-					this.SendPropertyChanged("OvertimePay");
-					this.OnOvertimePayChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NetPay", DbType="Float NOT NULL")]
-		public double NetPay
-		{
-			get
-			{
-				return this._NetPay;
-			}
-			set
-			{
-				if ((this._NetPay != value))
-				{
-					this.OnNetPayChanging(value);
-					this.SendPropertyChanging();
-					this._NetPay = value;
-					this.SendPropertyChanged("NetPay");
-					this.OnNetPayChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrossPay", DbType="Float NOT NULL")]
-		public double GrossPay
-		{
-			get
-			{
-				return this._GrossPay;
-			}
-			set
-			{
-				if ((this._GrossPay != value))
-				{
-					this.OnGrossPayChanging(value);
-					this.SendPropertyChanging();
-					this._GrossPay = value;
-					this.SendPropertyChanged("GrossPay");
-					this.OnGrossPayChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalDays", AutoSync=AutoSync.Always, DbType="Int", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<int> TotalDays
 		{
@@ -2925,6 +2805,126 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._TotalContributions = value;
 					this.SendPropertyChanged("TotalContributions");
 					this.OnTotalContributionsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GrossPay", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> GrossPay
+		{
+			get
+			{
+				return this._GrossPay;
+			}
+			set
+			{
+				if ((this._GrossPay != value))
+				{
+					this.OnGrossPayChanging(value);
+					this.SendPropertyChanging();
+					this._GrossPay = value;
+					this.SendPropertyChanged("GrossPay");
+					this.OnGrossPayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalRegularHours", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> TotalRegularHours
+		{
+			get
+			{
+				return this._TotalRegularHours;
+			}
+			set
+			{
+				if ((this._TotalRegularHours != value))
+				{
+					this.OnTotalRegularHoursChanging(value);
+					this.SendPropertyChanging();
+					this._TotalRegularHours = value;
+					this.SendPropertyChanged("TotalRegularHours");
+					this.OnTotalRegularHoursChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_OvertimePay", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> OvertimePay
+		{
+			get
+			{
+				return this._OvertimePay;
+			}
+			set
+			{
+				if ((this._OvertimePay != value))
+				{
+					this.OnOvertimePayChanging(value);
+					this.SendPropertyChanging();
+					this._OvertimePay = value;
+					this.SendPropertyChanged("OvertimePay");
+					this.OnOvertimePayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalDeductions", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> TotalDeductions
+		{
+			get
+			{
+				return this._TotalDeductions;
+			}
+			set
+			{
+				if ((this._TotalDeductions != value))
+				{
+					this.OnTotalDeductionsChanging(value);
+					this.SendPropertyChanging();
+					this._TotalDeductions = value;
+					this.SendPropertyChanged("TotalDeductions");
+					this.OnTotalDeductionsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalOverTimeHours", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> TotalOverTimeHours
+		{
+			get
+			{
+				return this._TotalOverTimeHours;
+			}
+			set
+			{
+				if ((this._TotalOverTimeHours != value))
+				{
+					this.OnTotalOverTimeHoursChanging(value);
+					this.SendPropertyChanging();
+					this._TotalOverTimeHours = value;
+					this.SendPropertyChanged("TotalOverTimeHours");
+					this.OnTotalOverTimeHoursChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NetPay", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> NetPay
+		{
+			get
+			{
+				return this._NetPay;
+			}
+			set
+			{
+				if ((this._NetPay != value))
+				{
+					this.OnNetPayChanging(value);
+					this.SendPropertyChanging();
+					this._NetPay = value;
+					this.SendPropertyChanged("NetPay");
+					this.OnNetPayChanged();
 				}
 			}
 		}

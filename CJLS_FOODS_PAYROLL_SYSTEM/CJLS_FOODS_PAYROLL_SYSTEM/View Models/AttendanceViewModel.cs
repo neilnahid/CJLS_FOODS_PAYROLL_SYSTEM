@@ -14,6 +14,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             Attendances = new List<Attendance>(); //instantiates attendances
             Payroll = payroll;
             PayrollDetail = selectedPayrollDetail;
+            PayrollRange = new Model.PayrollRange();
             PayrollRange = GetPayrollRange(); // returns the weeks which contains days starting from payroll startdate to enddate
             AddToAttendances(PayrollRange); // references the attendance object attached to the Day object to the Attendances property
             GetSummaryNumbers();
@@ -46,7 +47,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
 
         #region Methods/Functions
         public Model.PayrollRange GetPayrollRange() {
-            if (PayrollDetail.Attendances.Count > 0) {
+            if (PayrollDetail.Attendances.Count > 0 && PayrollDetail.Attendances[0].AttendanceDate.HasValue) {
                 return new Model.PayrollRange(PayrollDetail);
             }
             else {
@@ -84,6 +85,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             }
         }
         public void AddToAttendances(Model.PayrollRange pr) {
+            Attendances = new List<Attendance>();
             foreach (var w in pr.Weeks) {
                 foreach (var d in w.Days) {
                     if (d.Attendance.AttendanceDate != null) {
