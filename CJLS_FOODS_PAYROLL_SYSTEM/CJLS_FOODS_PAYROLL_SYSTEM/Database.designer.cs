@@ -2642,8 +2642,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private System.Nullable<int> _TotalDays;
 		
-		private System.Nullable<double> _TotalContributions;
-		
 		private System.Nullable<double> _GrossPay;
 		
 		private System.Nullable<double> _TotalRegularHours;
@@ -2655,6 +2653,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		private System.Nullable<double> _TotalOverTimeHours;
 		
 		private System.Nullable<double> _NetPay;
+		
+		private System.Nullable<double> _TotalContributions;
 		
 		private EntitySet<Attendance> _Attendances;
 		
@@ -2676,8 +2676,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnEmployeeIDChanged();
     partial void OnTotalDaysChanging(System.Nullable<int> value);
     partial void OnTotalDaysChanged();
-    partial void OnTotalContributionsChanging(System.Nullable<double> value);
-    partial void OnTotalContributionsChanged();
     partial void OnGrossPayChanging(System.Nullable<double> value);
     partial void OnGrossPayChanged();
     partial void OnTotalRegularHoursChanging(System.Nullable<double> value);
@@ -2690,6 +2688,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnTotalOverTimeHoursChanged();
     partial void OnNetPayChanging(System.Nullable<double> value);
     partial void OnNetPayChanged();
+    partial void OnTotalContributionsChanging(System.Nullable<double> value);
+    partial void OnTotalContributionsChanged();
     #endregion
 		
 		public PayrollDetail()
@@ -2785,26 +2785,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._TotalDays = value;
 					this.SendPropertyChanged("TotalDays");
 					this.OnTotalDaysChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalContributions", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<double> TotalContributions
-		{
-			get
-			{
-				return this._TotalContributions;
-			}
-			set
-			{
-				if ((this._TotalContributions != value))
-				{
-					this.OnTotalContributionsChanging(value);
-					this.SendPropertyChanging();
-					this._TotalContributions = value;
-					this.SendPropertyChanged("TotalContributions");
-					this.OnTotalContributionsChanged();
 				}
 			}
 		}
@@ -2925,6 +2905,26 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._NetPay = value;
 					this.SendPropertyChanged("NetPay");
 					this.OnNetPayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalContributions", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> TotalContributions
+		{
+			get
+			{
+				return this._TotalContributions;
+			}
+			set
+			{
+				if ((this._TotalContributions != value))
+				{
+					this.OnTotalContributionsChanging(value);
+					this.SendPropertyChanging();
+					this._TotalContributions = value;
+					this.SendPropertyChanged("TotalContributions");
+					this.OnTotalContributionsChanged();
 				}
 			}
 		}

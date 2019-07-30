@@ -19,13 +19,15 @@
             <StackPanel>
                 <TreeView SelectedItemChanged="TreeView_SelectedItemChanged">
                     <TreeViewItem Header="Employees">
+                        <TreeViewItem Header="Employee List" />
                         <TreeViewItem Header="Employee Groups" />
                         <TreeViewItem Header="Job Positions" />
-                        <TreeViewItem Header="Employee List" />
+                        <TreeViewItem Header="Leave" />
                     </TreeViewItem>
                     <TreeViewItem Header="Attendance" />
                     <TreeViewItem Header="Payroll" />
                     <TreeViewItem Header="Users" />
+                    <TreeViewItem Header="New Page" />
                 </TreeView>
             </StackPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>

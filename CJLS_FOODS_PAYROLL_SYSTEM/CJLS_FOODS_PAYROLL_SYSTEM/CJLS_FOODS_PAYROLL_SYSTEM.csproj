@@ -97,6 +97,7 @@
     <Compile Include="StaticValues.cs" />
     <Compile Include="View Models\AttendanceViewModel.cs" />
     <Compile Include="View Models\EmployeeTypeViewModel.cs" />
+    <Compile Include="View Models\LeaveViewModel.cs" />
     <Compile Include="View Models\PayrollGroupViewModel.cs" />
     <Compile Include="View Models\EmployeeViewModel.cs" />
     <Compile Include="Model\ModelPropertyChanged.cs" />
@@ -128,6 +129,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Employee\Leave.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employee\Page1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Employee\PayrollGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -156,6 +165,12 @@
     <Compile Include="View Models\MainDashboardViewModel.cs" />
     <Compile Include="Views\Employee\EmployeeTypeList.xaml.cs">
       <DependentUpon>EmployeeTypeList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\Leave.xaml.cs">
+      <DependentUpon>Leave.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\Page1.xaml.cs">
+      <DependentUpon>Page1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\PayrollGroup.xaml.cs">
       <DependentUpon>PayrollGroup.xaml</DependentUpon>

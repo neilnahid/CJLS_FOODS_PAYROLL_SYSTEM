@@ -45,6 +45,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
         }
 
         private void Btn_createNewEmployee_Click(object sender, RoutedEventArgs e) {
+            VM.Employee = new CJLS_FOODS_PAYROLL_SYSTEM.Employee();
             DialogHeader.Text = "Create New Employee";
             btn_dialogConfirm.Content = "CREATE";
         }
