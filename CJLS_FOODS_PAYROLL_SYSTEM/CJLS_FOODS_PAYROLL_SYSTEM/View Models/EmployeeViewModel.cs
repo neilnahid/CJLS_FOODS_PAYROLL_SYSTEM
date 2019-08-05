@@ -40,6 +40,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         }
         public void CreateNewEmployee() {
             Helper.db.Employees.InsertOnSubmit(Employee);
+            Employee.Status = "Active";
             Employees.Add(Employee);
             Helper.db.SubmitChanges();
             MessageBox.Show("Successfully created new employee");

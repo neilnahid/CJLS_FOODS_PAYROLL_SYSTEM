@@ -157,8 +157,9 @@
                             SelectedItem="{Binding Employee.PayrollGroup}"
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                         <ComboBox
+                            x:Name="cmbbox_EmploymentStatus"
                             Grid.Column="3"
-                            materialDesign:HintAssist.Hint="Employement Status"
+                            materialDesign:HintAssist.Hint="Employment Status"
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                             Text="{Binding Employee.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <ComboBoxItem Content="Active" />

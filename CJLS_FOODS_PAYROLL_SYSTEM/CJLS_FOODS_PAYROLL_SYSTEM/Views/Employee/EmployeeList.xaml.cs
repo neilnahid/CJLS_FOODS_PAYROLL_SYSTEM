@@ -35,6 +35,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
         private void Btn_Edit_Click(object sender, RoutedEventArgs e) {
             DialogHeader.Text = "Update Employee";
             btn_dialogConfirm.Content = "UPDATE";
+            cmbbox_EmploymentStatus.IsEnabled = true;
             VM.UpdateEmployee();
         }
 
@@ -46,7 +47,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
 
         private void Btn_createNewEmployee_Click(object sender, RoutedEventArgs e) {
             VM.Employee = new CJLS_FOODS_PAYROLL_SYSTEM.Employee();
+            VM.Employee.Status = "Active";
             DialogHeader.Text = "Create New Employee";
+            cmbbox_EmploymentStatus.IsEnabled = false;
             btn_dialogConfirm.Content = "CREATE";
         }
     }

@@ -23,7 +23,6 @@
                 <ComboBox
                     Grid.Column="1"
                     materialDesign:HintAssist.Hint="Approval Status"
-                    ItemsSource=""
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                     Text="{Binding Employee.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBox
