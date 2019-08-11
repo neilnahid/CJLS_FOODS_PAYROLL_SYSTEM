@@ -11,54 +11,130 @@
     d:DesignWidth="875.978"
     DataContext="{StaticResource AttendanceViewModel}"
     mc:Ignorable="d">
-    <materialDesign:DialogHost x:Name="dialogHost">
+    <materialDesign:DialogHost x:Name="dialogHost" IsOpen="True">
         <materialDesign:DialogHost.DialogContent>
-            <StackPanel Margin="50">
-                <TextBlock
-                    x:Name="DialogHeader"
-                    Margin="0,0,0,25"
-                    HorizontalAlignment="Center"
-                    Style="{StaticResource MaterialDesignHeadlineTextBlock}"
-                    Text="Header" />
-                <StackPanel x:Name="sp_dialogFields">
-                    <ComboBox
-                        materialDesign:HintAssist.Hint="Deduction Type"
-                        DisplayMemberPath="Name"
-                        ItemsSource="{Binding DeductionsTypes}"
-                        SelectedItem="{Binding Deduction.DeductionsType}"
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
-                    <TextBox
-                        materialDesign:HintAssist.Hint="Amount"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding Deduction.Amount}" />
-                    <TextBlock />
-                </StackPanel>
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button
-                        x:Name="btn_dialogConfirm"
-                        Click="Btn_dialogConfirm_Click"
-                        Command="materialDesign:DialogHost.CloseDialogCommand"
-                        IsDefault="True"
-                        Style="{StaticResource MaterialDesignFlatButton}">
-                        <Button.CommandParameter>
-                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                True
-                            </system:Boolean>
-                        </Button.CommandParameter>
-                        ACCEPT
-                    </Button>
-                    <Button
-                        Command="materialDesign:DialogHost.CloseDialogCommand"
-                        IsCancel="True"
-                        Style="{StaticResource MaterialDesignFlatButton}">
-                        <Button.CommandParameter>
-                            <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                False
-                            </system:Boolean>
-                        </Button.CommandParameter>
-                        CANCEL
-                    </Button>
-                </StackPanel>
+            <StackPanel>
+                <materialDesign:DialogHost IsOpen="True">
+                    <!--  This is the dialog for the deduction breakdown  -->
+                    <materialDesign:DialogHost.DialogContent>
+                        <StackPanel>
+                            <StackPanel x:Name="Day_to_day" Visibility="Collapsed">
+                                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Deductions}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding DeductionsType.Name}" Header="Name" />
+                                        <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                                        <DataGridTextColumn Binding="{Binding Attendance.AttendanceDate}" Header="Date Occcured" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button
+                                    Command="materialDesign:DialogHost.CloseDialogCommand"
+                                    IsCancel="True"
+                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    <Button.CommandParameter>
+                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                            False
+                                        </system:Boolean>
+                                    </Button.CommandParameter>
+                                    Close
+                                </Button>
+                            </StackPanel>
+                            <StackPanel x:Name="Loan_CashAdvance">
+                                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Loans}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding Amount}" Header="Original Amount" />
+                                        <DataGridTextColumn Binding="{Binding RemainingAmount}" Header="Remaining" />
+                                        <DataGridTextColumn Binding="{Binding LoanType}" Header="Loan Type" />
+                                        <DataGridTextColumn Binding="{Binding TermsRemaining}" Header="Terms Remaining" />
+                                        <DataGridTextColumn Binding="{Binding AmountToPayPerPayroll}" Header="Amt. To Pay" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                            <StackPanel x:Name="Contributions" />
+                        </StackPanel>
+                    </materialDesign:DialogHost.DialogContent>
+
+                    <!--  this is the dialog for the general overview of deduction and the adddeduction form  -->
+                    <StackPanel>
+                        <StackPanel x:Name="dlg_addDeduction" Visibility="Collapsed">
+                            <TextBlock
+                                x:Name="DialogHeader"
+                                Margin="0,0,0,25"
+                                HorizontalAlignment="Center"
+                                Style="{StaticResource MaterialDesignHeadlineTextBlock}"
+                                Text="Header" />
+                            <StackPanel x:Name="sp_dialogFields">
+                                <ComboBox
+                                    materialDesign:HintAssist.Hint="Deduction Type"
+                                    DisplayMemberPath="Name"
+                                    ItemsSource="{Binding DeductionsTypes}"
+                                    SelectedItem="{Binding Deduction.DeductionsType}"
+                                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                                <TextBox
+                                    materialDesign:HintAssist.Hint="Amount"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding Deduction.Amount}" />
+                                <TextBlock />
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Button
+                                    x:Name="btn_dialogConfirm"
+                                    Click="Btn_dialogConfirm_Click"
+                                    Command="materialDesign:DialogHost.CloseDialogCommand"
+                                    IsDefault="True"
+                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    <Button.CommandParameter>
+                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                            True
+                                        </system:Boolean>
+                                    </Button.CommandParameter>
+                                    ACCEPT
+                                </Button>
+                                <Button
+                                    Command="materialDesign:DialogHost.CloseDialogCommand"
+                                    IsCancel="True"
+                                    Style="{StaticResource MaterialDesignFlatButton}">
+                                    <Button.CommandParameter>
+                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                            False
+                                        </system:Boolean>
+                                    </Button.CommandParameter>
+                                    CANCEL
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel
+                            x:Name="dlg_viewBreakdown"
+                            Margin="50"
+                            Visibility="Visible">
+                            <Grid>
+                                <GroupBox Header="Deduction">
+                                    <DataGrid>
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Name" />
+                                            <DataGridTextColumn Header="Amount" />
+                                            <DataGridTemplateColumn>
+                                                <DataGridTemplateColumn.CellTemplate>
+                                                    <DataTemplate>
+                                                        <Button
+                                                            x:Name="btn_viewBreakdown"
+                                                            materialDesign:HintAssist.Hint="View Breakdown"
+                                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                                            <materialDesign:PackIcon
+                                                                Width="24"
+                                                                Height="24"
+                                                                Kind="ViewList" />
+                                                        </Button>
+                                                    </DataTemplate>
+                                                </DataGridTemplateColumn.CellTemplate>
+                                            </DataGridTemplateColumn>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </GroupBox>
+                            </Grid>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:DialogHost>
             </StackPanel>
         </materialDesign:DialogHost.DialogContent>
         <Grid Margin="0,0,0,-0.4">
@@ -451,4 +527,5 @@
             </Grid>
         </Grid>
     </materialDesign:DialogHost>
+
 </Page>

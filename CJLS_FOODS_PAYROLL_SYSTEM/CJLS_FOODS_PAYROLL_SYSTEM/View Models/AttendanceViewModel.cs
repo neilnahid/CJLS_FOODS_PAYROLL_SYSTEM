@@ -30,7 +30,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         public double TotalDeductions { get; set; }
 
         public Payroll Payroll { get; set; }
-
+        public List<Loan> Loans { get; set; }
+        public Employee Employee { get; set; }
         public PayrollDetail PayrollDetail { get; set; }
         public Model.PayrollRange PayrollRange { get; set; }
 
@@ -140,6 +141,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             a.HoursWorkedWidth = String.Format("{0}*", hourswidth);
             a.OverTimeHoursWorkedWidth = String.Format("{0}*", overtimeWidth);
 
+        }
+        public void GetLoans()
+        {
+            Loans = (from l in Helper.db.Loans where Employee == l.Employee && !l.IsPaid.Value select l).ToList();
         }
         #endregion
         #endregion
