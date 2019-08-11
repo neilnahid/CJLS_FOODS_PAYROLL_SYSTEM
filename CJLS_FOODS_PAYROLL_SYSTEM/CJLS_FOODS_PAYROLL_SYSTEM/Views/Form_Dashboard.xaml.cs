@@ -71,6 +71,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
                 Frame.Content = new Views.Employee.Leave();
                 Title.Text = "Leave";
             }
+            else if (tvi.Header.ToString() == "Loans/Cash Advance")
+            {
+                draweHost.IsLeftDrawerOpen = false;
+                Frame.Content = new Views.Employee.LoanCashAdvance();
+                Title.Text = "Loans/Cash Advance";
+            }
         }
     }
 }

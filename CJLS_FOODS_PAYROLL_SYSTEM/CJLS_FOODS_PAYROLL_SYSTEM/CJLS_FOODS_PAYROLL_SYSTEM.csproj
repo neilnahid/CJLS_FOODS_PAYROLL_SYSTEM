@@ -98,6 +98,7 @@
     <Compile Include="View Models\AttendanceViewModel.cs" />
     <Compile Include="View Models\EmployeeTypeViewModel.cs" />
     <Compile Include="View Models\LeaveViewModel.cs" />
+    <Compile Include="View Models\LoanCashAdvanceViewModel.cs" />
     <Compile Include="View Models\PayrollGroupViewModel.cs" />
     <Compile Include="View Models\EmployeeViewModel.cs" />
     <Compile Include="Model\ModelPropertyChanged.cs" />
@@ -133,6 +134,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Employee\LoanCashAdvance.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Employee\PayrollGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,6 +169,9 @@
     </Compile>
     <Compile Include="Views\Employee\Leave.xaml.cs">
       <DependentUpon>Leave.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\LoanCashAdvance.xaml.cs">
+      <DependentUpon>LoanCashAdvance.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\PayrollGroup.xaml.cs">
       <DependentUpon>PayrollGroup.xaml</DependentUpon>

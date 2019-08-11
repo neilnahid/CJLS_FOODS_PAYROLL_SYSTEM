@@ -14,6 +14,7 @@
             <VM:PayrollViewModel x:Key="PayrollViewModel" />
             <VM:PayrollGroupViewModel x:Key="PayrollGroupViewModel" />
             <VM:EmployeeTypeViewModel x:Key="EmployeeTypeViewModel" />
+            <VM:LoanCashAdvanceViewModel x:Key="LoanCashAdvanceViewModel" />
             <VM:LeaveViewModel x:Key="LeaveViewModel" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />

@@ -1,16 +1,17 @@
 ﻿<Page
-    x:Class="CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee.Leave"
+    x:Class="CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee.LoanCashAdvance"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Leave"
+    Title="LoanCashAdvance"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    DataContext="{StaticResource LeaveViewModel}"
+    DataContext="{StaticResource LoanCashAdvanceViewModel}"
     mc:Ignorable="d">
+
     <materialDesign:DialogHost x:Name="dialogHost">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="50">
@@ -19,36 +20,43 @@
                     Margin="0,0,0,25"
                     HorizontalAlignment="Center"
                     Style="{StaticResource MaterialDesignHeadlineTextBlock}"
-                    Text="Process Leave" />
+                    Text="Header" />
                 <ComboBox
                     Grid.Column="1"
-                    materialDesign:HintAssist.Hint="Search"
+                    materialDesign:HintAssist.Hint="Employee"
                     materialDesign:HintAssist.HintOpacity=".26"
                     DisplayMemberPath="FullName"
                     IsEditable="True"
                     ItemsSource="{Binding Employees}"
-                    SelectedItem="{Binding Leave.Employee}"
+                    SelectedItem="{Binding Loan.Employee, UpdateSourceTrigger=PropertyChanged}"
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
-                <DatePicker
-                    Grid.Column="0"
-                    Margin="0,0,15,0"
-                    materialDesign:HintAssist.Hint="Date Of Birth"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                    Text="{Binding Leave.LeaveDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox
+                    materialDesign:HintAssist.Hint="Amount"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding Loan.Amount, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox
                     Grid.Column="1"
-                    materialDesign:HintAssist.Hint="Approval Status"
+                    materialDesign:HintAssist.Hint="Loan Type"
+                    materialDesign:HintAssist.HintOpacity=".26"
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                    Text="{Binding Leave.ApprovalStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    <ComboBoxItem Content="Pending" />
-                    <ComboBoxItem Content="Approved" />
-                    <ComboBoxItem Content="Declined" />
+                    Text="{Binding Loan.LoanType, UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBoxItem>Loan</ComboBoxItem>
+                    <ComboBoxItem>Cash Advance</ComboBoxItem>
                 </ComboBox>
+                <TextBox
+                    materialDesign:HintAssist.Hint="Terms(By Payroll)"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding Loan.Terms, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBox
+                    materialDesign:HintAssist.Hint="Terms(By Payroll)"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding Loan.TermsRemaining, UpdateSourceTrigger=PropertyChanged}" />
+
                 <!--  SP for buttons  -->
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
                         x:Name="btn_dialogConfirm"
-                        Click="btn_dialogConfirm_Click"
+                        Click="Btn_dialogConfirm_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
                         IsDefault="True"
                         Style="{StaticResource MaterialDesignFlatButton}">
@@ -83,20 +91,23 @@
                 <GroupBox
                     Grid.Column="1"
                     FontSize="24"
-                    Header="Leaves">
+                    Header="Loans and Cash Advance">
                     <DataGrid
                         AutoGenerateColumns="False"
                         CanUserAddRows="False"
                         CanUserDeleteRows="false"
                         CanUserResizeColumns="False"
                         IsReadOnly="True"
-                        ItemsSource="{Binding Leaves}"
-                        SelectedItem="{Binding Leave}">
+                        ItemsSource="{Binding Loans}"
+                        SelectedItem="{Binding Loan}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Employee.FullName}" Header="First Name" />
-                            <DataGridTextColumn Binding="{Binding Employee.EmployeeType.Name}" Header="Job Position" />
-                            <DataGridTextColumn Binding="{Binding LeaveDate}" Header="Leave Date" />
-                            <DataGridTextColumn Binding="{Binding ApprovalStatus}" Header="Approval Status" />
+                            <DataGridTextColumn Binding="{Binding Employee.FullName}" Header="Employee Name" />
+                            <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                            <DataGridTextColumn Binding="{Binding LoanType}" Header="LoanType" />
+                            <DataGridTextColumn Binding="{Binding TermsRemaining}" Header="TermsRemaining" />
+                            <DataGridTextColumn Binding="{Binding AmountToPayPerPayroll}" Header="AmountToPayPerPayroll" />
+                            <DataGridTextColumn Binding="{Binding RemainingAmount}" Header="RemainingAmount" />
+                            <DataGridTextColumn Binding="{Binding IsPaid}" Header="IsPaid" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -114,15 +125,16 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>
             </Grid>
             <Button
-                x:Name="btn_createNewLeave"
+                x:Name="btn_createNewLoan"
                 Grid.Row="2"
                 Margin="744,4.8,0,1.6"
-                Click="Btn_createNewLeave_Click"
+                Click="Btn_createNewLoan_Click"
                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                 Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
                 ToolTip="Add New Employee">
@@ -139,4 +151,5 @@
             </Grid>
         </Grid>
     </materialDesign:DialogHost>
+
 </Page>
