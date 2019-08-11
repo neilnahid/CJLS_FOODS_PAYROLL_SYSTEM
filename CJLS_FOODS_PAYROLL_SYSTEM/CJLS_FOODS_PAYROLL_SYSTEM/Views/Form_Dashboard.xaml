@@ -24,10 +24,10 @@
                         <TreeViewItem Header="Job Positions" />
                         <TreeViewItem Header="Leave" />
                     </TreeViewItem>
-                    <TreeViewItem Header="Attendance" />
                     <TreeViewItem Header="Payroll" />
                     <TreeViewItem Header="Users" />
-                    <TreeViewItem Header="New Page" />
+                    <TreeViewItem Header="Leave" />
+                    <TreeViewItem Header="Loans/Cash Advance" />
                 </TreeView>
             </StackPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>

@@ -1330,6 +1330,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private string _LastName;
 		
+		private string _FullName;
+		
 		private string _Gender;
 		
 		private System.DateTime _DateOfBirth;
@@ -1394,6 +1396,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnMiddleNameChanged();
     partial void OnLastNameChanging(string value);
     partial void OnLastNameChanged();
+    partial void OnFullNameChanging(string value);
+    partial void OnFullNameChanged();
     partial void OnGenderChanging(string value);
     partial void OnGenderChanged();
     partial void OnDateOfBirthChanging(System.DateTime value);
@@ -1569,6 +1573,26 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._LastName = value;
 					this.SendPropertyChanged("LastName");
 					this.OnLastNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", AutoSync=AutoSync.Always, DbType="VarChar(101) NOT NULL", CanBeNull=false, IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public string FullName
+		{
+			get
+			{
+				return this._FullName;
+			}
+			set
+			{
+				if ((this._FullName != value))
+				{
+					this.OnFullNameChanging(value);
+					this.SendPropertyChanging();
+					this._FullName = value;
+					this.SendPropertyChanged("FullName");
+					this.OnFullNameChanged();
 				}
 			}
 		}
@@ -2238,7 +2262,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private int _LeaveID;
 		
-		private System.Nullable<bool> _ApprovalStatus;
+		private string _ApprovalStatus;
 		
 		private EntityRef<Employee> _Employee;
 		
@@ -2252,7 +2276,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnEmployeeIDChanged();
     partial void OnLeaveIDChanging(int value);
     partial void OnLeaveIDChanged();
-    partial void OnApprovalStatusChanging(System.Nullable<bool> value);
+    partial void OnApprovalStatusChanging(string value);
     partial void OnApprovalStatusChanged();
     #endregion
 		
@@ -2326,8 +2350,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovalStatus", DbType="Bit")]
-		public System.Nullable<bool> ApprovalStatus
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovalStatus", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string ApprovalStatus
 		{
 			get
 			{

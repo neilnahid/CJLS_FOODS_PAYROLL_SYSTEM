@@ -32,7 +32,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             switch (btn_dialogConfirm.Content.ToString())
             {
                 case "UPDATE": Helper.db.SubmitChanges(); MessageBox.Show("Successfully Updated Leave"); break;
-                case "CREATE": VM.CreateNewPayrollGroup(); break;
+                case "CREATE": VM.CreateNewLeave(); break;
                 default: MessageBox.Show("command invalid"); break;
             }
         }
