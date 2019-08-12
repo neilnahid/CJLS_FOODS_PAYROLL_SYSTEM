@@ -7,10 +7,15 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.ComponentModel;
-namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
+using System.Globalization;
 
-    public class AttendanceViewModel : INotifyPropertyChanged {
-        public void InstantiateViewModel(Payroll payroll, PayrollDetail selectedPayrollDetail) {
+namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
+{
+
+    public class AttendanceViewModel : INotifyPropertyChanged
+    {
+        public void InstantiateViewModel(Payroll payroll, PayrollDetail selectedPayrollDetail)
+        {
             Attendances = new List<Attendance>(); //instantiates attendances
             Payroll = payroll;
             PayrollDetail = selectedPayrollDetail;
@@ -21,41 +26,66 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             SelectedWeek = new Model.Week(); // instantiate
             DeductionsTypes = GetDeductionTypes(); // gets deduction types
             Deduction = new Deduction(); // instantiate
-            UpdateFlagsOfEveryAttendance(); // instantiate the flags according to the extended attendance's value
+            Deductions = new ObservableCollection<Deduction>();
+            Loans = new List<Loan>();
+            GetLoans();
+            UpdateFlagsOfEveryAttendance(); // instantiate the flags according to the extended attendance's valuep
+            populateBreakdownItems();
+            //gets the string month representation
+            StartMonth = DateTimeFormatInfo.CurrentInfo.GetMonthName(Payroll.StartDate.Month);
+            EndMonth = DateTimeFormatInfo.CurrentInfo.GetMonthName(Payroll.EndDate.Month);
         }
         #region properties
         public double TotalOverTimeHours { get; set; }
 
+        public List<Deduction> AllDeductions { get; set; }
         public double TotalRegularHours { get; set; }
         public double TotalDeductions { get; set; }
 
         public Payroll Payroll { get; set; }
         public List<Loan> Loans { get; set; }
-        public Employee Employee { get; set; }
         public PayrollDetail PayrollDetail { get; set; }
         public Model.PayrollRange PayrollRange { get; set; }
 
         public List<Attendance> Attendances { get; set; }
         public Model.ExtendedAttendance Attendance { get; set; }
-
+        public string StartMonth { get; set; }
+        public string EndMonth { get; set; }
         public Deduction Deduction { get; set; }
         public Model.Week SelectedWeek { get; set; }
         public List<DeductionsType> DeductionsTypes { get; set; }
         public ObservableCollection<Deduction> Deductions { get; set; }
+        public List<BreakdownItem> BreakdownItems { get; set; }
+
+
+        #region UI Properties
+        public bool IsParentDialogOpen { get; set; }
+        public bool IsJrDialogOpen { get; set; }
+
+        public Visibility AddDeductionPanel { get; set; }
+        public Visibility BreakdownPanel { get; set; }
+        public Visibility BPTDaytoDayPanel { get; set; }
+        public Visibility BPLoanCashAdvancePanel { get; set; }
+        public Visibility BPContributionsPanel { get; set; }
+        #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region Methods/Functions
-        public Model.PayrollRange GetPayrollRange() {
-            if (PayrollDetail.Attendances.Count > 0 && PayrollDetail.Attendances[0].AttendanceDate.HasValue) {
+        public Model.PayrollRange GetPayrollRange()
+        {
+            if (PayrollDetail.Attendances.Count > 0 && PayrollDetail.Attendances[0].AttendanceDate.HasValue)
+            {
                 return new Model.PayrollRange(PayrollDetail);
             }
-            else {
-                return new Model.PayrollRange(Payroll.StartDate, Payroll.EndDate,PayrollDetail);
+            else
+            {
+                return new Model.PayrollRange(Payroll.StartDate, Payroll.EndDate, PayrollDetail);
             }
         }
-        public void SaveAttendance() {
+        public void SaveAttendance()
+        {
             Attendances = new List<Attendance>();
             AddToAttendances(PayrollRange);
             GetSummaryNumbers();
@@ -63,33 +93,42 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             PayrollDetail.Attendances.AddRange(Attendances);
             Helper.db.SubmitChanges();
         }
-        public void AddDeduction(Attendance a, Deduction d) {
+        public void AddDeduction(Attendance a, Deduction d)
+        {
             a.Deductions.Add(d);
         }
-        private List<DeductionsType> GetDeductionTypes() {
+        private List<DeductionsType> GetDeductionTypes()
+        {
             return (from i in Helper.db.DeductionsTypes select i).ToList();
         }
-        public void UpdateFlagsOf(Model.ExtendedAttendance attendance) {
-            if (attendance != null && attendance.Attendance.AttendanceDate != null) {
+        public void UpdateFlagsOf(Model.ExtendedAttendance attendance)
+        {
+            if (attendance != null && attendance.Attendance.AttendanceDate != null)
+            {
                 UpdateRegularHoursFlag(attendance);
                 UpdateOverTimeHoursFlag(attendance);
                 UpdateDeductionsFlag(attendance);
-                SetProportionWidths(attendance);
             }
         }
-        public void UpdateFlagsOfEveryAttendance() {
-            foreach (var w in PayrollRange.Weeks) {
-                foreach (var d in w.Days) {
+        public void UpdateFlagsOfEveryAttendance()
+        {
+            foreach (var w in PayrollRange.Weeks)
+            {
+                foreach (var d in w.Days)
+                {
                     UpdateFlagsOf(d);
-                    SetProportionWidths(d);
                 }
             }
         }
-        public void AddToAttendances(Model.PayrollRange pr) {
+        public void AddToAttendances(Model.PayrollRange pr)
+        {
             Attendances = new List<Attendance>();
-            foreach (var w in pr.Weeks) {
-                foreach (var d in w.Days) {
-                    if (d.Attendance.AttendanceDate != null) {
+            foreach (var w in pr.Weeks)
+            {
+                foreach (var d in w.Days)
+                {
+                    if (d.Attendance.AttendanceDate != null)
+                    {
                         Attendances.Add(d.Attendance);
                     }
                 }
@@ -97,12 +136,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         }
 
         //this method must be placed AFTER the AddToAttendances
-        public void GetSummaryNumbers() {
+        public void GetSummaryNumbers()
+        {
             TotalRegularHours = 0;
             TotalDeductions = 0;
             TotalOverTimeHours = 0;
-            if(Attendances != null){
-                foreach (var a in Attendances) {
+            if (Attendances != null)
+            {
+                foreach (var a in Attendances)
+                {
                     TotalRegularHours += a.RegularHoursWorked;
                     TotalDeductions += (from d in a.Deductions select d.Amount).Sum();
                     TotalOverTimeHours += a.OverTimeHoursWorked;
@@ -111,42 +153,89 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         }
 
         #region UpdateFlags Functions
-        private void UpdateRegularHoursFlag(Model.ExtendedAttendance a) {
-            if (a.Attendance.RegularHoursWorked >= a.Attendance.PayrollDetail.Employee.DailyRequiredHours) {
+        private void UpdateRegularHoursFlag(Model.ExtendedAttendance a)
+        {
+            if (a.Attendance.RegularHoursWorked >= a.Attendance.PayrollDetail.Employee.DailyRequiredHours)
+            {
                 a.RegularHoursFlag = Visibility.Visible;
                 a.UnderTimeFlag = Visibility.Collapsed;
             }
-            else {
+            else
+            {
                 a.RegularHoursFlag = Visibility.Collapsed;
                 a.UnderTimeFlag = Visibility.Visible;
             }
         }
-        private void UpdateOverTimeHoursFlag(Model.ExtendedAttendance a) {
+        private void UpdateOverTimeHoursFlag(Model.ExtendedAttendance a)
+        {
             if (a.Attendance.OverTimeHoursWorked > 0)
                 a.OverTimeHoursFlag = Visibility.Visible;
             else
                 a.OverTimeHoursFlag = Visibility.Collapsed;
         }
-        private void UpdateDeductionsFlag(Model.ExtendedAttendance a) {
+        private void UpdateDeductionsFlag(Model.ExtendedAttendance a)
+        {
             if (a.Attendance.Deductions.Count > 0)
                 a.DeductionsFlag = Visibility.Visible;
             else
                 a.DeductionsFlag = Visibility.Collapsed;
         }
-        public void SetProportionWidths(Model.ExtendedAttendance a) {
-            double minsWidth = (a.Attendance.MinutesLate / (a.Attendance.MinutesLate + a.Attendance.RegularHoursWorked + a.Attendance.OverTimeHoursWorked))*50;
-            var hourswidth = (a.Attendance.RegularHoursWorked / (a.Attendance.MinutesLate + a.Attendance.RegularHoursWorked + a.Attendance.OverTimeHoursWorked))*50;
-            var overtimeWidth = (a.Attendance.OverTimeHoursWorked / (a.Attendance.MinutesLate + a.Attendance.RegularHoursWorked + a.Attendance.OverTimeHoursWorked))*50;
-            a.MinutesLateWidth = String.Format("{0}*", minsWidth);
-            a.HoursWorkedWidth = String.Format("{0}*", hourswidth);
-            a.OverTimeHoursWorkedWidth = String.Format("{0}*", overtimeWidth);
+        #endregion
 
-        }
         public void GetLoans()
         {
-            Loans = (from l in Helper.db.Loans where Employee == l.Employee && !l.IsPaid.Value select l).ToList();
+            Loans = (from l in Helper.db.Loans where PayrollDetail.Employee == l.Employee && !l.IsPaid.Value select l).ToList();
         }
-        #endregion
+        public struct BreakdownItem
+        {
+            public string Name { get; set; }
+            public double Amount { get; set; }
+        }
+
+
+        //Functions for getting the value of the breakdown panel
+        private double getDaytoDayDeductionAmount()
+        {
+            var totalDeductions = 0.0;
+            foreach (var a in Attendances)
+            {
+                totalDeductions += (from d in a.Deductions select d.Amount).Sum();
+            }
+            return totalDeductions;
+        }
+        private double getCashLoansAmount()
+        {
+            return (from l in Loans where l.IsPaid.Value == false select l.AmountToPayPerPayroll).Sum().Value;
+        }
+        private double getContributionsAmount()
+        {
+            return Helper.db.ComputeTotalContributions(PayrollDetail.Employee.EmployeeID, PayrollDetail.PayrollDetailID, Payroll.PayrollID).Value;
+        }
+        public void populateBreakdownItems()
+        {
+            BreakdownItems = new List<BreakdownItem>();
+            BreakdownItems.Add(new BreakdownItem { Name = "DaytoDay", Amount = getDaytoDayDeductionAmount() });
+            BreakdownItems.Add(new BreakdownItem { Name = "Loans/Cash Advance", Amount = getCashLoansAmount() });
+            BreakdownItems.Add(new BreakdownItem { Name = "Contributions", Amount = getContributionsAmount() });
+        }
+        public void updateLoansAndCashAdvances()
+        {
+            foreach(var l in Loans)
+            {
+                l.TermsRemaining--;
+            }
+        }
+        public void getAllDeducions()
+        {
+            AllDeductions = new List<Deduction>();
+            foreach(var a in Attendances)
+            {
+                foreach(var d in a.Deductions)
+                {
+                    AllDeductions.Add(d);
+                }
+            }
+        }
         #endregion
     }
 }

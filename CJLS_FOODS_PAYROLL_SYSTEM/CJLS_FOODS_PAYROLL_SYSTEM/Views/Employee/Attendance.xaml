@@ -11,35 +11,34 @@
     d:DesignWidth="875.978"
     DataContext="{StaticResource AttendanceViewModel}"
     mc:Ignorable="d">
-    <materialDesign:DialogHost x:Name="dialogHost" IsOpen="True">
+    <materialDesign:DialogHost x:Name="dialogHost" IsOpen="{Binding IsParentDialogOpen}">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel>
-                <materialDesign:DialogHost IsOpen="True">
+                <materialDesign:DialogHost x:Name="dialogjr">
                     <!--  This is the dialog for the deduction breakdown  -->
                     <materialDesign:DialogHost.DialogContent>
                         <StackPanel>
-                            <StackPanel x:Name="Day_to_day" Visibility="Collapsed">
-                                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Deductions}">
+                            <StackPanel x:Name="Day_to_day" Visibility="{Binding BPTDaytoDayPanel}">
+                                <DataGrid
+                                    AutoGenerateColumns="False"
+                                    CanUserAddRows="False"
+                                    CanUserDeleteRows="False"
+                                    CanUserReorderColumns="False"
+                                    ItemsSource="{Binding AllDeductions}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding DeductionsType.Name}" Header="Name" />
                                         <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
                                         <DataGridTextColumn Binding="{Binding Attendance.AttendanceDate}" Header="Date Occcured" />
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <Button
-                                    Command="materialDesign:DialogHost.CloseDialogCommand"
-                                    IsCancel="True"
-                                    Style="{StaticResource MaterialDesignFlatButton}">
-                                    <Button.CommandParameter>
-                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                            False
-                                        </system:Boolean>
-                                    </Button.CommandParameter>
-                                    Close
-                                </Button>
                             </StackPanel>
-                            <StackPanel x:Name="Loan_CashAdvance">
-                                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Loans}">
+                            <StackPanel x:Name="Loan_CashAdvance" Visibility="{Binding BPLoanCashAdvancePanel}">
+                                <DataGrid
+                                    AutoGenerateColumns="False"
+                                    CanUserAddRows="False"
+                                    CanUserDeleteRows="False"
+                                    CanUserReorderColumns="False"
+                                    ItemsSource="{Binding Loans}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding Amount}" Header="Original Amount" />
                                         <DataGridTextColumn Binding="{Binding RemainingAmount}" Header="Remaining" />
@@ -49,19 +48,32 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
-                            <StackPanel x:Name="Contributions" />
+                            <StackPanel x:Name="Contributions" Visibility="{Binding BPContributionsPanel}" />
+                            <Button
+                                Command="materialDesign:DialogHost.CloseDialogCommand"
+                                IsCancel="True"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <Button.CommandParameter>
+                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                        False
+                                    </system:Boolean>
+                                </Button.CommandParameter>
+                                Close
+                            </Button>
                         </StackPanel>
                     </materialDesign:DialogHost.DialogContent>
 
                     <!--  this is the dialog for the general overview of deduction and the adddeduction form  -->
                     <StackPanel>
-                        <StackPanel x:Name="dlg_addDeduction" Visibility="Collapsed">
+                        <!--  DEDUCTION DIALOG  -->
+                        <StackPanel
+                            x:Name="dlg_addDeduction"
+                            Margin="50"
+                            Visibility="{Binding AddDeductionPanel}">
                             <TextBlock
                                 x:Name="DialogHeader"
-                                Margin="0,0,0,25"
-                                HorizontalAlignment="Center"
                                 Style="{StaticResource MaterialDesignHeadlineTextBlock}"
-                                Text="Header" />
+                                Text="Add Deduction" />
                             <StackPanel x:Name="sp_dialogFields">
                                 <ComboBox
                                     materialDesign:HintAssist.Hint="Deduction Type"
@@ -75,51 +87,32 @@
                                     Text="{Binding Deduction.Amount}" />
                                 <TextBlock />
                             </StackPanel>
-                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                <Button
-                                    x:Name="btn_dialogConfirm"
-                                    Click="Btn_dialogConfirm_Click"
-                                    Command="materialDesign:DialogHost.CloseDialogCommand"
-                                    IsDefault="True"
-                                    Style="{StaticResource MaterialDesignFlatButton}">
-                                    <Button.CommandParameter>
-                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                            True
-                                        </system:Boolean>
-                                    </Button.CommandParameter>
-                                    ACCEPT
-                                </Button>
-                                <Button
-                                    Command="materialDesign:DialogHost.CloseDialogCommand"
-                                    IsCancel="True"
-                                    Style="{StaticResource MaterialDesignFlatButton}">
-                                    <Button.CommandParameter>
-                                        <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
-                                            False
-                                        </system:Boolean>
-                                    </Button.CommandParameter>
-                                    CANCEL
-                                </Button>
-                            </StackPanel>
                         </StackPanel>
+                        <!--  BREAKDOWN DIALOG  -->
                         <StackPanel
                             x:Name="dlg_viewBreakdown"
                             Margin="50"
-                            Visibility="Visible">
+                            Visibility="{Binding BreakdownPanel}">
                             <Grid>
-                                <GroupBox Header="Deduction">
-                                    <DataGrid>
+                                <GroupBox Header="Deductions">
+                                    <DataGrid
+                                        AutoGenerateColumns="False"
+                                        CanUserAddRows="False"
+                                        CanUserDeleteRows="False"
+                                        CanUserReorderColumns="False"
+                                        ItemsSource="{Binding BreakdownItems}">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Name" />
-                                            <DataGridTextColumn Header="Amount" />
+                                            <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                                            <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
                                             <DataGridTemplateColumn>
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <Button
-                                                            x:Name="btn_viewBreakdown"
                                                             materialDesign:HintAssist.Hint="View Breakdown"
+                                                            Click="btn_viewItemBreakdown"
                                                             Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                                            Tag="{Binding Name}">
                                                             <materialDesign:PackIcon
                                                                 Width="24"
                                                                 Height="24"
@@ -133,6 +126,34 @@
                                 </GroupBox>
                             </Grid>
                         </StackPanel>
+
+                        <!--  Footer buttons for dialog  -->
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button
+                                x:Name="dialogConfirm"
+                                Click="Btn_dialogConfirm_Click"
+                                Command="materialDesign:DialogHost.CloseDialogCommand"
+                                IsDefault="True"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <Button.CommandParameter>
+                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                        True
+                                    </system:Boolean>
+                                </Button.CommandParameter>
+                                ACCEPT
+                            </Button>
+                            <Button
+                                Command="materialDesign:DialogHost.CloseDialogCommand"
+                                IsCancel="True"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <Button.CommandParameter>
+                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                        False
+                                    </system:Boolean>
+                                </Button.CommandParameter>
+                                CANCEL
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
                 </materialDesign:DialogHost>
             </StackPanel>
@@ -140,391 +161,443 @@
         <Grid Margin="0,0,0,-0.4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="16*" />
-                <ColumnDefinition Width="9*" />
             </Grid.ColumnDefinitions>
-            <DataGrid
-                Name="DataGridCalendar"
-                AutoGenerateColumns="False"
-                CanUserAddRows="False"
-                CanUserDeleteRows="False"
-                CanUserResizeRows="False"
-                CurrentCellChanged="DataGridCalendar_CurrentCellChanged"
-                ItemsSource="{Binding PayrollRange.Weeks}"
-                SelectedCellsChanged="DataGridCalendar_SelectedCellsChanged"
-                SelectedItem="{Binding SelectedWeek}"
-                SelectionMode="Extended">
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Width="1*" Header="Sunday">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel Name="Sunday">
-                                    <TextBlock Text="{Binding Days[0].Attendance.AttendanceDate.Day}" />
-                                    <Rectangle
-                                        x:Name="Regular"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Green"
-                                        Visibility="{Binding Days[0].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="OverTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="SkyBlue"
-                                        Visibility="{Binding Days[0].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="Deduction"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Red"
-                                        Visibility="{Binding Days[0].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="UnderTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Orange"
-                                        Visibility="{Binding Days[0].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width="1*" Header="Monday">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel x:Name="Monday">
-                                    <TextBlock Text="{Binding Days[1].Attendance.AttendanceDate.Day}" />
-                                    <Rectangle
-                                        x:Name="Regular"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Green"
-                                        Visibility="{Binding Days[1].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="OverTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="SkyBlue"
-                                        Visibility="{Binding Days[1].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="Deduction"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Red"
-                                        Visibility="{Binding Days[1].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="UnderTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Orange"
-                                        Visibility="{Binding Days[1].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width="1*" Header="Tuesday">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel x:Name="Tuesday">
-                                    <TextBlock Text="{Binding Days[2].Attendance.AttendanceDate.Day}" />
-                                    <Rectangle
-                                        x:Name="Regular"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Green"
-                                        Visibility="{Binding Days[2].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="OverTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="SkyBlue"
-                                        Visibility="{Binding Days[2].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="Deduction"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Red"
-                                        Visibility="{Binding Days[2].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="UnderTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Orange"
-                                        Visibility="{Binding Days[2].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width="1*" Header="Wednesday">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel x:Name="Wednesday">
-                                    <TextBlock Text="{Binding Days[3].Attendance.AttendanceDate.Day}" />
-                                    <Rectangle
-                                        x:Name="Regular"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Green"
-                                        Visibility="{Binding Days[3].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="OverTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="SkyBlue"
-                                        Visibility="{Binding Days[3].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="Deduction"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Red"
-                                        Visibility="{Binding Days[3].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="UnderTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Orange"
-                                        Visibility="{Binding Days[3].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width="1*" Header="Thursday">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel x:Name="Thursday">
-                                    <TextBlock Text="{Binding Days[4].Attendance.AttendanceDate.Day}" />
-                                    <Rectangle
-                                        x:Name="Regular"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Green"
-                                        Visibility="{Binding Days[4].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="OverTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="SkyBlue"
-                                        Visibility="{Binding Days[4].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="Deduction"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Red"
-                                        Visibility="{Binding Days[4].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="UnderTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Orange"
-                                        Visibility="{Binding Days[4].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width="1*" Header="Friday">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel x:Name="Friday">
-                                    <TextBlock Text="{Binding Days[5].Attendance.AttendanceDate.Day}" />
-                                    <Rectangle
-                                        x:Name="Regular"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Green"
-                                        Visibility="{Binding Days[5].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="OverTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="SkyBlue"
-                                        Visibility="{Binding Days[5].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="Deduction"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Red"
-                                        Visibility="{Binding Days[5].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="UnderTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Orange"
-                                        Visibility="{Binding Days[5].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Width="1*" Header="Saturday">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel x:Name="Saturday">
-                                    <TextBlock Text="{Binding Days[6].Attendance.AttendanceDate.Day}" />
-                                    <Rectangle
-                                        x:Name="Regular"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Green"
-                                        Visibility="{Binding Days[6].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="OverTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="SkyBlue"
-                                        Visibility="{Binding Days[6].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="Deduction"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Red"
-                                        Visibility="{Binding Days[6].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                    <Rectangle
-                                        x:Name="UnderTime"
-                                        Width="Auto"
-                                        Height="20"
-                                        Fill="Orange"
-                                        Visibility="{Binding Days[6].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="281*" />
-                    <RowDefinition Height="304*" />
-                </Grid.RowDefinitions>
-                <GroupBox
-                    Grid.Row="0"
-                    Margin="0,0,0.2,25.8"
-                    Header="Attendance Details">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="187*" />
-                            <RowDefinition Height="78*" />
-                        </Grid.RowDefinitions>
-                        <GroupBox Margin="0,0,0.6,4.2" Header="Deductions">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="39*" />
-                                    <RowDefinition Height="8*" />
-                                </Grid.RowDefinitions>
-                                <DataGrid
-                                    AutoGenerateColumns="False"
-                                    CanUserAddRows="False"
-                                    CanUserDeleteRows="False"
-                                    CanUserResizeRows="False"
-                                    ItemsSource="{Binding Deductions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding DeductionsType.Name}" Header="Description" />
-                                        <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
-                                    </DataGrid.Columns>
-                                </DataGrid>
-                                <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                    <TextBlock Text="Total Deductions: " />
-                                    <TextBlock Text="{Binding Deductions.Sum}" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="71*" />
+                <RowDefinition Height="514*" />
+            </Grid.RowDefinitions>
+            <!--  PAGE HEADER  -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Vertical">
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Employee Name"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding PayrollDetail.Employee.FullName}" />
+                    <TextBox
+                        materialDesign:HintAssist.Hint="PayrollID"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding PayrollDetail.PayrollID}" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <TextBox
+                        materialDesign:HintAssist.Hint="PayrollDetailID"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding PayrollDetail.PayrollDetailID}" />
+                </StackPanel>
+            </Grid>
+            <!--  PAGE CONTENT  -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <!--  DATA GRID  -->
+                <StackPanel Orientation="Vertical">
+                    <TextBlock>
+                        <TextBlock Style="{StaticResource MaterialDesignDisplay2TextBlock}">
+                            <Run Text="{Binding StartMonth}" />
+                            <Run Text="-" />
+                            <Run Text="{Binding EndMonth}" />
+                        </TextBlock>
+                    </TextBlock>
+                    <DataGrid
+                        Name="DataGridCalendar"
+                        Grid.Column="0"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        CanUserResizeRows="False"
+                        CurrentCellChanged="DataGridCalendar_CurrentCellChanged"
+                        ItemsSource="{Binding PayrollRange.Weeks}"
+                        SelectedCellsChanged="DataGridCalendar_SelectedCellsChanged"
+                        SelectedItem="{Binding SelectedWeek}"
+                        SelectionMode="Extended">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="1*" Header="Sunday">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Name="Sunday">
+                                            <TextBlock Text="{Binding Days[0].Attendance.AttendanceDate.Day}" />
+                                            <Rectangle
+                                                x:Name="Regular"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Green"
+                                                Visibility="{Binding Days[0].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="OverTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="SkyBlue"
+                                                Visibility="{Binding Days[0].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Deduction"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Red"
+                                                Visibility="{Binding Days[0].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="UnderTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Orange"
+                                                Visibility="{Binding Days[0].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="1*" Header="Monday">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel x:Name="Monday">
+                                            <TextBlock Text="{Binding Days[1].Attendance.AttendanceDate.Day}" />
+                                            <Rectangle
+                                                x:Name="Regular"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Green"
+                                                Visibility="{Binding Days[1].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="OverTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="SkyBlue"
+                                                Visibility="{Binding Days[1].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Deduction"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Red"
+                                                Visibility="{Binding Days[1].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="UnderTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Orange"
+                                                Visibility="{Binding Days[1].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="1*" Header="Tuesday">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel x:Name="Tuesday">
+                                            <TextBlock Text="{Binding Days[2].Attendance.AttendanceDate.Day}" />
+                                            <Rectangle
+                                                x:Name="Regular"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Green"
+                                                Visibility="{Binding Days[2].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="OverTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="SkyBlue"
+                                                Visibility="{Binding Days[2].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Deduction"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Red"
+                                                Visibility="{Binding Days[2].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="UnderTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Orange"
+                                                Visibility="{Binding Days[2].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="1*" Header="Wednesday">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel x:Name="Wednesday">
+                                            <TextBlock Text="{Binding Days[3].Attendance.AttendanceDate.Day}" />
+                                            <Rectangle
+                                                x:Name="Regular"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Green"
+                                                Visibility="{Binding Days[3].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="OverTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="SkyBlue"
+                                                Visibility="{Binding Days[3].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Deduction"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Red"
+                                                Visibility="{Binding Days[3].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="UnderTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Orange"
+                                                Visibility="{Binding Days[3].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="1*" Header="Thursday">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel x:Name="Thursday">
+                                            <TextBlock Text="{Binding Days[4].Attendance.AttendanceDate.Day}" />
+                                            <Rectangle
+                                                x:Name="Regular"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Green"
+                                                Visibility="{Binding Days[4].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="OverTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="SkyBlue"
+                                                Visibility="{Binding Days[4].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Deduction"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Red"
+                                                Visibility="{Binding Days[4].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="UnderTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Orange"
+                                                Visibility="{Binding Days[4].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="1*" Header="Friday">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel x:Name="Friday">
+                                            <TextBlock Text="{Binding Days[5].Attendance.AttendanceDate.Day}" />
+                                            <Rectangle
+                                                x:Name="Regular"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Green"
+                                                Visibility="{Binding Days[5].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="OverTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="SkyBlue"
+                                                Visibility="{Binding Days[5].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Deduction"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Red"
+                                                Visibility="{Binding Days[5].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="UnderTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Orange"
+                                                Visibility="{Binding Days[5].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn Width="1*" Header="Saturday">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel x:Name="Saturday">
+                                            <TextBlock Text="{Binding Days[6].Attendance.AttendanceDate.Day}" />
+                                            <Rectangle
+                                                x:Name="Regular"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Green"
+                                                Visibility="{Binding Days[6].RegularHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="OverTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="SkyBlue"
+                                                Visibility="{Binding Days[6].OverTimeHoursFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Deduction"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Red"
+                                                Visibility="{Binding Days[6].DeductionsFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="UnderTime"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Orange"
+                                                Visibility="{Binding Days[6].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </StackPanel>
+                <!--  Attendance Details  -->
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="281*" />
+                        <RowDefinition Height="304*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox
+                        Grid.Row="0"
+                        Margin="0,0,0.2,25.8"
+                        Header="Attendance Details">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="187*" />
+                                <RowDefinition Height="78*" />
+                            </Grid.RowDefinitions>
+                            <GroupBox Margin="0,0,0.6,4.2" Header="Deductions">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="39*" />
+                                        <RowDefinition Height="8*" />
+                                    </Grid.RowDefinitions>
+                                    <DataGrid
+                                        AutoGenerateColumns="False"
+                                        CanUserAddRows="False"
+                                        CanUserDeleteRows="False"
+                                        CanUserResizeRows="False"
+                                        ItemsSource="{Binding Deductions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Binding="{Binding DeductionsType.Name}" Header="Description" />
+                                            <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                        <TextBlock Text="Total Deductions: " />
+                                        <TextBlock Text="{Binding Deductions.Sum}" />
+                                    </StackPanel>
+                                </Grid>
+                            </GroupBox>
+                            <Grid Grid.Row="1" Margin="0,0.8,-0.4,-0.4">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBox
+                                        Name="txtbox_regularHours"
+                                        materialDesign:HintAssist.Hint="Regular Hours Worked"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Attendance.Attendance.RegularHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        TextChanged="Txtbox_regularHours_TextChanged" />
+                                    <TextBox
+                                        Name="txtbox_overtimeHours"
+                                        materialDesign:HintAssist.Hint="Overtime Hours Worked"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Attendance.Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        TextChanged="Txtbox_overtimeHours_TextChanged" />
                                 </StackPanel>
                             </Grid>
-                        </GroupBox>
-                        <Grid Grid.Row="1" Margin="0,0.8,-0.4,-0.4">
-                            <StackPanel Orientation="Vertical">
-                                <TextBox
-                                    Name="txtbox_regularHours"
-                                    materialDesign:HintAssist.Hint="Regular Hours Worked"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding Attendance.Attendance.RegularHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    TextChanged="Txtbox_regularHours_TextChanged" />
-                                <TextBox
-                                    Name="txtbox_overtimeHours"
-                                    materialDesign:HintAssist.Hint="Overtime Hours Worked"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding Attendance.Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    TextChanged="Txtbox_overtimeHours_TextChanged" />
-                            </StackPanel>
                         </Grid>
-                    </Grid>
-                </GroupBox>
-                <GroupBox Grid.Row="1" Header="Summary">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="10*" />
-                            <RowDefinition Height="3*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Margin="0,0,2.8,6">
-                            <TextBox
-                                materialDesign:HintAssist.Hint="Total Regular Hours"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding TotalRegularHours, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBox
-                                materialDesign:HintAssist.Hint="Total Overtime Hours"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding TotalOverTimeHours, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBox
-                                materialDesign:HintAssist.Hint="Total Deductions"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding TotalDeductions, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBox
-                                materialDesign:HintAssist.Hint="Net Pay"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding TotalDeductions, UpdateSourceTrigger=PropertyChanged}" />
-                        </StackPanel>
-                        <StackPanel
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Margin="4.2,0,-0.4,6">
-                            <TextBox
-                                materialDesign:HintAssist.Hint="GrossPay"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding TotalRegularHours, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBox
-                                materialDesign:HintAssist.Hint="Overtime Pay"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding TotalOverTimeHours, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBox
-                                materialDesign:HintAssist.Hint="Total Contributions"
-                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                Text="{Binding TotalDeductions, UpdateSourceTrigger=PropertyChanged}" />
-                            <Button
-                                Content="View Breakdown"
-                                Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                ToolTip="Resource name: MaterialDesignRaisedAccentButton" />
-                        </StackPanel>
-                        <materialDesign:PopupBox
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="0,0,-0.4,-0.2"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Bottom"
-                            Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}"
-                            ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionPopupBox"
-                            ToolTipService.Placement="Right">
-                            <StackPanel>
-                                <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}" ToolTip="Add Deduction">
-                                    <materialDesign:PackIcon
-                                        Width="24"
-                                        Height="24"
-                                        Kind="AlphabetD" />
-                                </Button>
-                                <Button
-                                    x:Name="btn_saveAttendance"
-                                    Click="Btn_saveAttendance_Click"
-                                    ToolTip="Save Attendance">
-                                    <materialDesign:PackIcon
-                                        Width="24"
-                                        Height="24"
-                                        Kind="ContentSaveAll" />
-                                </Button>
+                    </GroupBox>
+                    <GroupBox Grid.Row="1" Header="Summary">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10*" />
+                                <RowDefinition Height="3*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="1*" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="0,0,2.8,6">
+                                <TextBox
+                                    materialDesign:HintAssist.Hint="Total Regular Hours"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding TotalRegularHours, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox
+                                    materialDesign:HintAssist.Hint="Total Overtime Hours"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding TotalOverTimeHours, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox
+                                    materialDesign:HintAssist.Hint="Total Deductions"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding TotalDeductions, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox
+                                    materialDesign:HintAssist.Hint="Net Pay"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding TotalDeductions, UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
-                        </materialDesign:PopupBox>
+                            <StackPanel
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Margin="4.2,0,-0.4,6">
+                                <TextBox
+                                    materialDesign:HintAssist.Hint="GrossPay"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding TotalRegularHours, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox
+                                    materialDesign:HintAssist.Hint="Overtime Pay"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding TotalOverTimeHours, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox
+                                    materialDesign:HintAssist.Hint="Total Contributions"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding TotalDeductions, UpdateSourceTrigger=PropertyChanged}" />
+                                <Button
+                                    x:Name="btn_viewBreakdownDialog"
+                                    Click="Btn_viewBreakdownDialog_Click"
+                                    Content="View Breakdown"
+                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton" />
+                            </StackPanel>
+                            <materialDesign:PopupBox
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="0,0,-0.4,-0.2"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}"
+                                ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionPopupBox"
+                                ToolTipService.Placement="Right">
+                                <StackPanel>
+                                    <Button
+                                        x:Name="btn_openAddDeductionDialog"
+                                        Click="Btn_openAddDeductionDialog_Click"
+                                        ToolTip="Add Deduction">
+                                        <materialDesign:PackIcon
+                                            Width="24"
+                                            Height="24"
+                                            Kind="AlphabetD" />
+                                    </Button>
+                                    <Button
+                                        x:Name="btn_saveAttendance"
+                                        Click="Btn_saveAttendance_Click"
+                                        ToolTip="Save Attendance">
+                                        <materialDesign:PackIcon
+                                            Width="24"
+                                            Height="24"
+                                            Kind="ContentSaveAll" />
+                                    </Button>
+                                </StackPanel>
+                            </materialDesign:PopupBox>
 
-                    </Grid>
-                </GroupBox>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
             </Grid>
+
         </Grid>
     </materialDesign:DialogHost>
 
