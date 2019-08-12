@@ -27,7 +27,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
 
         private void btn_dialogConfirm_Click(object sender, RoutedEventArgs e) {
             switch (btn_dialogConfirm.Content.ToString()) {
-                case "UPDATE": Helper.db.SubmitChanges(); MessageBox.Show("Successfully Updated Employee"); break;
+                case "UPDATE": VM.UpdateEmployee(); MessageBox.Show("Successfully Updated Employee"); break;
                 case "CREATE": VM.CreateNewEmployee(); break;
                 default: MessageBox.Show("command invalid"); break;
             }
@@ -36,7 +36,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
             DialogHeader.Text = "Update Employee";
             btn_dialogConfirm.Content = "UPDATE";
             cmbbox_EmploymentStatus.IsEnabled = true;
-            VM.UpdateEmployee();
         }
 
         private void Btn_deleteEmployee_Click(object sender, RoutedEventArgs e) {

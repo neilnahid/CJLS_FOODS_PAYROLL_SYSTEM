@@ -280,7 +280,7 @@
                         CanUserDeleteRows="false"
                         CanUserResizeColumns="False"
                         IsReadOnly="True"
-                        ItemsSource="{Binding Employees}"
+                        ItemsSource="{Binding Employees, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         SelectedItem="{Binding Employee, Mode=TwoWay}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding EmployeeID}" Header="EmployeeID" />
@@ -301,22 +301,6 @@
                                                 Width="24"
                                                 Height="24"
                                                 Kind="Edit" />
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button
-                                            x:Name="btn_deleteEmployee"
-                                            materialDesign:HintAssist.Hint="Delete Employee"
-                                            Click="Btn_deleteEmployee_Click"
-                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
-                                            <materialDesign:PackIcon
-                                                Width="24"
-                                                Height="24"
-                                                Kind="Delete" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

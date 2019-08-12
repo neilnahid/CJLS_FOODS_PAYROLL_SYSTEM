@@ -32,7 +32,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
 
         #region methods/functions
         public List<Employee> GetEmployeeList() {
-            var result = (from employee in Helper.db.Employees select employee).ToList();
+            var result = (from employee in Helper.db.Employees where employee.Status=="Active" select employee).ToList();
             return result;
         }
         public List<PayrollGroup> GetPayrollGroups() {
@@ -57,6 +57,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         }
         public void UpdateEmployee() {
             Helper.db.SubmitChanges();
+            Employees = new ObservableCollection<Employee>(GetEmployeeList());
         }
         #endregion
     }
