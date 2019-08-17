@@ -12,11 +12,22 @@
       <Association Name="PayrollDetail_Attendance" Member="PayrollDetail" ThisKey="PayrollDetailsID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Contribution" Member="Contributions">
     <Type Name="Contribution">
       <Column Name="ContributionLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ContributionTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PayrollDetailID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="ContributionType_Contribution" Member="ContributionType" ThisKey="ContributionTypeID" OtherKey="ContributionTypeID" Type="ContributionType" IsForeignKey="true" />
       <Association Name="PayrollDetail_Contribution" Member="PayrollDetail" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" />
     </Type>
@@ -77,8 +88,8 @@
       <Column Name="IsIncomeTaxActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsPagibigActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Association Name="Employee_Leave" Member="Leaves" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Leave" />
-      <Association Name="Employee_PayrollDetail" Member="PayrollDetails" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="PayrollDetail" />
       <Association Name="Employee_Loan" Member="Loans" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Loan" />
+      <Association Name="Employee_PayrollDetail" Member="PayrollDetails" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="PayrollDetail" />
       <Association Name="EmployeeType_Employee" Member="EmployeeType" ThisKey="EmployeeTypeID" OtherKey="EmployeeTypeID" Type="EmployeeType" IsForeignKey="true" />
       <Association Name="PayrollGroup_Employee" Member="PayrollGroup" ThisKey="EmployeeGroupID" OtherKey="PayrollGroupID" Type="PayrollGroup" IsForeignKey="true" />
     </Type>
@@ -97,6 +108,31 @@
       <Column Name="LeaveDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
       <Column Name="ApprovalStatus" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Employee_Leave" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Loan" Member="Loans">
+    <Type Name="Loan">
+      <Column Name="LoanID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="LoanType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Terms" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TermsRemaining" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AmountRemaining" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="TotalPaid" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="IsPaid" Type="System.Boolean" DbType="Bit" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Loan_LoanPayment" Member="LoanPayments" ThisKey="LoanID" OtherKey="LoanID" Type="LoanPayment" />
+      <Association Name="Employee_Loan" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LoanPayment" Member="LoanPayments">
+    <Type Name="LoanPayment">
+      <Column Name="LoanPaymentID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LoanID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PayrollDetailID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AmountPaid" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Loan_LoanPayment" Member="Loan" ThisKey="LoanID" OtherKey="LoanID" Type="Loan" IsForeignKey="true" />
+      <Association Name="PayrollDetail_LoanPayment" Member="PayrollDetail" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Payroll" Member="Payrolls">
@@ -125,6 +161,7 @@
       <Column Name="TotalContributions" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="PayrollDetail_Attendance" Member="Attendances" ThisKey="PayrollDetailID" OtherKey="PayrollDetailsID" Type="Attendance" />
       <Association Name="PayrollDetail_Contribution" Member="Contributions" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="Contribution" />
+      <Association Name="PayrollDetail_LoanPayment" Member="LoanPayments" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="LoanPayment" />
       <Association Name="Employee_PayrollDetail" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
       <Association Name="Payroll_PayrollDetail" Member="Payroll" ThisKey="PayrollID" OtherKey="PayrollID" Type="Payroll" IsForeignKey="true" />
     </Type>
@@ -135,30 +172,6 @@
       <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="PayrollGroup_Employee" Member="Employees" ThisKey="PayrollGroupID" OtherKey="EmployeeGroupID" Type="Employee" />
       <Association Name="PayrollGroup_Payroll" Member="Payrolls" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Payroll" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Loan" Member="Loans">
-    <Type Name="Loan">
-      <Column Name="LoanID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="LoanType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Terms" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="TermsRemaining" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="AmountToPayPerPayroll" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="RemainingAmount" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="IsPaid" Type="System.Boolean" DbType="Bit" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Employee_Loan" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.ComputeGrossPay" Method="ComputeGrossPay" IsComposable="true">
@@ -185,6 +198,10 @@
     <Parameter Name="TotalDays" Parameter="totalDays" Type="System.Double" DbType="Float" />
     <Return Type="System.Double" />
   </Function>
+  <Function Name="dbo.computePayment" Method="computePayment" IsComposable="true">
+    <Parameter Name="LoanID" Parameter="loanID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Double" />
+  </Function>
   <Function Name="dbo.ComputePhilHealth" Method="ComputePhilHealth" IsComposable="true">
     <Parameter Name="MonthlySalary" Parameter="monthlySalary" Type="System.Double" DbType="Float" />
     <Parameter Name="AverageWorkDaysAMonth" Parameter="averageWorkDaysAMonth" Type="System.Double" DbType="Float" />
@@ -202,6 +219,11 @@
     <Parameter Name="AverageWorkDaysAMonth" Parameter="averageWorkDaysAMonth" Type="System.Double" DbType="Float" />
     <Parameter Name="TotalDays" Parameter="totalDays" Type="System.Double" DbType="Float" />
     <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.computeTermsRemaining" Method="computeTermsRemaining" IsComposable="true">
+    <Parameter Name="LoanID" Parameter="loanID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Terms" Parameter="terms" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.ComputeTotalContributions" Method="ComputeTotalContributions" IsComposable="true">
     <Parameter Name="EmployeeID" Parameter="employeeID" Type="System.Int32" DbType="Int" />

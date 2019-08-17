@@ -32,6 +32,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             PayrollGroups = (from pg in Helper.db.PayrollGroups select pg).ToList();
         }
 
+        public void CreateEmployeePayrollDetails()
+        {
+            var employees = (from e in Helper.db.Employees where e.PayrollGroup == Payroll.PayrollGroup && (e.Status != "Terminated" || e.Status != "Inactive") select e);
+            foreach (var emp in employees)
+            {
+                this.Payroll.PayrollDetails.Add(new PayrollDetail { Employee = emp });
+            }
+        }
+
         #endregion
     }
 }

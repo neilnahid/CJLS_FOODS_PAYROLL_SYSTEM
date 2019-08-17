@@ -205,11 +205,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         }
         private double getCashLoansAmount()
         {
-            return (from l in Loans where l.IsPaid.Value == false select l.AmountToPayPerPayroll).Sum().Value;
+            return (from l in Loans where l.IsPaid.Value == false select l.AmountRemaining).Sum().Value;
         }
         private double getContributionsAmount()
         {
-            return Helper.db.ComputeTotalContributions(PayrollDetail.Employee.EmployeeID, PayrollDetail.PayrollDetailID, Payroll.PayrollID).Value;
+            //return Helper.db.ComputeTotalContributions(PayrollDetail.Employee.EmployeeID, PayrollDetail.PayrollDetailID, Payroll.PayrollID).Value;
+            return 0;
         }
         public void populateBreakdownItems()
         {

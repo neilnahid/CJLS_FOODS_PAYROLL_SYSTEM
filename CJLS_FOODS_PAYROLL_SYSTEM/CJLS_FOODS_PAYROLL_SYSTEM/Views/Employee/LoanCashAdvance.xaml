@@ -105,8 +105,7 @@
                             <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
                             <DataGridTextColumn Binding="{Binding LoanType}" Header="LoanType" />
                             <DataGridTextColumn Binding="{Binding TermsRemaining}" Header="TermsRemaining" />
-                            <DataGridTextColumn Binding="{Binding AmountToPayPerPayroll}" Header="AmountToPayPerPayroll" />
-                            <DataGridTextColumn Binding="{Binding RemainingAmount}" Header="RemainingAmount" />
+                            <DataGridTextColumn Binding="{Binding AmountRemaining}" Header="RemainingAmount" />
                             <DataGridTextColumn Binding="{Binding IsPaid}" Header="IsPaid" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
