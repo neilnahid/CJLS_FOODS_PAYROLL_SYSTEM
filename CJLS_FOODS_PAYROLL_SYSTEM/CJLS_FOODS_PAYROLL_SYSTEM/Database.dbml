@@ -27,7 +27,7 @@
       <Column Name="ContributionLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ContributionTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PayrollDetailID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Amount" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="amount" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="ContributionType_Contribution" Member="ContributionType" ThisKey="ContributionTypeID" OtherKey="ContributionTypeID" Type="ContributionType" IsForeignKey="true" />
       <Association Name="PayrollDetail_Contribution" Member="PayrollDetail" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" />
     </Type>
@@ -154,11 +154,11 @@
       <Column Name="TotalDays" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="GrossPay" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="TotalRegularHours" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="OvertimePay" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="TotalDeductions" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="TotalOverTimeHours" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="NetPay" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="TotalContributions" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="OvertimePay" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="PayrollDetail_Attendance" Member="Attendances" ThisKey="PayrollDetailID" OtherKey="PayrollDetailsID" Type="Attendance" />
       <Association Name="PayrollDetail_Contribution" Member="Contributions" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="Contribution" />
       <Association Name="PayrollDetail_LoanPayment" Member="LoanPayments" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="LoanPayment" />

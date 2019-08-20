@@ -38,7 +38,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         #region properties
         public double TotalOverTimeHours { get; set; }
 
-        public List<Deduction> AllDeductions { get; set; }
+        public ObservableCollection<Deduction> AllDeductions { get; set; }
         public double TotalRegularHours { get; set; }
         public double TotalDeductions { get; set; }
 
@@ -209,8 +209,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         }
         private double getContributionsAmount()
         {
-            //return Helper.db.ComputeTotalContributions(PayrollDetail.Employee.EmployeeID, PayrollDetail.PayrollDetailID, Payroll.PayrollID).Value;
-            return 0;
+            return (from c in Helper.db.Contributions where c.PayrollDetailID == PayrollDetail.PayrollDetailID select c.Amount).Sum().Value;
         }
         public void populateBreakdownItems()
         {
@@ -228,7 +227,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         }
         public void getAllDeducions()
         {
-            AllDeductions = new List<Deduction>();
+            AllDeductions = new ObservableCollection<Deduction>();
             foreach(var a in Attendances)
             {
                 foreach(var d in a.Deductions)
