@@ -27,7 +27,7 @@
       <Column Name="ContributionLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="ContributionTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PayrollDetailID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="amount" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Amount" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="ContributionType_Contribution" Member="ContributionType" ThisKey="ContributionTypeID" OtherKey="ContributionTypeID" Type="ContributionType" IsForeignKey="true" />
       <Association Name="PayrollDetail_Contribution" Member="PayrollDetail" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" />
     </Type>
@@ -121,6 +121,7 @@
       <Column Name="AmountRemaining" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="TotalPaid" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="IsPaid" Type="System.Boolean" DbType="Bit" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="AmountPerPayroll" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Loan_LoanPayment" Member="LoanPayments" ThisKey="LoanID" OtherKey="LoanID" Type="LoanPayment" />
       <Association Name="Employee_Loan" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
     </Type>

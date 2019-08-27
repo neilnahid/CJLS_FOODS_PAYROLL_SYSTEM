@@ -28,29 +28,29 @@
                     DisplayMemberPath="FullName"
                     IsEditable="True"
                     ItemsSource="{Binding Employees}"
-                    SelectedItem="{Binding Loan.Employee, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedItem="{Binding Loan.Employee, Mode=TwoWay}"
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                 <TextBox
                     materialDesign:HintAssist.Hint="Amount"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Loan.Amount, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding Loan.Amount, Mode=TwoWay}" />
                 <ComboBox
                     Grid.Column="1"
                     materialDesign:HintAssist.Hint="Loan Type"
                     materialDesign:HintAssist.HintOpacity=".26"
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                    Text="{Binding Loan.LoanType, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Loan.LoanType, Mode=TwoWay}">
                     <ComboBoxItem>Loan</ComboBoxItem>
                     <ComboBoxItem>Cash Advance</ComboBoxItem>
                 </ComboBox>
                 <TextBox
                     materialDesign:HintAssist.Hint="Terms(By Payroll)"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Loan.Terms, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding Loan.Terms, Mode=TwoWay}" />
                 <TextBox
                     materialDesign:HintAssist.Hint="Terms(By Payroll)"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Loan.TermsRemaining, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding Loan.TermsRemaining, Mode=TwoWay}" />
 
                 <!--  SP for buttons  -->
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">

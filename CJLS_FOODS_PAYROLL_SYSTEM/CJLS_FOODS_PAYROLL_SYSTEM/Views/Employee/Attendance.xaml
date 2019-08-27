@@ -41,10 +41,10 @@
                                     ItemsSource="{Binding Loans}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding Amount}" Header="Original Amount" />
-                                        <DataGridTextColumn Binding="{Binding RemainingAmount}" Header="Remaining" />
+                                        <DataGridTextColumn Binding="{Binding AmountRemaining}" Header="Remaining" />
                                         <DataGridTextColumn Binding="{Binding LoanType}" Header="Loan Type" />
                                         <DataGridTextColumn Binding="{Binding TermsRemaining}" Header="Terms Remaining" />
-                                        <DataGridTextColumn Binding="{Binding AmountToPayPerPayroll}" Header="Amt. To Pay" />
+                                        <DataGridTextColumn Binding="{Binding AmountPerPayroll}" Header="Amt. To Pay" />
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
@@ -138,15 +138,14 @@
                                 </GroupBox>
                             </Grid>
                         </StackPanel>
-
                         <!--  Footer buttons for dialog  -->
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button
                                 x:Name="dialogConfirm"
                                 Click="Btn_dialogConfirm_Click"
                                 Command="materialDesign:DialogHost.CloseDialogCommand"
-                                IsDefault="True"
-                                Style="{StaticResource MaterialDesignFlatButton}">
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Visibility="{Binding ConfirmButtonVisibility}">
                                 <Button.CommandParameter>
                                     <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
                                         True

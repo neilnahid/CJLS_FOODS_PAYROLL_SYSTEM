@@ -80,6 +80,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             VM.IsParentDialogOpen = true;
             VM.AddDeductionPanel = Visibility.Visible;
             VM.BreakdownPanel = Visibility.Collapsed;
+            VM.ConfirmButtonVisibility = Visibility.Visible;
         }
 
         private void btn_viewItemBreakdown(object sender, RoutedEventArgs e)
@@ -102,6 +103,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             VM.IsParentDialogOpen = true;
             VM.BreakdownPanel = Visibility.Visible;
             VM.AddDeductionPanel = Visibility.Collapsed;
+            VM.ConfirmButtonVisibility = Visibility.Collapsed;
         }
     }
 }

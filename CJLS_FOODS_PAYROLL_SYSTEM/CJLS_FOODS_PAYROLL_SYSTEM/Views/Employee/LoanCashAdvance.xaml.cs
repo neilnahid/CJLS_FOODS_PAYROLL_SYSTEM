@@ -29,7 +29,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void Btn_createNewLoan_Click(object sender, RoutedEventArgs e)
         {
-            VM.Loan = new Loan();
             DialogHeader.Text = "Create New Payroll Group";
             btn_dialogConfirm.Content = "CREATE";
         }

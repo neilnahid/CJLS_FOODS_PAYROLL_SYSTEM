@@ -61,7 +61,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         #region UI Properties
         public bool IsParentDialogOpen { get; set; }
         public bool IsJrDialogOpen { get; set; }
-
+        public Visibility ConfirmButtonVisibility { get; set; }
         public Visibility AddDeductionPanel { get; set; }
         public Visibility BreakdownPanel { get; set; }
         public Visibility BPTDaytoDayPanel { get; set; }
@@ -205,7 +205,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         }
         private double getCashLoansAmount()
         {
-            return (from l in Loans where l.IsPaid.Value == false select l.AmountRemaining).Sum().Value;
+            return (from l in Loans where l.IsPaid.Value == false select l.AmountPerPayroll).Sum().Value;
         }
         private double getContributionsAmount()
         {
@@ -218,13 +218,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             BreakdownItems.Add(new BreakdownItem { Name = "Loans/Cash Advance", Amount = getCashLoansAmount() });
             BreakdownItems.Add(new BreakdownItem { Name = "Contributions", Amount = getContributionsAmount() });
         }
-        public void updateLoansAndCashAdvances()
-        {
-            foreach(var l in Loans)
-            {
-                l.TermsRemaining--;
-            }
-        }
         public void getAllDeducions()
         {
             AllDeductions = new ObservableCollection<Deduction>();
@@ -235,6 +228,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                     AllDeductions.Add(d);
                 }
             }
+        }
+        public void insertLoanPayment()
+        {
+            Loans.ForEach((loan) =>
+            {
+                PayrollDetail.LoanPayments.Add(new LoanPayment { Loan = loan});
+            });
         }
         #endregion
     }

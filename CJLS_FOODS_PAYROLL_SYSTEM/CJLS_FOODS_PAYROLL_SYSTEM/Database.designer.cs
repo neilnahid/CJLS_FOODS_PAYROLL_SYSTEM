@@ -746,7 +746,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private System.Nullable<int> _PayrollDetailID;
 		
-		private System.Nullable<double> _amount;
+		private System.Nullable<double> _Amount;
 		
 		private EntityRef<ContributionType> _ContributionType;
 		
@@ -762,8 +762,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnContributionTypeIDChanged();
     partial void OnPayrollDetailIDChanging(System.Nullable<int> value);
     partial void OnPayrollDetailIDChanged();
-    partial void OnamountChanging(System.Nullable<double> value);
-    partial void OnamountChanged();
+    partial void OnAmountChanging(System.Nullable<double> value);
+    partial void OnAmountChanged();
     #endregion
 		
 		public Contribution()
@@ -841,22 +841,22 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_amount", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<double> amount
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Amount", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> Amount
 		{
 			get
 			{
-				return this._amount;
+				return this._Amount;
 			}
 			set
 			{
-				if ((this._amount != value))
+				if ((this._Amount != value))
 				{
-					this.OnamountChanging(value);
+					this.OnAmountChanging(value);
 					this.SendPropertyChanging();
-					this._amount = value;
-					this.SendPropertyChanged("amount");
-					this.OnamountChanged();
+					this._Amount = value;
+					this.SendPropertyChanged("Amount");
+					this.OnAmountChanged();
 				}
 			}
 		}
@@ -2607,6 +2607,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private System.Nullable<bool> _IsPaid;
 		
+		private System.Nullable<double> _AmountPerPayroll;
+		
 		private EntitySet<LoanPayment> _LoanPayments;
 		
 		private EntityRef<Employee> _Employee;
@@ -2633,6 +2635,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnTotalPaidChanged();
     partial void OnIsPaidChanging(System.Nullable<bool> value);
     partial void OnIsPaidChanged();
+    partial void OnAmountPerPayrollChanging(System.Nullable<double> value);
+    partial void OnAmountPerPayrollChanged();
     #endregion
 		
 		public Loan()
@@ -2822,6 +2826,26 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._IsPaid = value;
 					this.SendPropertyChanged("IsPaid");
 					this.OnIsPaidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AmountPerPayroll", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> AmountPerPayroll
+		{
+			get
+			{
+				return this._AmountPerPayroll;
+			}
+			set
+			{
+				if ((this._AmountPerPayroll != value))
+				{
+					this.OnAmountPerPayrollChanging(value);
+					this.SendPropertyChanging();
+					this._AmountPerPayroll = value;
+					this.SendPropertyChanged("AmountPerPayroll");
+					this.OnAmountPerPayrollChanged();
 				}
 			}
 		}
