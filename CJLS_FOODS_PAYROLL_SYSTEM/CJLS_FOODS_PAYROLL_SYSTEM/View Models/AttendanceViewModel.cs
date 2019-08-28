@@ -16,6 +16,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
     {
         public void InstantiateViewModel(Payroll payroll, PayrollDetail selectedPayrollDetail)
         {
+            LoanPayments = (from l in Helper.db.LoanPayments where PayrollDetail == l.PayrollDetail select l).ToList();
             Attendances = new List<Attendance>(); //instantiates attendances
             Payroll = payroll;
             PayrollDetail = selectedPayrollDetail;
@@ -27,8 +28,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             DeductionsTypes = GetDeductionTypes(); // gets deduction types
             Deduction = new Deduction(); // instantiate
             Deductions = new ObservableCollection<Deduction>();
-            Loans = new List<Loan>();
-            GetLoans();
             UpdateFlagsOfEveryAttendance(); // instantiate the flags according to the extended attendance's valuep
             populateBreakdownItems();
             //gets the string month representation
@@ -43,10 +42,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public double TotalDeductions { get; set; }
 
         public Payroll Payroll { get; set; }
-        public List<Loan> Loans { get; set; }
         public PayrollDetail PayrollDetail { get; set; }
         public Model.PayrollRange PayrollRange { get; set; }
-
+        public List<LoanPayment> LoanPayments { get; set; }
         public List<Attendance> Attendances { get; set; }
         public Model.ExtendedAttendance Attendance { get; set; }
         public string StartMonth { get; set; }
@@ -151,7 +149,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 }
             }
         }
-
         #region UpdateFlags Functions
         private void UpdateRegularHoursFlag(Model.ExtendedAttendance a)
         {
@@ -181,11 +178,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 a.DeductionsFlag = Visibility.Collapsed;
         }
         #endregion
-
-        public void GetLoans()
-        {
-            Loans = (from l in Helper.db.Loans where PayrollDetail.Employee == l.Employee && !l.IsPaid.Value select l).ToList();
-        }
         public struct BreakdownItem
         {
             public string Name { get; set; }
@@ -203,20 +195,21 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             }
             return totalDeductions;
         }
-        private double getCashLoansAmount()
-        {
-            return (from l in Loans where l.IsPaid.Value == false select l.AmountPerPayroll).Sum().Value;
-        }
         private double getContributionsAmount()
         {
-            return (from c in Helper.db.Contributions where c.PayrollDetailID == PayrollDetail.PayrollDetailID select c.Amount).Sum().Value;
+            var contributionAmount = (from c in Helper.db.Contributions where c.PayrollDetailID == PayrollDetail.PayrollDetailID select c.Amount).Sum();
+            return contributionAmount.HasValue ? contributionAmount.Value : 0;
         }
         public void populateBreakdownItems()
         {
             BreakdownItems = new List<BreakdownItem>();
             BreakdownItems.Add(new BreakdownItem { Name = "DaytoDay", Amount = getDaytoDayDeductionAmount() });
-            BreakdownItems.Add(new BreakdownItem { Name = "Loans/Cash Advance", Amount = getCashLoansAmount() });
+            BreakdownItems.Add(new BreakdownItem { Name = "Loans/Cash Advance", Amount = getTotalLoanPayments() });
             BreakdownItems.Add(new BreakdownItem { Name = "Contributions", Amount = getContributionsAmount() });
+        }
+        private double getTotalLoanPayments()
+        {
+            return (from lp in LoanPayments select lp.AmountPaid).Sum().Value;
         }
         public void getAllDeducions()
         {
@@ -228,13 +221,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                     AllDeductions.Add(d);
                 }
             }
-        }
-        public void insertLoanPayment()
-        {
-            Loans.ForEach((loan) =>
-            {
-                PayrollDetail.LoanPayments.Add(new LoanPayment { Loan = loan});
-            });
         }
         #endregion
     }

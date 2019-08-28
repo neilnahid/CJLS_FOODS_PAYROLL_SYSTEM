@@ -2938,9 +2938,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private int _LoanPaymentID;
 		
-		private System.Nullable<int> _LoanID;
+		private int _LoanID;
 		
-		private System.Nullable<int> _PayrollDetailID;
+		private int _PayrollDetailID;
 		
 		private System.Nullable<double> _AmountPaid;
 		
@@ -2954,9 +2954,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnCreated();
     partial void OnLoanPaymentIDChanging(int value);
     partial void OnLoanPaymentIDChanged();
-    partial void OnLoanIDChanging(System.Nullable<int> value);
+    partial void OnLoanIDChanging(int value);
     partial void OnLoanIDChanged();
-    partial void OnPayrollDetailIDChanging(System.Nullable<int> value);
+    partial void OnPayrollDetailIDChanging(int value);
     partial void OnPayrollDetailIDChanged();
     partial void OnAmountPaidChanging(System.Nullable<double> value);
     partial void OnAmountPaidChanged();
@@ -2989,8 +2989,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoanID", DbType="Int")]
-		public System.Nullable<int> LoanID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoanID", DbType="Int NOT NULL")]
+		public int LoanID
 		{
 			get
 			{
@@ -3013,8 +3013,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayrollDetailID", DbType="Int")]
-		public System.Nullable<int> PayrollDetailID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayrollDetailID", DbType="Int NOT NULL")]
+		public int PayrollDetailID
 		{
 			get
 			{
@@ -3084,7 +3084,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					}
 					else
 					{
-						this._LoanID = default(Nullable<int>);
+						this._LoanID = default(int);
 					}
 					this.SendPropertyChanged("Loan");
 				}
@@ -3118,7 +3118,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					}
 					else
 					{
-						this._PayrollDetailID = default(Nullable<int>);
+						this._PayrollDetailID = default(int);
 					}
 					this.SendPropertyChanged("PayrollDetail");
 				}
@@ -3391,8 +3391,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private System.Nullable<double> _TotalRegularHours;
 		
-		private System.Nullable<double> _TotalDeductions;
-		
 		private System.Nullable<double> _TotalOverTimeHours;
 		
 		private System.Nullable<double> _NetPay;
@@ -3400,6 +3398,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		private System.Nullable<double> _TotalContributions;
 		
 		private System.Nullable<double> _OvertimePay;
+		
+		private System.Nullable<double> _TotalDeductions;
 		
 		private EntitySet<Attendance> _Attendances;
 		
@@ -3427,8 +3427,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnGrossPayChanged();
     partial void OnTotalRegularHoursChanging(System.Nullable<double> value);
     partial void OnTotalRegularHoursChanged();
-    partial void OnTotalDeductionsChanging(System.Nullable<double> value);
-    partial void OnTotalDeductionsChanged();
     partial void OnTotalOverTimeHoursChanging(System.Nullable<double> value);
     partial void OnTotalOverTimeHoursChanged();
     partial void OnNetPayChanging(System.Nullable<double> value);
@@ -3437,6 +3435,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnTotalContributionsChanged();
     partial void OnOvertimePayChanging(System.Nullable<double> value);
     partial void OnOvertimePayChanged();
+    partial void OnTotalDeductionsChanging(System.Nullable<double> value);
+    partial void OnTotalDeductionsChanged();
     #endregion
 		
 		public PayrollDetail()
@@ -3577,26 +3577,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalDeductions", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<double> TotalDeductions
-		{
-			get
-			{
-				return this._TotalDeductions;
-			}
-			set
-			{
-				if ((this._TotalDeductions != value))
-				{
-					this.OnTotalDeductionsChanging(value);
-					this.SendPropertyChanging();
-					this._TotalDeductions = value;
-					this.SendPropertyChanged("TotalDeductions");
-					this.OnTotalDeductionsChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalOverTimeHours", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
 		public System.Nullable<double> TotalOverTimeHours
 		{
@@ -3673,6 +3653,26 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._OvertimePay = value;
 					this.SendPropertyChanged("OvertimePay");
 					this.OnOvertimePayChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalDeductions", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> TotalDeductions
+		{
+			get
+			{
+				return this._TotalDeductions;
+			}
+			set
+			{
+				if ((this._TotalDeductions != value))
+				{
+					this.OnTotalDeductionsChanging(value);
+					this.SendPropertyChanging();
+					this._TotalDeductions = value;
+					this.SendPropertyChanged("TotalDeductions");
+					this.OnTotalDeductionsChanged();
 				}
 			}
 		}
