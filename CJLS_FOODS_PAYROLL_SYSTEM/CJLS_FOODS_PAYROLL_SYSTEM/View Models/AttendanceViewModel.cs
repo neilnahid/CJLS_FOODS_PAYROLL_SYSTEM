@@ -40,6 +40,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public double TotalRegularHours { get; set; }
         public double TotalDeductions { get; set; }
 
+        public ObservableCollection<Contribution> Contributions { get; set; }
+
         public Payroll Payroll { get; set; }
         public PayrollDetail PayrollDetail { get; set; }
         public Model.PayrollRange PayrollRange { get; set; }

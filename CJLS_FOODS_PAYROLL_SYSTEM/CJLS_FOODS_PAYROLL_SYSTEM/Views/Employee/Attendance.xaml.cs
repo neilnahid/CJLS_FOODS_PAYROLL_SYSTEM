@@ -25,6 +25,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         {
             InitializeComponent();
             VM = (View_Models.AttendanceViewModel)DataContext;
+
             VM.InstantiateViewModel(payroll, selectedPayrolLDetail);
         }
 

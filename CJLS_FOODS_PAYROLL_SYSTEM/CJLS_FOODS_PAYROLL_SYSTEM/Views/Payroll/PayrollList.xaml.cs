@@ -40,6 +40,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
             Helper.db.Payrolls.InsertOnSubmit(VM.Payroll);
             Helper.db.SubmitChanges();
             Helper.db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues, VM.Payroll);
+
             NavigationService.Navigate(new Views.PayrollView.PayrollDetails(VM.Payroll));
             VM.Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
         }

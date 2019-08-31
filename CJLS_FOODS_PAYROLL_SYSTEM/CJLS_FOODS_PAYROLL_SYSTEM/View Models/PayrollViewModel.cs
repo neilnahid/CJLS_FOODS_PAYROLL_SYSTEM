@@ -37,10 +37,31 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             var employees = (from e in Helper.db.Employees where e.PayrollGroup == Payroll.PayrollGroup && (e.Status != "Terminated" || e.Status != "Inactive") select e);
             foreach (var emp in employees)
             {
-                this.Payroll.PayrollDetails.Add(new PayrollDetail { Employee = emp });
+                var newPD = new PayrollDetail { Employee = emp };
+                insertContributions(newPD);
+                insertLoanPayments(newPD);
+                this.Payroll.PayrollDetails.Add(newPD);
             }
         }
-
+        private void insertLoanPayments(PayrollDetail pd)
+        {
+            //inserts loan payments for the specified pd based on active loans of employee
+            (from l in Helper.db.Loans where l.Employee == pd.Employee && l.IsPaid == false select l).ToList().ForEach(loan =>
+            {
+                pd.LoanPayments.Add(new LoanPayment { Loan = loan });
+            });
+        }
+        private void insertContributions(PayrollDetail pd)
+        {
+            if (pd.Employee.IsPhilhealthActive)
+                pd.Contributions.Add(new Contribution { ContributionTypeID = 1, PayrollDetailID = pd.PayrollDetailID });
+            if (pd.Employee.IsSSSActive)
+                pd.Contributions.Add(new Contribution { ContributionTypeID = 2, PayrollDetailID = pd.PayrollDetailID });
+            if (pd.Employee.IsPagibigActive)
+                pd.Contributions.Add(new Contribution { ContributionTypeID = 3, PayrollDetailID = pd.PayrollDetailID });
+            if (pd.Employee.IsIncomeTaxActive)
+                pd.Contributions.Add(new Contribution { ContributionTypeID = 4, PayrollDetailID = pd.PayrollDetailID });
+        }
         #endregion
     }
 }
