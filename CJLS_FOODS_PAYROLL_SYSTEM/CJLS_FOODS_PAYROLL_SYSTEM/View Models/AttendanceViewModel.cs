@@ -16,7 +16,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
     {
         public void InstantiateViewModel(Payroll payroll, PayrollDetail selectedPayrollDetail)
         {
-            LoanPayments = (from l in Helper.db.LoanPayments where PayrollDetail == l.PayrollDetail select l).ToList();
             Attendances = new List<Attendance>(); //instantiates attendances
             Payroll = payroll;
             PayrollDetail = selectedPayrollDetail;
@@ -44,7 +43,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public Payroll Payroll { get; set; }
         public PayrollDetail PayrollDetail { get; set; }
         public Model.PayrollRange PayrollRange { get; set; }
-        public List<LoanPayment> LoanPayments { get; set; }
         public List<Attendance> Attendances { get; set; }
         public Model.ExtendedAttendance Attendance { get; set; }
         public string StartMonth { get; set; }
@@ -191,25 +189,21 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             var totalDeductions = 0.0;
             foreach (var a in Attendances)
             {
-                totalDeductions += (from d in a.Deductions select d.Amount).Sum();
+                totalDeductions += Math.Round((from d in a.Deductions select d.Amount).Sum(),2);
             }
             return totalDeductions;
         }
         private double getContributionsAmount()
         {
             var contributionAmount = (from c in Helper.db.Contributions where c.PayrollDetailID == PayrollDetail.PayrollDetailID select c.Amount).Sum();
-            return contributionAmount.HasValue ? contributionAmount.Value : 0;
+            return contributionAmount.HasValue ? Math.Round(contributionAmount.Value,2) : 0;
         }
         public void populateBreakdownItems()
         {
             BreakdownItems = new List<BreakdownItem>();
             BreakdownItems.Add(new BreakdownItem { Name = "DaytoDay", Amount = getDaytoDayDeductionAmount() });
-            BreakdownItems.Add(new BreakdownItem { Name = "Loans/Cash Advance", Amount = getTotalLoanPayments() });
+            BreakdownItems.Add(new BreakdownItem { Name = "Loans/Cash Advance", Amount = Math.Round((from lp in PayrollDetail.LoanPayments select lp.AmountPaid).Sum().Value,2) });
             BreakdownItems.Add(new BreakdownItem { Name = "Contributions", Amount = getContributionsAmount() });
-        }
-        private double getTotalLoanPayments()
-        {
-            return (from lp in LoanPayments select lp.AmountPaid).Sum().Value;
         }
         public void getAllDeducions()
         {

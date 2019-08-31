@@ -38,7 +38,7 @@
                                     CanUserAddRows="False"
                                     CanUserDeleteRows="False"
                                     CanUserReorderColumns="False"
-                                    ItemsSource="{Binding LoanPayments}">
+                                    ItemsSource="{Binding PayrollDetail.LoanPayments}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding Loan.Amount}" Header="Original Amount" />
                                         <DataGridTextColumn Binding="{Binding Loan.LoanType}" Header="Loan Type" />
@@ -553,10 +553,6 @@
                                     materialDesign:HintAssist.Hint="Overtime Pay"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     Text="{Binding PayrollDetail.OvertimePay, UpdateSourceTrigger=PropertyChanged}" />
-                                <TextBox
-                                    materialDesign:HintAssist.Hint="Total Contributions"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding PayrollDetail.TotalContributions, UpdateSourceTrigger=PropertyChanged}" />
                                 <Button
                                     x:Name="btn_viewBreakdownDialog"
                                     Click="Btn_viewBreakdownDialog_Click"

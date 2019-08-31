@@ -77,7 +77,6 @@
                             <DataGridTextColumn Binding="{Binding TotalRegularHours}" Header="Total Regular Hours" />
                             <DataGridTextColumn Binding="{Binding TotalOverTimeHours}" Header="Total Overtime Hours" />
                             <DataGridTextColumn Binding="{Binding TotalDeductions}" Header="Total Deductions" />
-                            <DataGridTextColumn Binding="{Binding TotalContributions}" Header="Total Deductions" />
                             <DataGridTextColumn Binding="{Binding GrossPay}" Header="Gross Pay" />
                             <DataGridTextColumn Binding="{Binding NetPay}" Header="Net Pay" />
                             <DataGridTemplateColumn>

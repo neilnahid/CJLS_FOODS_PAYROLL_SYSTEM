@@ -22,7 +22,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
         public PayrollDetails(CJLS_FOODS_PAYROLL_SYSTEM.Payroll payroll) {
             InitializeComponent();
             VM = (View_Models.PayrollDetailsViewModel)DataContext;
-            VM.Payroll = payroll;
+            VM.Payroll = (from p in Helper.db.Payrolls where p.PayrollID == payroll.PayrollID select p).FirstOrDefault();
             VM.InstantiatePayrollDetails();
             dialogHost.IsOpen = false;
         }
