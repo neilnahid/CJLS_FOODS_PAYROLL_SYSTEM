@@ -169,14 +169,15 @@
         </materialDesign:DialogHost.DialogContent>
         <Grid Margin="0,0,0,-0.4">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="16*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="71*" />
                 <RowDefinition Height="514*" />
             </Grid.RowDefinitions>
             <!--  PAGE HEADER  -->
-            <Grid>
+            <Grid Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -202,7 +203,6 @@
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
                 <!--  DATA GRID  -->
                 <StackPanel Orientation="Vertical">
@@ -215,7 +215,6 @@
                     </TextBlock>
                     <DataGrid
                         Name="DataGridCalendar"
-                        Grid.Column="0"
                         AutoGenerateColumns="False"
                         CanUserAddRows="False"
                         CanUserDeleteRows="False"
@@ -462,138 +461,145 @@
 
                 </StackPanel>
                 <!--  Attendance Details  -->
-                <Grid Grid.Row="1" Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="281*" />
-                        <RowDefinition Height="304*" />
-                    </Grid.RowDefinitions>
-                    <GroupBox Grid.Row="0" Header="Attendance Details">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="49*" />
-                                <ColumnDefinition Width="62*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="0">
-                                <StackPanel Orientation="Vertical">
-                                    <TextBox
-                                        Name="txtbox_regularHours"
-                                        materialDesign:HintAssist.Hint="Regular Hours Worked"
-                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        Text="{Binding Attendance.Attendance.RegularHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        TextChanged="Txtbox_regularHours_TextChanged" />
-                                    <TextBox
-                                        Name="txtbox_overtimeHours"
-                                        materialDesign:HintAssist.Hint="Overtime Hours Worked"
-                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        Text="{Binding Attendance.Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        TextChanged="Txtbox_overtimeHours_TextChanged" />
-                                </StackPanel>
-                            </Grid>
-                            <GroupBox Grid.Column="1" Header="Deductions">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="39*" />
-                                        <RowDefinition Height="8*" />
-                                    </Grid.RowDefinitions>
-                                    <DataGrid
-                                        AutoGenerateColumns="False"
-                                        CanUserAddRows="False"
-                                        CanUserDeleteRows="False"
-                                        CanUserResizeRows="False"
-                                        ItemsSource="{Binding Deductions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                        <DataGrid.Columns>
-                                            <DataGridTextColumn Binding="{Binding DeductionsType.Name}" Header="Description" />
-                                            <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
-                                        </DataGrid.Columns>
-                                    </DataGrid>
-                                </Grid>
-                            </GroupBox>
-                        </Grid>
-                    </GroupBox>
-                    <GroupBox Grid.Row="1" Header="Summary">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="10*" />
-                                <RowDefinition Height="3*" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <StackPanel
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Margin="0,0,2.8,6">
+            </Grid>
+            <Grid Grid.RowSpan="2" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="281*" />
+                    <RowDefinition Height="304*" />
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" Header="Attendance Details">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="49*" />
+                            <ColumnDefinition Width="62*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <StackPanel Orientation="Vertical">
                                 <TextBox
-                                    materialDesign:HintAssist.Hint="Total Regular Hours"
+                                    Name="txtbox_regularHours"
+                                    materialDesign:HintAssist.Hint="Regular Hours Worked"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding PayrollDetail.TotalRegularHours, UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding Attendance.Attendance.RegularHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    TextChanged="Txtbox_regularHours_TextChanged" />
                                 <TextBox
-                                    materialDesign:HintAssist.Hint="Total Overtime Hours"
+                                    Name="txtbox_overtimeHours"
+                                    materialDesign:HintAssist.Hint="Overtime Hours Worked"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding PayrollDetail.TotalOverTimeHours, UpdateSourceTrigger=PropertyChanged}" />
-                                <TextBox
-                                    materialDesign:HintAssist.Hint="Total Deductions"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding PayrollDetail.TotalDeductions, UpdateSourceTrigger=PropertyChanged}" />
-                                <TextBox
-                                    materialDesign:HintAssist.Hint="Net Pay"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding PayrollDetail.NetPay, UpdateSourceTrigger=PropertyChanged}" />
+                                    Text="{Binding Attendance.Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    TextChanged="Txtbox_overtimeHours_TextChanged" />
+                                <GroupBox Header="Leave Requests">
+                                    <ListView ItemsSource="{Binding Leaves}">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn DisplayMemberBinding="{Binding LeaveDate}" Header="Leave Date" />
+                                                <GridViewColumn DisplayMemberBinding="{Binding IsPaidLeave}" Header="Paid Leave" />
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </GroupBox>
                             </StackPanel>
-                            <StackPanel
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Margin="4.2,0,-0.4,6">
-                                <TextBox
-                                    materialDesign:HintAssist.Hint="GrossPay"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding PayrollDetail.GrossPay, UpdateSourceTrigger=PropertyChanged}" />
-                                <TextBox
-                                    materialDesign:HintAssist.Hint="Overtime Pay"
-                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding PayrollDetail.OvertimePay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                        <GroupBox Grid.Column="1" Header="Deductions">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="39*" />
+                                    <RowDefinition Height="8*" />
+                                </Grid.RowDefinitions>
+                                <DataGrid
+                                    Grid.Row="0"
+                                    AutoGenerateColumns="False"
+                                    CanUserAddRows="False"
+                                    CanUserDeleteRows="False"
+                                    CanUserResizeRows="False"
+                                    ItemsSource="{Binding Deductions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding DeductionsType.Name}" Header="Description" />
+                                        <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
                                 <Button
-                                    x:Name="btn_viewBreakdownDialog"
-                                    Click="Btn_viewBreakdownDialog_Click"
-                                    Content="View Breakdown"
-                                    Style="{StaticResource MaterialDesignRaisedAccentButton}"
-                                    ToolTip="Resource name: MaterialDesignRaisedAccentButton" />
-                            </StackPanel>
-                            <materialDesign:PopupBox
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Margin="0,0,-0.4,-0.2"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Bottom"
-                                Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}"
-                                ToolTip="PopupBox, Style MaterialDesignMultiFloatingActionPopupBox"
-                                ToolTipService.Placement="Right">
-                                <StackPanel>
-                                    <Button
-                                        x:Name="btn_openAddDeductionDialog"
-                                        Click="Btn_openAddDeductionDialog_Click"
-                                        ToolTip="Add Deduction">
-                                        <materialDesign:PackIcon
-                                            Width="24"
-                                            Height="24"
-                                            Kind="AlphabetD" />
-                                    </Button>
-                                    <Button
-                                        x:Name="btn_saveAttendance"
-                                        Click="Btn_saveAttendance_Click"
-                                        ToolTip="Save Attendance">
-                                        <materialDesign:PackIcon
-                                            Width="24"
-                                            Height="24"
-                                            Kind="ContentSaveAll" />
-                                    </Button>
-                                </StackPanel>
-                            </materialDesign:PopupBox>
+                                    x:Name="btn_openAddDeductionDialog"
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Right"
+                                    Click="Btn_openAddDeductionDialog_Click"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    ToolTip="Add Deduction">
+                                    <materialDesign:PackIcon
+                                        Width="24"
+                                        Height="24"
+                                        Kind="Add" />
+                                </Button>
 
-                        </Grid>
-                    </GroupBox>
-                </Grid>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="Summary">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*" />
+                            <RowDefinition Height="3*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,2.8,6">
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Total Regular Hours"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding PayrollDetail.TotalRegularHours, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Total Overtime Hours"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding PayrollDetail.TotalOverTimeHours, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Total Deductions"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding PayrollDetail.TotalDeductions, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Net Pay"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding PayrollDetail.NetPay, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
+                        <StackPanel
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="4.2,0,-0.4,6">
+                            <TextBox
+                                materialDesign:HintAssist.Hint="GrossPay"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding PayrollDetail.GrossPay, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox
+                                materialDesign:HintAssist.Hint="Overtime Pay"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding PayrollDetail.OvertimePay, UpdateSourceTrigger=PropertyChanged}" />
+                            <Button
+                                x:Name="btn_viewBreakdownDialog"
+                                Click="Btn_viewBreakdownDialog_Click"
+                                Content="View Breakdown"
+                                Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                                ToolTip="Resource name: MaterialDesignRaisedAccentButton" />
+                        </StackPanel>
+                        <Button
+                            x:Name="btn_saveAttendance"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Click="Btn_saveAttendance_Click"
+                            Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                            ToolTip="Save Attendance">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                Kind="ContentSave" />
+                        </Button>
+                    </Grid>
+                </GroupBox>
             </Grid>
 
         </Grid>

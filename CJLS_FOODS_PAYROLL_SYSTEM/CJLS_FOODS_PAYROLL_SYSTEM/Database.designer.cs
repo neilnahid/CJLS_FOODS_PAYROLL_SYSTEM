@@ -2420,7 +2420,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private System.DateTime _LeaveDate;
 		
-		private string _ApprovalStatus;
+		private bool _IsPaidLeave;
 		
 		private EntityRef<Employee> _Employee;
 		
@@ -2434,8 +2434,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnEmployeeIDChanged();
     partial void OnLeaveDateChanging(System.DateTime value);
     partial void OnLeaveDateChanged();
-    partial void OnApprovalStatusChanging(string value);
-    partial void OnApprovalStatusChanged();
+    partial void OnIsPaidLeaveChanging(bool value);
+    partial void OnIsPaidLeaveChanged();
     #endregion
 		
 		public Leave()
@@ -2508,22 +2508,22 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApprovalStatus", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string ApprovalStatus
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPaidLeave", DbType="Bit NOT NULL")]
+		public bool IsPaidLeave
 		{
 			get
 			{
-				return this._ApprovalStatus;
+				return this._IsPaidLeave;
 			}
 			set
 			{
-				if ((this._ApprovalStatus != value))
+				if ((this._IsPaidLeave != value))
 				{
-					this.OnApprovalStatusChanging(value);
+					this.OnIsPaidLeaveChanging(value);
 					this.SendPropertyChanging();
-					this._ApprovalStatus = value;
-					this.SendPropertyChanged("ApprovalStatus");
-					this.OnApprovalStatusChanged();
+					this._IsPaidLeave = value;
+					this.SendPropertyChanged("IsPaidLeave");
+					this.OnIsPaidLeaveChanged();
 				}
 			}
 		}

@@ -19,6 +19,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             Attendances = new List<Attendance>(); //instantiates attendances
             Payroll = payroll;
             PayrollDetail = selectedPayrollDetail;
+            Leaves = (from l in Helper.db.Leaves where l.Employee == selectedPayrollDetail.Employee && l.LeaveDate>=payroll.StartDate && l.LeaveDate <= payroll.EndDate select l).ToList();
             PayrollRange = new Model.PayrollRange();
             PayrollRange = GetPayrollRange(); // returns the weeks which contains days starting from payroll startdate to enddate
             AddToAttendances(PayrollRange); // references the attendance object attached to the Day object to the Attendances property
@@ -40,8 +41,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public double TotalRegularHours { get; set; }
         public double TotalDeductions { get; set; }
 
-        public ObservableCollection<Contribution> Contributions { get; set; }
-
+        public List<Leave> Leaves { get; set; }
         public Payroll Payroll { get; set; }
         public PayrollDetail PayrollDetail { get; set; }
         public Model.PayrollRange PayrollRange { get; set; }
@@ -90,6 +90,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             PayrollDetail.Attendances = new System.Data.Linq.EntitySet<Attendance>();
             PayrollDetail.Attendances.AddRange(Attendances);
             Helper.db.SubmitChanges();
+            Payroll = (from p in Helper.db.Payrolls where p.PayrollID == Payroll.PayrollID select p).First();
+            PayrollDetail = (from pd in Payroll.PayrollDetails where pd.PayrollDetailID == PayrollDetail.PayrollDetailID select pd).First();
         }
         public void AddDeduction(Attendance a, Deduction d)
         {
