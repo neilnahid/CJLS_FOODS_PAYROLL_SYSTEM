@@ -14,12 +14,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         public PayrollGroup PayrollGroup { get; set; }
         public ObservableCollection<PayrollGroup> PayrollGroups { get; set; }
         #endregion
-        public PayrollGroupViewModel() {
+        public void Instantiate()
+        {
+            Helper.db = new DatabaseDataContext();
             PayrollGroup = new PayrollGroup();
             PayrollGroups = new ObservableCollection<PayrollGroup>();
             GetPayrollGroups();
         }
-     
         public void CreateNewPayrollGroup() {
             try {
                 Helper.db.PayrollGroups.InsertOnSubmit(PayrollGroup);

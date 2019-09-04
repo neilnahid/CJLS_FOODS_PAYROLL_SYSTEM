@@ -24,6 +24,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         public Attendance(Payroll payroll, PayrollDetail selectedPayrolLDetail)
         {
             InitializeComponent();
+            Helper.db = new DatabaseDataContext();
             VM = (View_Models.AttendanceViewModel)DataContext;
 
             VM.InstantiateViewModel(payroll, selectedPayrolLDetail);

@@ -13,10 +13,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         {
             InitializeComponent();
             VM = (View_Models.EmployeeTypeViewModel)DataContext;
+            VM.Instantiate();
         }
 
         private void Btn_createNewEmployeeType_Click(object sender, RoutedEventArgs e)
         {
+            VM.EmployeeType = new EmployeeType();
             DialogHeader.Text = "Create New Employee Type";
             btn_dialogConfirm.Content = "CREATE";
         }

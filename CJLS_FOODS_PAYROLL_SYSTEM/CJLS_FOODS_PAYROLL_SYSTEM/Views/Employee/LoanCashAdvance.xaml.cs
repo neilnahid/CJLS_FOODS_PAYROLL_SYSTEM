@@ -25,6 +25,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         {
             InitializeComponent();
             VM = (View_Models.LoanCashAdvanceViewModel)DataContext;
+            VM.Instantiate();
         }
 
         private void Btn_createNewLoan_Click(object sender, RoutedEventArgs e)

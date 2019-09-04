@@ -11,8 +11,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 {
     public class LeaveViewModel : INotifyPropertyChanged
     {
-        public LeaveViewModel()
+        public void Instantiate()
         {
+            Helper.db = new DatabaseDataContext();
             Leave = new Leave();
             Leaves = new ObservableCollection<Leave>();
             Employees = new List<Employee>();

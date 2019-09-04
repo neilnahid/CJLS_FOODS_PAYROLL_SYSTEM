@@ -10,12 +10,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 {
     public class LoanCashAdvanceViewModel
     {
-        public LoanCashAdvanceViewModel()
+        public void Instantiate()
         {
+            Helper.db = new DatabaseDataContext();
             Loan = new Loan();
             GetLoans();
             GetEmployees();
-
         }
         public Loan Loan { get; set; }
         public ObservableCollection<Loan> Loans { get; set; }

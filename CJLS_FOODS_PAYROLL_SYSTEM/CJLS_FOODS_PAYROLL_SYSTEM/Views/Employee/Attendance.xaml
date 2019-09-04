@@ -52,7 +52,7 @@
                                     CanUserAddRows="False"
                                     CanUserDeleteRows="False"
                                     CanUserReorderColumns="False"
-                                    ItemsSource="{Binding PayrollDetail.Contributions}">
+                                    ItemsSource="{Binding PayrollDetail.Contributions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding ContributionType.Name}" Header="Name" />
                                         <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />

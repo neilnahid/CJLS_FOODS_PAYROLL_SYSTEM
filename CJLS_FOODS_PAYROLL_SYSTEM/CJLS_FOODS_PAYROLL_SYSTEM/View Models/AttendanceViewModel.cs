@@ -16,9 +16,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
     {
         public void InstantiateViewModel(Payroll payroll, PayrollDetail selectedPayrollDetail)
         {
+            Helper.db = new DatabaseDataContext();
             Attendances = new List<Attendance>(); //instantiates attendances
-            Payroll = payroll;
-            PayrollDetail = selectedPayrollDetail;
+            Payroll = (from p in Helper.db.Payrolls where p.PayrollID == payroll.PayrollID select p).First();
+            PayrollDetail = (from pd in Payroll.PayrollDetails where pd.PayrollDetailID == selectedPayrollDetail.PayrollDetailID select pd).First();
             Leaves = (from l in Helper.db.Leaves where l.Employee == selectedPayrollDetail.Employee && l.LeaveDate>=payroll.StartDate && l.LeaveDate <= payroll.EndDate select l).ToList();
             PayrollRange = new Model.PayrollRange();
             PayrollRange = GetPayrollRange(); // returns the weeks which contains days starting from payroll startdate to enddate
@@ -91,7 +92,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             PayrollDetail.Attendances.AddRange(Attendances);
             Helper.db.SubmitChanges();
             Payroll = (from p in Helper.db.Payrolls where p.PayrollID == Payroll.PayrollID select p).First();
-            PayrollDetail = (from pd in Payroll.PayrollDetails where pd.PayrollDetailID == PayrollDetail.PayrollDetailID select pd).First();
+            Helper.db = new DatabaseDataContext();
+            Helper.db = new DatabaseDataContext();
+            PayrollDetail = (from pd in Helper.db.PayrollDetails where pd.PayrollDetailID == PayrollDetail.PayrollDetailID select pd).First();
         }
         public void AddDeduction(Attendance a, Deduction d)
         {

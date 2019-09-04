@@ -166,7 +166,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Controls\Session.cs" />
-    <Compile Include="View Models\MainDashboardViewModel.cs" />
     <Compile Include="Views\Employee\EmployeeTypeList.xaml.cs">
       <DependentUpon>EmployeeTypeList.xaml</DependentUpon>
     </Compile>

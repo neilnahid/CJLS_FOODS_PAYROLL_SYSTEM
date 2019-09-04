@@ -10,9 +10,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
     class PayrollDetailsViewModel : INotifyPropertyChanged
     {
         #region properties
-        public PayrollDetailsViewModel()
-        {
-        }
         public Payroll Payroll { get; set; }
         public PayrollDetail PayrollDetail { get; set; }
         public ObservableCollection<PayrollDetail> PayrollDetails { get; set; }
@@ -23,8 +20,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         #region methods/functions
-        public void InstantiatePayrollDetails()
+        public void InstantiatePayrollDetails(Payroll payroll)
         {
+            Helper.db = new DatabaseDataContext();
+            Payroll = (from p in Helper.db.Payrolls where p.PayrollID == payroll.PayrollID select p).FirstOrDefault();
             PayrollDetails = new ObservableCollection<PayrollDetail>(GetPayrollDetailList());
             try
             {

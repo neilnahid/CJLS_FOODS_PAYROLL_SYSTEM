@@ -18,12 +18,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
     /// Interaction logic for PayrollDetails.xaml
     /// </summary>
     public partial class PayrollDetails : Page {
-        View_Models.PayrollDetailsViewModel VM = new View_Models.PayrollDetailsViewModel();
+        View_Models.PayrollDetailsViewModel VM;
         public PayrollDetails(CJLS_FOODS_PAYROLL_SYSTEM.Payroll payroll) {
             InitializeComponent();
             VM = (View_Models.PayrollDetailsViewModel)DataContext;
-            VM.Payroll = (from p in Helper.db.Payrolls where p.PayrollID == payroll.PayrollID select p).FirstOrDefault();
-            VM.InstantiatePayrollDetails();
+            VM.InstantiatePayrollDetails(payroll);
             dialogHost.IsOpen = false;
         }
         private void DialogHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs) {

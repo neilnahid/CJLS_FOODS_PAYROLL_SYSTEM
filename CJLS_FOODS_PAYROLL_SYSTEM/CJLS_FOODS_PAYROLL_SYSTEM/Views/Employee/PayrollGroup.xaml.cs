@@ -12,10 +12,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         {
             InitializeComponent();
             VM = (View_Models.PayrollGroupViewModel)DataContext;
+            VM.Instantiate();
         }
 
         private void Btn_CreateNewPayrollGroup_Click(object sender, RoutedEventArgs e)
         {
+            VM.PayrollGroup = new CJLS_FOODS_PAYROLL_SYSTEM.PayrollGroup();
             DialogHeader.Text = "Create New Payroll Group";
             btn_dialogConfirm.Content = "CREATE";
         }

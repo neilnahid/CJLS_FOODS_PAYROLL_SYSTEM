@@ -14,8 +14,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public ObservableCollection<EmployeeType> EmployeeTypes { get; set; }
         public EmployeeType EmployeeType { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
-        public EmployeeTypeViewModel()
+        public void Instantiate()
         {
+            Helper.db = new DatabaseDataContext();
             EmployeeType = new EmployeeType();
             EmployeeTypes = new ObservableCollection<EmployeeType>();
             FetchEmployeeTypes();

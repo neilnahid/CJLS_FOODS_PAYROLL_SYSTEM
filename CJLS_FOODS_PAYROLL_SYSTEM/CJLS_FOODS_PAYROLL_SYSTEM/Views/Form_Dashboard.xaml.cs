@@ -19,6 +19,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
     public partial class Form_Dashboard : Window {
         public Form_Dashboard() {
             InitializeComponent();
+            Helper.db.ObjectTrackingEnabled = true;
         }
 
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e) {

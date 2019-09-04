@@ -10,7 +10,8 @@ using System.Windows;
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
     public class PayrollViewModel : INotifyPropertyChanged {
         #region Constructors
-        public PayrollViewModel() {
+        public void Instantiate()
+        {
             Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
             Payrolls = FetchPayrollList();
             FetchPayrollGroups();
