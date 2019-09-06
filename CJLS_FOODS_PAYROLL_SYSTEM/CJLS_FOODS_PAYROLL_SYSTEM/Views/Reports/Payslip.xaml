@@ -1,0 +1,11 @@
+﻿<Window
+    x:Class="CJLS_FOODS_PAYROLL_SYSTEM.Views.Reports.Payslip"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.Views.Reports"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Payslip"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d" />

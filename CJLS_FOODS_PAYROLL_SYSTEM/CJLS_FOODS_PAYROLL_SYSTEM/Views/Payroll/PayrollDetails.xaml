@@ -11,6 +11,7 @@
     d:DesignWidth="800"
     DataContext="{StaticResource PayrollDetailsViewModel}"
     mc:Ignorable="d">
+
     <materialDesign:DialogHost x:Name="dialogHost" DialogClosing="DialogHost_DialogClosing">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel />
@@ -21,6 +22,116 @@
                     <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
+                <GroupBox
+                    Grid.Column="0"
+                    FontSize="24"
+                    Header="Payroll Details">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Style="{StaticResource MaterialDesignBody1TextBlock}">
+                                <Run Text="Payroll Group: " />
+                                <Run Text="{Binding Payroll.PayrollGroup.Name}" />
+                            </TextBlock>
+                            <TextBlock
+                                Grid.Row="0"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource MaterialDesignBody1TextBlock}">
+                                <Run Text="Date Created: " />
+                                <Run Text="{Binding Payroll.DateCreated, StringFormat=d}" />
+                            </TextBlock>
+                            <TextBlock Grid.Row="1" Style="{StaticResource MaterialDesignBody1TextBlock}">
+                                <Run Text="Payroll ID: " />
+                                <Run Text="{Binding Payroll.PayrollID, StringFormat=d}" />
+                            </TextBlock>
+                            <TextBlock
+                                Grid.Row="1"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource MaterialDesignBody1TextBlock}">
+                                <Run Text="Payroll Coverage: " />
+                                <Run Text="{Binding Payroll.StartDate, StringFormat=d}" />
+                                <Run Text=" - " />
+                                <Run Text="{Binding Payroll.EndDate, StringFormat=d}" />
+                            </TextBlock>
+                        </Grid>
+                        <DataGrid
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Stretch"
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserDeleteRows="False"
+                            CanUserResizeColumns="False"
+                            ColumnWidth="*"
+                            GridLinesVisibility="All"
+                            HorizontalGridLinesBrush="Black"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding PayrollDetails}"
+                            SelectedItem="{Binding PayrollDetail}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding PayrollDetailID}" />
+                                <DataGridTemplateColumn Header="Name">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Margin="0,0,5,0" Text="{Binding Employee.FirstName}" />
+                                                <TextBlock Text="{Binding Employee.LastName}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Binding="{Binding TotalRegularHours}" Header="Total Regular Hours" />
+                                <DataGridTextColumn Binding="{Binding TotalOverTimeHours}" Header="Total Overtime Hours" />
+                                <DataGridTextColumn Binding="{Binding TotalDeductions}" Header="Total Deductions" />
+                                <DataGridTextColumn Binding="{Binding GrossPay}" Header="Gross Pay" />
+                                <DataGridTextColumn Binding="{Binding NetPay}" Header="Net Pay" />
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                                x:Name="btn_Edit"
+                                                materialDesign:HintAssist.Hint="Edit Attendance"
+                                                Click="Btn_Edit_Click"
+                                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                                <materialDesign:PackIcon
+                                                    Width="24"
+                                                    Height="24"
+                                                    Kind="Edit" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <!--<DataGridCheckBoxColumn
+                                    Binding="{Binding Employee.IsPhilhealthActive}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                    Header="Philhealth" />
+                                <DataGridCheckBoxColumn
+                                    Binding="{Binding Employee.IsSSSActive}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                    Header="SSS" />
+                                <DataGridCheckBoxColumn
+                                    Binding="{Binding Employee.IsPagibigActive}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                    Header="PAG-IBIG" />
+                                <DataGridCheckBoxColumn
+                                    Binding="{Binding Employee.IsIncomeTaxActive}"
+                                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
+                                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
+                                    Header="Income Tax" />-->
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Button>Print Payroll Summary</Button>
+                            <Button>Print all Payslips</Button>
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
                 <GroupBox
                     Grid.Column="1"
                     FontSize="24"
@@ -42,83 +153,7 @@
                             materialDesign:HintAssist.Hint="Total Net Pay"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding TotalNetPay}" />
-
                     </StackPanel>
-                </GroupBox>
-
-                <GroupBox
-                    Grid.Column="0"
-                    FontSize="24"
-                    Header="Payroll Details">
-                    <DataGrid
-                        Margin="0,0,0,-0.2"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Stretch"
-                        AutoGenerateColumns="False"
-                        CanUserAddRows="False"
-                        CanUserDeleteRows="false"
-                        CanUserResizeColumns="False"
-                        ColumnWidth="*"
-                        IsReadOnly="True"
-                        ItemsSource="{Binding PayrollDetails}"
-                        SelectedItem="{Binding PayrollDetail}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding PayrollDetailID}" />
-                            <DataGridTemplateColumn Header="Name">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Margin="0,0,5,0" Text="{Binding Employee.FirstName}" />
-                                            <TextBlock Text="{Binding Employee.LastName}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTextColumn Binding="{Binding TotalRegularHours}" Header="Total Regular Hours" />
-                            <DataGridTextColumn Binding="{Binding TotalOverTimeHours}" Header="Total Overtime Hours" />
-                            <DataGridTextColumn Binding="{Binding TotalDeductions}" Header="Total Deductions" />
-                            <DataGridTextColumn Binding="{Binding GrossPay}" Header="Gross Pay" />
-                            <DataGridTextColumn Binding="{Binding NetPay}" Header="Net Pay" />
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button
-                                            x:Name="btn_Edit"
-                                            materialDesign:HintAssist.Hint="Edit Attendance"
-                                            Click="Btn_Edit_Click"
-                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
-                                            <materialDesign:PackIcon
-                                                Width="24"
-                                                Height="24"
-                                                Kind="Edit" />
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridCheckBoxColumn
-                                Binding="{Binding Employee.IsPhilhealthActive}"
-                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
-                                Header="Philhealth" />
-                            <DataGridCheckBoxColumn
-                                Binding="{Binding Employee.IsSSSActive}"
-                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
-                                Header="SSS" />
-                            <DataGridCheckBoxColumn
-                                Binding="{Binding Employee.IsPagibigActive}"
-                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
-                                Header="PAG-IBIG" />
-                            <DataGridCheckBoxColumn
-                                Binding="{Binding Employee.IsIncomeTaxActive}"
-                                EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
-                                Header="Income Tax" />
-
-                        </DataGrid.Columns>
-                    </DataGrid>
                 </GroupBox>
             </Grid>
             <Grid Grid.RowSpan="2" Margin="0,0,0,322">

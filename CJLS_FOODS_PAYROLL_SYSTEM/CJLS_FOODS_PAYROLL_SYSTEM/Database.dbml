@@ -9,7 +9,7 @@
       <Column Name="PayrollDetailsID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="MinutesLate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="Attendance_Deduction" Member="Deductions" ThisKey="AttendanceID" OtherKey="AttendanceID" Type="Deduction" />
-      <Association Name="PayrollDetail_Attendance" Member="PayrollDetail" ThisKey="PayrollDetailsID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" />
+      <Association Name="PayrollDetail_Attendance" Member="PayrollDetail" ThisKey="PayrollDetailsID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.Users" Member="Users">
@@ -28,8 +28,8 @@
       <Column Name="ContributionTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PayrollDetailID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Amount" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="ContributionType_Contribution" Member="ContributionType" ThisKey="ContributionTypeID" OtherKey="ContributionTypeID" Type="ContributionType" IsForeignKey="true" />
-      <Association Name="PayrollDetail_Contribution" Member="PayrollDetail" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" />
+      <Association Name="ContributionType_Contribution" Member="ContributionType" ThisKey="ContributionTypeID" OtherKey="ContributionTypeID" Type="ContributionType" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="PayrollDetail_Contribution" Member="PayrollDetail" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.ContributionType" Member="ContributionTypes">
@@ -46,7 +46,7 @@
       <Column Name="DeductionTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Amount" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="AttendanceID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Attendance_Deduction" Member="Attendance" ThisKey="AttendanceID" OtherKey="AttendanceID" Type="Attendance" IsForeignKey="true" />
+      <Association Name="Attendance_Deduction" Member="Attendance" ThisKey="AttendanceID" OtherKey="AttendanceID" Type="Attendance" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="DeductionsType_Deduction" Member="DeductionsType" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="DeductionsType" IsForeignKey="true" />
     </Type>
   </Table>
@@ -132,8 +132,8 @@
       <Column Name="LoanID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="PayrollDetailID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="AmountPaid" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Loan_LoanPayment" Member="Loan" ThisKey="LoanID" OtherKey="LoanID" Type="Loan" IsForeignKey="true" />
-      <Association Name="PayrollDetail_LoanPayment" Member="PayrollDetail" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" />
+      <Association Name="Loan_LoanPayment" Member="Loan" ThisKey="LoanID" OtherKey="LoanID" Type="Loan" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="PayrollDetail_LoanPayment" Member="PayrollDetail" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Payroll" Member="Payrolls">
@@ -142,7 +142,7 @@
       <Column Name="StartDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="EndDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="PayrollGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TotalDays" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="Payroll_PayrollDetail" Member="PayrollDetails" ThisKey="PayrollID" OtherKey="PayrollID" Type="PayrollDetail" />
       <Association Name="PayrollGroup_Payroll" Member="PayrollGroup" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="PayrollGroup" IsForeignKey="true" />
     </Type>
@@ -163,8 +163,8 @@
       <Association Name="PayrollDetail_Attendance" Member="Attendances" ThisKey="PayrollDetailID" OtherKey="PayrollDetailsID" Type="Attendance" />
       <Association Name="PayrollDetail_Contribution" Member="Contributions" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="Contribution" />
       <Association Name="PayrollDetail_LoanPayment" Member="LoanPayments" ThisKey="PayrollDetailID" OtherKey="PayrollDetailID" Type="LoanPayment" />
-      <Association Name="Employee_PayrollDetail" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
-      <Association Name="Payroll_PayrollDetail" Member="Payroll" ThisKey="PayrollID" OtherKey="PayrollID" Type="Payroll" IsForeignKey="true" />
+      <Association Name="Employee_PayrollDetail" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="Payroll_PayrollDetail" Member="Payroll" ThisKey="PayrollID" OtherKey="PayrollID" Type="Payroll" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.PayrollGroup" Member="PayrollGroups">

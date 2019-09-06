@@ -85,8 +85,24 @@
                         SelectedItem="{Binding Payroll}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding PayrollID}" Header="PayrollID" />
-                            <DataGridTextColumn Binding="{Binding StartDate}" Header="StartDate" />
-                            <DataGridTextColumn Binding="{Binding EndDate}" Header="EndDate" />
+                            <DataGridTextColumn Binding="{Binding PayrollGroup.Name}" Header="Type" />
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock>
+                                                <Run>Date Created:</Run>
+                                                <Run Text="{Binding DateCreated, StringFormat=d}" />
+                                            </TextBlock>
+                                            <TextBlock>
+                                                <Run Text="{Binding StartDate, StringFormat=d}" />
+                                                <Run>-</Run>
+                                                <Run Text="{Binding EndDate, StringFormat=d}" />
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

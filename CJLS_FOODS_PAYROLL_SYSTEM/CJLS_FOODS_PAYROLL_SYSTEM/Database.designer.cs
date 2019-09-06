@@ -401,7 +401,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollDetail_Attendance", Storage="_PayrollDetail", ThisKey="PayrollDetailsID", OtherKey="PayrollDetailID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollDetail_Attendance", Storage="_PayrollDetail", ThisKey="PayrollDetailsID", OtherKey="PayrollDetailID", IsForeignKey=true, DeleteRule="CASCADE")]
 		public PayrollDetail PayrollDetail
 		{
 			get
@@ -777,7 +777,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContributionType_Contribution", Storage="_ContributionType", ThisKey="ContributionTypeID", OtherKey="ContributionTypeID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="ContributionType_Contribution", Storage="_ContributionType", ThisKey="ContributionTypeID", OtherKey="ContributionTypeID", IsForeignKey=true, DeleteRule="CASCADE")]
 		public ContributionType ContributionType
 		{
 			get
@@ -811,7 +811,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollDetail_Contribution", Storage="_PayrollDetail", ThisKey="PayrollDetailID", OtherKey="PayrollDetailID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollDetail_Contribution", Storage="_PayrollDetail", ThisKey="PayrollDetailID", OtherKey="PayrollDetailID", IsForeignKey=true, DeleteRule="CASCADE")]
 		public PayrollDetail PayrollDetail
 		{
 			get
@@ -1131,7 +1131,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Attendance_Deduction", Storage="_Attendance", ThisKey="AttendanceID", OtherKey="AttendanceID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Attendance_Deduction", Storage="_Attendance", ThisKey="AttendanceID", OtherKey="AttendanceID", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Attendance Attendance
 		{
 			get
@@ -2973,7 +2973,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Loan_LoanPayment", Storage="_Loan", ThisKey="LoanID", OtherKey="LoanID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Loan_LoanPayment", Storage="_Loan", ThisKey="LoanID", OtherKey="LoanID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public Loan Loan
 		{
 			get
@@ -3007,7 +3007,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollDetail_LoanPayment", Storage="_PayrollDetail", ThisKey="PayrollDetailID", OtherKey="PayrollDetailID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollDetail_LoanPayment", Storage="_PayrollDetail", ThisKey="PayrollDetailID", OtherKey="PayrollDetailID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
 		public PayrollDetail PayrollDetail
 		{
 			get
@@ -3076,7 +3076,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private System.Nullable<int> _PayrollGroupID;
 		
-		private System.Nullable<int> _TotalDays;
+		private System.DateTime _DateCreated;
 		
 		private EntitySet<PayrollDetail> _PayrollDetails;
 		
@@ -3094,8 +3094,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnEndDateChanged();
     partial void OnPayrollGroupIDChanging(System.Nullable<int> value);
     partial void OnPayrollGroupIDChanged();
-    partial void OnTotalDaysChanging(System.Nullable<int> value);
-    partial void OnTotalDaysChanged();
+    partial void OnDateCreatedChanging(System.DateTime value);
+    partial void OnDateCreatedChanged();
     #endregion
 		
 		public Payroll()
@@ -3189,22 +3189,22 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TotalDays", AutoSync=AutoSync.Always, DbType="Int", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
-		public System.Nullable<int> TotalDays
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateCreated", DbType="DateTime NOT NULL")]
+		public System.DateTime DateCreated
 		{
 			get
 			{
-				return this._TotalDays;
+				return this._DateCreated;
 			}
 			set
 			{
-				if ((this._TotalDays != value))
+				if ((this._DateCreated != value))
 				{
-					this.OnTotalDaysChanging(value);
+					this.OnDateCreatedChanging(value);
 					this.SendPropertyChanging();
-					this._TotalDays = value;
-					this.SendPropertyChanged("TotalDays");
-					this.OnTotalDaysChanged();
+					this._DateCreated = value;
+					this.SendPropertyChanged("DateCreated");
+					this.OnDateCreatedChanged();
 				}
 			}
 		}
@@ -3632,7 +3632,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_PayrollDetail", Storage="_Employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Employee_PayrollDetail", Storage="_Employee", ThisKey="EmployeeID", OtherKey="EmployeeID", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Employee Employee
 		{
 			get
@@ -3666,7 +3666,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Payroll_PayrollDetail", Storage="_Payroll", ThisKey="PayrollID", OtherKey="PayrollID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Payroll_PayrollDetail", Storage="_Payroll", ThisKey="PayrollID", OtherKey="PayrollID", IsForeignKey=true, DeleteRule="CASCADE")]
 		public Payroll Payroll
 		{
 			get

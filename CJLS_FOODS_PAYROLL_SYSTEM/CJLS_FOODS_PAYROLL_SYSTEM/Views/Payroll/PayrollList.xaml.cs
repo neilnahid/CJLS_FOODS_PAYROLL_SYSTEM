@@ -36,6 +36,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
 
         private void btn_DialogConfirm_Click(object sender, RoutedEventArgs e) {
             VM.CreateEmployeePayrollDetails();
+            VM.Payroll.DateCreated = DateTime.Now.Date;
             Helper.db.Payrolls.InsertOnSubmit(VM.Payroll);
             Helper.db.SubmitChanges();
             Helper.db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues, VM.Payroll);
