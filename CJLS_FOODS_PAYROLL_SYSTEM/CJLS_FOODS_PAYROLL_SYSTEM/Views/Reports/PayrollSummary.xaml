@@ -12,7 +12,7 @@
     mc:Ignorable="d">
     <Grid>
         <StackPanel>
-            <FlowDocumentReader>
+            <FlowDocumentReader ViewingMode="Scroll">
                 <FlowDocument
                     x:Name="fd_payrollSummary"
                     ColumnWidth="8.5in"
@@ -27,7 +27,6 @@
                             CanUserDeleteRows="False"
                             CanUserReorderColumns="False"
                             CanUserResizeRows="False"
-                            ColumnWidth="Auto"
                             ItemsSource="{Binding Payroll.PayrollDetails}">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Header="Name">
