@@ -1394,6 +1394,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private int _DailyRequiredHours;
 		
+		private double _DailyRate;
+		
 		private int _RequiredDaysAWeek;
 		
 		private System.Nullable<double> _MonthlySalary;
@@ -1462,6 +1464,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnHourlyRateChanged();
     partial void OnDailyRequiredHoursChanging(int value);
     partial void OnDailyRequiredHoursChanged();
+    partial void OnDailyRateChanging(double value);
+    partial void OnDailyRateChanged();
     partial void OnRequiredDaysAWeekChanging(int value);
     partial void OnRequiredDaysAWeekChanged();
     partial void OnMonthlySalaryChanging(System.Nullable<double> value);
@@ -1802,6 +1806,26 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._DailyRequiredHours = value;
 					this.SendPropertyChanged("DailyRequiredHours");
 					this.OnDailyRequiredHoursChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DailyRate", AutoSync=AutoSync.Always, DbType="Float NOT NULL", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public double DailyRate
+		{
+			get
+			{
+				return this._DailyRate;
+			}
+			set
+			{
+				if ((this._DailyRate != value))
+				{
+					this.OnDailyRateChanging(value);
+					this.SendPropertyChanging();
+					this._DailyRate = value;
+					this.SendPropertyChanged("DailyRate");
+					this.OnDailyRateChanged();
 				}
 			}
 		}

@@ -65,6 +65,7 @@
     <Reference Include="PropertyChanged, Version=3.0.1.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
       <HintPath>..\packages\PropertyChanged.Fody.3.0.1\lib\net452\PropertyChanged.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -115,6 +116,7 @@
     <Compile Include="View Models\EmployeeViewModel.cs" />
     <Compile Include="Model\ModelPropertyChanged.cs" />
     <Compile Include="View Models\PayrollDetailsViewModel.cs" />
+    <Compile Include="View Models\PayrollSummaryViewModel.cs" />
     <Compile Include="View Models\PayrollViewModel.cs" />
     <Compile Include="View Models\UserAdminViewModel.cs" />
     <Compile Include="Views\Accounts\UserList.xaml.cs">

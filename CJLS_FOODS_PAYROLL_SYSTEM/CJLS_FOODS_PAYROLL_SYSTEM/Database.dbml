@@ -75,6 +75,7 @@
       <Column Name="AvailableLeaves" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="HourlyRate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Column Name="DailyRequiredHours" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DailyRate" Type="System.Double" DbType="Float NOT NULL" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="RequiredDaysAWeek" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="MonthlySalary" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="SSSID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />

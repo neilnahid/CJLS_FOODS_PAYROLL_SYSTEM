@@ -19,6 +19,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
     public partial class Form_Dashboard : Window {
         public Form_Dashboard() {
             InitializeComponent();
+            StaticValues.Title = Title;
             Helper.db.ObjectTrackingEnabled = true;
         }
 

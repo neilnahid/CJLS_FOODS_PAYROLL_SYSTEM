@@ -12,6 +12,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         #region Constructors
         public void Instantiate()
         {
+            Helper.db = new DatabaseDataContext();
             Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
             Payrolls = FetchPayrollList();
             FetchPayrollGroups();

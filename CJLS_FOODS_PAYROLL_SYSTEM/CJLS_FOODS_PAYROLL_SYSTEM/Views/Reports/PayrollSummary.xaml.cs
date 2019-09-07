@@ -19,9 +19,17 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Reports
     /// </summary>
     public partial class PayrollSummary : Window
     {
-        public PayrollSummary()
+        View_Models.PayrollSummaryViewModel VM;
+        public PayrollSummary(Payroll payroll)
         {
             InitializeComponent();
+            VM = (View_Models.PayrollSummaryViewModel)DataContext;
+            VM.Initialize(payroll.PayrollID);
+        }
+
+        private void btn_print_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Print(fd_payrollSummary);
         }
     }
 }

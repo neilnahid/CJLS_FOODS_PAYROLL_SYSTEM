@@ -7,8 +7,8 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Attendance"
-    d:DesignHeight="585.196"
-    d:DesignWidth="875.978"
+    d:DesignHeight="1080"
+    d:DesignWidth="1920"
     DataContext="{StaticResource AttendanceViewModel}"
     mc:Ignorable="d">
     <materialDesign:DialogHost x:Name="dialogHost" IsOpen="{Binding IsParentDialogOpen}">
@@ -40,9 +40,9 @@
                                     CanUserReorderColumns="False"
                                     ItemsSource="{Binding PayrollDetail.LoanPayments}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding Loan.Amount}" Header="Original Amount" />
                                         <DataGridTextColumn Binding="{Binding Loan.LoanType}" Header="Loan Type" />
-                                        <DataGridTextColumn Binding="{Binding Loan.AmountPerPayroll}" Header="Amt. To Pay" />
+                                        <DataGridTextColumn Binding="{Binding Loan.Amount}" Header="Original Amount" />
+                                        <DataGridTextColumn Binding="{Binding Loan.AmountRemaining}" Header="Amt. Remaining After" />
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
@@ -475,6 +475,16 @@
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
                             <StackPanel Orientation="Vertical">
+                                <GroupBox Header="Leave Requests">
+                                    <ListView ItemsSource="{Binding Leaves}">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn DisplayMemberBinding="{Binding LeaveDate}" Header="Leave Date" />
+                                                <GridViewColumn DisplayMemberBinding="{Binding IsPaidLeave}" Header="Paid Leave" />
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </GroupBox>
                                 <TextBox
                                     Name="txtbox_regularHours"
                                     materialDesign:HintAssist.Hint="Regular Hours Worked"
@@ -487,16 +497,7 @@
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     Text="{Binding Attendance.Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextChanged="Txtbox_overtimeHours_TextChanged" />
-                                <GroupBox Header="Leave Requests">
-                                    <ListView ItemsSource="{Binding Leaves}">
-                                        <ListView.View>
-                                            <GridView>
-                                                <GridViewColumn DisplayMemberBinding="{Binding LeaveDate}" Header="Leave Date" />
-                                                <GridViewColumn DisplayMemberBinding="{Binding IsPaidLeave}" Header="Paid Leave" />
-                                            </GridView>
-                                        </ListView.View>
-                                    </ListView>
-                                </GroupBox>
+
                             </StackPanel>
                         </Grid>
                         <GroupBox Grid.Column="1" Header="Deductions">

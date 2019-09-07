@@ -8,13 +8,55 @@
     Title="PayrollSummary"
     Width="1100"
     Height="850"
+    DataContext="{StaticResource PayrollSummaryViewModel}"
     mc:Ignorable="d">
-    <FlowDocumentReader>
-        <FlowDocument
-            ColumnWidth="8.5in"
-            PageHeight="8.5in"
-            PageWidth="11in">
-            <Paragraph FontSize="30" TextAlignment="Center">Payroll Summary</Paragraph>
-        </FlowDocument>
-    </FlowDocumentReader>
+    <Grid>
+        <StackPanel>
+            <FlowDocumentReader>
+                <FlowDocument
+                    x:Name="fd_payrollSummary"
+                    ColumnWidth="8.5in"
+                    PageHeight="8.5in"
+                    PagePadding="0"
+                    PageWidth="13in">
+                    <Paragraph FontSize="30" TextAlignment="Center">Payroll Summary</Paragraph>
+                    <BlockUIContainer>
+                        <DataGrid
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserDeleteRows="False"
+                            CanUserReorderColumns="False"
+                            CanUserResizeRows="False"
+                            ColumnWidth="Auto"
+                            ItemsSource="{Binding Payroll.PayrollDetails}">
+                            <DataGrid.Columns>
+                                <DataGridTemplateColumn Header="Name">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock>
+                                                <Run Text="{Binding Employee.LastName}" />
+                                                <Run Text=" " />
+                                                <Run Text="{Binding Employee.FirstName}" />
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Binding="{Binding Employee.EmployeeType.Name}" Header="Position" />
+                                <DataGridTextColumn Binding="{Binding Employee.DailyRate}" Header="Rate" />
+                                <DataGridTextColumn Binding="{Binding TotalRegularHours}" Header="Total Regular Hours" />
+                                <DataGridTextColumn Binding="{Binding TotalDays}" Header="No. of Days" />
+                                <DataGridTextColumn Binding="{Binding TotalOverTimeHours}" Header="Total Overtime Hours" />
+                                <DataGridTextColumn Binding="{Binding OvertimePay}" Header="Overtime" />
+                                <DataGridTextColumn Binding="{Binding GrossPay}" Header="Gross Pay" />
+                                <DataGridTextColumn Binding="{Binding TotalDeductions}" Header="Deduction" />
+                                <DataGridTextColumn Binding="{Binding NetPay}" Header="Net Payroll" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </BlockUIContainer>
+                </FlowDocument>
+            </FlowDocumentReader>
+            <Button Click="btn_print_Click">Print</Button>
+        </StackPanel>
+    </Grid>
+
 </Window>
