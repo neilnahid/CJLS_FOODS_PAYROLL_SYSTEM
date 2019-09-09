@@ -43,6 +43,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition />
                                     <ColumnDefinition />
+                                    <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel Name="Grosspay" Grid.Column="0">
                                     <StackPanel Orientation="Horizontal">
@@ -68,6 +69,15 @@
                                     IsReadOnly="True"
                                     ItemsSource="{Binding PayDeductions}"
                                     VerticalGridLinesBrush="Transparent" />
+                                <Grid Grid.Column="2">
+                                    <TextBlock>
+                                        <Run>Net Payroll:</Run>
+                                        <Run Text="{Binding PayrollDetail.NetPay}" />
+                                    </TextBlock>
+                                    <TextBlock VerticalAlignment="Bottom">
+                                        Received By:_________________
+                                    </TextBlock>
+                                </Grid>
                             </Grid>
                         </StackPanel>
                     </Grid>
