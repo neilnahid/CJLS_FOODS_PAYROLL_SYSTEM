@@ -107,11 +107,11 @@
     <Compile Include="Model\ExtendedAttendance.cs" />
     <Compile Include="Model\PayrollRange.cs" />
     <Compile Include="Model\Week.cs" />
-    <Compile Include="StaticValues.cs" />
     <Compile Include="View Models\AttendanceViewModel.cs" />
     <Compile Include="View Models\EmployeeTypeViewModel.cs" />
     <Compile Include="View Models\LeaveViewModel.cs" />
     <Compile Include="View Models\LoanCashAdvanceViewModel.cs" />
+    <Compile Include="View Models\LoginViewModel.cs" />
     <Compile Include="View Models\PayrollGroupViewModel.cs" />
     <Compile Include="View Models\EmployeeViewModel.cs" />
     <Compile Include="Model\ModelPropertyChanged.cs" />
@@ -128,6 +128,9 @@
     </Compile>
     <Compile Include="Views\Employee\EmployeeList.xaml.cs">
       <DependentUpon>EmployeeList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login_Form.xaml.cs">
+      <DependentUpon>Login_Form.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Reports\PayrollSummary.xaml.cs">
       <DependentUpon>PayrollSummary.xaml</DependentUpon>
@@ -163,6 +166,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Login_Form.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Payroll\PayrollDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -174,10 +181,6 @@
     <Page Include="Views\Form_Dashboard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Form_Login.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -204,10 +207,6 @@
     </Compile>
     <Compile Include="Views\Form_Dashboard.xaml.cs">
       <DependentUpon>Form_Dashboard.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Form_Login.xaml.cs">
-      <DependentUpon>Form_Login.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Reports\PayrollSummary.xaml">
       <SubType>Designer</SubType>

@@ -1,0 +1,56 @@
+﻿<Window
+    x:Class="CJLS_FOODS_PAYROLL_SYSTEM.Views.Login_Form"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.Views"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Login_Form"
+    Width="500"
+    Height="400"
+    DataContext="{StaticResource LoginViewModel}"
+    mc:Ignorable="d">
+    <Grid>
+        <StackPanel>
+            <TextBlock HorizontalAlignment="Center" FontSize="25">CJLS FOODS PAYROLL SYSTEM</TextBlock>
+            <TextBlock
+                Margin="0,25,0,0"
+                HorizontalAlignment="Center"
+                FontSize="40"
+                Text="Login" />
+            <Grid>
+                <StackPanel HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon VerticalAlignment="Bottom" Kind="Account" />
+                        <TextBox
+                            materialDesign:HintAssist.Hint="Username"
+                            FontSize="15"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding Username}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon VerticalAlignment="Bottom" Kind="Key" />
+                        <PasswordBox
+                            x:Name="passwordBox"
+                            materialDesign:HintAssist.Foreground="Green"
+                            materialDesign:HintAssist.Hint="Password"
+                            materialDesign:TextFieldAssist.UnderlineBrush="Green"
+                            FontSize="15"
+                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                    </StackPanel>
+                    <Button Margin="0,25,0,0" Click="btn_Login_Click">
+                        <Button.Background>
+                            <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                <GradientStop Offset="0" Color="#FF42D693" />
+                                <GradientStop Offset="1" Color="#FF8680E0" />
+                                <GradientStop Offset="0.522" Color="#FF1DB2CE" />
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        Login
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>

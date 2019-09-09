@@ -38,7 +38,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
         }
 
         private void Btn_Edit_Click(object sender, RoutedEventArgs e) {
-            StaticValues.Title.Text = "Attendance";
+            Helper.Title.Text = "Attendance";
             NavigationService.Navigate(new Views.Employee.Attendance(VM.Payroll, VM.PayrollDetail));
         }
 
