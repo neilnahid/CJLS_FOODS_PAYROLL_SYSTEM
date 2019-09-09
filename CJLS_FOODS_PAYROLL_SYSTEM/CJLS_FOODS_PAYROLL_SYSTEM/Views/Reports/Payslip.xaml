@@ -20,67 +20,73 @@
                 PagePadding="0"
                 PageWidth="8.5in">
                 <BlockUIContainer>
-                    <Grid>
-                        <StackPanel>
-                            <Label HorizontalAlignment="Center" FontSize="30">PAYSLIP</Label>
-                            <Grid>
-                                <TextBlock>
-                                    <Run>NAME:</Run>
-                                    <Run Text="{Binding PayrollDetail.Employee.FullName}" />
-                                </TextBlock>
-                                <TextBlock HorizontalAlignment="Center">
-                                    <Run>Payroll Period:</Run>
-                                    <Run Text="{Binding PayrollDetail.Payroll.StartDate, StringFormat=d}" />
-                                    <Run>-</Run>
-                                    <Run Text="{Binding PayrollDetail.Payroll.EndDate, StringFormat=d}" />
-                                </TextBlock>
-                            </Grid>
-                            <TextBlock>
-                                <Run>BASIC:</Run>
-                                <Run Text="{Binding PayrollDetail.Employee.DailyRate}" />
-                            </TextBlock>
-                            <Grid Margin="0,50,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Name="Grosspay" Grid.Column="0">
-                                    <StackPanel Orientation="Horizontal">
-                                        <StackPanel HorizontalAlignment="Right">
-                                            <Label HorizontalAlignment="Right" Content="Regular Shift: " />
-                                            <Label HorizontalAlignment="Right" Content="Overtime: " />
-                                            <Label HorizontalAlignment="Right" Content="Gross Pay: " />
-                                        </StackPanel>
-                                        <StackPanel>
-                                            <Label Content="{Binding PayrollDetail.RegularPay}" />
-                                            <Label Content="{Binding PayrollDetail.OvertimePay}" />
-                                            <Label Content="{Binding PayrollDetail.GrossPay}" />
-                                        </StackPanel>
-                                    </StackPanel>
+                    <ItemsControl ItemsSource="{Binding Payslips}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <StackPanel>
+                                        <Label HorizontalAlignment="Center" FontSize="30">PAYSLIP</Label>
+                                        <Grid>
+                                            <TextBlock>
+                                                <Run>NAME:</Run>
+                                                <Run Text="{Binding PayrollDetail.Employee.FullName}" />
+                                            </TextBlock>
+                                            <TextBlock HorizontalAlignment="Center">
+                                                <Run>Payroll Period:</Run>
+                                                <Run Text="{Binding PayrollDetail.Payroll.StartDate, StringFormat=d}" />
+                                                <Run>-</Run>
+                                                <Run Text="{Binding PayrollDetail.Payroll.EndDate, StringFormat=d}" />
+                                            </TextBlock>
+                                        </Grid>
+                                        <TextBlock>
+                                            <Run>BASIC:</Run>
+                                            <Run Text="{Binding PayrollDetail.Employee.DailyRate}" />
+                                        </TextBlock>
+                                        <Grid Margin="0,50,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Name="Grosspay" Grid.Column="0">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <StackPanel HorizontalAlignment="Right">
+                                                        <Label HorizontalAlignment="Right" Content="Regular Shift: " />
+                                                        <Label HorizontalAlignment="Right" Content="Overtime: " />
+                                                        <Label HorizontalAlignment="Right" Content="Gross Pay: " />
+                                                    </StackPanel>
+                                                    <StackPanel>
+                                                        <Label Content="{Binding PayrollDetail.RegularPay}" />
+                                                        <Label Content="{Binding PayrollDetail.OvertimePay}" />
+                                                        <Label Content="{Binding PayrollDetail.GrossPay}" />
+                                                    </StackPanel>
+                                                </StackPanel>
 
-                                </StackPanel>
-                                <DataGrid
-                                    Grid.Column="1"
-                                    ColumnWidth="1*"
-                                    GridLinesVisibility="All"
-                                    HeadersVisibility="None"
-                                    HorizontalGridLinesBrush="Transparent"
-                                    IsReadOnly="True"
-                                    ItemsSource="{Binding PayDeductions}"
-                                    VerticalGridLinesBrush="Transparent" />
-                                <Grid Grid.Column="2">
-                                    <TextBlock>
-                                        <Run>Net Payroll:</Run>
-                                        <Run Text="{Binding PayrollDetail.NetPay}" />
-                                    </TextBlock>
-                                    <TextBlock VerticalAlignment="Bottom">
-                                        Received By:_________________
-                                    </TextBlock>
+                                            </StackPanel>
+                                            <DataGrid
+                                                Grid.Column="1"
+                                                ColumnWidth="1*"
+                                                GridLinesVisibility="All"
+                                                HeadersVisibility="None"
+                                                HorizontalGridLinesBrush="Transparent"
+                                                IsReadOnly="True"
+                                                ItemsSource="{Binding PayrollDeductions}"
+                                                VerticalGridLinesBrush="Transparent" />
+                                            <Grid Grid.Column="2">
+                                                <TextBlock>
+                                                    <Run>Net Payroll:</Run>
+                                                    <Run Text="{Binding PayrollDetail.NetPay}" />
+                                                </TextBlock>
+                                                <TextBlock VerticalAlignment="Bottom">
+                                                    Received By:_________________
+                                                </TextBlock>
+                                            </Grid>
+                                        </Grid>
+                                    </StackPanel>
                                 </Grid>
-                            </Grid>
-                        </StackPanel>
-                    </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </BlockUIContainer>
             </FlowDocument>
         </FlowDocumentReader>

@@ -11,32 +11,38 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 {
     public class PayslipViewModel : INotifyPropertyChanged
     {
-        public class PayrollDeductions : INotifyPropertyChanged
+        public class PayrollDeduction : INotifyPropertyChanged
         {
             public event PropertyChangedEventHandler PropertyChanged;
             public string Name { get; set; }
             public double Amount { get; set; }
 
         }
-        
-        public PayrollDetail PayrollDetail { get; set; }
-        public List<PayrollDeductions> PayDeductions { get; set; }
-
-        public void Instantiate(PayrollDetail pd)
+        public class Payslip
         {
-            PayrollDetail = pd;
-            getPayrollDeductions();
+            public PayrollDetail PayrollDetail { get; set; }
+            public List<PayrollDeduction> PayrollDeductions{ get; set; }
         }
-        public void getPayrollDeductions()
+        public List<Payslip> Payslips { get; set; }
+        public void Instantiate(List<PayrollDetail> payrollDetails)
         {
-            PayDeductions = new List<PayrollDeductions>();
+            Payslips = new List<Payslip>();
+            foreach(var pd in payrollDetails)
+            {
+                Payslips.Add(new Payslip { PayrollDetail = pd, PayrollDeductions = getPayrollDeductions(pd) });
+            }
+        }
+        public List<PayrollDeduction> getPayrollDeductions(PayrollDetail payrollDetail)
+        {
+            var PayDeductions = new List<PayrollDeduction>();
             //get daytodaydeductions
-            PayDeductions.AddRange(getDayToDayDeductions());
+            PayDeductions.AddRange(getDayToDayDeductions(payrollDetail));
             //get CA/loans deductions
-            PayDeductions.AddRange(getCALoansDeductions());
+            PayDeductions.AddRange(getCALoansDeductions(payrollDetail));
             //get contributions deductions
-            PayDeductions.AddRange(getContributionDeductions());
-            PayDeductions.Add(new PayrollDeductions { Name = "Total Deductions", Amount = PayDeductions.Sum(pd => pd.Amount) });
+            PayDeductions.AddRange(getContributionDeductions(payrollDetail));
+            PayDeductions.Add(new PayrollDeduction { Name = "Total Deductions", Amount = PayDeductions.Sum(pd => pd.Amount) });
+            return PayDeductions;
         }
 
 
@@ -47,30 +53,30 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
          * 2. orders all the retrieved deductions by groups according to their name
          * 3. return the payrolldeductions list
          */
-        private List<PayrollDeductions> getDayToDayDeductions()
+        private List<PayrollDeduction> getDayToDayDeductions(PayrollDetail payrollDetail)
         {
 
-            List<PayrollDeductions> pd = new List<PayrollDeductions>();
-            foreach (var attendance in PayrollDetail.Attendances)
+            List<PayrollDeduction> pd = new List<PayrollDeduction>();
+            foreach (var attendance in payrollDetail.Attendances)
             {
                 foreach (var deduction in attendance.Deductions)
                 {
-                    pd.Add(new PayrollDeductions
+                    pd.Add(new PayrollDeduction
                     {
                         Name = deduction.DeductionsType.Name,
                         Amount = deduction.Amount
                     });
                 }
             }
-            pd = (from _pd in pd group _pd by _pd.Name into g select new PayrollDeductions { Name = g.Key, Amount = g.Sum(x => x.Amount) }).ToList();
+            pd = (from _pd in pd group _pd by _pd.Name into g select new PayrollDeduction { Name = g.Key, Amount = g.Sum(x => x.Amount) }).ToList();
             return pd;
         }
-        private List<PayrollDeductions> getCALoansDeductions()
+        private List<PayrollDeduction> getCALoansDeductions(PayrollDetail payrollDetail)
         {
-            var pd = new List<PayrollDeductions>();
-            foreach (var loanPayment in PayrollDetail.LoanPayments)
+            var pd = new List<PayrollDeduction>();
+            foreach (var loanPayment in payrollDetail.LoanPayments)
             {
-                pd.Add(new PayrollDeductions
+                pd.Add(new PayrollDeduction
                 {
                     Name = loanPayment.Loan.LoanType,
                     Amount = loanPayment.AmountPaid.Value
@@ -78,12 +84,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             }
             return pd;
         }
-        private List<PayrollDeductions> getContributionDeductions()
+        private List<PayrollDeduction> getContributionDeductions(PayrollDetail payrollDetail)
         {
-            var pd = new List<PayrollDeductions>();
-            foreach (var contribution in PayrollDetail.Contributions)
+            var pd = new List<PayrollDeduction>();
+            foreach (var contribution in payrollDetail.Contributions)
             {
-                pd.Add(new PayrollDeductions
+                pd.Add(new PayrollDeduction
                 {
                     Name = contribution.ContributionType.Name,
                     Amount = contribution.Amount.Value

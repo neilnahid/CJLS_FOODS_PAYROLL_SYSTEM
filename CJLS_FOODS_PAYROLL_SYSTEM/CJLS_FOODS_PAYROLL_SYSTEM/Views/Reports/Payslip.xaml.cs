@@ -20,11 +20,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Reports
     public partial class Payslip : Window
     {
         View_Models.PayslipViewModel VM;
-        public Payslip(PayrollDetail pd)
+        public Payslip(List<PayrollDetail> payrollDetails)
         {
             InitializeComponent();
             VM = (View_Models.PayslipViewModel)DataContext;
-            VM.Instantiate(pd);
+            VM.Instantiate(payrollDetails);
         }
 
         private void btn_printPayslip_Click(object sender, RoutedEventArgs e)
