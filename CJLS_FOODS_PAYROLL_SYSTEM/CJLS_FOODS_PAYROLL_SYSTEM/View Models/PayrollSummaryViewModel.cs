@@ -15,7 +15,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
    public  class PayrollSummaryViewModel : INotifyPropertyChanged
     {
         public Payroll Payroll { get; set; }
-        public Employee Employee { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize(int PayrollID)
         {

@@ -15,6 +15,7 @@
             <VM:PayrollGroupViewModel x:Key="PayrollGroupViewModel" />
             <VM:EmployeeTypeViewModel x:Key="EmployeeTypeViewModel" />
             <VM:LoanCashAdvanceViewModel x:Key="LoanCashAdvanceViewModel" />
+            <VM:PayslipViewModel x:Key="PayslipViewModel" />
             <VM:PayrollSummaryViewModel x:Key="PayrollSummaryViewModel" />
             <VM:LeaveViewModel x:Key="LeaveViewModel" />
             <ResourceDictionary.MergedDictionaries>

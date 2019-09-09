@@ -4,8 +4,76 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.Views.Reports"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Payslip"
-    Width="800"
-    Height="450"
-    mc:Ignorable="d" />
+    Width="1000"
+    Height="578.475"
+    DataContext="{StaticResource PayslipViewModel}"
+    mc:Ignorable="d">
+    <Grid>
+        <FlowDocumentReader ViewingMode="Scroll">
+            <FlowDocument
+                x:Name="fd_Payslip"
+                ColumnWidth="8.5in"
+                PageHeight="11in"
+                PagePadding="0"
+                PageWidth="8.5in">
+                <BlockUIContainer>
+                    <Grid>
+                        <StackPanel>
+                            <Label HorizontalAlignment="Center" FontSize="30">PAYSLIP</Label>
+                            <Grid>
+                                <TextBlock>
+                                    <Run>NAME:</Run>
+                                    <Run Text="{Binding PayrollDetail.Employee.FullName}" />
+                                </TextBlock>
+                                <TextBlock HorizontalAlignment="Center">
+                                    <Run>Payroll Period:</Run>
+                                    <Run Text="{Binding PayrollDetail.Payroll.StartDate, StringFormat=d}" />
+                                    <Run>-</Run>
+                                    <Run Text="{Binding PayrollDetail.Payroll.EndDate, StringFormat=d}" />
+                                </TextBlock>
+                            </Grid>
+                            <TextBlock>
+                                <Run>BASIC:</Run>
+                                <Run Text="{Binding PayrollDetail.Employee.DailyRate}" />
+                            </TextBlock>
+                            <Grid Margin="0,50,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Name="Grosspay" Grid.Column="0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel HorizontalAlignment="Right">
+                                            <Label HorizontalAlignment="Right" Content="Regular Shift: " />
+                                            <Label HorizontalAlignment="Right" Content="Overtime: " />
+                                            <Label HorizontalAlignment="Right" Content="Gross Pay: " />
+                                        </StackPanel>
+                                        <StackPanel>
+                                            <Label Content="{Binding PayrollDetail.RegularPay}" />
+                                            <Label Content="{Binding PayrollDetail.OvertimePay}" />
+                                            <Label Content="{Binding PayrollDetail.GrossPay}" />
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                </StackPanel>
+                                <DataGrid
+                                    Grid.Column="1"
+                                    ColumnWidth="1*"
+                                    GridLinesVisibility="All"
+                                    HeadersVisibility="None"
+                                    HorizontalGridLinesBrush="Transparent"
+                                    IsReadOnly="True"
+                                    ItemsSource="{Binding PayDeductions}"
+                                    VerticalGridLinesBrush="Transparent" />
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </BlockUIContainer>
+            </FlowDocument>
+        </FlowDocumentReader>
+        <Button Click="btn_printPayslip_Click">Print</Button>
+    </Grid>
+</Window>

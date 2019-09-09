@@ -47,5 +47,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
             Views.Reports.PayrollSummary payrollSummary = new Reports.PayrollSummary(VM.Payroll);
             payrollSummary.ShowDialog();
         }
+
+        private void btn_PrintPayAllPayslips_Click(object sender, RoutedEventArgs e)
+        {
+            new Views.Reports.Payslip(VM.PayrollDetails[1]).ShowDialog();
+        }
     }
 }

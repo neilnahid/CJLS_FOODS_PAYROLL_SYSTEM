@@ -19,12 +19,18 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Reports
     /// </summary>
     public partial class Payslip : Window
     {
-        public Payslip()
+        View_Models.PayslipViewModel VM;
+        public Payslip(PayrollDetail pd)
         {
             InitializeComponent();
+            VM = (View_Models.PayslipViewModel)DataContext;
+            VM.Instantiate(pd);
         }
-        public void RenderPayslipDocument()
+
+        private void btn_printPayslip_Click(object sender, RoutedEventArgs e)
         {
+            VM.PrintPaySlip(fd_Payslip);
         }
     }
+
 }

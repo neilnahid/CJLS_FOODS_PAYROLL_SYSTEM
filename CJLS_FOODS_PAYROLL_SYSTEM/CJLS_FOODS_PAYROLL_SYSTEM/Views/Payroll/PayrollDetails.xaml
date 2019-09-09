@@ -128,7 +128,7 @@
                         </DataGrid>
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                             <Button x:Name="btn_PrintPayrollSummary" Click="Btn_PrintPayrollSummary_Click">Print Payroll Summary</Button>
-                            <Button>Print all Payslips</Button>
+                            <Button Click="btn_PrintPayAllPayslips_Click">Print all Payslips</Button>
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
