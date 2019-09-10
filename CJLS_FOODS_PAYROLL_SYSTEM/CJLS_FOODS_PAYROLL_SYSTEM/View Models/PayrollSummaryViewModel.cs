@@ -23,7 +23,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         }
         public void Print(FlowDocument fd)
         {
-
             var pd = new PrintDialog();
             if (pd.ShowDialog().Value)
             {

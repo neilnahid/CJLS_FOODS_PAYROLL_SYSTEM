@@ -42,7 +42,8 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding Loan.LoanType}" Header="Loan Type" />
                                         <DataGridTextColumn Binding="{Binding Loan.Amount}" Header="Original Amount" />
-                                        <DataGridTextColumn Binding="{Binding Loan.AmountRemaining}" Header="Amt. Remaining After" />
+                                        <DataGridTextColumn Binding="{Binding AmountPaid}" Header="Amount Paid" />
+                                        <DataGridTextColumn Binding="{Binding Loan.TermsRemaining}" Header="Terms Remaining" />
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
