@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,10 @@ using System.Windows;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 {
-    public class LoanCashAdvanceViewModel
+    public class LoanCashAdvanceViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public void Instantiate()
         {
             Helper.db = new DatabaseDataContext();
