@@ -28,7 +28,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             SelectedWeek = new Model.Week(); // instantiate
             DeductionsTypes = GetDeductionTypes(); // gets deduction types
             Deduction = new Deduction(); // instantiate
-            Deductions = new ObservableCollection<Deduction>();
+            Deductions = new ObservableCollection<Deduction>(); 
             UpdateFlagsOfEveryAttendance(); // instantiate the flags according to the extended attendance's valuep
             populateBreakdownItems();
             //gets the string month representation

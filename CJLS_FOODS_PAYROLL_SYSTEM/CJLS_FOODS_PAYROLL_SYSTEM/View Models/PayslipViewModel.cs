@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -18,21 +19,24 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             public double Amount { get; set; }
 
         }
-        public class Payslip
+        public class Payslip : INotifyPropertyChanged
         {
+
             public PayrollDetail PayrollDetail { get; set; }
-            public List<PayrollDeduction> PayrollDeductions{ get; set; }
+            public ObservableCollection<PayrollDeduction> PayrollDeductions{ get; set; }
+
+            public event PropertyChangedEventHandler PropertyChanged;
         }
-        public List<Payslip> Payslips { get; set; }
+        public ObservableCollection<Payslip> Payslips { get; set; }
         public void Instantiate(List<PayrollDetail> payrollDetails)
         {
-            Payslips = new List<Payslip>();
+            Payslips = new ObservableCollection<Payslip>();
             foreach(var pd in payrollDetails)
             {
                 Payslips.Add(new Payslip { PayrollDetail = pd, PayrollDeductions = getPayrollDeductions(pd) });
             }
         }
-        public List<PayrollDeduction> getPayrollDeductions(PayrollDetail payrollDetail)
+        public ObservableCollection<PayrollDeduction> getPayrollDeductions(PayrollDetail payrollDetail)
         {
             var PayDeductions = new List<PayrollDeduction>();
             //get daytodaydeductions
@@ -42,7 +46,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             //get contributions deductions
             PayDeductions.AddRange(getContributionDeductions(payrollDetail));
             PayDeductions.Add(new PayrollDeduction { Name = "Total Deductions", Amount = PayDeductions.Sum(pd => pd.Amount) });
-            return PayDeductions;
+            return new ObservableCollection<PayrollDeduction>(PayDeductions);
         }
 
 
