@@ -25,7 +25,7 @@
                         materialDesign:HintAssist.Hint="EmployeeID"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding Employee.EmployeeID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding Employee.Emp_ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -283,7 +283,7 @@
                         ItemsSource="{Binding Employees, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         SelectedItem="{Binding Employee, Mode=TwoWay}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding EmployeeID}" Header="EmployeeID" />
+                            <DataGridTextColumn Binding="{Binding Emp_ID}" Header="EmployeeID" />
                             <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
                             <DataGridTextColumn Binding="{Binding MiddleName}" Header="Middle Name" />
                             <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
