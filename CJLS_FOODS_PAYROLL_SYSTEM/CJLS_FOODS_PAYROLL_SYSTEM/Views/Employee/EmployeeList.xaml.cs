@@ -51,5 +51,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
             cmbbox_EmploymentStatus.IsEnabled = false;
             btn_dialogConfirm.Content = "CREATE";
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            VM.SearchEmployees();
+        }
     }
 }

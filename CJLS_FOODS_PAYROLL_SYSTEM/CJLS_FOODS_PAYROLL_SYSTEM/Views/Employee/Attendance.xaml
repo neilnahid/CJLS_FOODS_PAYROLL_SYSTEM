@@ -87,6 +87,7 @@
                                 Text="Add Deduction" />
                             <StackPanel x:Name="sp_dialogFields">
                                 <ComboBox
+                                    Name="cmbbox_DeductionsTypes"
                                     materialDesign:HintAssist.Hint="Deduction Type"
                                     DisplayMemberPath="Name"
                                     ItemsSource="{Binding DeductionsTypes}"
@@ -513,10 +514,37 @@
                                     CanUserAddRows="False"
                                     CanUserDeleteRows="False"
                                     CanUserResizeRows="False"
-                                    ItemsSource="{Binding Deductions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    ItemsSource="{Binding Attendance.Attendance.Deductions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    SelectedItem="{Binding Deduction}">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding DeductionsType.Name}" Header="Description" />
+                                        <DataGridTemplateColumn Header="Deduction Type">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <ComboBox
+                                                        DisplayMemberPath="Name"
+                                                        IsEditable="False"
+                                                        ItemsSource="{Binding RelativeSource={RelativeSource AncestorType=Page}, Path=DataContext.DeductionsTypes}"
+                                                        SelectedItem="{Binding DeductionsType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                         <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button
+                                                        Name="btn_deleteDeduction"
+                                                        Click="Btn_deleteDeduction_Click"
+                                                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                                        ToolTip="Delete Deduction">
+                                                        <materialDesign:PackIcon
+                                                            Width="24"
+                                                            Height="24"
+                                                            Kind="Delete" />
+                                                    </Button>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Button
@@ -531,7 +559,18 @@
                                         Height="24"
                                         Kind="Add" />
                                 </Button>
-
+                                <Button
+                                    x:Name="btn_updateDeduction"
+                                    Grid.Row="1"
+                                    HorizontalAlignment="Right"
+                                    Click="Btn_openAddDeductionDialog_Click"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    ToolTip="Add Deduction">
+                                    <materialDesign:PackIcon
+                                        Width="24"
+                                        Height="24"
+                                        Kind="Add" />
+                                </Button>
                             </Grid>
                         </GroupBox>
                     </Grid>

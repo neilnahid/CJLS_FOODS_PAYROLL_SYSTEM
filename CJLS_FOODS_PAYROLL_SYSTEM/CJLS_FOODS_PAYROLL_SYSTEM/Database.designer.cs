@@ -215,6 +215,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 				return this.GetTable<PayrollGroup>();
 			}
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.sp_SearchEmployee")]
+		public ISingleResult<sp_SearchEmployeeResult> sp_SearchEmployee([global::System.Data.Linq.Mapping.ParameterAttribute(Name="string", DbType="VarChar(50)")] string @string)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), @string);
+			return ((ISingleResult<sp_SearchEmployeeResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Attendance")]
@@ -3992,6 +3999,554 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		{
 			this.SendPropertyChanging();
 			entity.PayrollGroup = null;
+		}
+	}
+	
+	public partial class sp_SearchEmployeeResult
+	{
+		
+		private int _EmployeeID;
+		
+		private string _FirstName;
+		
+		private string _MiddleName;
+		
+		private string _LastName;
+		
+		private string _FullName;
+		
+		private string _Gender;
+		
+		private System.DateTime _DateOfBirth;
+		
+		private System.Nullable<int> _Age;
+		
+		private string _ContactNumber;
+		
+		private string _Address;
+		
+		private int _AvailableLeaves;
+		
+		private double _HourlyRate;
+		
+		private int _DailyRequiredHours;
+		
+		private double _DailyRate;
+		
+		private int _RequiredDaysAWeek;
+		
+		private System.Nullable<double> _MonthlySalary;
+		
+		private string _SSSID;
+		
+		private string _PagIbigID;
+		
+		private string _PhilhealthID;
+		
+		private string _TINID;
+		
+		private string _Branch;
+		
+		private string _Status;
+		
+		private bool _IsPhilhealthActive;
+		
+		private bool _IsSSSActive;
+		
+		private bool _IsIncomeTaxActive;
+		
+		private bool _IsPagibigActive;
+		
+		private int _EmployeeTypeID;
+		
+		private string _Emp_ID;
+		
+		private System.Nullable<int> _PayrollGroupID;
+		
+		private System.Nullable<System.DateTime> _DateAdded;
+		
+		public sp_SearchEmployeeResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeID", DbType="Int NOT NULL")]
+		public int EmployeeID
+		{
+			get
+			{
+				return this._EmployeeID;
+			}
+			set
+			{
+				if ((this._EmployeeID != value))
+				{
+					this._EmployeeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FirstName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string FirstName
+		{
+			get
+			{
+				return this._FirstName;
+			}
+			set
+			{
+				if ((this._FirstName != value))
+				{
+					this._FirstName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string MiddleName
+		{
+			get
+			{
+				return this._MiddleName;
+			}
+			set
+			{
+				if ((this._MiddleName != value))
+				{
+					this._MiddleName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string LastName
+		{
+			get
+			{
+				return this._LastName;
+			}
+			set
+			{
+				if ((this._LastName != value))
+				{
+					this._LastName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="VarChar(101) NOT NULL", CanBeNull=false)]
+		public string FullName
+		{
+			get
+			{
+				return this._FullName;
+			}
+			set
+			{
+				if ((this._FullName != value))
+				{
+					this._FullName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Gender", DbType="VarChar(25) NOT NULL", CanBeNull=false)]
+		public string Gender
+		{
+			get
+			{
+				return this._Gender;
+			}
+			set
+			{
+				if ((this._Gender != value))
+				{
+					this._Gender = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateOfBirth", DbType="DateTime NOT NULL")]
+		public System.DateTime DateOfBirth
+		{
+			get
+			{
+				return this._DateOfBirth;
+			}
+			set
+			{
+				if ((this._DateOfBirth != value))
+				{
+					this._DateOfBirth = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Age", DbType="Int")]
+		public System.Nullable<int> Age
+		{
+			get
+			{
+				return this._Age;
+			}
+			set
+			{
+				if ((this._Age != value))
+				{
+					this._Age = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactNumber", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string ContactNumber
+		{
+			get
+			{
+				return this._ContactNumber;
+			}
+			set
+			{
+				if ((this._ContactNumber != value))
+				{
+					this._ContactNumber = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Address", DbType="VarChar(255) NOT NULL", CanBeNull=false)]
+		public string Address
+		{
+			get
+			{
+				return this._Address;
+			}
+			set
+			{
+				if ((this._Address != value))
+				{
+					this._Address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AvailableLeaves", DbType="Int NOT NULL")]
+		public int AvailableLeaves
+		{
+			get
+			{
+				return this._AvailableLeaves;
+			}
+			set
+			{
+				if ((this._AvailableLeaves != value))
+				{
+					this._AvailableLeaves = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HourlyRate", DbType="Float NOT NULL")]
+		public double HourlyRate
+		{
+			get
+			{
+				return this._HourlyRate;
+			}
+			set
+			{
+				if ((this._HourlyRate != value))
+				{
+					this._HourlyRate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DailyRequiredHours", DbType="Int NOT NULL")]
+		public int DailyRequiredHours
+		{
+			get
+			{
+				return this._DailyRequiredHours;
+			}
+			set
+			{
+				if ((this._DailyRequiredHours != value))
+				{
+					this._DailyRequiredHours = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DailyRate", DbType="Float NOT NULL")]
+		public double DailyRate
+		{
+			get
+			{
+				return this._DailyRate;
+			}
+			set
+			{
+				if ((this._DailyRate != value))
+				{
+					this._DailyRate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RequiredDaysAWeek", DbType="Int NOT NULL")]
+		public int RequiredDaysAWeek
+		{
+			get
+			{
+				return this._RequiredDaysAWeek;
+			}
+			set
+			{
+				if ((this._RequiredDaysAWeek != value))
+				{
+					this._RequiredDaysAWeek = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MonthlySalary", DbType="Float")]
+		public System.Nullable<double> MonthlySalary
+		{
+			get
+			{
+				return this._MonthlySalary;
+			}
+			set
+			{
+				if ((this._MonthlySalary != value))
+				{
+					this._MonthlySalary = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SSSID", DbType="VarChar(50)")]
+		public string SSSID
+		{
+			get
+			{
+				return this._SSSID;
+			}
+			set
+			{
+				if ((this._SSSID != value))
+				{
+					this._SSSID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PagIbigID", DbType="VarChar(50)")]
+		public string PagIbigID
+		{
+			get
+			{
+				return this._PagIbigID;
+			}
+			set
+			{
+				if ((this._PagIbigID != value))
+				{
+					this._PagIbigID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhilhealthID", DbType="VarChar(50)")]
+		public string PhilhealthID
+		{
+			get
+			{
+				return this._PhilhealthID;
+			}
+			set
+			{
+				if ((this._PhilhealthID != value))
+				{
+					this._PhilhealthID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TINID", DbType="VarChar(50)")]
+		public string TINID
+		{
+			get
+			{
+				return this._TINID;
+			}
+			set
+			{
+				if ((this._TINID != value))
+				{
+					this._TINID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Branch", DbType="VarChar(50)")]
+		public string Branch
+		{
+			get
+			{
+				return this._Branch;
+			}
+			set
+			{
+				if ((this._Branch != value))
+				{
+					this._Branch = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPhilhealthActive", DbType="Bit NOT NULL")]
+		public bool IsPhilhealthActive
+		{
+			get
+			{
+				return this._IsPhilhealthActive;
+			}
+			set
+			{
+				if ((this._IsPhilhealthActive != value))
+				{
+					this._IsPhilhealthActive = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsSSSActive", DbType="Bit NOT NULL")]
+		public bool IsSSSActive
+		{
+			get
+			{
+				return this._IsSSSActive;
+			}
+			set
+			{
+				if ((this._IsSSSActive != value))
+				{
+					this._IsSSSActive = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsIncomeTaxActive", DbType="Bit NOT NULL")]
+		public bool IsIncomeTaxActive
+		{
+			get
+			{
+				return this._IsIncomeTaxActive;
+			}
+			set
+			{
+				if ((this._IsIncomeTaxActive != value))
+				{
+					this._IsIncomeTaxActive = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsPagibigActive", DbType="Bit NOT NULL")]
+		public bool IsPagibigActive
+		{
+			get
+			{
+				return this._IsPagibigActive;
+			}
+			set
+			{
+				if ((this._IsPagibigActive != value))
+				{
+					this._IsPagibigActive = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EmployeeTypeID", DbType="Int NOT NULL")]
+		public int EmployeeTypeID
+		{
+			get
+			{
+				return this._EmployeeTypeID;
+			}
+			set
+			{
+				if ((this._EmployeeTypeID != value))
+				{
+					this._EmployeeTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Emp_ID", DbType="VarChar(50)")]
+		public string Emp_ID
+		{
+			get
+			{
+				return this._Emp_ID;
+			}
+			set
+			{
+				if ((this._Emp_ID != value))
+				{
+					this._Emp_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayrollGroupID", DbType="Int")]
+		public System.Nullable<int> PayrollGroupID
+		{
+			get
+			{
+				return this._PayrollGroupID;
+			}
+			set
+			{
+				if ((this._PayrollGroupID != value))
+				{
+					this._PayrollGroupID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateAdded", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateAdded
+		{
+			get
+			{
+				return this._DateAdded;
+			}
+			set
+			{
+				if ((this._DateAdded != value))
+				{
+					this._DateAdded = value;
+				}
+			}
 		}
 	}
 }

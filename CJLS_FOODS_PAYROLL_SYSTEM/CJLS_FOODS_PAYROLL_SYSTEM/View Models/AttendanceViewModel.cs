@@ -26,9 +26,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             AddToAttendances(PayrollRange); // references the attendance object attached to the Day object to the Attendances property
             GetSummaryNumbers();
             SelectedWeek = new Model.Week(); // instantiate
-            DeductionsTypes = GetDeductionTypes(); // gets deduction types
+            DeductionsTypes = new ObservableCollection<DeductionsType>(GetDeductionTypes()); // gets deduction types
             Deduction = new Deduction(); // instantiate
-            Deductions = new ObservableCollection<Deduction>(); 
             UpdateFlagsOfEveryAttendance(); // instantiate the flags according to the extended attendance's valuep
             populateBreakdownItems();
             //gets the string month representation
@@ -52,8 +51,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public string EndMonth { get; set; }
         public Deduction Deduction { get; set; }
         public Model.Week SelectedWeek { get; set; }
-        public List<DeductionsType> DeductionsTypes { get; set; }
-        public ObservableCollection<Deduction> Deductions { get; set; }
+        public ObservableCollection<DeductionsType> DeductionsTypes { get; set; }
         public List<BreakdownItem> BreakdownItems { get; set; }
 
 
@@ -95,10 +93,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             Helper.db = new DatabaseDataContext();
             Helper.db = new DatabaseDataContext();
             PayrollDetail = (from pd in Helper.db.PayrollDetails where pd.PayrollDetailID == PayrollDetail.PayrollDetailID select pd).First();
-        }
-        public void AddDeduction(Attendance a, Deduction d)
-        {
-            a.Deductions.Add(d);
         }
         private List<DeductionsType> GetDeductionTypes()
         {

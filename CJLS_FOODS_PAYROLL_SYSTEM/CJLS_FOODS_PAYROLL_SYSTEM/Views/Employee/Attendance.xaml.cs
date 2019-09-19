@@ -36,7 +36,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             {
                 var colIndex = DataGridCalendar.CurrentCell.Column.DisplayIndex;
                 VM.Attendance = VM.SelectedWeek.Days[colIndex];
-                VM.Deductions = new System.Collections.ObjectModel.ObservableCollection<Deduction>(VM.Attendance.Attendance.Deductions.ToList());
             }
         }
 
@@ -46,7 +45,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             {
                 var colIndex = DataGridCalendar.CurrentCell.Column.DisplayIndex;
                 VM.Attendance = VM.SelectedWeek.Days[colIndex];
-                VM.Deductions = new System.Collections.ObjectModel.ObservableCollection<Deduction>(VM.Attendance.Attendance.Deductions.ToList());
             }
         }
         private void Txtbox_regularHours_TextChanged(object sender, TextChangedEventArgs e)
@@ -63,9 +61,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void Btn_dialogConfirm_Click(object sender, RoutedEventArgs e)
         {
-            VM.AddDeduction(VM.Attendance.Attendance, VM.Deduction);
-            VM.Deduction = new Deduction();
-            VM.Deductions = new System.Collections.ObjectModel.ObservableCollection<Deduction>(VM.Attendance.Attendance.Deductions.ToList());
+            VM.Attendance.Attendance.Deductions.Add(VM.Deduction);
             VM.UpdateFlagsOf(VM.Attendance);
             VM.GetSummaryNumbers();
             VM.populateBreakdownItems();
@@ -79,6 +75,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void Btn_openAddDeductionDialog_Click(object sender, RoutedEventArgs e)
         {
+            VM.Deduction = new Deduction();
             VM.IsParentDialogOpen = true;
             VM.AddDeductionPanel = Visibility.Visible;
             VM.BreakdownPanel = Visibility.Collapsed;
@@ -106,6 +103,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             VM.BreakdownPanel = Visibility.Visible;
             VM.AddDeductionPanel = Visibility.Collapsed;
             VM.ConfirmButtonVisibility = Visibility.Collapsed;
+        }
+
+        private void Btn_deleteDeduction_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Attendance.Attendance.Deductions.Remove(VM.Deduction);
+            VM.UpdateFlagsOf(VM.Attendance);
         }
     }
 }
