@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace CJLS_FOODS_PAYROLL_SYSTEM {
-    public static class Helper {
+namespace CJLS_FOODS_PAYROLL_SYSTEM
+{
+    public static class Helper
+    {
         public static DatabaseDataContext db = createDB();
         private static DatabaseDataContext createDB()
         {
@@ -15,7 +18,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM {
             return db;
         }
 
-        public static User User;
+        public static User User { get; set; }
         public static TextBlock Title = null;
+
     }
 }

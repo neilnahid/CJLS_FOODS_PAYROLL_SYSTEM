@@ -18,9 +18,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 
         public void CheckLogin()
         {
-            var userExists = (from u in Helper.db.Users where u.Username == Username && u.Password == Password select u).Count() > 0 ? true:false;
-            if (userExists)
+            var user = (from u in Helper.db.Users where u.Username == Username && u.Password == Password select u).FirstOrDefault();
+            if (user != null)
             {
+                Helper.User = user;
                 new Views.Form_Dashboard().Show();
             }
             else

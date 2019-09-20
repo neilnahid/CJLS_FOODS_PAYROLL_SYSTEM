@@ -31,5 +31,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
             VM.Password = passwordBox.Password;
             VM.CheckLogin();
         }
+
+        private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            new Views.Form_ForgotPassword().ShowDialog();
+        }
     }
 }

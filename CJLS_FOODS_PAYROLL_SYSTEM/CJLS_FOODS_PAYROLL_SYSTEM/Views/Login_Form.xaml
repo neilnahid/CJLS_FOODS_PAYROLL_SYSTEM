@@ -49,6 +49,19 @@
                         </Button.Background>
                         Login
                     </Button>
+                    <TextBlock MouseLeftButtonDown="TextBlock_MouseLeftButtonDown">
+                        <Underline>Forgot Password?</Underline>
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="Blue" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="Red" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                 </StackPanel>
             </Grid>
         </StackPanel>

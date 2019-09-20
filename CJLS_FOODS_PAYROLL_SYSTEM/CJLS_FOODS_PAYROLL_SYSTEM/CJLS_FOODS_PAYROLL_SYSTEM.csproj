@@ -109,6 +109,8 @@
     <Compile Include="Model\Week.cs" />
     <Compile Include="View Models\AttendanceViewModel.cs" />
     <Compile Include="View Models\EmployeeTypeViewModel.cs" />
+    <Compile Include="View Models\ForgotPassordViewModel.cs" />
+    <Compile Include="View Models\HomeViewModel.cs" />
     <Compile Include="View Models\LeaveViewModel.cs" />
     <Compile Include="View Models\LoanCashAdvanceViewModel.cs" />
     <Compile Include="View Models\LoginViewModel.cs" />
@@ -128,6 +130,12 @@
     </Compile>
     <Compile Include="Views\Employee\EmployeeList.xaml.cs">
       <DependentUpon>EmployeeList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Form_ForgotPassword.xaml.cs">
+      <DependentUpon>Form_ForgotPassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Login_Form.xaml.cs">
       <DependentUpon>Login_Form.xaml</DependentUpon>
@@ -163,6 +171,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Employee\PayrollGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Form_ForgotPassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
