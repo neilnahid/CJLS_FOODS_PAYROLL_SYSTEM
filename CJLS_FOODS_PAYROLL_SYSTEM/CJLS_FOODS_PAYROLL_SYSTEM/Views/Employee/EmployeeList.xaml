@@ -265,63 +265,264 @@
             </StackPanel>
         </materialDesign:DialogHost.DialogContent>
         <Grid>
-
             <GroupBox FontSize="24" Header="Employee List">
-                <StackPanel>
-                    <TextBox
-                        HorizontalAlignment="Right"
-                        materialDesign:HintAssist.Hint="Search"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        TextChanged="TextBox_TextChanged" />
-                    <DataGrid
-                        AutoGenerateColumns="False"
-                        CanUserResizeColumns="False"
-                        IsReadOnly="True"
-                        ItemsSource="{Binding Employees, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        SelectedItem="{Binding Employee, Mode=TwoWay}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Emp_ID}" Header="EmployeeID" />
-                            <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
-                            <DataGridTextColumn Binding="{Binding MiddleName}" Header="Middle Name" />
-                            <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
-                            <DataGridTextColumn Binding="{Binding EmployeeType.Name}" Header="Job Position" />
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button
-                                            x:Name="btn_Edit"
-                                            materialDesign:HintAssist.Hint="Edit Employee"
-                                            Click="Btn_Edit_Click"
-                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
-                                            <materialDesign:PackIcon
-                                                Width="24"
-                                                Height="24"
-                                                Kind="Edit" />
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" BorderBrush="Black">
+                        <StackPanel>
+                            <TextBox
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                TextChanged="TextBox_TextChanged" />
+                            <DataGrid
+                                AutoGenerateColumns="False"
+                                CanUserResizeColumns="False"
+                                IsReadOnly="True"
+                                ItemsSource="{Binding Employees, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedItem="{Binding Employee, Mode=TwoWay}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Emp_ID}" Header="EmployeeID" />
+                                    <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />
+                                    <DataGridTextColumn Binding="{Binding MiddleName}" Header="Middle Name" />
+                                    <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
+                                    <DataGridTextColumn Binding="{Binding EmployeeType.Name}" Header="Job Position" />
+                                    <DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button
+                                                    x:Name="btn_Edit"
+                                                    materialDesign:HintAssist.Hint="Edit Employee"
+                                                    Click="Btn_Edit_Click"
+                                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                                    <materialDesign:PackIcon
+                                                        Width="24"
+                                                        Height="24"
+                                                        Kind="Edit" />
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button
+                                x:Name="btn_createNewEmployee"
+                                Grid.Row="2"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Click="Btn_createNewEmployee_Click"
+                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                                ToolTip="Add New Employee">
+                                <materialDesign:PackIcon
+                                    Width="24"
+                                    Height="24"
+                                    Kind="Add" />
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                    <Border Grid.Column="1" BorderBrush="Black">
+                        <StackPanel TextElement.FontSize="14">
+                            <StackPanel>
+                                <TextBox
+                                    materialDesign:HintAssist.Hint="EmployeeID"
+                                    IsReadOnly="True"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding Employee.Emp_ID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox
+                                        Grid.Column="0"
+                                        Margin="0,0,15,0"
+                                        materialDesign:HintAssist.Hint="First Name"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Employee.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBox
+                                        Grid.Column="1"
+                                        Margin="0,0,15,0"
+                                        materialDesign:HintAssist.Hint="Middle Name"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Employee.MiddleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBox
+                                        Grid.Column="2"
+                                        materialDesign:HintAssist.Hint="Last Name"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Employee.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <DatePicker
+                                        Grid.Column="0"
+                                        Margin="0,0,15,0"
+                                        materialDesign:HintAssist.Hint="Date Of Birth"
+                                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                                        Text="{Binding Employee.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ComboBox
+                                        Grid.Column="1"
+                                        materialDesign:HintAssist.Hint="Gender"
+                                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                        Text="{Binding Employee.Gender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                        <ComboBoxItem Content="Male" />
+                                        <ComboBoxItem Content="Female" />
+                                        <ComboBoxItem Content="Other" />
+                                    </ComboBox>
 
-                </StackPanel>
+                                </Grid>
+                                <TextBox
+                                    materialDesign:HintAssist.Hint="Address"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding Employee.Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBox
+                                    materialDesign:HintAssist.Hint="Contact Number"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    Text="{Binding Employee.ContactNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <ComboBox
+                                        Grid.Column="0"
+                                        Margin="0,0,15,0"
+                                        materialDesign:HintAssist.Hint="Job Position"
+                                        DisplayMemberPath="Name"
+                                        ItemsSource="{Binding EmployeeTypes}"
+                                        SelectedItem="{Binding Employee.EmployeeType}"
+                                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                                    <TextBox
+                                        Grid.Column="1"
+                                        Margin="0,0,15,0"
+                                        materialDesign:HintAssist.Hint="Salary Rate(Per hour)"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Employee.HourlyRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBox
+                                        Grid.Column="2"
+                                        Margin="0,0,15,0"
+                                        materialDesign:HintAssist.Hint="Daily Required Hours"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Employee.DailyRequiredHours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ComboBox
+                                        Grid.Column="3"
+                                        Margin="0,0,15,0"
+                                        materialDesign:HintAssist.Hint="Weekly Required Working Days"
+                                        SelectedIndex="{Binding Employee.RequiredDaysAWeek, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                                        <ComboBoxItem Visibility="Hidden" />
+                                        <ComboBoxItem Visibility="Hidden" />
+                                        <ComboBoxItem Visibility="Hidden" />
+                                        <ComboBoxItem Visibility="Hidden" />
+                                        <ComboBoxItem Visibility="Hidden" />
+                                        <ComboBoxItem Content="5" />
+                                        <ComboBoxItem Content="6" />
+
+                                    </ComboBox>
+                                    <TextBox
+                                        Grid.Column="4"
+                                        materialDesign:HintAssist.Hint="Monthly Salary (Read Only)"
+                                        IsReadOnly="True"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Employee.MonthlySalary, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox
+                                        Grid.Column="0"
+                                        materialDesign:HintAssist.Hint="Available Leaves"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Employee.AvailableLeaves, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <TextBox
+                                        Grid.Column="1"
+                                        Margin="0,0,15,0"
+                                        materialDesign:HintAssist.Hint="Branch Assigned"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Employee.Branch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ComboBox
+                                        Grid.Column="2"
+                                        Margin="0,0,15,0"
+                                        materialDesign:HintAssist.Hint="Payroll Group"
+                                        DisplayMemberPath="Name"
+                                        ItemsSource="{Binding PayrollGroups}"
+                                        SelectedItem="{Binding Employee.PayrollGroup}"
+                                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                                    <ComboBox
+                                        Grid.Column="3"
+                                        materialDesign:HintAssist.Hint="Employment Status"
+                                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                        Text="{Binding Employee.Status, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                        <ComboBoxItem Content="Active" />
+                                        <ComboBoxItem Content="Inactive" />
+                                        <ComboBoxItem Content="Terminated" />
+                                    </ComboBox>
+                                </Grid>
+
+                            </StackPanel>
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox
+                                        materialDesign:HintAssist.Hint="SSS Id"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Employee.SSSID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <CheckBox Margin="0,20,0,0" IsChecked="{Binding Employee.IsSSSActive}">
+                                        Active
+                                    </CheckBox>
+                                </StackPanel>
+                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                    <TextBox
+                                        materialDesign:HintAssist.Hint="Pagibig Id"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Employee.PagIbigID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <CheckBox
+                                        Grid.Column="1"
+                                        Margin="0,20,0,0"
+                                        IsChecked="{Binding Employee.IsPagibigActive}">
+                                        Active
+                                    </CheckBox>
+                                </StackPanel>
+                            </Grid>
+                            <Grid>
+                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                    <TextBox
+                                        materialDesign:HintAssist.Hint="Philhealth Id"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Employee.PhilhealthID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <CheckBox Margin="0,20,0,0" IsChecked="{Binding Employee.IsPhilhealthActive}">
+                                        Active
+                                    </CheckBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox
+                                        materialDesign:HintAssist.Hint="TIN Id"
+                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                        Text="{Binding Employee.TINID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <CheckBox Margin="0,20,0,0" IsChecked="{Binding Employee.IsIncomeTaxActive}">
+                                        Active
+                                    </CheckBox>
+                                </StackPanel>
+                            </Grid>
+                            <Button>Update Employee</Button>
+                        </StackPanel>
+                    </Border>
+                </Grid>
             </GroupBox>
-            <Button
-                x:Name="btn_createNewEmployee"
-                Grid.Row="2"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Bottom"
-                Click="Btn_createNewEmployee_Click"
-                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
-                ToolTip="Add New Employee">
-                <materialDesign:PackIcon
-                    Width="24"
-                    Height="24"
-                    Kind="Add" />
-            </Button>
         </Grid>
     </materialDesign:DialogHost>
 </Page>

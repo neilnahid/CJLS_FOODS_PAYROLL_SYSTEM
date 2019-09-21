@@ -27,8 +27,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             EmployeeTypes = GetEmployeeTypes();
         }
         #endregion
-
-
         #region methods/functions
         public List<Employee> GetEmployeeList()
         {
