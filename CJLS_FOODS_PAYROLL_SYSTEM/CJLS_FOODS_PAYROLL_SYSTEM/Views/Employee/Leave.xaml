@@ -32,18 +32,13 @@
                 <DatePicker
                     Grid.Column="0"
                     Margin="0,0,15,0"
-                    materialDesign:HintAssist.Hint="Date Of Birth"
+                    materialDesign:HintAssist.Hint="Leave Date"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     Text="{Binding Leave.LeaveDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <ComboBox
-                    Grid.Column="1"
-                    materialDesign:HintAssist.Hint="Approval Status"
-                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                    Text="{Binding Leave.ApprovalStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                    <ComboBoxItem Content="Pending" />
-                    <ComboBoxItem Content="Approved" />
-                    <ComboBoxItem Content="Declined" />
-                </ComboBox>
+                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                    <Label Content="Paid_Leave" />
+                    <CheckBox IsChecked="{Binding Leave.IsPaidLeave}" />
+                </StackPanel>
                 <!--  SP for buttons  -->
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
@@ -86,9 +81,6 @@
                     Header="Leaves">
                     <DataGrid
                         AutoGenerateColumns="False"
-                        CanUserAddRows="False"
-                        CanUserDeleteRows="false"
-                        CanUserResizeColumns="False"
                         IsReadOnly="True"
                         ItemsSource="{Binding Leaves}"
                         SelectedItem="{Binding Leave}">
@@ -102,7 +94,7 @@
                                     <DataTemplate>
                                         <Button
                                             x:Name="btn_Edit"
-                                            materialDesign:HintAssist.Hint="Edit Employee"
+                                            materialDesign:HintAssist.Hint="Edit Leave"
                                             Click="Btn_Edit_Click"
                                             Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                                             Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
@@ -125,7 +117,7 @@
                 Click="Btn_createNewLeave_Click"
                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                 Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
-                ToolTip="Add New Employee">
+                ToolTip="Add New Leave">
                 <materialDesign:PackIcon
                     Width="24"
                     Height="24"

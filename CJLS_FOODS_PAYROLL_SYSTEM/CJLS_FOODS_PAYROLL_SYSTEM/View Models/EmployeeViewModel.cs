@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using GalaSoft.MvvmLight.Command;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
+using System.Windows.Input;
+
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 {
-    public class EmployeeViewModel : INotifyPropertyChanged,IDataErrorInfo
+    public class EmployeeViewModel : INotifyPropertyChanged
     {
         #region properties
         public event PropertyChangedEventHandler PropertyChanged;
@@ -17,27 +20,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public PayrollGroup PayrollGroup { get; set; }
         public List<PayrollGroup> PayrollGroups { get; set; }
 
-        public Dictionary<string,string> ErrorCollection { get; set; }
-        public string Error { get { return null; } }
-
-        public string this[string columnName] {
-            get {
-                string result = null;
-                switch (columnName)
-                {
-                    case "Employee":
-                        if (string.IsNullOrEmpty(Employee.FirstName))
-                            result = "First name must not be empty";
-                        break;
-                }
-                if (ErrorCollection.ContainsKey(columnName))
-                    ErrorCollection[columnName] = result;
-                else if (result != null)
-                    ErrorCollection.Add(columnName, result);
-                OnPropertyChanged(columnName);
-                return result;
-            }
-        }
+        public bool IsUpdateValid { get; set; }
         #endregion
         #region constructor
         public void Instantiate()
@@ -45,15 +28,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             Helper.db = new DatabaseDataContext();
             Employees = new ObservableCollection<Employee>(GetEmployeeList());
             PayrollGroups = GetPayrollGroups();
-            ErrorCollection = new Dictionary<string, string>();
             Employee = new Employee();
             EmployeeTypes = GetEmployeeTypes();
         }
         #endregion
         #region methods/functions
-        public List<Employee> GetEmployeeList()
+        public ObservableCollection<Employee> GetEmployeeList()
         {
-            var result = (from employee in Helper.db.Employees where employee.Status == "Active" select employee).ToList();
+            var result = new ObservableCollection<Employee>((from employee in Helper.db.Employees where employee.Status == "Active" select employee).ToList());
             return result;
         }
         public List<PayrollGroup> GetPayrollGroups()
@@ -69,6 +51,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 Employees.Add(Employee);
                 Helper.db.SubmitChanges();
                 MessageBox.Show("Successfully created new employee");
+                Helper.db = new DatabaseDataContext();
             }
             else
             {
@@ -115,7 +98,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         }
         protected void OnPropertyChanged(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            var propertyChanged = PropertyChanged;
+            if (propertyChanged != null)
+            {
+                propertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
         #endregion
     }

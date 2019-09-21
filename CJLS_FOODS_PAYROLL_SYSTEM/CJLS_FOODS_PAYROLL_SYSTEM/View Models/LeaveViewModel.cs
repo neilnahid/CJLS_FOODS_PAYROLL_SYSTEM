@@ -17,7 +17,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             Leave = new Leave();
             Leaves = new ObservableCollection<Leave>();
             Employees = new List<Employee>();
-            GetLeaves();
+            Leaves = GetLeaves();
             GetEmployees();
         }
         public Leave Leave { get; set; }
@@ -34,6 +34,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 Helper.db.Leaves.InsertOnSubmit(Leave);
                 Leaves.Add(Leave);
                 Helper.db.SubmitChanges();
+                Helper.db = new DatabaseDataContext();
+                Leaves = GetLeaves();
             }
             catch(Exception ex)
             {
@@ -44,9 +46,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         {
             Helper.db.SubmitChanges();
         }
-        private void GetLeaves()
+        private ObservableCollection<Leave> GetLeaves()
         {
-            Leaves = new ObservableCollection<Leave>((from l in Helper.db.Leaves select l).ToList());
+           return new ObservableCollection<Leave>((from l in Helper.db.Leaves select l).ToList());
         }
         public void DeleteLeave(Leave Leave)
         {

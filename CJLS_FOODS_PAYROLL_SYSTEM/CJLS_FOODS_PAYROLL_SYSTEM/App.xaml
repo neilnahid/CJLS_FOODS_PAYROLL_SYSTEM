@@ -5,7 +5,7 @@
     xmlns:Helper="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM"
     xmlns:VM="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.View_Models"
     xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM"
-    StartupUri="Views/Login_Form.xaml">
+    StartupUri="Views/Form_Dashboard.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <VM:EmployeeViewModel x:Key="EmployeeViewModel" />

@@ -33,11 +33,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
             }
         }   
         private void Btn_Edit_Click(object sender, RoutedEventArgs e) {
-            DialogHeader.Text = "Update Employee";
-            btn_dialogConfirm.Content = "UPDATE";
-            cmbbox_EmploymentStatus.IsEnabled = true;
+            sp_empInfo.IsEnabled = !sp_empInfo.IsEnabled;
         }
-
         private void Btn_deleteEmployee_Click(object sender, RoutedEventArgs e) {
             DialogHeader.Text = "Delete Employee";
             btn_dialogConfirm.Content = "DELETE";
@@ -55,6 +52,19 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             VM.SearchEmployees();
+        }
+
+        private void btn_cancelUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            sp_empInfo.IsEnabled = false;
+            VM.Employees = VM.GetEmployeeList();
+        }
+
+        private void btn_updateEmployee_Click(object sender, RoutedEventArgs e)
+        {
+            VM.UpdateEmployee();
+            MessageBox.Show("Successfully updated Employees.");
+            VM.Employees = VM.GetEmployeeList();
         }
     }
 }
