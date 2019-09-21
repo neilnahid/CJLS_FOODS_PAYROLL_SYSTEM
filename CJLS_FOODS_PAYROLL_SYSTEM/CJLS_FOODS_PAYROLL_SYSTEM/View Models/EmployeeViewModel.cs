@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows;
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 {
-    public class EmployeeViewModel : INotifyPropertyChanged
+    public class EmployeeViewModel : INotifyPropertyChanged,IDataErrorInfo
     {
         #region properties
         public event PropertyChangedEventHandler PropertyChanged;
@@ -16,6 +16,28 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public Employee Employee { get; set; }
         public PayrollGroup PayrollGroup { get; set; }
         public List<PayrollGroup> PayrollGroups { get; set; }
+
+        public Dictionary<string,string> ErrorCollection { get; set; }
+        public string Error { get { return null; } }
+
+        public string this[string columnName] {
+            get {
+                string result = null;
+                switch (columnName)
+                {
+                    case "Employee":
+                        if (string.IsNullOrEmpty(Employee.FirstName))
+                            result = "First name must not be empty";
+                        break;
+                }
+                if (ErrorCollection.ContainsKey(columnName))
+                    ErrorCollection[columnName] = result;
+                else if (result != null)
+                    ErrorCollection.Add(columnName, result);
+                OnPropertyChanged(columnName);
+                return result;
+            }
+        }
         #endregion
         #region constructor
         public void Instantiate()
@@ -23,6 +45,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             Helper.db = new DatabaseDataContext();
             Employees = new ObservableCollection<Employee>(GetEmployeeList());
             PayrollGroups = GetPayrollGroups();
+            ErrorCollection = new Dictionary<string, string>();
             Employee = new Employee();
             EmployeeTypes = GetEmployeeTypes();
         }
@@ -85,6 +108,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             }
             else
                 Employees = new ObservableCollection<Employee>(GetEmployeeList());
+        }
+        protected void OnPropertyChanged(PropertyChangedEventArgs eventArgs)
+        {
+            PropertyChanged?.Invoke(this, eventArgs);
+        }
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         #endregion
     }

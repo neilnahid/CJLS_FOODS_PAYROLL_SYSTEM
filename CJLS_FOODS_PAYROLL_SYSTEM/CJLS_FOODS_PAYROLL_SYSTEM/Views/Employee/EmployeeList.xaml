@@ -344,7 +344,8 @@
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="First Name"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        Text="{Binding Employee.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        Text="{Binding Employee.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                        ToolTip="{Binding ErrorCollection[FirstName]}" />
                                     <TextBox
                                         Grid.Column="1"
                                         Margin="0,0,15,0"
