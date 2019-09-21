@@ -421,11 +421,11 @@
                                         materialDesign:HintAssist.Hint="Weekly Required Working Days"
                                         SelectedIndex="{Binding Employee.RequiredDaysAWeek, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                                        <ComboBoxItem Visibility="Hidden" />
-                                        <ComboBoxItem Visibility="Hidden" />
-                                        <ComboBoxItem Visibility="Hidden" />
-                                        <ComboBoxItem Visibility="Hidden" />
-                                        <ComboBoxItem Visibility="Hidden" />
+                                        <ComboBoxItem Visibility="Collapsed" />
+                                        <ComboBoxItem Visibility="Collapsed" />
+                                        <ComboBoxItem Visibility="Collapsed" />
+                                        <ComboBoxItem Visibility="Collapsed" />
+                                        <ComboBoxItem Visibility="Collapsed" />
                                         <ComboBoxItem Content="5" />
                                         <ComboBoxItem Content="6" />
 
@@ -473,11 +473,11 @@
                                         <ComboBoxItem Content="Terminated" />
                                     </ComboBox>
                                 </Grid>
-
                             </StackPanel>
-                            <Grid>
+                            <StackPanel Orientation="Horizontal">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBox
+                                        Width="150"
                                         materialDesign:HintAssist.Hint="SSS Id"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.SSSID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -487,6 +487,8 @@
                                 </StackPanel>
                                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                                     <TextBox
+                                        Width="150"
+                                        Margin="25,0,0,0"
                                         materialDesign:HintAssist.Hint="Pagibig Id"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.PagIbigID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -497,10 +499,11 @@
                                         Active
                                     </CheckBox>
                                 </StackPanel>
-                            </Grid>
-                            <Grid>
-                                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal">
                                     <TextBox
+                                        Width="150"
                                         materialDesign:HintAssist.Hint="Philhealth Id"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.PhilhealthID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -510,6 +513,8 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBox
+                                        Width="150"
+                                        Margin="25,0,0,0"
                                         materialDesign:HintAssist.Hint="TIN Id"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.TINID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -517,8 +522,8 @@
                                         Active
                                     </CheckBox>
                                 </StackPanel>
-                            </Grid>
-                            <Button>Update Employee</Button>
+                            </StackPanel>
+                            <Button Margin="0,25,0,0">Update Employee</Button>
                         </StackPanel>
                     </Border>
                 </Grid>
