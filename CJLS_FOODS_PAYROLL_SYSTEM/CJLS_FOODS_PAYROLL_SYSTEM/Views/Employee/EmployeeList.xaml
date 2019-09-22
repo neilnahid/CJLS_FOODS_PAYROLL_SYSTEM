@@ -326,8 +326,8 @@
                     <Border Grid.Column="1" BorderBrush="Black">
                         <StackPanel
                             x:Name="sp_empInfo"
-                            IsEnabled="False"
-                            TextElement.FontSize="20">
+                            TextElement.FontSize="20"
+                            Visibility="Collapsed">
                             <StackPanel>
                                 <TextBox
                                     materialDesign:HintAssist.Hint="EmployeeID"
@@ -531,11 +531,11 @@
                                 Margin="0,25,0,0"
                                 HorizontalAlignment="Center"
                                 Orientation="Horizontal">
-                                <Button Click="btn_updateEmployee_Click" Content="Update" />
                                 <Button
-                                    Click="btn_cancelUpdate_Click"
-                                    Command="{Binding UpdateCommand, UpdateSourceTrigger=PropertyChanged}"
-                                    Content="Cancel" />
+                                    Click="btn_updateEmployee_Click"
+                                    Content="Update"
+                                    IsEnabled="{Binding Employee.IsValidationPassed, UpdateSourceTrigger=PropertyChanged}" />
+                                <Button Click="btn_cancelUpdate_Click" Content="Cancel" />
                             </StackPanel>
 
 

@@ -33,7 +33,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
             }
         }   
         private void Btn_Edit_Click(object sender, RoutedEventArgs e) {
-            sp_empInfo.IsEnabled = !sp_empInfo.IsEnabled;
+            sp_empInfo.Visibility = Visibility.Visible;
         }
         private void Btn_deleteEmployee_Click(object sender, RoutedEventArgs e) {
             DialogHeader.Text = "Delete Employee";
@@ -56,7 +56,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
 
         private void btn_cancelUpdate_Click(object sender, RoutedEventArgs e)
         {
-            sp_empInfo.IsEnabled = false;
+            sp_empInfo.Visibility = Visibility.Collapsed;
             VM.Employees = VM.GetEmployeeList();
         }
 

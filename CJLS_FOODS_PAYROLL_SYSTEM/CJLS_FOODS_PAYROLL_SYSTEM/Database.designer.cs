@@ -1776,7 +1776,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 				return this._DateOfBirth;
 			}
 			set
-			{
+		    {
 				if ((this._DateOfBirth != value))
 				{
 					this.OnDateOfBirthChanging(value);
