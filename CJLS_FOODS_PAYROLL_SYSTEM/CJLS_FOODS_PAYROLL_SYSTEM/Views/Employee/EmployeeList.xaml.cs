@@ -42,7 +42,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
         }
 
         private void Btn_createNewEmployee_Click(object sender, RoutedEventArgs e) {
-            VM.Employee = new CJLS_FOODS_PAYROLL_SYSTEM.Employee();
+            VM.Employee = new CJLS_FOODS_PAYROLL_SYSTEM.Employee() { DateOfBirth = DateTime.Now };
             VM.Employee.Status = "Active";
             DialogHeader.Text = "Create New Employee";
             cmbbox_EmploymentStatus.IsEnabled = false;

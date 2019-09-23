@@ -50,8 +50,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                             result = "You must select a job position.";
                         break;
                     case "ContactNumber":
-                        var cnumber = String.IsNullOrEmpty(ContactNumber) ? "" : ContactNumber;
-                        if (!Regex.IsMatch(cnumber, "^[+][0-9]{12}$"))
+                        if (String.IsNullOrEmpty(ContactNumber))
+                            goto case "stringEmpty";
+                        else if (!Regex.IsMatch(ContactNumber, "^[+][0-9]{12}$"))
                             result = "invalid format, accepted format: '+639123456789'";
                         break;
                     case "HourlyRate":
@@ -61,6 +62,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                     case "Branch":
                         if (String.IsNullOrEmpty(Branch))
                             goto case "stringEmpty";
+                        break;
+                    case "DateOfBirth":
+                        if (!Regex.IsMatch(String.Format("mm/dd/yyyy",DateOfBirth.Date), "^[0-1][0-2]/[0-3][0-9]/[0-9]{4}$"))
+                            result = "date format should be mm/dd/yyyy";
                         break;
                     case "PayrollGroup":
                         if (PayrollGroup == null)

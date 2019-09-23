@@ -1640,11 +1640,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		public Employee()
 		{
+            SendPropertyChanging();
 			this._Leaves = new EntitySet<Leave>(new Action<Leave>(this.attach_Leaves), new Action<Leave>(this.detach_Leaves));
 			this._Loans = new EntitySet<Loan>(new Action<Loan>(this.attach_Loans), new Action<Loan>(this.detach_Loans));
 			this._PayrollDetails = new EntitySet<PayrollDetail>(new Action<PayrollDetail>(this.attach_PayrollDetails), new Action<PayrollDetail>(this.detach_PayrollDetails));
 			this._EmployeeType = default(EntityRef<EmployeeType>);
 			this._PayrollGroup = default(EntityRef<PayrollGroup>);
+            SendPropertyChanged(String.Empty);
 			OnCreated();
 		}
 		
