@@ -9,6 +9,8 @@
     Title="Form_Dashboard"
     Width="800"
     Height="450"
+    WindowState="Maximized"
+    WindowStyle="None"
     mc:Ignorable="d">
     <materialDesign:DrawerHost
         x:Name="draweHost"
@@ -28,6 +30,7 @@
                     <TreeViewItem Header="Users" />
                     <TreeViewItem Header="Leave" />
                     <TreeViewItem Header="Loans/Cash Advance" />
+                    <TreeViewItem Header="Logout" />
                 </TreeView>
             </StackPanel>
         </materialDesign:DrawerHost.LeftDrawerContent>

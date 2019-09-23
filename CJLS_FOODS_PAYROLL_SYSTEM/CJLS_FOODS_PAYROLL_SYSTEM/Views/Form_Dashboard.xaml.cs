@@ -79,6 +79,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
                 Frame.Content = new Views.Employee.LoanCashAdvance();
                 Title.Text = "Loans/Cash Advance";
             }
+            else if(tvi.Header.ToString() == "Logout")
+            {
+                new Views.Login_Form().Show();
+                this.Close();
+                Helper.User = null;
+            }
         }
     }
 }
