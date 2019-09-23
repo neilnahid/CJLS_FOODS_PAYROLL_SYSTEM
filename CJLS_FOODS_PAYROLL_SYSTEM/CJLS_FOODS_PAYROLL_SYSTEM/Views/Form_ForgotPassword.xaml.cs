@@ -42,5 +42,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
             else
                 MessageBox.Show("Invalid Secret Answer");
         }
+
+        private void btn_back_Click(object sender, RoutedEventArgs e)
+        {
+            new Views.Login_Form().Show();
+            this.Close();
+        }
     }
 }

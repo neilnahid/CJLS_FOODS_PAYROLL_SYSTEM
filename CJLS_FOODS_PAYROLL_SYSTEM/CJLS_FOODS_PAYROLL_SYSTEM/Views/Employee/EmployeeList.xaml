@@ -284,7 +284,9 @@
                                 CanUserResizeColumns="False"
                                 IsReadOnly="True"
                                 ItemsSource="{Binding Employees, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                                SelectedItem="{Binding Employee, Mode=TwoWay}">
+                                SelectedItem="{Binding Employee, Mode=TwoWay}"
+                                SelectionMode="Single"
+                                SelectionUnit="FullRow">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Binding="{Binding Emp_ID}" Header="EmployeeID" />
                                     <DataGridTextColumn Binding="{Binding FirstName}" Header="First Name" />

@@ -10,6 +10,8 @@
     Width="500"
     Height="400"
     DataContext="{StaticResource LoginViewModel}"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="ToolWindow"
     mc:Ignorable="d">
     <Grid>
         <StackPanel>
