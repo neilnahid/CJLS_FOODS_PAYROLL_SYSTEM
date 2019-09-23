@@ -199,16 +199,13 @@
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                     <TextBox
                         materialDesign:HintAssist.Hint="PayrollDetailID"
-                        IsReadOnly="True"   
+                        IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding PayrollDetail.PayrollDetailID}" />
                 </StackPanel>
             </Grid>
             <!--  PAGE CONTENT  -->
             <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
-                </Grid.ColumnDefinitions>
                 <!--  DATA GRID  -->
                 <StackPanel Orientation="Vertical">
                     <TextBlock>
@@ -258,6 +255,12 @@
                                                 Height="20"
                                                 Fill="Orange"
                                                 Visibility="{Binding Days[0].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Absent"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Black"
+                                                Visibility="{Binding Days[0].AbsentFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -291,6 +294,12 @@
                                                 Height="20"
                                                 Fill="Orange"
                                                 Visibility="{Binding Days[1].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Absent"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Black"
+                                                Visibility="{Binding Days[1].AbsentFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -324,6 +333,12 @@
                                                 Height="20"
                                                 Fill="Orange"
                                                 Visibility="{Binding Days[2].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Absent"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Black"
+                                                Visibility="{Binding Days[2].AbsentFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -357,6 +372,12 @@
                                                 Height="20"
                                                 Fill="Orange"
                                                 Visibility="{Binding Days[3].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Absent"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Black"
+                                                Visibility="{Binding Days[3].AbsentFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -390,6 +411,12 @@
                                                 Height="20"
                                                 Fill="Orange"
                                                 Visibility="{Binding Days[4].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Absent"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Black"
+                                                Visibility="{Binding Days[4].AbsentFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -423,6 +450,12 @@
                                                 Height="20"
                                                 Fill="Orange"
                                                 Visibility="{Binding Days[5].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Absent"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Black"
+                                                Visibility="{Binding Days[5].AbsentFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
@@ -456,13 +489,75 @@
                                                 Height="20"
                                                 Fill="Orange"
                                                 Visibility="{Binding Days[6].UnderTimeFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            <Rectangle
+                                                x:Name="Absent"
+                                                Width="Auto"
+                                                Height="20"
+                                                Fill="Black"
+                                                Visibility="{Binding Days[6].AbsentFlag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-
+                    <StackPanel Margin="0,50,25,0" HorizontalAlignment="Right">
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Top"
+                                Fill="Green" />
+                            <TextBlock>
+                                <Run Text=" - " />
+                                <Run Text=" Met Required Hours" />
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Top"
+                                Fill="SkyBlue" />
+                            <TextBlock>
+                                <Run Text=" - " />
+                                <Run Text=" Has Overtime" />
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Top"
+                                Fill="Red" />
+                            <TextBlock>
+                                <Run Text=" - " />
+                                <Run Text=" Has Deduction " />
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Top"
+                                Fill="Orange" />
+                            <TextBlock>
+                                <Run Text=" - " />
+                                <Run Text=" Undertime " />
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle
+                                Width="20"
+                                Height="20"
+                                VerticalAlignment="Top"
+                                Fill="Black" />
+                            <TextBlock>
+                                <Run Text=" - " />
+                                <Run Text=" Absent " />
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
                 </StackPanel>
                 <!--  Attendance Details  -->
             </Grid>

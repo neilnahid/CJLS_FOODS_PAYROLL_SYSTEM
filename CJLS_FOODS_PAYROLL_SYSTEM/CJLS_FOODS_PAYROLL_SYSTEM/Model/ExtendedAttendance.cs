@@ -18,6 +18,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
         public Visibility OverTimeHoursFlag { get; set; }
 
         public Visibility DeductionsFlag { get; set; }
+        public Visibility AbsentFlag { get; set; }
 
         public string MinutesLateWidth { get; set; }
         public string HoursWorkedWidth { get; set; }

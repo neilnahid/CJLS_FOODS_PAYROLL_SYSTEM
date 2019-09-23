@@ -103,6 +103,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 UpdateRegularHoursFlag(attendance);
                 UpdateOverTimeHoursFlag(attendance);
                 UpdateDeductionsFlag(attendance);
+                updateUnderTimeHoursFlag(attendance);
+                UpdateAbsentFlag(attendance);
             }
         }
         public void UpdateFlagsOfEveryAttendance()
@@ -152,14 +154,24 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             if (a.Attendance.RegularHoursWorked >= a.Attendance.PayrollDetail.Employee.DailyRequiredHours)
             {
                 a.RegularHoursFlag = Visibility.Visible;
-                a.UnderTimeFlag = Visibility.Collapsed;
             }
             else
             {
                 a.RegularHoursFlag = Visibility.Collapsed;
-                a.UnderTimeFlag = Visibility.Visible;
             }
         }
+        private void updateUnderTimeHoursFlag(Model.ExtendedAttendance a)
+        {
+            if (a.Attendance.RegularHoursWorked < a.Attendance.PayrollDetail.Employee.DailyRequiredHours && a.Attendance.RegularHoursWorked > 0)
+            {
+                a.UnderTimeFlag = Visibility.Visible;
+            }
+            else
+            {
+                a.UnderTimeFlag = Visibility.Collapsed;
+            }
+        }
+
         private void UpdateOverTimeHoursFlag(Model.ExtendedAttendance a)
         {
             if (a.Attendance.OverTimeHoursWorked > 0)
@@ -173,6 +185,17 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 a.DeductionsFlag = Visibility.Visible;
             else
                 a.DeductionsFlag = Visibility.Collapsed;
+        }
+        private void UpdateAbsentFlag(Model.ExtendedAttendance a)
+        {
+            if (a.Attendance.RegularHoursWorked <= 0)
+            {
+                a.AbsentFlag = Visibility.Visible;
+            }
+            else
+            {
+                a.AbsentFlag = Visibility.Collapsed;
+            }
         }
         #endregion
         public struct BreakdownItem
