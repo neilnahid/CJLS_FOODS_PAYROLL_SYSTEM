@@ -57,6 +57,7 @@
                             Grid.Column="0"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Date Of Birth"
+                            SelectedDateFormat="Short"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                             Text="{Binding Employee.DateOfBirth, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="{Binding Employee.ErrorCollection[DateOfBirth]}" />
@@ -290,22 +291,6 @@
                                     <DataGridTextColumn Binding="{Binding MiddleName}" Header="Middle Name" />
                                     <DataGridTextColumn Binding="{Binding LastName}" Header="Last Name" />
                                     <DataGridTextColumn Binding="{Binding EmployeeType.Name}" Header="Job Position" />
-                                    <DataGridTemplateColumn>
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Button
-                                                    x:Name="btn_Edit"
-                                                    materialDesign:HintAssist.Hint="Edit Employee"
-                                                    Click="Btn_Edit_Click"
-                                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
-                                                    <materialDesign:PackIcon
-                                                        Width="24"
-                                                        Height="24"
-                                                        Kind="Edit" />
-                                                </Button>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
                             <Button
@@ -325,10 +310,7 @@
                         </StackPanel>
                     </Border>
                     <Border Grid.Column="1" BorderBrush="Black">
-                        <StackPanel
-                            x:Name="sp_empInfo"
-                            TextElement.FontSize="20"
-                            Visibility="Collapsed">
+                        <StackPanel x:Name="sp_empInfo" TextElement.FontSize="20">
                             <StackPanel>
                                 <TextBox
                                     materialDesign:HintAssist.Hint="EmployeeID"

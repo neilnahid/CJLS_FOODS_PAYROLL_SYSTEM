@@ -46,5 +46,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             }
             VM.FetchEmployeeTypes();
         }
+
+        private void btn_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.db = new DatabaseDataContext();
+           VM.EmployeeTypes = VM.FetchEmployeeTypes();
+        }
     }
 }

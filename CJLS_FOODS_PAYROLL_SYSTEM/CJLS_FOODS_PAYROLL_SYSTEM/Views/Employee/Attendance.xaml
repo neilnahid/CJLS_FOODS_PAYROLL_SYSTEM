@@ -187,16 +187,19 @@
                 <StackPanel Orientation="Vertical">
                     <TextBox
                         materialDesign:HintAssist.Hint="Employee Name"
+                        IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding PayrollDetail.Employee.FullName}" />
                     <TextBox
                         materialDesign:HintAssist.Hint="PayrollID"
+                        IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding PayrollDetail.PayrollID}" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                     <TextBox
                         materialDesign:HintAssist.Hint="PayrollDetailID"
+                        IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding PayrollDetail.PayrollDetailID}" />
                 </StackPanel>
@@ -218,13 +221,12 @@
                     <DataGrid
                         Name="DataGridCalendar"
                         AutoGenerateColumns="False"
-                        CanUserAddRows="False"
-                        CanUserDeleteRows="False"
-                        CanUserResizeRows="False"
                         CurrentCellChanged="DataGridCalendar_CurrentCellChanged"
+                        IsReadOnly="True"
                         ItemsSource="{Binding PayrollRange.Weeks}"
                         SelectedCellsChanged="DataGridCalendar_SelectedCellsChanged"
                         SelectedItem="{Binding SelectedWeek}"
+                        SelectionChanged="DataGridCalendar_SelectionChanged"
                         SelectionMode="Extended">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Width="1*" Header="Sunday">
@@ -469,7 +471,11 @@
                     <RowDefinition Height="281*" />
                     <RowDefinition Height="304*" />
                 </Grid.RowDefinitions>
-                <GroupBox Grid.Row="0" Header="Attendance Details">
+                <GroupBox
+                    x:Name="grpbox_attendanceDetails"
+                    Grid.Row="0"
+                    Header="Attendance Details"
+                    IsEnabled="False">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="49*" />
@@ -591,18 +597,22 @@
                             Margin="0,0,2.8,6">
                             <TextBox
                                 materialDesign:HintAssist.Hint="Total Regular Hours"
+                                IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 Text="{Binding PayrollDetail.TotalRegularHours, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBox
                                 materialDesign:HintAssist.Hint="Total Overtime Hours"
+                                IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 Text="{Binding PayrollDetail.TotalOverTimeHours, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBox
                                 materialDesign:HintAssist.Hint="Total Deductions"
+                                IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 Text="{Binding PayrollDetail.TotalDeductions, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBox
                                 materialDesign:HintAssist.Hint="Net Pay"
+                                IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 Text="{Binding PayrollDetail.NetPay, UpdateSourceTrigger=PropertyChanged}" />
                         </StackPanel>
@@ -612,10 +622,12 @@
                             Margin="4.2,0,-0.4,6">
                             <TextBox
                                 materialDesign:HintAssist.Hint="GrossPay"
+                                IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 Text="{Binding PayrollDetail.GrossPay, UpdateSourceTrigger=PropertyChanged}" />
                             <TextBox
                                 materialDesign:HintAssist.Hint="Overtime Pay"
+                                IsReadOnly="True"
                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                 Text="{Binding PayrollDetail.OvertimePay, UpdateSourceTrigger=PropertyChanged}" />
                             <Button

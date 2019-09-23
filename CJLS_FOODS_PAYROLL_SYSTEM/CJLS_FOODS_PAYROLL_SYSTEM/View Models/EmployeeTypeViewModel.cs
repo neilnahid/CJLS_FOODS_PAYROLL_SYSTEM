@@ -19,11 +19,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             Helper.db = new DatabaseDataContext();
             EmployeeType = new EmployeeType();
             EmployeeTypes = new ObservableCollection<EmployeeType>();
-            FetchEmployeeTypes();
+            EmployeeTypes = FetchEmployeeTypes();
         }
-        public void FetchEmployeeTypes()
+        public ObservableCollection<EmployeeType> FetchEmployeeTypes()
         {
-            EmployeeTypes = new ObservableCollection<EmployeeType>((from et in Helper.db.EmployeeTypes select et).ToList());
+            return new ObservableCollection<EmployeeType>((from et in Helper.db.EmployeeTypes select et).ToList());
         }
         public void CreateNewEmployeeType()
         {

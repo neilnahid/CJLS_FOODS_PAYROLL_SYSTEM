@@ -47,10 +47,6 @@
                     materialDesign:HintAssist.Hint="Terms(By Payroll)"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding Loan.Terms, Mode=TwoWay}" />
-                <TextBox
-                    materialDesign:HintAssist.Hint="Terms(By Payroll)"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Loan.TermsRemaining, Mode=TwoWay}" />
 
                 <!--  SP for buttons  -->
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">

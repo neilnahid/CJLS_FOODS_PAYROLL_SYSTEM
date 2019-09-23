@@ -64,6 +64,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             if (pd.Employee.IsIncomeTaxActive)
                 pd.Contributions.Add(new Contribution { ContributionTypeID = 4, PayrollDetailID = pd.PayrollDetailID });
         }
+        public void deletePayroll(Payroll payroll)
+        {
+            Helper.db.Payrolls.DeleteOnSubmit(payroll);
+            Helper.db.SubmitChanges();
+            Helper.db = new DatabaseDataContext();
+            Payrolls = FetchPayrollList();
+        }
         #endregion
     }
 }

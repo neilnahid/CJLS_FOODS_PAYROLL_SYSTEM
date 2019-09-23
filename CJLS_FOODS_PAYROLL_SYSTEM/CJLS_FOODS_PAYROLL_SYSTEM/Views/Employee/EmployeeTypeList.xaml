@@ -24,7 +24,7 @@
                 <TextBox
                     materialDesign:HintAssist.Hint="Job Position"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding EmployeeType.Name}" />
+                    Text="{Binding EmployeeType.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <!--  SP for buttons  -->
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
@@ -33,6 +33,7 @@
                         Click="btn_dialogConfirm_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
                         IsDefault="True"
+                        IsEnabled="{Binding EmployeeType.IsValidationPassed, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource MaterialDesignFlatButton}">
                         <Button.CommandParameter>
                             <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
@@ -42,6 +43,7 @@
                         ACCEPT
                     </Button>
                     <Button
+                        Click="btn_cancel_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
                         IsCancel="True"
                         Style="{StaticResource MaterialDesignFlatButton}">

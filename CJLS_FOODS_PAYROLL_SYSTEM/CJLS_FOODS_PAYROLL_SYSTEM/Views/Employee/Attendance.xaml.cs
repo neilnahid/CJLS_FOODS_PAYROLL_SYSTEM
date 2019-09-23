@@ -37,6 +37,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 var colIndex = DataGridCalendar.CurrentCell.Column.DisplayIndex;
                 VM.Attendance = VM.SelectedWeek.Days[colIndex];
             }
+            grpbox_attendanceDetails.IsEnabled = VM.Attendance.Attendance.AttendanceDate.HasValue ? true : false;
         }
 
         private void DataGridCalendar_CurrentCellChanged(object sender, EventArgs e)
@@ -46,6 +47,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 var colIndex = DataGridCalendar.CurrentCell.Column.DisplayIndex;
                 VM.Attendance = VM.SelectedWeek.Days[colIndex];
             }
+            grpbox_attendanceDetails.IsEnabled = VM.Attendance.Attendance.AttendanceDate.HasValue ? true : false;
+
         }
         private void Txtbox_regularHours_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -109,6 +112,16 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         {
             VM.Attendance.Attendance.Deductions.Remove(VM.Deduction);
             VM.UpdateFlagsOf(VM.Attendance);
+        }
+
+        private void DataGridCalendar_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataGridCalendar.CurrentColumn != null)
+            {
+                var colIndex = DataGridCalendar.CurrentCell.Column.DisplayIndex;
+                VM.Attendance = VM.SelectedWeek.Days[colIndex];
+            }
+            grpbox_attendanceDetails.IsEnabled = VM.Attendance.Attendance.AttendanceDate.HasValue ? true : false;
         }
     }
 }

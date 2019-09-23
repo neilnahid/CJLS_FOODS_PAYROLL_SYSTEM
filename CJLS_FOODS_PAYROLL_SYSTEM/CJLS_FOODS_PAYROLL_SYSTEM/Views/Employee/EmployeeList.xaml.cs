@@ -32,9 +32,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
                 default: MessageBox.Show("command invalid"); break;
             }
         }   
-        private void Btn_Edit_Click(object sender, RoutedEventArgs e) {
-            sp_empInfo.Visibility = Visibility.Visible;
-        }
         private void Btn_deleteEmployee_Click(object sender, RoutedEventArgs e) {
             DialogHeader.Text = "Delete Employee";
             btn_dialogConfirm.Content = "DELETE";
@@ -56,8 +53,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
 
         private void btn_cancelUpdate_Click(object sender, RoutedEventArgs e)
         {
-            sp_empInfo.Visibility = Visibility.Collapsed;
             VM.Employees = VM.GetEmployeeList();
+            VM.Employee = null;
         }
 
         private void btn_updateEmployee_Click(object sender, RoutedEventArgs e)

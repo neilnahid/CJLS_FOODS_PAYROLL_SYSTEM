@@ -44,5 +44,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 default: MessageBox.Show("command invalid"); break;
             }
         }
+
+        private void btn_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.db = new DatabaseDataContext();
+            VM.GetPayrollGroups();
+        }
     }
 }

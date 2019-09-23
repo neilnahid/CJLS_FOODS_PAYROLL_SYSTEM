@@ -26,12 +26,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
         }
 
         private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e) {
+            VM.Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
             DialogHeader.Text = "Create New Payroll";
             btn_dialogConfirm.Content = "CREATE";
-        }
-
-        private void DialogHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs) {
-
         }
 
         private void btn_DialogConfirm_Click(object sender, RoutedEventArgs e) {
@@ -49,6 +46,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
             Helper.Title.Text = "Payroll Details";
             NavigationService.Navigate(new Views.PayrollView.PayrollDetails(VM.Payroll));
             VM.Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
+        }
+
+        private void btn_deletePayroll_Click(object sender, RoutedEventArgs e)
+        {
+             var res = MessageBox.Show("Are you sure you want to delete it?", "Delete Payroll", MessageBoxButton.YesNo);
+            if (res == MessageBoxResult.Yes)
+                VM.deletePayroll(VM.Payroll);
         }
     }
 }

@@ -28,8 +28,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             Helper.db = new DatabaseDataContext();
             Employees = new ObservableCollection<Employee>(GetEmployeeList());
             PayrollGroups = GetPayrollGroups();
-            Employee = new Employee();
             EmployeeTypes = GetEmployeeTypes();
+            Employee = Employees[0];
         }
         #endregion
         #region methods/functions

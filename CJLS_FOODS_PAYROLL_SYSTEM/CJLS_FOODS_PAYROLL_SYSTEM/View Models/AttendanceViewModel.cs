@@ -26,6 +26,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             AddToAttendances(PayrollRange); // references the attendance object attached to the Day object to the Attendances property
             GetSummaryNumbers();
             SelectedWeek = new Model.Week(); // instantiate
+            Attendance = null;
             DeductionsTypes = new ObservableCollection<DeductionsType>(GetDeductionTypes()); // gets deduction types
             Deduction = new Deduction(); // instantiate
             UpdateFlagsOfEveryAttendance(); // instantiate the flags according to the extended attendance's valuep
@@ -89,10 +90,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             PayrollDetail.Attendances = new System.Data.Linq.EntitySet<Attendance>();
             PayrollDetail.Attendances.AddRange(Attendances);
             Helper.db.SubmitChanges();
-            Payroll = (from p in Helper.db.Payrolls where p.PayrollID == Payroll.PayrollID select p).First();
-            Helper.db = new DatabaseDataContext();
-            Helper.db = new DatabaseDataContext();
-            PayrollDetail = (from pd in Helper.db.PayrollDetails where pd.PayrollDetailID == PayrollDetail.PayrollDetailID select pd).First();
+            InstantiateViewModel(Payroll, PayrollDetail);
         }
         private List<DeductionsType> GetDeductionTypes()
         {

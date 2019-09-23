@@ -56,5 +56,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             btn_dialogConfirm.Content = "DELETE";
             VM.DeleteLeave(VM.Leave);
         }
+
+        private void btn_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.db = new DatabaseDataContext();
+            VM.GetEmployees();
+        }
     }
 }

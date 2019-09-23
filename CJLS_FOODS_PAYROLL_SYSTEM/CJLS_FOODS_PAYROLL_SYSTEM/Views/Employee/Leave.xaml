@@ -27,14 +27,14 @@
                     DisplayMemberPath="FullName"
                     IsEditable="True"
                     ItemsSource="{Binding Employees}"
-                    SelectedItem="{Binding Leave.Employee}"
+                    SelectedItem="{Binding Leave.Employee, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                 <DatePicker
                     Grid.Column="0"
                     Margin="0,0,15,0"
                     materialDesign:HintAssist.Hint="Leave Date"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                    Text="{Binding Leave.LeaveDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding Leave.LeaveDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <Label Content="Paid_Leave" />
                     <CheckBox IsChecked="{Binding Leave.IsPaidLeave}" />
@@ -46,6 +46,7 @@
                         Click="btn_dialogConfirm_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
                         IsDefault="True"
+                        IsEnabled="{Binding Leave.IsValidationPassed, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource MaterialDesignFlatButton}">
                         <Button.CommandParameter>
                             <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
@@ -55,6 +56,7 @@
                         ACCEPT
                     </Button>
                     <Button
+                        Click="btn_cancel_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
                         IsCancel="True"
                         Style="{StaticResource MaterialDesignFlatButton}">
@@ -87,8 +89,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Employee.FullName}" Header="First Name" />
                             <DataGridTextColumn Binding="{Binding Employee.EmployeeType.Name}" Header="Job Position" />
-                            <DataGridTextColumn Binding="{Binding LeaveDate}" Header="Leave Date" />
-                            <DataGridTextColumn Binding="{Binding ApprovalStatus}" Header="Approval Status" />
+                            <DataGridTextColumn Binding="{Binding LeaveDate, StringFormat=d}" Header="Leave Date" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

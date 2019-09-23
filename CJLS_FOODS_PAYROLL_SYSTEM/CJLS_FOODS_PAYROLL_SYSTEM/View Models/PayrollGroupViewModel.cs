@@ -34,7 +34,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         public void UpdatePayrollGroup() {
             Helper.db.SubmitChanges();
         }
-        private void GetPayrollGroups() {
+        public void GetPayrollGroups() {
             PayrollGroups = new ObservableCollection<PayrollGroup>((from eg in Helper.db.PayrollGroups select eg).ToList());
         }
         public void DeletePayrollGroup(PayrollGroup PayrollGroup) {
