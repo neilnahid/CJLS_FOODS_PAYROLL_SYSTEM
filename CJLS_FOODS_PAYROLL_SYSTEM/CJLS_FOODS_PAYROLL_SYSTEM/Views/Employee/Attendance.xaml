@@ -199,7 +199,7 @@
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                     <TextBox
                         materialDesign:HintAssist.Hint="PayrollDetailID"
-                        IsReadOnly="True"
+                        IsReadOnly="True"   
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding PayrollDetail.PayrollDetailID}" />
                 </StackPanel>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -55,6 +56,25 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             DialogHeader.Text = "Delete Employee Group";
             btn_dialogConfirm.Content = "DELETE";
             VM.DeleteLoan(VM.Loan);
+        }
+
+        private void NumberValidation(object sender, TextCompositionEventArgs e)
+        {
+            int num;
+            e.Handled = !int.TryParse(e.Text, out num);
+        }
+        private void FloatValidation(object sender, TextCompositionEventArgs e)
+        {
+            bool approvedDecimalPoint = false;
+
+            if (e.Text == ".")
+            {
+                if (!((TextBox)sender).Text.Contains("."))
+                    approvedDecimalPoint = true;
+            }
+
+            if (!(char.IsDigit(e.Text, e.Text.Length - 1) || approvedDecimalPoint))
+                e.Handled = true;
         }
     }
 }

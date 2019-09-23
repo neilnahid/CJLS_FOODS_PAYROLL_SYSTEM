@@ -123,6 +123,7 @@
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\EmployeeType.cs" />
     <Compile Include="Model\ExtendedAttendance.cs" />
+    <Compile Include="Model\Loan.cs" />
     <Compile Include="Model\Payroll.cs" />
     <Compile Include="Model\PayrollGroup.cs" />
     <Compile Include="Model\PayrollRange.cs" />

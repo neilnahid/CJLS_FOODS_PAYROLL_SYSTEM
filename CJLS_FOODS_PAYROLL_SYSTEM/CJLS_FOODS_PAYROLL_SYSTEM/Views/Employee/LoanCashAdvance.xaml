@@ -23,30 +23,31 @@
                     Text="Header" />
                 <ComboBox
                     Grid.Column="1"
-                    materialDesign:HintAssist.Hint="Employee"
                     materialDesign:HintAssist.HintOpacity=".26"
                     DisplayMemberPath="FullName"
                     IsEditable="True"
                     ItemsSource="{Binding Employees}"
-                    SelectedItem="{Binding Loan.Employee, Mode=TwoWay}"
+                    SelectedItem="{Binding Loan.Employee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                 <TextBox
                     materialDesign:HintAssist.Hint="Amount"
+                    PreviewTextInput="FloatValidation"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Loan.Amount, Mode=TwoWay}" />
+                    Text="{Binding Loan.Amount, Mode=TwoWay, ValidatesOnDataErrors=True}" />
                 <ComboBox
                     Grid.Column="1"
                     materialDesign:HintAssist.Hint="Loan Type"
                     materialDesign:HintAssist.HintOpacity=".26"
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                    Text="{Binding Loan.LoanType, Mode=TwoWay}">
+                    Text="{Binding Loan.LoanType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                     <ComboBoxItem>Loan</ComboBoxItem>
                     <ComboBoxItem>Cash Advance</ComboBoxItem>
                 </ComboBox>
                 <TextBox
                     materialDesign:HintAssist.Hint="Terms(By Payroll)"
+                    PreviewTextInput="NumberValidation"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Loan.Terms, Mode=TwoWay}" />
+                    Text="{Binding Loan.Terms, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
 
                 <!--  SP for buttons  -->
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
@@ -55,6 +56,7 @@
                         Click="Btn_dialogConfirm_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
                         IsDefault="True"
+                        IsEnabled="{Binding Loan.IsValidationPassed}"
                         Style="{StaticResource MaterialDesignFlatButton}">
                         <Button.CommandParameter>
                             <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
