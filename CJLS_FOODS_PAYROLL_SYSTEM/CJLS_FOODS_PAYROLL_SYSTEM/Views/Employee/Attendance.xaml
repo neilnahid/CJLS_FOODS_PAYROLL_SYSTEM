@@ -7,8 +7,8 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Attendance"
-    d:DesignHeight="1080"
-    d:DesignWidth="1920"
+    d:DesignHeight="798"
+    d:DesignWidth="1366"
     DataContext="{StaticResource AttendanceViewModel}"
     mc:Ignorable="d">
     <materialDesign:DialogHost x:Name="dialogHost" IsOpen="{Binding IsParentDialogOpen}">
@@ -592,7 +592,7 @@
                                     Name="txtbox_regularHours"
                                     materialDesign:HintAssist.Hint="Regular Hours Worked"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding Attendance.Attendance.RegularHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding Attendance.Attendance.RegularHoursWorked, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                     TextChanged="Txtbox_regularHours_TextChanged" />
                                 <TextBox
                                     Name="txtbox_overtimeHours"
@@ -739,6 +739,7 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
                             Click="Btn_saveAttendance_Click"
+                            IsEnabled="{Binding Attendance.Attendance.IsValidationPassed3}"
                             Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
                             ToolTip="Save Attendance">
                             <materialDesign:PackIcon

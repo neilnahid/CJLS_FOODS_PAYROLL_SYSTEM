@@ -38,7 +38,8 @@
                     <PasswordBox
                         x:Name="passwordBox"
                         materialDesign:HintAssist.Hint="Password"
-                        PasswordChanged="PasswordBox_PasswordChanged" />
+                        PasswordChanged="PasswordBox_PasswordChanged"
+                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
                     <TextBox
                         materialDesign:HintAssist.Hint="Secret Question"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -88,18 +89,18 @@
                     FontSize="24"
                     Header="User List">
                     <DataGrid
-                        CanUserAddRows="False"
-                        CanUserDeleteRows="false"
+                        AutoGenerateColumns="False"
                         CanUserResizeColumns="False"
                         IsReadOnly="True"
                         ItemsSource="{Binding Users}"
                         SelectedItem="{Binding User}">
                         <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding FullName}" Header="Full Name" />
+                            <DataGridTextColumn Binding="{Binding Username}" Header="Username" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Button
-                                            x:Name="btn_Edit"
                                             materialDesign:HintAssist.Hint="Edit User"
                                             Click="Btn_Edit_Click"
                                             Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"

@@ -39,7 +39,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts {
             passwordBox.Password = VM.User.Password;
             DialogHeader.Text = "Update User";
             btn_dialogConfirm.Content = "UPDATE";
-            VM.Users = new System.Collections.ObjectModel.ObservableCollection<User>(VM.GetAllUsers());
         }
 
         private void btn_DialogConfirm_Click(object sender, RoutedEventArgs e) {

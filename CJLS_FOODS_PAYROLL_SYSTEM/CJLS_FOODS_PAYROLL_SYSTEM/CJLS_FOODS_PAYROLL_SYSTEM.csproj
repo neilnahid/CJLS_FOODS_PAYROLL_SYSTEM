@@ -119,6 +119,7 @@
       <DependentUpon>Database.dbml</DependentUpon>
     </Compile>
     <Compile Include="Helper.cs" />
+    <Compile Include="Model\Attendance.cs" />
     <Compile Include="Model\Dialog.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\EmployeeType.cs" />
