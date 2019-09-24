@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM
 {
-    public partial class Attendance
+    public partial class Attendance : INotifyPropertyChanged
     {
         public Visibility UnderTimeFlag { get; set; }
 
@@ -19,10 +19,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 
         public Visibility DeductionsFlag { get; set; }
         public Visibility AbsentFlag { get; set; }
-
-        public string MinutesLateWidth { get; set; }
-        public string HoursWorkedWidth { get; set; }
-        public string OverTimeHoursWorkedWidth { get; set; }
         //public bool IsValidationPassed { get; set; }
         //public string Error { get { return null; } }
         //public Dictionary<string, string> ErrorCollection { get; set; } = new Dictionary<string, string>();

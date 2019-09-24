@@ -47,7 +47,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public PayrollDetail PayrollDetail { get; set; }
         public Model.PayrollRange PayrollRange { get; set; }
         public List<Attendance> Attendances { get; set; }
-        public Model.ExtendedAttendance Attendance { get; set; }
+        public Attendance Attendance { get; set; }
         public string StartMonth { get; set; }
         public string EndMonth { get; set; }
         public Deduction Deduction { get; set; }
@@ -96,9 +96,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         {
             return (from i in Helper.db.DeductionsTypes select i).ToList();
         }
-        public void UpdateFlagsOf(Model.ExtendedAttendance attendance)
+        public void UpdateFlagsOf(Attendance attendance)
         {
-            if (attendance != null && attendance.Attendance.AttendanceDate != null)
+            if (attendance != null && attendance.AttendanceDate != null)
             {
                 UpdateRegularHoursFlag(attendance);
                 UpdateOverTimeHoursFlag(attendance);
@@ -124,9 +124,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             {
                 foreach (var d in w.Days)
                 {
-                    if (d.Attendance.AttendanceDate != null)
+                    if (d.AttendanceDate != null)
                     {
-                        Attendances.Add(d.Attendance);
+                        Attendances.Add(d);
                     }
                 }
             }
@@ -149,9 +149,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             }
         }
         #region UpdateFlags Functions
-        private void UpdateRegularHoursFlag(Model.ExtendedAttendance a)
+        private void UpdateRegularHoursFlag(Attendance a)
         {
-            if (a.Attendance.RegularHoursWorked >= a.Attendance.PayrollDetail.Employee.DailyRequiredHours)
+            if (a.RegularHoursWorked >= a.PayrollDetail.Employee.DailyRequiredHours)
             {
                 a.RegularHoursFlag = Visibility.Visible;
             }
@@ -160,9 +160,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 a.RegularHoursFlag = Visibility.Collapsed;
             }
         }
-        private void updateUnderTimeHoursFlag(Model.ExtendedAttendance a)
+        private void updateUnderTimeHoursFlag(Attendance a)
         {
-            if (a.Attendance.RegularHoursWorked < a.Attendance.PayrollDetail.Employee.DailyRequiredHours && a.Attendance.RegularHoursWorked > 0)
+            if (a.RegularHoursWorked < a.PayrollDetail.Employee.DailyRequiredHours && a.RegularHoursWorked > 0)
             {
                 a.UnderTimeFlag = Visibility.Visible;
             }
@@ -172,23 +172,23 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             }
         }
 
-        private void UpdateOverTimeHoursFlag(Model.ExtendedAttendance a)
+        private void UpdateOverTimeHoursFlag(Attendance a)
         {
-            if (a.Attendance.OverTimeHoursWorked > 0)
+            if (a.OverTimeHoursWorked > 0)
                 a.OverTimeHoursFlag = Visibility.Visible;
             else
                 a.OverTimeHoursFlag = Visibility.Collapsed;
         }
-        private void UpdateDeductionsFlag(Model.ExtendedAttendance a)
+        private void UpdateDeductionsFlag(Attendance a)
         {
-            if (a.Attendance.Deductions.Count > 0)
+            if (a.Deductions.Count > 0)
                 a.DeductionsFlag = Visibility.Visible;
             else
                 a.DeductionsFlag = Visibility.Collapsed;
         }
-        private void UpdateAbsentFlag(Model.ExtendedAttendance a)
+        private void UpdateAbsentFlag(Attendance a)
         {
-            if (a.Attendance.RegularHoursWorked <= 0)
+            if (a.RegularHoursWorked <= 0)
             {
                 a.AbsentFlag = Visibility.Visible;
             }

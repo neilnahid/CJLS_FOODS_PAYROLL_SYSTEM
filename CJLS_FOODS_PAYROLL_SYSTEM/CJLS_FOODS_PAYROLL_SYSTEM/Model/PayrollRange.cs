@@ -16,8 +16,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
             foreach(var a in payrollDetails.Attendances) {
                 if (a.AttendanceDate.HasValue)
                 {
-                    var currentDay = Weeks[weekCounter].Days[(int)a.AttendanceDate.Value.DayOfWeek];
-                    currentDay.Attendance = a;
+                    Weeks[weekCounter].Days[(int)a.AttendanceDate.Value.DayOfWeek] = a;
                     if (a.AttendanceDate.Value.DayOfWeek == DayOfWeek.Saturday)
                     {
                         weekCounter++;
@@ -36,8 +35,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
             int weekCounter = 0;
             //assign each attendance to their corresponding dayofweek
             for (int i = 0; i < (EndDate-StartDate).TotalDays; i++) {
-                var currentDay = Weeks[weekCounter].Days[(int)StartDate.AddDays(i).DayOfWeek];
-                currentDay.Attendance.AttendanceDate = StartDate.AddDays(i);
+                var currentDay = Weeks[weekCounter].Days[(int)StartDate.AddDays(i).DayOfWeek].AttendanceDate = StartDate.AddDays(i);
                 if (StartDate.AddDays(i).DayOfWeek == DayOfWeek.Saturday) {
                     weekCounter++;
                     Weeks.Add(new Week(pd));

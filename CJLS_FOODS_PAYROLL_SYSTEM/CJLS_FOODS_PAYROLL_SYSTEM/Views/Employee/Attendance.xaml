@@ -230,7 +230,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Name="Sunday">
-                                            <TextBlock Text="{Binding Days[0].Attendance.AttendanceDate.Day}" />
+                                            <TextBlock Text="{Binding Days[0].AttendanceDate.Day}" />
                                             <Rectangle
                                                 x:Name="Regular"
                                                 Width="Auto"
@@ -269,7 +269,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel x:Name="Monday">
-                                            <TextBlock Text="{Binding Days[1].Attendance.AttendanceDate.Day}" />
+                                            <TextBlock Text="{Binding Days[1].AttendanceDate.Day}" />
                                             <Rectangle
                                                 x:Name="Regular"
                                                 Width="Auto"
@@ -308,7 +308,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel x:Name="Tuesday">
-                                            <TextBlock Text="{Binding Days[2].Attendance.AttendanceDate.Day}" />
+                                            <TextBlock Text="{Binding Days[2].AttendanceDate.Day}" />
                                             <Rectangle
                                                 x:Name="Regular"
                                                 Width="Auto"
@@ -347,7 +347,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel x:Name="Wednesday">
-                                            <TextBlock Text="{Binding Days[3].Attendance.AttendanceDate.Day}" />
+                                            <TextBlock Text="{Binding Days[3].AttendanceDate.Day}" />
                                             <Rectangle
                                                 x:Name="Regular"
                                                 Width="Auto"
@@ -386,7 +386,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel x:Name="Thursday">
-                                            <TextBlock Text="{Binding Days[4].Attendance.AttendanceDate.Day}" />
+                                            <TextBlock Text="{Binding Days[4].AttendanceDate.Day}" />
                                             <Rectangle
                                                 x:Name="Regular"
                                                 Width="Auto"
@@ -425,7 +425,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel x:Name="Friday">
-                                            <TextBlock Text="{Binding Days[5].Attendance.AttendanceDate.Day}" />
+                                            <TextBlock Text="{Binding Days[5].AttendanceDate.Day}" />
                                             <Rectangle
                                                 x:Name="Regular"
                                                 Width="Auto"
@@ -464,7 +464,7 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel x:Name="Saturday">
-                                            <TextBlock Text="{Binding Days[6].Attendance.AttendanceDate.Day}" />
+                                            <TextBlock Text="{Binding Days[6].AttendanceDate.Day}" />
                                             <Rectangle
                                                 x:Name="Regular"
                                                 Width="Auto"
@@ -592,13 +592,13 @@
                                     Name="txtbox_regularHours"
                                     materialDesign:HintAssist.Hint="Regular Hours Worked"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding Attendance.Attendance.RegularHoursWorked, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding Attendance.RegularHoursWorked, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                     TextChanged="Txtbox_regularHours_TextChanged" />
                                 <TextBox
                                     Name="txtbox_overtimeHours"
                                     materialDesign:HintAssist.Hint="Overtime Hours Worked"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                    Text="{Binding Attendance.Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    Text="{Binding Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextChanged="Txtbox_overtimeHours_TextChanged" />
 
                             </StackPanel>
@@ -615,7 +615,7 @@
                                     CanUserAddRows="False"
                                     CanUserDeleteRows="False"
                                     CanUserResizeRows="False"
-                                    ItemsSource="{Binding Attendance.Attendance.Deductions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    ItemsSource="{Binding Attendance.Deductions, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     SelectedItem="{Binding Deduction}">
                                     <DataGrid.Columns>
                                         <DataGridTemplateColumn Header="Deduction Type">
@@ -739,7 +739,7 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
                             Click="Btn_saveAttendance_Click"
-                            IsEnabled="{Binding Attendance.Attendance.IsValidationPassed3}"
+                            IsEnabled="{Binding Attendance.IsValidationPassed3}"
                             Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
                             ToolTip="Save Attendance">
                             <materialDesign:PackIcon

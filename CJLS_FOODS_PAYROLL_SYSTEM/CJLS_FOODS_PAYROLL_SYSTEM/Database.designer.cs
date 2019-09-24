@@ -625,10 +625,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		}
 		
 		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void SendPropertyChanging()
 		{
 			if ((this.PropertyChanging != null))
 			{

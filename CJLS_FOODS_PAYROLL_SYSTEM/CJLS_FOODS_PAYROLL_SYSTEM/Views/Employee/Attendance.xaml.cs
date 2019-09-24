@@ -26,7 +26,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             InitializeComponent();
             Helper.db = new DatabaseDataContext();
             VM = (View_Models.AttendanceViewModel)DataContext;
-
             VM.InstantiateViewModel(payroll, selectedPayrolLDetail);
         }
 
@@ -37,7 +36,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 var colIndex = DataGridCalendar.CurrentCell.Column.DisplayIndex;
                 VM.Attendance = VM.SelectedWeek.Days[colIndex];
             }
-            grpbox_attendanceDetails.IsEnabled = VM.Attendance.Attendance.AttendanceDate.HasValue ? true : false;
+            grpbox_attendanceDetails.IsEnabled = VM.Attendance.AttendanceDate.HasValue ? true : false;
         }
 
         private void DataGridCalendar_CurrentCellChanged(object sender, EventArgs e)
@@ -47,7 +46,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 var colIndex = DataGridCalendar.CurrentCell.Column.DisplayIndex;
                 VM.Attendance = VM.SelectedWeek.Days[colIndex];
             }
-            grpbox_attendanceDetails.IsEnabled = VM.Attendance.Attendance.AttendanceDate.HasValue ? true : false;
+            grpbox_attendanceDetails.IsEnabled = VM.Attendance.AttendanceDate.HasValue ? true : false;
 
         }
         private void Txtbox_regularHours_TextChanged(object sender, TextChangedEventArgs e)
@@ -64,7 +63,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void Btn_dialogConfirm_Click(object sender, RoutedEventArgs e)
         {
-            VM.Attendance.Attendance.Deductions.Add(VM.Deduction);
+            VM.Attendance.Deductions.Add(VM.Deduction);
             VM.UpdateFlagsOf(VM.Attendance);
             VM.GetSummaryNumbers();
             VM.populateBreakdownItems();
@@ -74,6 +73,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         {
             VM.SaveAttendance();
             MessageBox.Show("Successfully Saved Attendance");
+            grpbox_attendanceDetails.IsEnabled = false;
         }
 
         private void Btn_openAddDeductionDialog_Click(object sender, RoutedEventArgs e)
@@ -110,7 +110,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void Btn_deleteDeduction_Click(object sender, RoutedEventArgs e)
         {
-            VM.Attendance.Attendance.Deductions.Remove(VM.Deduction);
+            VM.Attendance.Deductions.Remove(VM.Deduction);
             VM.UpdateFlagsOf(VM.Attendance);
         }
 
@@ -121,7 +121,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 var colIndex = DataGridCalendar.CurrentCell.Column.DisplayIndex;
                 VM.Attendance = VM.SelectedWeek.Days[colIndex];
             }
-            grpbox_attendanceDetails.IsEnabled = VM.Attendance.Attendance.AttendanceDate.HasValue ? true : false;
+            grpbox_attendanceDetails.IsEnabled = VM.Attendance.AttendanceDate.HasValue ? true : false;
         }
     }
 }
