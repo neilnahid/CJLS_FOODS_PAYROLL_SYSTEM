@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM
 {
-    public partial class Attendance : INotifyPropertyChanged
+    public partial class Attendance
     {
         public Visibility UnderTimeFlag { get; set; }
 

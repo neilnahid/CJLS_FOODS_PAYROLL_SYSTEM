@@ -123,7 +123,6 @@
     <Compile Include="Model\Dialog.cs" />
     <Compile Include="Model\Employee.cs" />
     <Compile Include="Model\EmployeeType.cs" />
-    <Compile Include="Model\ExtendedAttendance.cs" />
     <Compile Include="Model\Loan.cs" />
     <Compile Include="Model\Payroll.cs" />
     <Compile Include="Model\PayrollGroup.cs" />
@@ -138,7 +137,6 @@
     <Compile Include="View Models\LoginViewModel.cs" />
     <Compile Include="View Models\PayrollGroupViewModel.cs" />
     <Compile Include="View Models\EmployeeViewModel.cs" />
-    <Compile Include="Model\ModelPropertyChanged.cs" />
     <Compile Include="View Models\PayrollDetailsViewModel.cs" />
     <Compile Include="View Models\PayrollSummaryViewModel.cs" />
     <Compile Include="View Models\PayrollViewModel.cs" />
