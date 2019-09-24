@@ -47,10 +47,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public void DeleteLoan(Loan loan)
         {
             Helper.db.Loans.DeleteOnSubmit(loan);
-            Loans.Remove(loan);
-            Loan = new Loan();
             Helper.db.SubmitChanges();
             MessageBox.Show("Successfully Deleted Loan!");
+            Instantiate();
         }
         public void GetEmployees()
         {

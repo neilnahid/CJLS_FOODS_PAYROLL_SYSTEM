@@ -28,12 +28,13 @@
                     IsEditable="True"
                     ItemsSource="{Binding Employees}"
                     SelectedItem="{Binding Loan.Employee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                    Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    ToolTip="{Binding Loan.ErrorCollection[Employee]}" />
                 <TextBox
                     materialDesign:HintAssist.Hint="Amount"
                     PreviewTextInput="FloatValidation"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding Loan.Amount, Mode=TwoWay, ValidatesOnDataErrors=True}" />
+                    Text="{Binding Loan.Amount, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox
                     Grid.Column="1"
                     materialDesign:HintAssist.Hint="Loan Type"
@@ -129,7 +130,7 @@
                 Click="Btn_createNewLoan_Click"
                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                 Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
-                ToolTip="Add New Employee">
+                ToolTip="Add new loan">
                 <materialDesign:PackIcon
                     Width="24"
                     Height="24"
