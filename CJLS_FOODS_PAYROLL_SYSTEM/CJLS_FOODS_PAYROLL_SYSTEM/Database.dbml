@@ -48,8 +48,6 @@
       <Column Name="AttendanceID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Attendance_Deduction" Member="Attendance" ThisKey="AttendanceID" OtherKey="AttendanceID" Type="Attendance" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="DeductionsType_Deduction" Member="DeductionsType" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="DeductionsType" IsForeignKey="true" />
-      <Association Name="DeductionsType_Deduction1" Member="DeductionsType1" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="DeductionsType" IsForeignKey="true" />
-      <Association Name="DeductionsType_Deduction2" Member="DeductionsType2" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="DeductionsType" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.DeductionsTypes" Member="DeductionsTypes">
@@ -58,8 +56,6 @@
       <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="DeductionReferenceId" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="DeductionsType_Deduction" Member="Deductions" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="Deduction" />
-      <Association Name="DeductionsType_Deduction1" Member="Deductions1" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="Deduction" />
-      <Association Name="DeductionsType_Deduction2" Member="Deductions2" ThisKey="DeductionTypeID" OtherKey="DeductionTypeID" Type="Deduction" />
     </Type>
   </Table>
   <Table Name="dbo.Employee" Member="Employees">
@@ -152,8 +148,6 @@
       <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Association Name="Payroll_PayrollDetail" Member="PayrollDetails" ThisKey="PayrollID" OtherKey="PayrollID" Type="PayrollDetail" />
       <Association Name="PayrollGroup_Payroll" Member="PayrollGroup" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="PayrollGroup" IsForeignKey="true" />
-      <Association Name="PayrollGroup_Payroll1" Member="PayrollGroup1" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="PayrollGroup" IsForeignKey="true" />
-      <Association Name="PayrollGroup_Payroll2" Member="PayrollGroup2" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="PayrollGroup" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.PayrollDetail" Member="PayrollDetails">
@@ -183,8 +177,6 @@
       <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Association Name="PayrollGroup_Employee" Member="Employees" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Employee" />
       <Association Name="PayrollGroup_Payroll" Member="Payrolls" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Payroll" />
-      <Association Name="PayrollGroup_Payroll1" Member="Payrolls1" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Payroll" />
-      <Association Name="PayrollGroup_Payroll2" Member="Payrolls2" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Payroll" />
     </Type>
   </Table>
   <Function Name="dbo.sp_SearchEmployee" Method="sp_SearchEmployee">

@@ -104,6 +104,7 @@
                             Grid.Column="1"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Salary Rate(Per hour)"
+                            PreviewTextInput="NumberValidation"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.HourlyRate, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="{Binding Employee.ErrorCollection[HourlyRate]}" />
@@ -111,6 +112,7 @@
                             Grid.Column="2"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Daily Required Hours"
+                            PreviewTextInput="NumberValidation"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.DailyRequiredHours, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="{Binding Employee.ErrorCollection[DailyRequiredHours]}" />
@@ -141,6 +143,7 @@
                         <TextBox
                             Grid.Column="0"
                             materialDesign:HintAssist.Hint="Available Leaves"
+                            PreviewTextInput="NumberValidation"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.AvailableLeaves, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                         <TextBox
@@ -252,6 +255,7 @@
                         ACCEPT
                     </Button>
                     <Button
+                        Click="btn_dialogCancel_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
                         IsCancel="True"
                         Style="{StaticResource MaterialDesignFlatButton}">
@@ -397,12 +401,14 @@
                                         Grid.Column="1"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Salary Rate(Per hour)"
+                                        PreviewTextInput="NumberValidation"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.HourlyRate, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBox
                                         Grid.Column="2"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Daily Required Hours"
+                                        PreviewTextInput="NumberValidation"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.DailyRequiredHours, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                     <ComboBox
@@ -437,6 +443,7 @@
                                     <TextBox
                                         Grid.Column="0"
                                         materialDesign:HintAssist.Hint="Available Leaves"
+                                        PreviewTextInput="NumberValidation"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.AvailableLeaves, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBox

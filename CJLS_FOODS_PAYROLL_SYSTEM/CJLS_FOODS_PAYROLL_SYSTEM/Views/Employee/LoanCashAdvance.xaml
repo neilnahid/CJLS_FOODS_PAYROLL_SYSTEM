@@ -105,7 +105,7 @@
                                 <DataTemplate>
                                     <Button
                                         x:Name="btn_Edit"
-                                        materialDesign:HintAssist.Hint="Edit Employee"
+                                        materialDesign:HintAssist.Hint="Edit Loan"
                                         Click="Btn_Edit_Click"
                                         Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                                         Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">

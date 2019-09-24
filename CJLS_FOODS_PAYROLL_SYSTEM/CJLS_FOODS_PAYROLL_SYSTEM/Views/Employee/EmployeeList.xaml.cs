@@ -63,5 +63,16 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
             MessageBox.Show("Successfully updated Employees.");
             VM.Employees = VM.GetEmployeeList();
         }
+
+        private void NumberValidation(object sender, TextCompositionEventArgs e)
+        {
+            int num;
+            e.Handled = !int.TryParse(e.Text, out num);
+        }
+
+        private void btn_dialogCancel_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Employee = VM.Employees.FirstOrDefault();
+        }
     }
 }

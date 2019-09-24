@@ -64,7 +64,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                             goto case "stringEmpty";
                         break;
                     case "DateOfBirth":
-                        if (!Regex.IsMatch(DateOfBirth.ToString("MM/dd/yyyy"), "^[0-1][0-2]/[0-3][0-9]/[0-9]{4}$"))
+                        if (!Regex.IsMatch(DateOfBirth.ToString("MM/dd/yyyy"), "^[0-10-9]{1,2}/[0-10-9]{1,2}/[0-9]{4}$"))
                             result = "date format should be mm/dd/yyyy";
                         break;
                     case "PayrollGroup":

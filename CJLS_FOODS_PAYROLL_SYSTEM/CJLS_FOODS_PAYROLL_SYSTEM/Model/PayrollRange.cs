@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
     public class PayrollRange : ModelPropertyChange {
+
+        //constructor for existing payrolldetails with attendance 
         public PayrollRange(PayrollDetail payrollDetails) {
             Weeks = new List<Week>();
             Weeks.Add(new Week());
