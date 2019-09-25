@@ -41,6 +41,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
 
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
             TreeViewItem tvi = (TreeViewItem)((TreeView)sender).SelectedItem;
+            Helper.PreviousPage = new Views.Home();
             if (tvi.Header.ToString() == "Employee List") {
                 draweHost.IsLeftDrawerOpen = false;
                 Frame.Content = new Views.Employee.EmployeeList();
@@ -85,6 +86,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
                 this.Close();
                 Helper.User = null;
             }
+        }
+
+        private void btn_GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Content = Helper.PreviousPage;
         }
     }
 }

@@ -44,15 +44,37 @@
                     <ColumnDefinition Width="63*" />
                     <ColumnDefinition Width="730*" />
                 </Grid.ColumnDefinitions>
-                <ToggleButton
-                    x:Name="MenuToggleButton"
-                    Width="Auto"
-                    Height="Auto"
-                    Checked="MenuToggleButton_Checked"
-                    Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
-                    CommandParameter="{x:Static Dock.Left}"
-                    Foreground="WhiteSmoke"
-                    Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                <StackPanel Orientation="Horizontal">
+                    <Button
+                        HorizontalAlignment="Left"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                        CommandParameter="{x:Static Dock.Left}"
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        ToolTip="MaterialDesignFloatingActionButton">
+                        <materialDesign:PackIcon
+                            Width="Auto"
+                            Height="Auto"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Kind="HamburgerMenu" />
+                    </Button>
+                    <Button
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Click="btn_GoBack_Click"
+                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                        ToolTip="MaterialDesignFloatingActionButton">
+                        <materialDesign:PackIcon
+                            Width="Auto"
+                            Height="Auto"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Kind="ArrowBack" />
+                    </Button>
+                </StackPanel>
+
                 <TextBlock
                     x:Name="Title"
                     Grid.Column="1"
