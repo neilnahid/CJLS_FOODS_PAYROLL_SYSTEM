@@ -19,17 +19,17 @@
         IsLeftDrawerOpen="True">
         <materialDesign:DrawerHost.LeftDrawerContent>
             <StackPanel>
-                <TreeView SelectedItemChanged="TreeView_SelectedItemChanged">
-                    <TreeViewItem Header="Employees">
+                <TreeView x:Name="treeview" SelectedItemChanged="TreeView_SelectedItemChanged">
+                    <TreeViewItem Header="Master Files">
                         <TreeViewItem Header="Employee List" />
                         <TreeViewItem Header="Employee Groups" />
                         <TreeViewItem Header="Job Positions" />
+                        <TreeViewItem Header="Branches" />
+                        <TreeViewItem Header="Users" />
                     </TreeViewItem>
-                    <TreeViewItem Header="Payroll" />
-                    <TreeViewItem Header="Users" />
-                    <TreeViewItem Header="Leave" />
-                    <TreeViewItem Header="Loans/Cash Advance" />
-                    <TreeViewItem Header="Account Settings" />
+                    <TreeViewItem Header="Process Payroll" />
+                    <TreeViewItem Header="Process Leave" />
+                    <TreeViewItem Header="Process Loans/Cash Advance" />
                     <TreeViewItem Header="Logout" />
                 </TreeView>
             </StackPanel>

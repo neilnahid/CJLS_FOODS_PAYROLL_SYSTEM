@@ -22,6 +22,7 @@
             <VM:LoginViewModel x:Key="LoginViewModel" />
             <VM:ForgotPasswordViewModel x:Key="ForgotPasswordViewModel" />
             <VM:HomeViewModel x:Key="HomeViewModel" />
+            <VM:BranchViewModel x:Key="BranchViewModel" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

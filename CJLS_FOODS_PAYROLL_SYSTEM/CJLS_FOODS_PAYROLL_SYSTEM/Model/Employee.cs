@@ -60,8 +60,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                             goto case "stringEmpty";
                         break;
                     case "Branch":
-                        if (String.IsNullOrEmpty(Branch))
-                            goto case "stringEmpty";
+                        if(Branch==null)
+                            result = "You must select a branch.";
                         break;
                     case "DateOfBirth":
                         if (!Regex.IsMatch(DateOfBirth.ToString("MM/dd/yyyy"), "^[0-10-9]{1,2}/[0-10-9]{1,2}/[0-9]{4}$"))

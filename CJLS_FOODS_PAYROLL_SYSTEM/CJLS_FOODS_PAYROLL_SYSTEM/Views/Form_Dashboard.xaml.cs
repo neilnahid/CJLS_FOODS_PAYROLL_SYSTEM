@@ -41,12 +41,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
 
         private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
             TreeViewItem tvi = (TreeViewItem)((TreeView)sender).SelectedItem;
-            if (tvi.Header.ToString() == "Employee List") {
+            if (tvi.Header.ToString() == "Employee List")
+            {
                 draweHost.IsLeftDrawerOpen = false;
                 Frame.Content = new Views.Employee.EmployeeList();
                 Title.Text = "Employee List";
             }
-            else if(tvi.Header.ToString() == "Employee Groups") {
+            else if (tvi.Header.ToString() == "Employee Groups")
+            {
                 draweHost.IsLeftDrawerOpen = false;
                 Frame.Content = new Views.Employee.PayrollGroup();
                 Title.Text = "Employee Groups";
@@ -57,29 +59,37 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
                 Frame.Content = new Views.Employee.EmployeeTypeList();
                 Title.Text = "Job Positions";
             }
-            else if (tvi.Header.ToString() == "Users") {
+            else if (tvi.Header.ToString() == "Branches")
+            {
+                draweHost.IsLeftDrawerOpen = false;
+                Frame.Content = new Views.Employee.BranchList();
+                Title.Text = "Branches";
+            }
+            else if (tvi.Header.ToString() == "Users")
+            {
                 draweHost.IsLeftDrawerOpen = false;
                 Frame.Content = new Views.Accounts.UserList();
                 Title.Text = "Users List";
             }
-            else if (tvi.Header.ToString() == "Payroll") {
+            else if (tvi.Header.ToString() == "Process Payroll")
+            {
                 draweHost.IsLeftDrawerOpen = false;
                 Frame.Content = new Views.PayrollView.PayrollList();
-                Title.Text = "Payroll";
+                Title.Text = "Process Payroll";
             }
-            else if (tvi.Header.ToString() == "Leave")
+            else if (tvi.Header.ToString() == "Process Leave")
             {
                 draweHost.IsLeftDrawerOpen = false;
                 Frame.Content = new Views.Employee.Leave();
-                Title.Text = "Leave";
+                Title.Text = "Process Leave";
             }
-            else if (tvi.Header.ToString() == "Loans/Cash Advance")
+            else if (tvi.Header.ToString() == "Process Loans/Cash Advance")
             {
                 draweHost.IsLeftDrawerOpen = false;
                 Frame.Content = new Views.Employee.LoanCashAdvance();
-                Title.Text = "Loans/Cash Advance";
+                Title.Text = "Process Loans/Cash Advance";
             }
-            else if(tvi.Header.ToString() == "Logout")
+            else if (tvi.Header.ToString() == "Logout")
             {
                 new Views.Login_Form().Show();
                 this.Close();

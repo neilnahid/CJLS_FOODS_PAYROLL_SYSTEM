@@ -13,6 +13,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         #region properties
         public event PropertyChangedEventHandler PropertyChanged;
         public List<EmployeeType> EmployeeTypes { get; set; }
+        public List<Branch> Branches { get; set; } = (from b in Helper.db.Branches select b).ToList();
         public ObservableCollection<Employee> Employees { get; set; }
 
         public string Search { get; set; }
@@ -28,16 +29,22 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             Helper.db = new DatabaseDataContext();
             Employees = new ObservableCollection<Employee>(GetEmployeeList());
             PayrollGroups = GetPayrollGroups();
+            Branches = GetBranches();
             EmployeeTypes = GetEmployeeTypes();
             Employee = Employees[0];
         }
         #endregion
         #region methods/functions
+        public List<Branch> GetBranches()
+        {
+            return (from b in Helper.db.Branches select b).ToList();
+        }
         public ObservableCollection<Employee> GetEmployeeList()
         {
             var result = new ObservableCollection<Employee>((from employee in Helper.db.Employees where employee.Status == "Active" select employee).ToList());
             return result;
         }
+
         public List<PayrollGroup> GetPayrollGroups()
         {
             return (from pg in Helper.db.PayrollGroups select pg).ToList();

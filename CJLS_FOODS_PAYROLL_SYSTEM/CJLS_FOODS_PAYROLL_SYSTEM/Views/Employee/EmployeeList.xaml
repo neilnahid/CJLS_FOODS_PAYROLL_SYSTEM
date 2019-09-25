@@ -146,11 +146,13 @@
                             PreviewTextInput="NumberValidation"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.AvailableLeaves, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
-                        <TextBox
+                        <ComboBox
                             Grid.Column="1"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Branch Assigned"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            ItemsSource="{Binding Branches}"
+                            SelectedItem="{Binding Employee.Branch}"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                             Text="{Binding Employee.Branch, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                         <ComboBox
                             Grid.Column="2"

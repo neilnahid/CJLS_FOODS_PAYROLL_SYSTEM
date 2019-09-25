@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CJLSFOODSPAYROLL" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=NEIL\SQLEXPRESS;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True" SettingsObjectName="CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings" SettingsPropertyName="CJLSFOODSPAYROLLConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Attendance" Member="Attendances">
     <Type Name="Attendance">
       <Column Name="AttendanceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -20,6 +10,22 @@
       <Column Name="MinutesLate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="Attendance_Deduction" Member="Deductions" ThisKey="AttendanceID" OtherKey="AttendanceID" Type="Deduction" />
       <Association Name="PayrollDetail_Attendance" Member="PayrollDetail" ThisKey="PayrollDetailsID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PayrollGroup" Member="PayrollGroups">
+    <Type Name="PayrollGroup">
+      <Column Name="PayrollGroupID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Association Name="PayrollGroup_Employee" Member="Employees" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Employee" />
+      <Association Name="PayrollGroup_Payroll" Member="Payrolls" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Payroll" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Branch" Member="Branches">
+    <Type Name="Branch">
+      <Column Name="BranchID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Branch_Employee" Member="Employees" ThisKey="BranchID" OtherKey="BranchID" Type="Employee" />
     </Type>
   </Table>
   <Table Name="dbo.Contribution" Member="Contributions">
@@ -80,7 +86,6 @@
       <Column Name="PagIbigID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="PhilhealthID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="TINID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Branch" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Status" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="IsPhilhealthActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="IsSSSActive" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
@@ -90,11 +95,13 @@
       <Column Name="Emp_ID" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="PayrollGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="DateAdded" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="BranchID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Employee_Leave" Member="Leaves" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Leave" />
       <Association Name="Employee_Loan" Member="Loans" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Loan" />
       <Association Name="Employee_PayrollDetail" Member="PayrollDetails" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="PayrollDetail" />
-      <Association Name="EmployeeType_Employee" Member="EmployeeType" ThisKey="EmployeeTypeID" OtherKey="EmployeeTypeID" Type="EmployeeType" IsForeignKey="true" />
+      <Association Name="Branch_Employee" Member="Branch" ThisKey="BranchID" OtherKey="BranchID" Type="Branch" IsForeignKey="true" />
       <Association Name="PayrollGroup_Employee" Member="PayrollGroup" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="PayrollGroup" IsForeignKey="true" />
+      <Association Name="EmployeeType_Employee" Member="EmployeeType" ThisKey="EmployeeTypeID" OtherKey="EmployeeTypeID" Type="EmployeeType" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.EmployeeType" Member="EmployeeTypes">
@@ -119,10 +126,10 @@
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="LoanType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Terms" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="TermsRemaining" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="AmountRemaining" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="TotalPaid" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Terms" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TermsRemaining" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="IsPaid" Type="System.Boolean" DbType="Bit" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="AmountPerPayroll" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Loan_LoanPayment" Member="LoanPayments" ThisKey="LoanID" OtherKey="LoanID" Type="LoanPayment" />
@@ -171,12 +178,14 @@
       <Association Name="Payroll_PayrollDetail" Member="Payroll" ThisKey="PayrollID" OtherKey="PayrollID" Type="Payroll" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
-  <Table Name="dbo.PayrollGroup" Member="PayrollGroups">
-    <Type Name="PayrollGroup">
-      <Column Name="PayrollGroupID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Association Name="PayrollGroup_Employee" Member="Employees" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Employee" />
-      <Association Name="PayrollGroup_Payroll" Member="Payrolls" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Payroll" />
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.sp_SearchEmployee" Method="sp_SearchEmployee">
