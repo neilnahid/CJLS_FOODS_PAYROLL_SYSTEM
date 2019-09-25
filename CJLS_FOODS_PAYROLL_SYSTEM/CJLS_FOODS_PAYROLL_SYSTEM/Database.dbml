@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CJLSFOODSPAYROLL" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=NEIL\SQLEXPRESS;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True" SettingsObjectName="CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings" SettingsPropertyName="CJLSFOODSPAYROLLConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Attendance" Member="Attendances">
     <Type Name="Attendance">
       <Column Name="AttendanceDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
@@ -20,6 +10,16 @@
       <Column Name="MinutesLate" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
       <Association Name="Attendance_Deduction" Member="Deductions" ThisKey="AttendanceID" OtherKey="AttendanceID" Type="Deduction" />
       <Association Name="PayrollDetail_Attendance" Member="PayrollDetail" ThisKey="PayrollDetailsID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Contribution" Member="Contributions">
@@ -119,10 +119,10 @@
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Amount" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="LoanType" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Terms" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="TermsRemaining" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="AmountRemaining" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="TotalPaid" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Terms" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TermsRemaining" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="IsPaid" Type="System.Boolean" DbType="Bit" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="AmountPerPayroll" Type="System.Double" DbType="Float" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="Loan_LoanPayment" Member="LoanPayments" ThisKey="LoanID" OtherKey="LoanID" Type="LoanPayment" />
