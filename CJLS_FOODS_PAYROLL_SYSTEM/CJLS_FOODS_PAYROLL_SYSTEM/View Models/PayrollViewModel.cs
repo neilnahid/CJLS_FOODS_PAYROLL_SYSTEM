@@ -12,9 +12,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         #region Constructors
         public void Instantiate()
         {
+            Page = 0;
             Helper.db = new DatabaseDataContext();
             Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
-            Payrolls = FetchPayrollList();
+            FilteredResult = FetchPayrollList();
+            Payrolls = GetPagedResult();
             FetchPayrollGroups();
         }
         #endregion
@@ -23,10 +25,23 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         public ObservableCollection<Payroll> Payrolls { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public List<PayrollGroup> PayrollGroups { get; set; }
+        public ObservableCollection<Payroll> FilteredResult { get; set; }
+
+        public int Page { get; set; }
+
+        [PropertyChanged.DependsOn("Page")]
+        public bool CanGoToNext { get { return (FilteredResult != null && (FilteredResult.Count) > ((Page + 1) * 10)) ? true : false; } }
+        [PropertyChanged.DependsOn("Page")]
+        public bool CanGoToPrevious { get { return Page > 0 ? true : false; } }
+        public string Search { get; set; }
         #endregion
 
 
         #region methods/functions
+        public ObservableCollection<Payroll> GetPagedResult()
+        {
+            return new ObservableCollection<Payroll>(FilteredResult.Skip(Page * 10).Take(10));
+        }
         public ObservableCollection<Payroll> FetchPayrollList() {
             return new ObservableCollection<Payroll>(((from p in Helper.db.Payrolls select p).ToList()));
         }
@@ -64,12 +79,20 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             if (pd.Employee.IsIncomeTaxActive)
                 pd.Contributions.Add(new Contribution { ContributionTypeID = 4, PayrollDetailID = pd.PayrollDetailID });
         }
+        public void UpdatePayroll()
+        {
+            Helper.db.SubmitChanges();
+            Page = 0;
+            FilteredResult = GetPagedResult();
+        }
         public void deletePayroll(Payroll payroll)
         {
             Helper.db.Payrolls.DeleteOnSubmit(payroll);
             Helper.db.SubmitChanges();
             Helper.db = new DatabaseDataContext();
-            Payrolls = FetchPayrollList();
+            Page = 0;
+            FilteredResult = FetchPayrollList();
+            Payrolls = GetPagedResult();
         }
         #endregion
     }
