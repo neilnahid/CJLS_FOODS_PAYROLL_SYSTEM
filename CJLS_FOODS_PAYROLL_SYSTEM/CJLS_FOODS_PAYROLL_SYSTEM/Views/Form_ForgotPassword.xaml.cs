@@ -23,13 +23,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
         {
             InitializeComponent();
             VM = (View_Models.ForgotPasswordViewModel)DataContext;
-            VM.Instantiate();
+            VM.Instantiate(Username);
             VM.Username = Username;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            VM.User = VM.searchUser();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

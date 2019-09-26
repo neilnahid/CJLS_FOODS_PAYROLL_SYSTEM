@@ -34,7 +34,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            new Views.Form_ForgotPassword(VM.Username).Show();
+            if ((from u in Helper.db.Users where u.Username == VM.Username select u).Count() > 0)
+                new Views.Form_ForgotPassword(VM.Username).Show();
+            else
+                MessageBox.Show("Username does not exist in the database.");
             this.Close();
         }
     }

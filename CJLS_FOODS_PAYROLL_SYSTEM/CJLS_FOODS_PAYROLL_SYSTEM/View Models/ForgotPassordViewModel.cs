@@ -13,9 +13,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public User User { get; set; }
         public string Username { get; set; }
         public string SecretAnswer { get; set; }
-        public void Instantiate()
+        public void Instantiate(string Username)
         {
-            User = new User();
+            User = (from u in Helper.db.Users where u.Username == Username select u).First();
         }
 
         public User searchUser()

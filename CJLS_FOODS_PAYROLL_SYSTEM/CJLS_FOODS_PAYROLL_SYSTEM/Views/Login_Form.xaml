@@ -28,7 +28,7 @@
                             materialDesign:HintAssist.Hint="Username"
                             FontSize="20"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            Text="{Binding Username}" />
+                            Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon VerticalAlignment="Bottom" Kind="Key" />
