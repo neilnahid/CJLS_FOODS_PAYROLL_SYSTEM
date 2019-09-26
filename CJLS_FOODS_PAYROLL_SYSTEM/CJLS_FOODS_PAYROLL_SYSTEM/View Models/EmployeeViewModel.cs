@@ -19,9 +19,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 
         public string Search { get; set; }
         public DateTime DateTimeNow { get;} = DateTime.Now;
+        public ObservableCollection<Employee> FilteredEmployees{ get; set; }
         public Employee Employee { get; set; }
         public PayrollGroup PayrollGroup { get; set; }
         public List<PayrollGroup> PayrollGroups { get; set; }
+
+        public string Filter { get; set; }
 
         public bool IsUpdateValid { get; set; }
         #endregion
@@ -34,6 +37,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             Branches = GetBranches();
             EmployeeTypes = GetEmployeeTypes();
             Employee = Employees[0];
+            FilteredEmployees = new ObservableCollection<Employee>((from e in Helper.db.Employees select e).ToList());
         }
         #endregion
         #region methods/functions
@@ -43,7 +47,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         }
         public ObservableCollection<Employee> GetEmployeeList()
         {
-            var result = new ObservableCollection<Employee>((from employee in Helper.db.Employees where employee.Status == "Active" select employee).ToList());
+            var result = new ObservableCollection<Employee>((from employee in Helper.db.Employees select employee).ToList());
             return result;
         }
 
