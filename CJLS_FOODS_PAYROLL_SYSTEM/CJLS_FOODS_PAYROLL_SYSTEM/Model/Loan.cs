@@ -33,7 +33,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                     case "Employee":
                         if (Employee == null)
                             result = "You must select an Employee,";
-                        else if ((from l in Employee.Loans where !(l.IsPaid != null ? l.IsPaid.Value : false) && l.EmployeeID == EmployeeID select l).Count() > 0)
+                        else if ((from l in Employee.Loans where !(l.IsPaid != null ? l.IsPaid.Value : false) && l.LoanID != 0 select l).Count() > 0)
                             result = $"{Employee.FullName} already has an existing loan that's unpaid.";
                         break;
                     case "LoanType":

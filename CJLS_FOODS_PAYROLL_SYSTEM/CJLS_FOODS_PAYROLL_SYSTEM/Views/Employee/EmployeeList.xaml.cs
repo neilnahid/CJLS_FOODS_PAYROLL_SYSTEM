@@ -28,7 +28,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
         private void btn_dialogConfirm_Click(object sender, RoutedEventArgs e) {
             switch (btn_dialogConfirm.Content.ToString()) {
                 case "UPDATE": VM.UpdateEmployee(); MessageBox.Show("Successfully Updated Employee"); break;
-                case "CREATE": VM.CreateNewEmployee(); break;
+                case "CREATE": if (VM.CreateNewEmployee())
+                    {
+                        Helper.db = new DatabaseDataContext();
+                        VM.Employees = VM.GetEmployeeList();
+                    }
+                    break;
                 default: MessageBox.Show("command invalid"); break;
             }
             dialogHost.IsOpen = false;

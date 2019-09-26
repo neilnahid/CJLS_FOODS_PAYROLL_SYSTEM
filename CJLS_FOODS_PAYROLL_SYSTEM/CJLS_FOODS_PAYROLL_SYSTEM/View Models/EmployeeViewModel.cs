@@ -51,7 +51,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         {
             return (from pg in Helper.db.PayrollGroups select pg).ToList();
         }
-        public void CreateNewEmployee()
+        public bool CreateNewEmployee()
         {
             if (!((from e in Helper.db.Employees where e.FirstName.ToLower() == Employee.FirstName.ToLower() && e.LastName.ToLower() == Employee.LastName.ToLower() select e).Count() > 0))
             {
@@ -60,11 +60,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 Employees.Add(Employee);
                 Helper.db.SubmitChanges();
                 MessageBox.Show("Successfully created new employee");
+                return true;
                 Helper.db = new DatabaseDataContext();
             }
             else
             {
                 MessageBox.Show("Employee already exists");
+                return false;
             }
 
         }

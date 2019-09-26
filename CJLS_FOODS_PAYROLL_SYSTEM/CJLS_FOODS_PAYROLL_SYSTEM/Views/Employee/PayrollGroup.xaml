@@ -67,7 +67,7 @@
                 <GroupBox
                     Grid.Column="1"
                     FontSize="24"
-                    Header="Employee Groups">
+                    Header="Payroll Groups">
                     <DataGrid
                         AutoGenerateColumns="False"
                         CanUserAddRows="False"
@@ -92,22 +92,6 @@
                                                 Width="24"
                                                 Height="24"
                                                 Kind="Edit" />
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button
-                                            x:Name="btn_deletePayrollGroup"
-                                            materialDesign:HintAssist.Hint="Delete Employee"
-                                            Click="Btn_deletePayrollGroup_Click"
-                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
-                                            <materialDesign:PackIcon
-                                                Width="24"
-                                                Height="24"
-                                                Kind="Delete" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

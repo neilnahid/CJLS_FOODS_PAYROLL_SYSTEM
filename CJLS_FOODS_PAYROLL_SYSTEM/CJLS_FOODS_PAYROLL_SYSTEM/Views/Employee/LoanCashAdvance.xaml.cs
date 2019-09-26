@@ -33,6 +33,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         {
             DialogHeader.Text = "Create New Payroll Group";
             btn_dialogConfirm.Content = "CREATE";
+            VM.Loan = new Loan();
         }
 
         private void Btn_dialogConfirm_Click(object sender, RoutedEventArgs e)
