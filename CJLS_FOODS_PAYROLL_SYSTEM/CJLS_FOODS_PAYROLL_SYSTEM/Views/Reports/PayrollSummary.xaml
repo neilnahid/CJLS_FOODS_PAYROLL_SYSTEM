@@ -20,6 +20,34 @@
                     PageHeight="8.5in"
                     PagePadding="0"
                     PageWidth="13in">
+                    <BlockUIContainer>
+                        <StackPanel>
+                            <TextBlock>
+                                <Run Text="Date Printed: " />
+                                <Run Text="{Binding DateNow, StringFormat=d}" />
+                            </TextBlock>
+                            <TextBlock>
+                                <Run Text="Printed By: " />
+                                <Run Text="{Binding User.FullName}" />
+                            </TextBlock>
+                            <TextBlock>
+                                <Run Text="Company Name: " />
+                                <Run Text="CJLS FOODS Inc." />
+                            </TextBlock>
+                            <TextBlock>
+                                <Run Text="Address: " />
+                                <Run Text="Address goes here" />
+                            </TextBlock>
+                            <TextBlock>
+                                <Run Text="Contact No: " />
+                                <Run Text="870-3295" />
+                            </TextBlock>
+                            <TextBlock>
+                                <Run Text="TIN No:" />
+                                <Run Text="0-0-00000-000" />
+                            </TextBlock>
+                        </StackPanel>
+                    </BlockUIContainer>
                     <Paragraph FontSize="30" TextAlignment="Center">Payroll Summary</Paragraph>
                     <BlockUIContainer>
                         <DataGrid

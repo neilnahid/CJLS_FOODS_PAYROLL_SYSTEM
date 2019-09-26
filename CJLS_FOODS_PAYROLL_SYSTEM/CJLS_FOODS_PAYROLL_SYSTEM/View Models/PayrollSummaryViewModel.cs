@@ -15,6 +15,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
    public  class PayrollSummaryViewModel : INotifyPropertyChanged
     {
         public Payroll Payroll { get; set; }
+        public DateTime DateNow { get; set; } = DateTime.Now;
+        public User User { get; set; } = Helper.User;
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize(int PayrollID)
         {

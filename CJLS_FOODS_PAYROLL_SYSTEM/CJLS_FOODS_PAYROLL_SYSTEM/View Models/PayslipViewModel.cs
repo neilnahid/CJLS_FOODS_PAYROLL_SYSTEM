@@ -22,12 +22,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public class Payslip : INotifyPropertyChanged
         {
 
+            public User User { get; set; } = Helper.User;
             public PayrollDetail PayrollDetail { get; set; }
             public ObservableCollection<PayrollDeduction> PayrollDeductions{ get; set; }
 
             public event PropertyChangedEventHandler PropertyChanged;
         }
         public ObservableCollection<Payslip> Payslips { get; set; }
+        public DateTime DateNow { get; set; } = DateTime.Now;
+
         public void Instantiate(List<PayrollDetail> payrollDetails)
         {
             Payslips = new ObservableCollection<Payslip>();
