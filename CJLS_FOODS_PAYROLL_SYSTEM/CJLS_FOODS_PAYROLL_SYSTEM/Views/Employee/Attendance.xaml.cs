@@ -37,6 +37,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 VM.Attendance = VM.SelectedWeek.Days[colIndex];
             }
             grpbox_attendanceDetails.IsEnabled = VM.Attendance.AttendanceDate.HasValue ? true : false;
+    
         }
 
         private void DataGridCalendar_CurrentCellChanged(object sender, EventArgs e)
@@ -123,5 +124,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             }
             grpbox_attendanceDetails.IsEnabled = VM.Attendance.AttendanceDate.HasValue ? true : false;
         }
+
     }
 }

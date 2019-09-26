@@ -600,7 +600,11 @@
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     Text="{Binding Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextChanged="Txtbox_overtimeHours_TextChanged" />
-
+                                <ComboBox SelectedValue="{Binding Attendance.DayType, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" SelectedValuePath="Content">
+                                    <ComboBoxItem>Normal</ComboBoxItem>
+                                    <ComboBoxItem>Regular</ComboBoxItem>
+                                    <ComboBoxItem>Special</ComboBoxItem>
+                                </ComboBox>
                             </StackPanel>
                         </Grid>
                         <GroupBox Grid.Column="1" Header="Deductions">
