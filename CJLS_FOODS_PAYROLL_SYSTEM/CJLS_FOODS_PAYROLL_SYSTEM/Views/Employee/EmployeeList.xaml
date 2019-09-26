@@ -169,7 +169,6 @@
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                             Text="{Binding Employee.Status, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}">
                             <ComboBoxItem Content="Active" />
-                            <ComboBoxItem Content="Inactive" />
                             <ComboBoxItem Content="Terminated" />
                         </ComboBox>
                     </Grid>

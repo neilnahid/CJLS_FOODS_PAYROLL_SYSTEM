@@ -19,27 +19,19 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
     /// </summary>
     public partial class PayrollDetails : Page {
         View_Models.PayrollDetailsViewModel VM;
-        public PayrollDetails(CJLS_FOODS_PAYROLL_SYSTEM.Payroll payroll) {
+        public PayrollDetails() {
             InitializeComponent();
             VM = (View_Models.PayrollDetailsViewModel)DataContext;
-            VM.InstantiatePayrollDetails(payroll);
+            VM.InstantiatePayrollDetails();
             dialogHost.IsOpen = false;
+            Helper.Title.Text = "Payroll Details";
         }
         private void DialogHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs) {
 
         }
-
-        private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e) {
-
-        }
-
-        private void btn_DialogConfirm_Click(object sender, RoutedEventArgs e) {
-
-        }
-
         private void Btn_Edit_Click(object sender, RoutedEventArgs e) {
-            Helper.Title.Text = "Attendance";
-            NavigationService.Navigate(new Views.Employee.Attendance(VM.Payroll, VM.PayrollDetail));
+            Helper.SelectedPayrollDetail = VM.PayrollDetail;
+            NavigationService.Navigate(new Views.Employee.Attendance());
         }
 
         private void Btn_PrintPayrollSummary_Click(object sender, RoutedEventArgs e)
@@ -51,6 +43,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
         private void btn_PrintPayAllPayslips_Click(object sender, RoutedEventArgs e)
         {
             new Views.Reports.Payslip(VM.PayrollDetails.ToList()).ShowDialog();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Helper.PreviousPage = new Views.PayrollView.PayrollList();
         }
     }
 }

@@ -14,13 +14,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 
     public class AttendanceViewModel : INotifyPropertyChanged
     {
-        public void InstantiateViewModel(Payroll payroll, PayrollDetail selectedPayrollDetail)
+        public void InstantiateViewModel()
         {
             Helper.db = new DatabaseDataContext();
             Attendances = new List<Attendance>(); //instantiates attendances
-            Payroll = (from p in Helper.db.Payrolls where p.PayrollID == payroll.PayrollID select p).First();
-            PayrollDetail = (from pd in Payroll.PayrollDetails where pd.PayrollDetailID == selectedPayrollDetail.PayrollDetailID select pd).First();
-            Leaves = (from l in Helper.db.Leaves where l.Employee == selectedPayrollDetail.Employee && l.LeaveDate>=payroll.StartDate && l.LeaveDate <= payroll.EndDate select l).ToList();
+            Payroll = Helper.SelectedPayroll;
+            PayrollDetail = Helper.SelectedPayrollDetail;
+            Leaves = (from l in Helper.db.Leaves where l.Employee == PayrollDetail.Employee && l.LeaveDate>=Payroll.StartDate && l.LeaveDate <= Payroll.EndDate select l).ToList();
             PayrollRange = new Model.PayrollRange();
             PayrollRange = GetPayrollRange(); // returns the weeks which contains days starting from payroll startdate to enddate
             AddToAttendances(PayrollRange); // references the attendance object attached to the Day object to the Attendances property
@@ -90,7 +90,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             PayrollDetail.Attendances = new System.Data.Linq.EntitySet<Attendance>();
             PayrollDetail.Attendances.AddRange(Attendances);
             Helper.db.SubmitChanges();
-            InstantiateViewModel(Payroll, PayrollDetail);
+            InstantiateViewModel();
         }
         private List<DeductionsType> GetDeductionTypes()
         {
