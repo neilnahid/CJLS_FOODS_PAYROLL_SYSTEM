@@ -13,7 +13,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
         public Week(PayrollDetail pd) {
             Days = new ObservableCollection<Attendance>();
             for (int i = 0; i < 7; i++) {
-                Days.Add(new Attendance() {PayrollDetail = pd, RegularHoursWorked = pd.Employee.DailyRequiredHours, OverTimeHoursWorked = 0, RegularHoursFlag = Visibility.Collapsed, OverTimeHoursFlag = Visibility.Collapsed, DeductionsFlag = Visibility.Collapsed, UnderTimeFlag = Visibility.Collapsed, AbsentFlag = Visibility.Collapsed });
+                Days.Add(new Attendance() { DayType = "Normal", PayrollDetail = pd, RegularHoursWorked = pd.Employee.DailyRequiredHours, OverTimeHoursWorked = 0, RegularHoursFlag = Visibility.Collapsed, OverTimeHoursFlag = Visibility.Collapsed, DeductionsFlag = Visibility.Collapsed, UnderTimeFlag = Visibility.Collapsed, AbsentFlag = Visibility.Collapsed });
             }
         }
         public Week()
@@ -21,7 +21,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
             Days = new ObservableCollection<Attendance>();
             for (int i = 0; i < 7; i++)
             {
-                Days.Add(new Attendance() { RegularHoursFlag = Visibility.Collapsed, OverTimeHoursFlag = Visibility.Collapsed, DeductionsFlag = Visibility.Collapsed, UnderTimeFlag = Visibility.Collapsed, AbsentFlag = Visibility.Collapsed });
+                Days.Add(new Attendance() { DayType = "Normal", RegularHoursFlag = Visibility.Collapsed, OverTimeHoursFlag = Visibility.Collapsed, DeductionsFlag = Visibility.Collapsed, UnderTimeFlag = Visibility.Collapsed, AbsentFlag = Visibility.Collapsed });
             }
         }
         public Week(List<Attendance> attendances) {

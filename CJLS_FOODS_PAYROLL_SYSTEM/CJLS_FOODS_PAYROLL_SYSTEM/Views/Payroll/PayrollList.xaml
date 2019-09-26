@@ -8,9 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="Payroll"
     d:DesignHeight="450"
-    Loaded="Page_Loaded"
     d:DesignWidth="800"
     DataContext="{StaticResource PayrollViewModel}"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
     <materialDesign:DialogHost x:Name="dialogHost">
         <materialDesign:DialogHost.DialogContent>
@@ -123,22 +123,6 @@
                                                 Width="24"
                                                 Height="24"
                                                 Kind="Eye" />
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button
-                                            x:Name="btn_deletePayroll"
-                                            Click="btn_deletePayroll_Click"
-                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                            ToolTip="View Payroll">
-                                            <materialDesign:PackIcon
-                                                Width="24"
-                                                Height="24"
-                                                Kind="Delete" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
