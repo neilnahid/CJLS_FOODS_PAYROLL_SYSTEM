@@ -60,16 +60,8 @@
             </StackPanel>
         </materialDesign:DialogHost.DialogContent>
         <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="323*" />
-                <RowDefinition Height="62*" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0" Margin="0,1.2,0,0.2">
-                <Grid.ColumnDefinitions />
-                <GroupBox
-                    Grid.Column="1"
-                    FontSize="24"
-                    Header="Branches">
+            <StackPanel Grid.Row="0">
+                <GroupBox FontSize="24" Header="Branches">
                     <DataGrid
                         AutoGenerateColumns="False"
                         CanUserAddRows="False"
@@ -102,10 +94,40 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>
-            </Grid>
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                    <Button
+                        materialDesign:HintAssist.Hint="Previous Page"
+                        Click="btn_previousPage_Click"
+                        IsEnabled="{Binding Paginator.CanGoPreviousPage, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                        ToolTip="MaterialDesignFloatingActionMiniAccentButton">
+                        <materialDesign:PackIcon
+                            Width="24"
+                            Height="24"
+                            Kind="ArrowLeft" />
+                    </Button>
+                    <Label
+                        Margin="10,0,10,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Content="1"
+                        FontSize="15" />
+                    <Button
+                        materialDesign:HintAssist.Hint="Next Page"
+                        Click="btn_nextPage_Click"
+                        IsEnabled="{Binding Paginator.CanGoNextPage, UpdateSourceTrigger=PropertyChanged}"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                        ToolTip="MaterialDesignFloatingActionMiniAccentButton">
+                        <materialDesign:PackIcon
+                            Width="24"
+                            Height="24"
+                            Kind="ArrowRight" />
+                    </Button>
+                </StackPanel>
+            </StackPanel>
             <Button
-                Grid.Row="2"
-                Margin="744,4.8,0,1.6"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
                 Click="btn_createNewBranch_Click"
                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                 Style="{StaticResource MaterialDesignFloatingActionAccentButton}"

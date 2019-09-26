@@ -30,6 +30,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
         {
             VM.Password = passwordBox.Password;
             VM.CheckLogin();
+            this.Close();
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -39,6 +40,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
             else
                 MessageBox.Show("Username does not exist in the database.");
             this.Close();
+
         }
     }
 }

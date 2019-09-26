@@ -185,7 +185,8 @@
   <Table Name="dbo.PayrollGroup" Member="PayrollGroups">
     <Type Name="PayrollGroup">
       <Column Name="PayrollGroupID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="PayrollGroup_Employee" Member="Employees" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Employee" />
       <Association Name="PayrollGroup_Payroll" Member="Payrolls" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Payroll" />
     </Type>

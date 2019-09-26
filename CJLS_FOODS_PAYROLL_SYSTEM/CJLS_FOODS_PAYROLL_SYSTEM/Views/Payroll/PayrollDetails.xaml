@@ -105,26 +105,6 @@
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
-                                <!--<DataGridCheckBoxColumn
-                                    Binding="{Binding Employee.IsPhilhealthActive}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
-                                    Header="Philhealth" />
-                                <DataGridCheckBoxColumn
-                                    Binding="{Binding Employee.IsSSSActive}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
-                                    Header="SSS" />
-                                <DataGridCheckBoxColumn
-                                    Binding="{Binding Employee.IsPagibigActive}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
-                                    Header="PAG-IBIG" />
-                                <DataGridCheckBoxColumn
-                                    Binding="{Binding Employee.IsIncomeTaxActive}"
-                                    EditingElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnEditingStyle}"
-                                    ElementStyle="{StaticResource MaterialDesignDataGridCheckBoxColumnStyle}"
-                                    Header="Income Tax" />-->
                             </DataGrid.Columns>
                         </DataGrid>
                         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">

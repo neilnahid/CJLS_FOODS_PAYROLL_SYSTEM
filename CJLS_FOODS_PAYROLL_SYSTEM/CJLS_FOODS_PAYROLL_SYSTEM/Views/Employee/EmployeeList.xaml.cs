@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using CJLS_FOODS_PAYROLL_SYSTEM;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -32,13 +34,17 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         {
             switch (btn_dialogConfirm.Content.ToString())
             {
-                case "UPDATE": VM.UpdateEmployee(); MessageBox.Show("Successfully Updated Employee"); break;
+                case "UPDATE": VM.UpdateEmployee(); MessageBox.Show("Successfully Updated Employee"); return;
                 case "CREATE":
                     if (VM.CreateNewEmployee())
                     {
                         Helper.db = new DatabaseDataContext();
-                        VM.Employees = VM.GetEmployeeList();
+                        VM.FilteredEmployees = VM.GetEmployeeList();
+                        VM.Page = 0;
+                        VM.Employees = new ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>((from emp in VM.FilteredEmployees select emp).ToList().Skip(10 * VM.Page).Take(10));
                     }
+                    else
+                        return;
                     break;
                 default: MessageBox.Show("command invalid"); break;
             }
@@ -62,11 +68,16 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
+            VM.Page = 0;
             string search = VM.Search.ToLower();
-            VM.Employees = new System.Collections.ObjectModel.ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>
-                          ((from emp in VM.FilteredEmployees
-                            where emp.FirstName.ToLower().Contains(search) || emp.LastName.ToLower().Contains(search) || emp.EmployeeType.Name.ToLower().Contains(search) || emp.Branch.Name.Contains(search)
-                            select emp).ToList());
+            if (!String.IsNullOrEmpty(search) || VM.Filter != "All" && !String.IsNullOrEmpty(VM.Filter))
+                VM.FilteredEmployees = new System.Collections.ObjectModel.ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>
+                              ((from emp in Helper.db.Employees
+                                where emp.FirstName.ToLower().Contains(search) || emp.LastName.ToLower().Contains(search) || emp.EmployeeType.Name.ToLower().Contains(search) || emp.Branch.Name.Contains(search) && emp.Status == VM.Filter
+                                select emp).ToList().Skip(VM.Page * 10).Take(10));
+            else
+                VM.FilteredEmployees = VM.GetEmployeeList();
+            VM.Employees = new ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>(VM.FilteredEmployees.Skip(VM.Page * 10).Take(10));
         }
 
         private void btn_cancelUpdate_Click(object sender, RoutedEventArgs e)
@@ -101,13 +112,28 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                     VM.FilteredEmployees = VM.GetEmployeeList();
                     break;
                 case "Active":
-                    VM.FilteredEmployees = new System.Collections.ObjectModel.ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>((from emp in Helper.db.Employees where emp.Status == "Active" select emp).ToList());
+                    VM.FilteredEmployees = new ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>((from emp in Helper.db.Employees where emp.Status == "Active" select emp).ToList());
                     break;
                 case "Inactive":
-                    VM.FilteredEmployees = new System.Collections.ObjectModel.ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>((from emp in Helper.db.Employees where emp.Status == "Inactive" select emp).ToList());
+                    VM.FilteredEmployees = new ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>((from emp in Helper.db.Employees where emp.Status == "Inactive" select emp).ToList());
+                    break;
+                default:
+                    VM.FilteredEmployees = VM.GetEmployeeList();
                     break;
             }
-            VM.Employees = VM.FilteredEmployees;
+            VM.Employees = new ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>((from emp in VM.FilteredEmployees select emp).ToList().Skip(10 * VM.Page).Take(10));
+            VM.Page = 0;
+        }
+
+        private void btn_previousPage_Click(object sender, RoutedEventArgs e)
+        {
+
+            VM.Employees = new ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>((from emp in VM.FilteredEmployees select emp).ToList().Skip(10 * --VM.Page).Take(10));
+        }
+
+        private void btn_nextPage_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Employees = new ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>((from emp in VM.FilteredEmployees select emp).ToList().Skip(10 * ++VM.Page).Take(10));
         }
     }
 }

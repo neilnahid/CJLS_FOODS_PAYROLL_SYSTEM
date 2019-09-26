@@ -44,15 +44,20 @@
                     <ColumnDefinition Width="63*" />
                     <ColumnDefinition Width="730*" />
                 </Grid.ColumnDefinitions>
-                <ToggleButton
+                <Button
                     x:Name="MenuToggleButton"
-                    Width="Auto"
-                    Height="Auto"
-                    Checked="MenuToggleButton_Checked"
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
                     Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
                     CommandParameter="{x:Static Dock.Left}"
-                    Foreground="WhiteSmoke"
-                    Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                    Style="{StaticResource MaterialDesignFloatingActionButton}">
+                    <materialDesign:PackIcon
+                        Width="24"
+                        Height="24"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Kind="HamburgerMenu" />
+                </Button>
                 <TextBlock
                     x:Name="Title"
                     Grid.Column="1"

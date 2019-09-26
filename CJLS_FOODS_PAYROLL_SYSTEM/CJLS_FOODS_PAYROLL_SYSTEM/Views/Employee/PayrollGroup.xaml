@@ -79,6 +79,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding PayrollGroupID}" Header="PayrollGroupID" />
                             <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                            <DataGridTextColumn Binding="{Binding NumberOfDays}" Header="Days Covered" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

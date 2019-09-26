@@ -75,5 +75,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             btn_dialogConfirm.Content = "DELETE";
             VM.DeleteBranch(VM.Branch);
         }
+        private void btn_nextPage_Click(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void btn_previousPage_Click(object sender, RoutedEventArgs e)
+        {
+        }
     }
 }

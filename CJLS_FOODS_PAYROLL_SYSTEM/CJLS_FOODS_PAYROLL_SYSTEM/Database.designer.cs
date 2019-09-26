@@ -194,7 +194,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 				return this.GetTable<Loan>();
 			}
 		}
-		
 		public System.Data.Linq.Table<LoanPayment> LoanPayments
 		{
 			get
@@ -4108,6 +4107,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private string _Name;
 		
+		private int _NumberOfDays;
+		
 		private EntitySet<Employee> _Employees;
 		
 		private EntitySet<Payroll> _Payrolls;
@@ -4120,6 +4121,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnPayrollGroupIDChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
+    partial void OnNumberOfDaysChanging(int value);
+    partial void OnNumberOfDaysChanged();
     #endregion
 		
 		public PayrollGroup()
@@ -4149,7 +4152,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
 		public string Name
 		{
 			get
@@ -4165,6 +4168,26 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._Name = value;
 					this.SendPropertyChanged("Name");
 					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberOfDays", DbType="Int NOT NULL")]
+		public int NumberOfDays
+		{
+			get
+			{
+				return this._NumberOfDays;
+			}
+			set
+			{
+				if ((this._NumberOfDays != value))
+				{
+					this.OnNumberOfDaysChanging(value);
+					this.SendPropertyChanging();
+					this._NumberOfDays = value;
+					this.SendPropertyChanged("NumberOfDays");
+					this.OnNumberOfDaysChanged();
 				}
 			}
 		}

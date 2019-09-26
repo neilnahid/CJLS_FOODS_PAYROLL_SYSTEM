@@ -170,7 +170,6 @@
                             Text="{Binding Employee.Status, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}">
                             <ComboBoxItem Content="Active" />
                             <ComboBoxItem Content="Inactive" />
-                            <ComboBoxItem Content="Terminated" />
                         </ComboBox>
                     </Grid>
 
@@ -304,7 +303,7 @@
                                 AutoGenerateColumns="False"
                                 CanUserResizeColumns="False"
                                 IsReadOnly="True"
-                                ItemsSource="{Binding Employees, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ItemsSource="{Binding Employees, Mode=OneWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedItem="{Binding Employee, Mode=TwoWay}"
                                 SelectionMode="Single"
                                 SelectionUnit="FullRow">
@@ -316,6 +315,31 @@
                                     <DataGridTextColumn Binding="{Binding EmployeeType.Name}" Header="Job Position" />
                                 </DataGrid.Columns>
                             </DataGrid>
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Button
+                                    materialDesign:HintAssist.Hint="Previous Page"
+                                    Click="btn_previousPage_Click"
+                                    IsEnabled="{Binding CanGoToPrevious, UpdateSourceTrigger=PropertyChanged}"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    ToolTip="MaterialDesignFloatingActionMiniAccentButton">
+                                    <materialDesign:PackIcon
+                                        Width="24"
+                                        Height="24"
+                                        Kind="ArrowLeft" />
+                                </Button>
+                                <Button
+                                    Margin="25,0,0,0"
+                                    materialDesign:HintAssist.Hint="Next Page"
+                                    Click="btn_nextPage_Click"
+                                    IsEnabled="{Binding CanGoToNext, UpdateSourceTrigger=PropertyChanged}"
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    ToolTip="MaterialDesignFloatingActionMiniAccentButton">
+                                    <materialDesign:PackIcon
+                                        Width="24"
+                                        Height="24"
+                                        Kind="ArrowRight" />
+                                </Button>
+                            </StackPanel>
                             <Button
                                 x:Name="btn_createNewEmployee"
                                 Grid.Row="2"

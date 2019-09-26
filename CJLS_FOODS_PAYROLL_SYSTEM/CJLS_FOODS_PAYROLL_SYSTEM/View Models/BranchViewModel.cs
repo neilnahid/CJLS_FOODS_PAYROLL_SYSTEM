@@ -12,7 +12,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
     {
         public Branch Branch { get; set; }
         public ObservableCollection<Branch> Branches { get; set; }
-
         public void Instantiate()
         {
             Branch = new Branch();
@@ -21,7 +20,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 
         public ObservableCollection<Branch> GetBranches()
         {
-            return new ObservableCollection<Branch>((from b in Helper.db.Branches where b.IsActive select b).ToList());
+            return new ObservableCollection<Branch>((from b in Helper.db.Branches select b).ToList());
         }
         public string AddBranch(Branch branch)
         {

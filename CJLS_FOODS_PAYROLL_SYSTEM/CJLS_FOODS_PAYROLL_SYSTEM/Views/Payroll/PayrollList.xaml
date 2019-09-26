@@ -22,24 +22,28 @@
                     Style="{StaticResource MaterialDesignHeadlineTextBlock}"
                     Text="Header" />
                 <StackPanel x:Name="sp_dateSelect">
-                    <DatePicker
-                        materialDesign:HintAssist.Hint="Start Date"
-                        SelectedDate="{Binding Payroll.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                        Text="{Binding Payroll.StartDateString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                    <DatePicker
-                        materialDesign:HintAssist.Hint="End Date"
-                        SelectedDate="{Binding Payroll.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                        Text="{Binding Payroll.EndDateString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                        ToolTip="{Binding Payroll.ErrorCollection[EndDateString]}" />
                     <ComboBox
                         materialDesign:HintAssist.Hint="Payroll Group"
                         DisplayMemberPath="Name"
                         IsEditable="False"
                         ItemsSource="{Binding PayrollGroups}"
                         SelectedItem="{Binding Payroll.PayrollGroup, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
+                        SelectionChanged="ComboBox_SelectionChanged"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        ToolTip="{Binding Payroll.ErrorCollection[PayrollGroup]}" />
+                    <DatePicker
+                        materialDesign:HintAssist.Hint="Start Date"
+                        DisplayDateStart="{Binding Payroll.LatestEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedDate="{Binding Payroll.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        Text="{Binding Payroll.StartDateString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                    <DatePicker
+                        materialDesign:HintAssist.Hint="End Date"
+                        DisplayDateStart="{Binding Payroll.StartDate}"
+                        SelectedDate="{Binding Payroll.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                        Text="{Binding Payroll.EndDateString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                        ToolTip="{Binding Payroll.ErrorCollection[EndDateString]}" />
                 </StackPanel>
                 <StackPanel
                     Margin="0,20,0,0"

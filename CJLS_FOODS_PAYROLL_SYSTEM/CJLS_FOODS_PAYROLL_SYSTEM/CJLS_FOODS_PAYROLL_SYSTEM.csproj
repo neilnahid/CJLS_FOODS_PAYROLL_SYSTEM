@@ -231,7 +231,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\Session.cs" />
     <Compile Include="Views\Employee\EmployeeTypeList.xaml.cs">
       <DependentUpon>EmployeeTypeList.xaml</DependentUpon>
     </Compile>
@@ -303,6 +302,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DatabaseHelper\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Leave.cs" />

@@ -15,29 +15,36 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public event PropertyChangedEventHandler PropertyChanged;
         public List<EmployeeType> EmployeeTypes { get; set; }
         public List<Branch> Branches { get; set; } = (from b in Helper.db.Branches where b.IsActive select b).ToList();
+
+        [PropertyChanged.DependsOn("FilteredEmployee")]
         public ObservableCollection<Employee> Employees { get; set; }
 
+        public int Page { get; set; }
+
+        [PropertyChanged.DependsOn("Page")]
+        public bool CanGoToNext { get { return (FilteredEmployees!=null && (FilteredEmployees.Count) > ((Page+1) * 10)) ? true : false; } set { } }
+        [PropertyChanged.DependsOn("Page")]
+        public bool CanGoToPrevious { get { return Page>0 ? true : false; } }
         public string Search { get; set; }
-        public DateTime DateTimeNow { get;} = DateTime.Now;
-        public ObservableCollection<Employee> FilteredEmployees{ get; set; }
+        public DateTime DateTimeNow { get; } = DateTime.Now;
+        public ObservableCollection<Employee> FilteredEmployees { get; set; }
         public Employee Employee { get; set; }
         public PayrollGroup PayrollGroup { get; set; }
         public List<PayrollGroup> PayrollGroups { get; set; }
-
         public string Filter { get; set; }
-
         public bool IsUpdateValid { get; set; }
         #endregion
         #region constructor
         public void Instantiate()
         {
             Helper.db = new DatabaseDataContext();
-            Employees = new ObservableCollection<Employee>(GetEmployeeList());
             PayrollGroups = GetPayrollGroups();
             Branches = GetBranches();
             EmployeeTypes = GetEmployeeTypes();
-            Employee = Employees[0];
             FilteredEmployees = new ObservableCollection<Employee>((from e in Helper.db.Employees select e).ToList());
+            Page = 0;
+            Employees = new ObservableCollection<Employee>(FilteredEmployees.Skip(Page*10).Take(10));
+            Employee = Employees[0];
         }
         #endregion
         #region methods/functions
@@ -64,8 +71,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 Employees.Add(Employee);
                 Helper.db.SubmitChanges();
                 MessageBox.Show("Successfully created new employee");
+                Helper.db.SubmitChanges();
                 return true;
-                Helper.db = new DatabaseDataContext();
             }
             else
             {
@@ -105,7 +112,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                                                                 select e).ToList());
             }
             else
-                Employees = new ObservableCollection<Employee>(GetEmployeeList());
+                Employees = FilteredEmployees;
         }
         protected void OnPropertyChanged(PropertyChangedEventArgs eventArgs)
         {

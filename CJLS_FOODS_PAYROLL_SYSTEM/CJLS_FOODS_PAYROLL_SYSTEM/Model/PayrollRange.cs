@@ -37,7 +37,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Model {
             Weeks.Add(new Model.Week(pd));
             int weekCounter = 0;
             //assign each attendance to their corresponding dayofweek
-            for (int i = 0; i < (EndDate-StartDate).TotalDays; i++) {
+            for (int i = 0; i < ((EndDate-StartDate).TotalDays+1); i++) {
                 var currentDay = Weeks[weekCounter].Days[(int)StartDate.AddDays(i).DayOfWeek].AttendanceDate = StartDate.AddDays(i);
                 if (StartDate.AddDays(i).DayOfWeek == DayOfWeek.Saturday) {
                     weekCounter++;
