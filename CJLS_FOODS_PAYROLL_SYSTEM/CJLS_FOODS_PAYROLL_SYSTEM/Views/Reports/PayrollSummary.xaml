@@ -21,44 +21,55 @@
                     PagePadding="0"
                     PageWidth="13in">
                     <BlockUIContainer>
-                        <StackPanel>
-                            <TextBlock>
-                                <Run Text="Date Printed: " />
-                                <Run Text="{Binding DateNow, StringFormat=d}" />
-                            </TextBlock>
-                            <TextBlock>
-                                <Run Text="Printed By: " />
-                                <Run Text="{Binding User.FullName}" />
-                            </TextBlock>
-                            <TextBlock>
-                                <Run Text="Company Name: " />
-                                <Run Text="CJLS FOODS Inc." />
-                            </TextBlock>
-                            <TextBlock>
-                                <Run Text="Address: " />
-                                <Run Text="Address goes here" />
-                            </TextBlock>
-                            <TextBlock>
-                                <Run Text="Contact No: " />
-                                <Run Text="870-3295" />
-                            </TextBlock>
-                            <TextBlock>
-                                <Run Text="TIN No:" />
-                                <Run Text="0-0-00000-000" />
-                            </TextBlock>
-                        </StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock>
+                                    <Run Text="Date Printed: " />
+                                    <Run Text="{Binding DateNow, StringFormat=d}" />
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="Printed By: " />
+                                    <Run Text="{Binding User.FullName}" />
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="Company Name: " />
+                                    <Run Text="CJLS FOODS Inc." />
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="Address: " />
+                                    <Run Text="0221 J. Solon Drive Kamagong, Lahug Cebu City" />
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="Contact No: " />
+                                    <Run Text="870-3295" />
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="TIN No:" />
+                                    <Run Text="0-0-00000-000" />
+                                </TextBlock>
+                            </StackPanel>
+                            <Image
+                                Grid.Column="1"
+                                Width="200"
+                                Height="150"
+                                HorizontalAlignment="Right"
+                                Source="C:\Users\Neil Francis Nahid\Documents\GitHub\CJLS_FOODS_PAYROLL_SYSTEM\CJLS_FOODS_PAYROLL_SYSTEM\CJLS_FOODS_PAYROLL_SYSTEM\CJLS FOODS LOGO.jpg"
+                                Stretch="Fill" />
+                        </Grid>
                     </BlockUIContainer>
                     <Paragraph FontSize="30" TextAlignment="Center">Payroll Summary</Paragraph>
                     <BlockUIContainer>
                         <DataGrid
                             AutoGenerateColumns="False"
-                            CanUserAddRows="False"
-                            CanUserDeleteRows="False"
-                            CanUserReorderColumns="False"
-                            CanUserResizeRows="False"
+                            ColumnWidth="*"
+                            IsReadOnly="True"
                             ItemsSource="{Binding Payroll.PayrollDetails}">
                             <DataGrid.Columns>
-                                <DataGridTemplateColumn Header="Name">
+                                <DataGridTemplateColumn Width="Auto" Header="Name">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock>

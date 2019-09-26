@@ -62,7 +62,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                             goto case "stringEmpty";
                         break;
                     case "Branch":
-                        if(Branch==null)
+                        if(Branch == null)
                             result = "You must select a branch.";
                         break;
                     case "DateOfBirth":

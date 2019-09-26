@@ -21,5 +21,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
         public static User User { get; set; }
         public static TextBlock Title = null;
 
+        public static Payroll CurrentPayroll { get; set; }
+        public static PayrollDetail CurrentPayrollDetail { get; set; }
     }
 }

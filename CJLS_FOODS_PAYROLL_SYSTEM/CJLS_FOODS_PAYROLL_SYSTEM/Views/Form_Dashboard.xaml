@@ -67,7 +67,7 @@
             <Frame
                 x:Name="Frame"
                 Grid.Row="1"
-                NavigationUIVisibility="Hidden" />
+                NavigationUIVisibility="Automatic" />
         </Grid>
     </materialDesign:DrawerHost>
 

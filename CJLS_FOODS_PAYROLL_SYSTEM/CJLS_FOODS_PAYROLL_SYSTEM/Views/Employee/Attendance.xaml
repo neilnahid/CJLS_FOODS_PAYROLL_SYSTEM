@@ -10,6 +10,7 @@
     d:DesignHeight="798"
     d:DesignWidth="1366"
     DataContext="{StaticResource AttendanceViewModel}"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
     <materialDesign:DialogHost x:Name="dialogHost" IsOpen="{Binding IsParentDialogOpen}">
         <materialDesign:DialogHost.DialogContent>

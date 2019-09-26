@@ -20,6 +20,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
     public partial class PayrollDetails : Page {
         View_Models.PayrollDetailsViewModel VM;
         public PayrollDetails(CJLS_FOODS_PAYROLL_SYSTEM.Payroll payroll) {
+            Helper.CurrentPayroll = payroll;
             InitializeComponent();
             VM = (View_Models.PayrollDetailsViewModel)DataContext;
             VM.InstantiatePayrollDetails(payroll);
@@ -51,6 +52,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
         private void btn_PrintPayAllPayslips_Click(object sender, RoutedEventArgs e)
         {
             new Views.Reports.Payslip(VM.PayrollDetails.ToList()).ShowDialog();
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            VM = (View_Models.PayrollDetailsViewModel)DataContext;
+            VM.InstantiatePayrollDetails(Helper.CurrentPayroll);
+            dialogHost.IsOpen = false;
         }
     }
 }

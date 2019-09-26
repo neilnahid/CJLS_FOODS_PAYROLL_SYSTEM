@@ -25,6 +25,13 @@
             <FlowDocument>
                 <BlockUIContainer x:Name="blockUI_playslip" Margin="0,10,0,0">
                     <Grid>
+                        <Image
+                            Width="150"
+                            Height="100"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Source="C:\Users\Neil Francis Nahid\Documents\GitHub\CJLS_FOODS_PAYROLL_SYSTEM\CJLS_FOODS_PAYROLL_SYSTEM\CJLS_FOODS_PAYROLL_SYSTEM\CJLS FOODS LOGO.jpg"
+                            Stretch="Fill" />
                         <StackPanel>
                             <TextBlock>
                                 <Run Text="Date Printed: " />

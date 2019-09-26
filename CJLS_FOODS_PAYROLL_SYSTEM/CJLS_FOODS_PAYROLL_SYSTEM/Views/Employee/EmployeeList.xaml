@@ -152,7 +152,7 @@
                             DisplayMemberPath="Name"
                             IsEditable="False"
                             ItemsSource="{Binding Branches}"
-                            SelectedItem="{Binding Employee.Branch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding Employee.Branch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                         <ComboBox
                             Grid.Column="2"

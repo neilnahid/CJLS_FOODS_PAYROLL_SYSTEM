@@ -23,6 +23,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         View_Models.AttendanceViewModel VM = new View_Models.AttendanceViewModel();
         public Attendance(Payroll payroll, PayrollDetail selectedPayrolLDetail)
         {
+            Helper.CurrentPayrollDetail = selectedPayrolLDetail;
             InitializeComponent();
             Helper.db = new DatabaseDataContext();
             VM = (View_Models.AttendanceViewModel)DataContext;
@@ -125,5 +126,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             grpbox_attendanceDetails.IsEnabled = VM.Attendance.AttendanceDate.HasValue ? true : false;
         }
 
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Helper.db = new DatabaseDataContext();
+            VM = (View_Models.AttendanceViewModel)DataContext;
+            VM.InstantiateViewModel(Helper.CurrentPayroll, Helper.CurrentPayrollDetail);
+        }
     }
 }

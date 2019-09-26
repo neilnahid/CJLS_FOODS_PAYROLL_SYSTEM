@@ -54,5 +54,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView {
             if (res == MessageBoxResult.Yes)
                 VM.deletePayroll(VM.Payroll);
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            VM = (View_Models.PayrollViewModel)DataContext;
+            VM.Instantiate();
+        }
     }
 }

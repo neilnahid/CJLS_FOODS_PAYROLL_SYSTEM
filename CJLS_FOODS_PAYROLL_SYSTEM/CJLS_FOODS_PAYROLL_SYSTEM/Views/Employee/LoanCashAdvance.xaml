@@ -23,6 +23,7 @@
                     Text="Header" />
                 <ComboBox
                     Grid.Column="1"
+                    materialDesign:HintAssist.Hint="Search Employee"
                     materialDesign:HintAssist.HintOpacity=".26"
                     DisplayMemberPath="FullName"
                     IsEditable="True"

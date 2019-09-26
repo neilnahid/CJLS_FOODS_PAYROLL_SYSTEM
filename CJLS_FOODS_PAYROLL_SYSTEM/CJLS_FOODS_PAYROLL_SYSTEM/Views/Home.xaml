@@ -12,6 +12,12 @@
     DataContext="{StaticResource HomeViewModel}"
     mc:Ignorable="d">
     <Grid>
+        <Image
+            Width="300"
+            Height="200"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
+            Source="C:\Users\Neil Francis Nahid\Documents\GitHub\CJLS_FOODS_PAYROLL_SYSTEM\CJLS_FOODS_PAYROLL_SYSTEM\CJLS_FOODS_PAYROLL_SYSTEM\CJLS FOODS LOGO.jpg" />
         <TextBlock
             HorizontalAlignment="Center"
             VerticalAlignment="Center"

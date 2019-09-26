@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.Views"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Title="Login_Form"
+    Title="CJLS FOODS PAYROLL SYSTEM"
     Width="500"
     Height="400"
     DataContext="{StaticResource LoginViewModel}"
@@ -15,19 +15,18 @@
     mc:Ignorable="d">
     <Grid>
         <StackPanel>
+            <Image
+                Width="150"
+                Height="100"
+                Source="C:\Users\Neil Francis Nahid\Documents\GitHub\CJLS_FOODS_PAYROLL_SYSTEM\CJLS_FOODS_PAYROLL_SYSTEM\CJLS_FOODS_PAYROLL_SYSTEM\CJLS FOODS LOGO.jpg" />
             <TextBlock HorizontalAlignment="Center" FontSize="25">CJLS FOODS PAYROLL SYSTEM</TextBlock>
-            <TextBlock
-                Margin="0,25,0,0"
-                HorizontalAlignment="Center"
-                FontSize="40"
-                Text="Login" />
-            <Grid>
+            <Grid Margin="0,25,0,0">
                 <StackPanel HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon VerticalAlignment="Bottom" Kind="Account" />
                         <TextBox
                             materialDesign:HintAssist.Hint="Username"
-                            FontSize="15"
+                            FontSize="20"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Username}" />
                     </StackPanel>
@@ -38,7 +37,7 @@
                             materialDesign:HintAssist.Foreground="Green"
                             materialDesign:HintAssist.Hint="Password"
                             materialDesign:TextFieldAssist.UnderlineBrush="Green"
-                            FontSize="15"
+                            FontSize="20"
                             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
                     </StackPanel>
                     <Button Margin="0,25,0,0" Click="btn_Login_Click">
