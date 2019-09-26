@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -40,7 +41,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         {
             switch (btn_dialogConfirm.Content.ToString())
             {
-                case "UPDATE": Helper.db.SubmitChanges(); MessageBox.Show("Successfully Updated Payroll Group"); break;
+                case "UPDATE": VM.UpdateLoan(); MessageBox.Show("Successfully Updated Payroll Group"); break;
                 case "CREATE": VM.CreatNewLoan(); break;
                 default: MessageBox.Show("command invalid"); break;
             }
@@ -76,6 +77,27 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
             if (!(char.IsDigit(e.Text, e.Text.Length - 1) || approvedDecimalPoint))
                 e.Handled = true;
+        }
+        private void btn_previousPage_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Page--;
+            VM.Loans = VM.GetPagedResult();
+        }
+
+        private void btn_nextPage_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Page++;
+            VM.Loans = VM.GetPagedResult();
+        }
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            VM.Page = 0;
+            string search = VM.Search.ToLower();
+            if (!String.IsNullOrEmpty(search))
+                VM.FilteredResult = new ObservableCollection<Loan>((from b in Helper.db.Loans where b.Employee.FullName.Contains(search) || b.LoanType.Contains(search) select b).ToList().Skip(VM.Page * 10).Take(10));
+            else
+                VM.FilteredResult = VM.GetLoans();
+            VM.Loans = new ObservableCollection<Loan>(VM.FilteredResult.Skip(VM.Page * 10).Take(10));
         }
     }
 }
