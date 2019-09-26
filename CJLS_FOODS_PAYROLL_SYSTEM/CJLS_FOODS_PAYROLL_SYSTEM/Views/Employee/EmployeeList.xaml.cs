@@ -31,7 +31,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee {
                 case "CREATE": VM.CreateNewEmployee(); break;
                 default: MessageBox.Show("command invalid"); break;
             }
-            dialogHost.IsOpen = false;
         }   
         private void Btn_deleteEmployee_Click(object sender, RoutedEventArgs e) {
             DialogHeader.Text = "Delete Employee";

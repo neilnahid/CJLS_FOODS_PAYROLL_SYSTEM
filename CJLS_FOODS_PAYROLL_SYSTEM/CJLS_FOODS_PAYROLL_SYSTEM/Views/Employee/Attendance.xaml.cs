@@ -21,13 +21,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
     public partial class Attendance : Page
     {
         View_Models.AttendanceViewModel VM = new View_Models.AttendanceViewModel();
-        public Attendance(Payroll payroll, PayrollDetail selectedPayrolLDetail)
+        public Attendance()
         {
             InitializeComponent();
-            Helper.db = new DatabaseDataContext();
             VM = (View_Models.AttendanceViewModel)DataContext;
-            VM.InstantiateViewModel(payroll, selectedPayrolLDetail);
+            Helper.Title.Text = "Attendance";
+            VM.InstantiateViewModel();
         }
+
 
         private void DataGridCalendar_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
@@ -122,6 +123,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 VM.Attendance = VM.SelectedWeek.Days[colIndex];
             }
             grpbox_attendanceDetails.IsEnabled = VM.Attendance.AttendanceDate.HasValue ? true : false;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Helper.PreviousPage = new Views.PayrollView.PayrollDetails();
         }
     }
 }

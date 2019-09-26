@@ -1,5 +1,4 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -14,11 +13,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         #region properties
         public event PropertyChangedEventHandler PropertyChanged;
         public List<EmployeeType> EmployeeTypes { get; set; }
-        public List<Branch> Branches { get; set; } = (from b in Helper.db.Branches where b.IsActive select b).ToList();
+        public List<Branch> Branches { get; set; } = (from b in Helper.db.Branches select b).ToList();
         public ObservableCollection<Employee> Employees { get; set; }
 
         public string Search { get; set; }
-        public DateTime DateTimeNow { get;} = DateTime.Now;
         public Employee Employee { get; set; }
         public PayrollGroup PayrollGroup { get; set; }
         public List<PayrollGroup> PayrollGroups { get; set; }

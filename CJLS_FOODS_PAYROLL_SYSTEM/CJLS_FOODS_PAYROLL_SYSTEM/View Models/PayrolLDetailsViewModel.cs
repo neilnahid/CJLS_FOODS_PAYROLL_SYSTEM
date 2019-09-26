@@ -20,10 +20,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public event PropertyChangedEventHandler PropertyChanged;
         #endregion
         #region methods/functions
-        public void InstantiatePayrollDetails(Payroll payroll)
+        public void InstantiatePayrollDetails()
         {
             Helper.db = new DatabaseDataContext();
-            Payroll = (from p in Helper.db.Payrolls where p.PayrollID == payroll.PayrollID select p).FirstOrDefault();
+            Payroll = Helper.SelectedPayroll;
             PayrollDetails = new ObservableCollection<PayrollDetail>(GetPayrollDetailList());
             try
             {
