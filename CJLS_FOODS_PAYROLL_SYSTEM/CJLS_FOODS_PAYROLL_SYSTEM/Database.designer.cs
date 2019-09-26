@@ -194,6 +194,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 				return this.GetTable<Loan>();
 			}
 		}
+		
 		public System.Data.Linq.Table<LoanPayment> LoanPayments
 		{
 			get

@@ -1,5 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System;
+using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 {
@@ -36,13 +39,38 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 case "CREATE": VM.CreateNewEmployeeType(); break;
                 default: MessageBox.Show("command invalid"); break;
             }
-            VM.FetchEmployeeTypes();
+            VM.Page = 0;
+            VM.FilteredResult = VM.FetchEmployeeTypes();
+            VM.EmployeeTypes = VM.GetPagedEmployeeTypes();
         }
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
+            VM.Page = 0;
             Helper.db = new DatabaseDataContext();
-           VM.EmployeeTypes = VM.FetchEmployeeTypes();
+           VM.FilteredResult = VM.FetchEmployeeTypes();
+            VM.EmployeeTypes = VM.GetPagedEmployeeTypes();
+        }
+        private void btn_previousPage_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Page--;
+            VM.EmployeeTypes = VM.GetPagedEmployeeTypes();
+        }
+
+        private void btn_nextPage_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Page++;
+            VM.EmployeeTypes = VM.GetPagedEmployeeTypes();
+        }
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            VM.Page = 0;
+            string search = VM.Search.ToLower();
+            if (!String.IsNullOrEmpty(search))
+                VM.FilteredResult = new ObservableCollection<EmployeeType>((from b in Helper.db.EmployeeTypes where b.Name.Contains(search) select b).ToList().Skip(VM.Page * 10).Take(10));
+            else
+                VM.FilteredResult = VM.FetchEmployeeTypes();
+            VM.EmployeeTypes = new ObservableCollection<EmployeeType>(VM.FilteredResult.Skip(VM.Page * 10).Take(10));
         }
     }
 }

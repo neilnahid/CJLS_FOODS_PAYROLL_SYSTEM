@@ -9,17 +9,32 @@ using System.Windows;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 {
-    public class EmployeeTypeViewModel: INotifyPropertyChanged
+    public class EmployeeTypeViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<EmployeeType> EmployeeTypes { get; set; }
         public EmployeeType EmployeeType { get; set; }
+        public ObservableCollection<EmployeeType> FilteredResult { get; set; }
+
+        public int Page { get; set; }
+
+        [PropertyChanged.DependsOn("Page")]
+        public bool CanGoToNext { get { return (FilteredResult != null && (FilteredResult.Count) > ((Page + 1) * 10)) ? true : false; } }
+        [PropertyChanged.DependsOn("Page")]
+        public bool CanGoToPrevious { get { return Page > 0 ? true : false; } }
+        public string Search { get; set; }
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         public void Instantiate()
         {
             Helper.db = new DatabaseDataContext();
             EmployeeType = new EmployeeType();
             EmployeeTypes = new ObservableCollection<EmployeeType>();
             EmployeeTypes = FetchEmployeeTypes();
+        }
+        public ObservableCollection<EmployeeType> GetPagedEmployeeTypes()
+        {
+            return new ObservableCollection<EmployeeType>(FilteredResult.Skip(Page * 10).Take(10));
         }
         public ObservableCollection<EmployeeType> FetchEmployeeTypes()
         {
@@ -32,11 +47,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 Helper.db.EmployeeTypes.InsertOnSubmit(EmployeeType);
                 Helper.db.SubmitChanges();
                 EmployeeType = new EmployeeType();
-            } catch (InvalidOperationException ex)
+            }
+            catch (InvalidOperationException ex)
             {
                 MessageBox.Show("Employee Type Already Exist");
             }
-           
+
         }
         public void UpdateEmployeeType()
         {

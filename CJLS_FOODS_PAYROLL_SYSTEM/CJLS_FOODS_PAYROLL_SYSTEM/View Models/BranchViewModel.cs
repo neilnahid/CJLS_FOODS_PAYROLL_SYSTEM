@@ -20,7 +20,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public bool CanGoToNext { get { return (FilteredBranches != null && (FilteredBranches.Count) > ((Page + 1) * 10)) ? true : false; } set { } }
         [PropertyChanged.DependsOn("Page")]
         public bool CanGoToPrevious { get { return Page > 0 ? true : false; } }
-
         public string Search { get; set; }
         public void Instantiate()
         {
