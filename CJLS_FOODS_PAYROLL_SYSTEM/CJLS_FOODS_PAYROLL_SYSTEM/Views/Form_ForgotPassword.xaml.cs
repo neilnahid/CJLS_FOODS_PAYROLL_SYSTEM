@@ -19,11 +19,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
     public partial class Form_ForgotPassword : Window
     {
         View_Models.ForgotPasswordViewModel VM;
-        public Form_ForgotPassword()
+        public Form_ForgotPassword(string Username)
         {
             InitializeComponent();
             VM = (View_Models.ForgotPasswordViewModel)DataContext;
             VM.Instantiate();
+            VM.Username = Username;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

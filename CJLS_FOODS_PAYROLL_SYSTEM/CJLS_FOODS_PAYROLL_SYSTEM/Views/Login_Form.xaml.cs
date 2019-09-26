@@ -34,7 +34,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            new Views.Form_ForgotPassword().Show();
+            new Views.Form_ForgotPassword(VM.Username).Show();
             this.Close();
         }
     }
