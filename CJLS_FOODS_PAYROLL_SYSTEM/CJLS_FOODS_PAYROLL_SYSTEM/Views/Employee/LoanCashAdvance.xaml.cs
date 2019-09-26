@@ -31,8 +31,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void Btn_createNewLoan_Click(object sender, RoutedEventArgs e)
         {
-            DialogHeader.Text = "Create New Payroll Group";
+            DialogHeader.Text = "Create New Loan";
             btn_dialogConfirm.Content = "CREATE";
+            VM.Loan = new Loan();
         }
 
         private void Btn_dialogConfirm_Click(object sender, RoutedEventArgs e)
@@ -47,13 +48,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void Btn_Edit_Click(object sender, RoutedEventArgs e)
         {
-            DialogHeader.Text = "Update Employee Group";
+            DialogHeader.Text = "Update Loan";
             btn_dialogConfirm.Content = "UPDATE";
         }
 
         private void Btn_deleteLoan_Click(object sender, RoutedEventArgs e)
         {
-            DialogHeader.Text = "Delete Employee Group";
+            DialogHeader.Text = "Delete Loan";
             btn_dialogConfirm.Content = "DELETE";
             VM.DeleteLoan(VM.Loan);
         }

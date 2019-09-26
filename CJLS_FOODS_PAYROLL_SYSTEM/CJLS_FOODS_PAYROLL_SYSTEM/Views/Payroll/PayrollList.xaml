@@ -10,6 +10,7 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     DataContext="{StaticResource PayrollViewModel}"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
     <materialDesign:DialogHost x:Name="dialogHost">
         <materialDesign:DialogHost.DialogContent>
