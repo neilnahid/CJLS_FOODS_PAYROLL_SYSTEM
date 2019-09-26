@@ -12,9 +12,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     {
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public bool IsValidationPassed { get; set; }
+        public string DateOfBirthString { get; set; }
         public string this[string name] {
             get {
                 string result = null;
+                SendPropertyChanging();
                 switch (name)
                 {
                     case "FirstName":
@@ -64,8 +66,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                             result = "You must select a branch.";
                         break;
                     case "DateOfBirth":
-                        if (!Regex.IsMatch(DateOfBirth.ToString("MM/dd/yyyy"), "^[0-10-9]{1,2}/[0-10-9]{1,2}/[0-9]{4}$"))
-                            result = "date format should be mm/dd/yyyy";
+                        if (DateOfBirth > DateTime.Now)
+                            result = "must not exceed current date.";
                         break;
                     case "PayrollGroup":
                         if (PayrollGroup == null)
@@ -77,19 +79,40 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                         break;
                     case "TINID":
                         if (!Regex.IsMatch(TINID == null ? "" : TINID, "^[0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{3}$|^$"))
-                            result = "format should be '000-000-000-000'";
+                            result = "format must be '000-000-000-000'";
+                        if (IsIncomeTaxActive && String.IsNullOrEmpty(TINID))
+                            result = "You must provide a TINID since it's active.";
                         break;
                     case "PhilhealthID":
                         if (!Regex.IsMatch(PhilhealthID == null ? "" : PhilhealthID, "^[0-9]{2}-[0-9]{9}-[0-9]$|^$"))
-                            result = "format should be '00-123456789-0'";
+                            result = "format must be '00-123456789-0'";
+                        if (IsPhilhealthActive && String.IsNullOrEmpty(PhilhealthID))
+                            result = "You must provide a PhilhealthID since it's active.";
                         break;
                     case "PagIbigID":
                         if (!Regex.IsMatch(PagIbigID == null ? "" : PagIbigID, "^[0-9]{4}-[0-9]{4}-[0-9]{4}$|^$"))
-                            result = "format should be 0000-0000-0000'";
+                            result = "format must be 0000-0000-0000'";
+                        if (IsPagibigActive && String.IsNullOrEmpty(PagIbigID))
+                            result = "You must provide a PagIbigID since it's active.";
                         break;
+
                     case "SSSID":
                         if (!Regex.IsMatch(SSSID == null ? "" : SSSID, "^[0-9]{2}-[0-9]{7}-[0-9]$|^$"))
-                            result = "fomat should be '00-1234567-0";
+                            result = "fomat must be '00-1234567-0";
+                        if (IsSSSActive && String.IsNullOrEmpty(SSSID))
+                            result = "You must provide an SSS-ID since it's active.";
+                        break;
+                    case "IsSSSActive":
+                            SendPropertyChanged("SSSID");
+                        break;
+                    case "IsPagibigActive":
+                            SendPropertyChanged("PagIbigID");
+                        break;
+                    case "IsPhilhealthActive":
+                            SendPropertyChanged("PhilhealthID");
+                        break;
+                    case "IsIncomeTaxActive":
+                            SendPropertyChanged("TINID");
                         break;
                     case "RequiredDaysAWeek":
                         if (Double.IsNaN(RequiredDaysAWeek))
@@ -100,7 +123,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 
                     case "stringEmpty": result = "Field must not be empty."; break;
                 }
-                SendPropertyChanging();
                 if (result == null)
                     ErrorCollection.Remove(name);
                 if (ErrorCollection.ContainsKey(name))

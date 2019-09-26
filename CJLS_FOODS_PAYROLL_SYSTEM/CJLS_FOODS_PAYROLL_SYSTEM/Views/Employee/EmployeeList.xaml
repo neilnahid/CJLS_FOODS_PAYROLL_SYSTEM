@@ -57,10 +57,10 @@
                             Grid.Column="0"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Date Of Birth"
+                            DisplayDateEnd="{Binding DateTimeNow, Mode=OneWay}"
+                            SelectedDate="{Binding Employee.DateOfBirth, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                             SelectedDateFormat="Short"
-                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                            Text="{Binding Employee.DateOfBirth, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                            ToolTip="{Binding Employee.ErrorCollection[DateOfBirth]}" />
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                         <ComboBox
                             Grid.Column="1"
                             materialDesign:HintAssist.Hint="Gender"
@@ -69,7 +69,6 @@
                             ToolTip="{Binding Employee.ErrorCollection[Gender]}">
                             <ComboBoxItem Content="Male" />
                             <ComboBoxItem Content="Female" />
-                            <ComboBoxItem Content="Other" />
                         </ComboBox>
 
                     </Grid>
@@ -150,10 +149,11 @@
                             Grid.Column="1"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Branch Assigned"
+                            DisplayMemberPath="Name"
+                            IsEditable="False"
                             ItemsSource="{Binding Branches}"
-                            SelectedItem="{Binding Employee.Branch}"
-                            Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                            Text="{Binding Employee.Branch, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+                            SelectedItem="{Binding Employee.Branch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                         <ComboBox
                             Grid.Column="2"
                             Margin="0,0,15,0"
@@ -245,7 +245,6 @@
                     <Button
                         x:Name="btn_dialogConfirm"
                         Click="btn_dialogConfirm_Click"
-                        Command="materialDesign:DialogHost.CloseDialogCommand"
                         IsDefault="True"
                         IsEnabled="{Binding Employee.IsValidationPassed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource MaterialDesignFlatButton}">
@@ -349,7 +348,7 @@
                                         Grid.Column="2"
                                         materialDesign:HintAssist.Hint="Last Name"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        Text="{Binding Employee.LastName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+                                        Text="{Binding F.LastName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -360,8 +359,9 @@
                                         Grid.Column="0"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Date Of Birth"
-                                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                                        Text="{Binding Employee.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        DisplayDateEnd="{Binding DateTimeNow, Mode=OneWay}"
+                                        SelectedDate="{Binding Employee.DateOfBirth, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                                     <ComboBox
                                         Grid.Column="1"
                                         materialDesign:HintAssist.Hint="Gender"
@@ -448,12 +448,15 @@
                                         PreviewTextInput="NumberValidation"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.AvailableLeaves, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
-                                    <TextBox
+                                    <ComboBox
                                         Grid.Column="1"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Branch Assigned"
-                                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        Text="{Binding Employee.Branch, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+                                        DisplayMemberPath="Name"
+                                        IsEditable="False"
+                                        ItemsSource="{Binding Branches}"
+                                        SelectedItem="{Binding Employee.Branch, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                                     <ComboBox
                                         Grid.Column="2"
                                         Margin="0,0,15,0"
@@ -480,7 +483,7 @@
                                         materialDesign:HintAssist.Hint="SSS Id"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.SSSID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
-                                    <CheckBox Margin="0,20,0,0" IsChecked="{Binding Employee.IsSSSActive}">
+                                    <CheckBox Margin="0,20,0,0" IsChecked="{Binding Employee.IsSSSActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                                         Active
                                     </CheckBox>
                                 </StackPanel>
@@ -494,7 +497,7 @@
                                     <CheckBox
                                         Grid.Column="1"
                                         Margin="0,20,0,0"
-                                        IsChecked="{Binding Employee.IsPagibigActive}">
+                                        IsChecked="{Binding Employee.IsPagibigActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                                         Active
                                     </CheckBox>
                                 </StackPanel>
@@ -506,7 +509,7 @@
                                         materialDesign:HintAssist.Hint="Philhealth Id"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.PhilhealthID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
-                                    <CheckBox Margin="0,20,0,0" IsChecked="{Binding Employee.IsPhilhealthActive}">
+                                    <CheckBox Margin="0,20,0,0" IsChecked="{Binding Employee.IsPhilhealthActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                                         Active
                                     </CheckBox>
                                 </StackPanel>
@@ -517,7 +520,7 @@
                                         materialDesign:HintAssist.Hint="TIN Id"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.TINID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
-                                    <CheckBox Margin="0,20,0,0" IsChecked="{Binding Employee.IsIncomeTaxActive}">
+                                    <CheckBox Margin="0,20,0,0" IsChecked="{Binding Employee.IsIncomeTaxActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                                         Active
                                     </CheckBox>
                                 </StackPanel>
