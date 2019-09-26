@@ -26,35 +26,28 @@
                         materialDesign:HintAssist.Hint="UserID"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding User.UserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        Text="{Binding User.UserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox
                         materialDesign:HintAssist.Hint="FullName"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding User.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        Text="{Binding User.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox
                         materialDesign:HintAssist.Hint="Username"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding User.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        Text="{Binding User.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <PasswordBox
                         x:Name="passwordBox"
                         materialDesign:HintAssist.Hint="Password"
                         PasswordChanged="PasswordBox_PasswordChanged"
                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
-                    <TextBlock x:Name="txtblock_errors" Foreground="Red" />
-                    <ComboBox
-                        materialDesign:HintAssist.Hint="Security Question"
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                        Text="{Binding User.SecretQuestion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
-                        <ComboBoxItem Content="What is your mother's maiden name?" />
-                        <ComboBoxItem Content="What primary school did you attend?" />
-                        <ComboBoxItem Content="In what town or city was your first full time job?" />
-                        <ComboBoxItem Content="In what city does your nearest sibling live?" />
-                        <ComboBoxItem Content="What was your childhood nickname?" />
-                    </ComboBox>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Secret Question"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding User.SecretQuestion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBox
                         materialDesign:HintAssist.Hint="Secret Answer"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding User.SecretAnswer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        Text="{Binding User.SecretAnswer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
@@ -62,7 +55,6 @@
                         Click="btn_DialogConfirm_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
                         IsDefault="True"
-                        IsEnabled="{Binding User.IsValidationPassed, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource MaterialDesignFlatButton}">
                         <Button.CommandParameter>
                             <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
@@ -117,6 +109,23 @@
                                                 Width="24"
                                                 Height="24"
                                                 Kind="Edit" />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                            x:Name="btn_deleteUser"
+                                            materialDesign:HintAssist.Hint="Delete User"
+                                            Click="Btn_deleteUser_Click"
+                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                            <materialDesign:PackIcon
+                                                Width="24"
+                                                Height="24"
+                                                Kind="Delete" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

@@ -143,7 +143,6 @@
     <Compile Include="View Models\PayrollViewModel.cs" />
     <Compile Include="View Models\PayslipViewModel.cs" />
     <Compile Include="View Models\UserAdminViewModel.cs" />
-    <Compile Include="Views\Accounts\User.cs" />
     <Compile Include="Views\Accounts\UserList.xaml.cs">
       <DependentUpon>UserList.xaml</DependentUpon>
     </Compile>
