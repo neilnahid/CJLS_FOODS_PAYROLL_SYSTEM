@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,12 +76,26 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             btn_dialogConfirm.Content = "DELETE";
             VM.DeleteBranch(VM.Branch);
         }
-        private void btn_nextPage_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
         private void btn_previousPage_Click(object sender, RoutedEventArgs e)
         {
+            VM.Page--;
+            VM.Branches = VM.GetPagedBranches();
+        }
+
+        private void btn_nextPage_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Page++;
+            VM.Branches = VM.GetPagedBranches();
+        }
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            VM.Page = 0;
+            string search = VM.Search.ToLower();
+            if (!String.IsNullOrEmpty(search))
+                VM.FilteredBranches = new ObservableCollection<Branch>((from b in Helper.db.Branches where b.Name.Contains(search) select b).ToList().Skip(VM.Page * 10).Take(10));
+            else
+                VM.FilteredBranches = VM.GetBranches();
+            VM.Branches = new ObservableCollection<Branch>(VM.FilteredBranches.Skip(VM.Page * 10).Take(10));
         }
     }
 }

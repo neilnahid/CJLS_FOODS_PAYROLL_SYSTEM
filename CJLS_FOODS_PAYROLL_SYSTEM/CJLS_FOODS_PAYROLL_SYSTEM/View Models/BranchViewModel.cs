@@ -12,10 +12,21 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
     {
         public Branch Branch { get; set; }
         public ObservableCollection<Branch> Branches { get; set; }
+        public ObservableCollection<Branch> FilteredBranches { get; set; }
+
+        public int Page { get; set; }
+
+        [PropertyChanged.DependsOn("Page")]
+        public bool CanGoToNext { get { return (FilteredBranches != null && (FilteredBranches.Count) > ((Page + 1) * 10)) ? true : false; } set { } }
+        [PropertyChanged.DependsOn("Page")]
+        public bool CanGoToPrevious { get { return Page > 0 ? true : false; } }
+
+        public string Search { get; set; }
         public void Instantiate()
         {
             Branch = new Branch();
-            Branches = GetBranches();
+            FilteredBranches = GetBranches();
+            Branches = GetPagedBranches();
         }
 
         public ObservableCollection<Branch> GetBranches()
@@ -34,6 +45,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 return ex.Message;
             }
             return null;
+        }
+        public ObservableCollection<Branch> GetPagedBranches()
+        {
+            return new ObservableCollection<Branch>(FilteredBranches.Skip(Page * 10).Take(10));
         }
         public void UpdateBranch(Branch branch)
         {

@@ -62,43 +62,50 @@
         <Grid>
             <StackPanel Grid.Row="0">
                 <GroupBox FontSize="24" Header="Branches">
-                    <DataGrid
-                        AutoGenerateColumns="False"
-                        CanUserAddRows="False"
-                        CanUserDeleteRows="false"
-                        CanUserResizeColumns="False"
-                        IsReadOnly="True"
-                        ItemsSource="{Binding Branches, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        SelectedItem="{Binding Branch}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding BranchID}" Header="BrnachID" />
-                            <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
-                            <DataGridCheckBoxColumn Binding="{Binding IsActive}" Header="IsActive" />
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button
-                                            x:Name="btn_Edit"
-                                            materialDesign:HintAssist.Hint="Edit"
-                                            Click="Btn_Edit_Click"
-                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
-                                            <materialDesign:PackIcon
-                                                Width="24"
-                                                Height="24"
-                                                Kind="Edit" />
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <StackPanel>
+                        <TextBox
+                            materialDesign:HintAssist.Hint="Search"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            Text="{Binding Search, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            TextChanged="TextBox_TextChanged" />
+                        <DataGrid
+                            AutoGenerateColumns="False"
+                            CanUserAddRows="False"
+                            CanUserDeleteRows="false"
+                            CanUserResizeColumns="False"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding Branches, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            SelectedItem="{Binding Branch}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding BranchID}" Header="BrnachID" />
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                                <DataGridCheckBoxColumn Binding="{Binding IsActive}" Header="IsActive" />
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                                x:Name="btn_Edit"
+                                                materialDesign:HintAssist.Hint="Edit"
+                                                Click="Btn_Edit_Click"
+                                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                                <materialDesign:PackIcon
+                                                    Width="24"
+                                                    Height="24"
+                                                    Kind="Edit" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
                 </GroupBox>
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
                         materialDesign:HintAssist.Hint="Previous Page"
                         Click="btn_previousPage_Click"
-                        IsEnabled="{Binding Paginator.CanGoPreviousPage, UpdateSourceTrigger=PropertyChanged}"
+                        IsEnabled="{Binding CanGoToPrevious, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                         ToolTip="MaterialDesignFloatingActionMiniAccentButton">
                         <materialDesign:PackIcon
@@ -106,16 +113,11 @@
                             Height="24"
                             Kind="ArrowLeft" />
                     </Button>
-                    <Label
-                        Margin="10,0,10,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Content="1"
-                        FontSize="15" />
                     <Button
+                        Margin="25,0,0,0"
                         materialDesign:HintAssist.Hint="Next Page"
                         Click="btn_nextPage_Click"
-                        IsEnabled="{Binding Paginator.CanGoNextPage, UpdateSourceTrigger=PropertyChanged}"
+                        IsEnabled="{Binding CanGoToNext, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                         ToolTip="MaterialDesignFloatingActionMiniAccentButton">
                         <materialDesign:PackIcon
