@@ -18,7 +18,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
             return db;
         }
 
-        public static User User { get; set; }
+        public static User User { get; set; } = null;
         public static TextBlock Title = null;
 
         public static Payroll CurrentPayroll { get; set; }

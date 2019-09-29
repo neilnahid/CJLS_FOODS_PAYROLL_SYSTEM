@@ -67,10 +67,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView
             VM = (View_Models.PayrollViewModel)DataContext;
             VM.Instantiate();
         }
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            VM.Payroll.LatestEndDate = (from p in Helper.db.Payrolls where p.PayrollGroup.PayrollGroupID == VM.Payroll.PayrollGroupID select p.EndDate).First().AddDays(1);
+            VM.Payroll.LatestEndDate = (from p in Helper.db.Payrolls where p.PayrollGroup.PayrollGroupID == VM.Payroll.PayrollGroupID select p.EndDate).FirstOrDefault();
         }
         private void btn_previousPage_Click(object sender, RoutedEventArgs e)
         {

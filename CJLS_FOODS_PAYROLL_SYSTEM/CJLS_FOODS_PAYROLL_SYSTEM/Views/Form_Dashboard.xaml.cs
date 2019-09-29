@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,8 +22,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
             InitializeComponent();
             Frame.Content = new Home();
             Helper.Title = Title;
+            if (Helper.User != null & Helper.User.Password == "admin")
+                dg_changePassword.IsOpen = true;
         }
-
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e) {
         }
 
@@ -95,6 +97,32 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
                 this.Close();
                 Helper.User = null;
             }
+        }
+
+        private void btn_applyNewPassword_Click(object sender, RoutedEventArgs e)
+        {
+            if (pswrdbox_confirmPassword.Password == pswrdbox_newPassword.Password)
+            {
+                string result = null;
+                if (!Regex.IsMatch(pswrdbox_newPassword.Password == null ? "" : pswrdbox_newPassword.Password, "(?=.{8,})^.*$"))
+                    result = "must contain at least 8 characters";
+                if (!Regex.IsMatch(pswrdbox_newPassword.Password == null ? "" : pswrdbox_newPassword.Password, "(?=.*[0-9])^.*$"))
+                    result = "must contain atleast 1 number";
+                if (!Regex.IsMatch(pswrdbox_newPassword.Password == null ? "" : pswrdbox_newPassword.Password, "(?=.*[A-Z])^.*$"))
+                    result = "must contain atleast 1 upper case letter";
+                if (!Regex.IsMatch(pswrdbox_newPassword.Password == null ? "" : pswrdbox_newPassword.Password, "(?=.*[!@#$%^&*()\\-_=+{};:,<.>])^.*$"))
+                    result = "must contain atleast 1 special character";
+                lbl_Error.Content = result;
+                if (result == null)
+                {
+                    MessageBox.Show("Successfully changed password.");
+                    dg_changePassword.IsOpen = false;
+                    Helper.User.Password = pswrdbox_newPassword.Password;
+                    Helper.db.SubmitChanges();
+                }
+            }
+            else
+                lbl_Error.Content = "confirm password does not match.";
         }
     }
 }

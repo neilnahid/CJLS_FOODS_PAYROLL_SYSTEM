@@ -16,17 +16,20 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public string Username { get; set; }
         public string Password { get; set; }
 
-        public void CheckLogin()
+        public bool CheckLogin()
         {
             var user = (from u in Helper.db.Users where u.Username == Username && u.Password == Password select u).FirstOrDefault();
             if (user != null)
             {
                 Helper.User = user;
                 new Views.Form_Dashboard().Show();
+                return true;
             }
             else
             {
                 MessageBox.Show("Invalid Credentials, please try again.");
+                return false;
+
             }
         }
     }

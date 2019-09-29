@@ -29,8 +29,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
         private void btn_Login_Click(object sender, RoutedEventArgs e)
         {
             VM.Password = passwordBox.Password;
-            VM.CheckLogin();
-            this.Close();
+            if (VM.CheckLogin() == true)
+                this.Close();
         }
 
         private void TextBlock_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

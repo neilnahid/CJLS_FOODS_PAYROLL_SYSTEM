@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
+using PropertyChanged;
 namespace CJLS_FOODS_PAYROLL_SYSTEM
 {
     public partial class Payroll : IDataErrorInfo
@@ -14,6 +14,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
         public string Error { get { return null; } }
 
         public string StartDateString { get; set; }
+
+
         public string EndDateString { get; set; }
 
         //the end date of the latest added payroll of given payroll group
@@ -44,8 +46,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                             result = "Startdate must not be greater than End Date.";
                         if (PayrollGroup != null)
                         {
-                            if ((EndDate - StartDate).TotalDays < PayrollGroup.NumberOfDays)
-                                result = $"Payroll Range is less than the payroll group's days coverage which is {PayrollGroup.NumberOfDays}";
                             if ((EndDate - StartDate).TotalDays > PayrollGroup.NumberOfDays)
                                 result = $"Payroll Range exceeds the payroll group's days coverage which is {PayrollGroup.NumberOfDays}";
                         }
@@ -56,8 +56,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                             result = "Startdate must not be greater than End Date.";
                         if (PayrollGroup != null)
                         {
-                            if ((EndDate - StartDate).TotalDays < PayrollGroup.NumberOfDays)
-                                result = $"Payroll Range is less than the payroll group's days coverage which is {PayrollGroup.NumberOfDays}";
                             if ((EndDate - StartDate).TotalDays > PayrollGroup.NumberOfDays)
                                 result = $"Payroll Range exceeds the payroll group's days coverage which is {PayrollGroup.NumberOfDays}";
                         }
@@ -73,8 +71,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                     ErrorCollection.Add(name, result);
                 IsValidationPassed = ErrorCollection.Count > 0 ? false : true;
                 SendPropertyChanged("ErrorCollection");
-                SendPropertyChanged("IsValidationPassed");
-                SendPropertyChanged("IsValidationPassed");
                 SendPropertyChanged("IsValidationPassed");
                 return result;
             }
