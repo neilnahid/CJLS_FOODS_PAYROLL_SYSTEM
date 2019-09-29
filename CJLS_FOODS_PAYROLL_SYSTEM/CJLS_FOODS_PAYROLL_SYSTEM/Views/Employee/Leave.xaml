@@ -81,34 +81,61 @@
                     Grid.Column="1"
                     FontSize="24"
                     Header="Leaves">
-                    <DataGrid
-                        AutoGenerateColumns="False"
-                        IsReadOnly="True"
-                        ItemsSource="{Binding Leaves}"
-                        SelectedItem="{Binding Leave}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Employee.FullName}" Header="First Name" />
-                            <DataGridTextColumn Binding="{Binding Employee.EmployeeType.Name}" Header="Job Position" />
-                            <DataGridTextColumn Binding="{Binding LeaveDate, StringFormat=d}" Header="Leave Date" />
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button
-                                            x:Name="btn_Edit"
-                                            materialDesign:HintAssist.Hint="Edit Leave"
-                                            Click="Btn_Edit_Click"
-                                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
-                                            <materialDesign:PackIcon
-                                                Width="24"
-                                                Height="24"
-                                                Kind="Edit" />
-                                        </Button>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <StackPanel>
+                        <DataGrid
+                            AutoGenerateColumns="False"
+                            IsReadOnly="True"
+                            ItemsSource="{Binding Leaves}"
+                            SelectedItem="{Binding Leave}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Employee.FullName}" Header="First Name" />
+                                <DataGridTextColumn Binding="{Binding Employee.EmployeeType.Name}" Header="Job Position" />
+                                <DataGridTextColumn Binding="{Binding LeaveDate, StringFormat=d}" Header="Leave Date" />
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button
+                                                x:Name="btn_Edit"
+                                                materialDesign:HintAssist.Hint="Edit Leave"
+                                                Click="Btn_Edit_Click"
+                                                Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                                                <materialDesign:PackIcon
+                                                    Width="24"
+                                                    Height="24"
+                                                    Kind="Edit" />
+                                            </Button>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Button
+                                materialDesign:HintAssist.Hint="Previous Page"
+                                Click="btn_previousPage_Click"
+                                IsEnabled="{Binding Paginator.  CanGoToPrevious, UpdateSourceTrigger=PropertyChanged}"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                ToolTip="MaterialDesignFloatingActionMiniAccentButton">
+                                <materialDesign:PackIcon
+                                    Width="24"
+                                    Height="24"
+                                    Kind="ArrowLeft" />
+                            </Button>
+                            <Button
+                                Margin="25,0,0,0"
+                                materialDesign:HintAssist.Hint="Next Page"
+                                Click="btn_nextPage_Click"
+                                IsEnabled="{Binding Paginator.CanGoToNext, UpdateSourceTrigger=PropertyChanged}"
+                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                ToolTip="MaterialDesignFloatingActionMiniAccentButton">
+                                <materialDesign:PackIcon
+                                    Width="24"
+                                    Height="24"
+                                    Kind="ArrowRight" />
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
                 </GroupBox>
             </Grid>
             <Button

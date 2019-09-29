@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 {
-    public class LeaveViewModel : INotifyPropertyChanged
+    public class LeaveViewModel : Paginator<Leave>, INotifyPropertyChanged
     {
         public void Instantiate()
         {
@@ -19,8 +19,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             Employees = new List<Employee>();
             Leaves = GetLeaves();
             GetEmployees();
+            PageCount = 10;
         }
         public Leave Leave { get; set; }
+
         public ObservableCollection<Leave> Leaves { get; set; }
         public List<Employee> Employees { get; set; }
         public Employee Employee { get; set; }
@@ -48,7 +50,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         }
         private ObservableCollection<Leave> GetLeaves()
         {
-           return new ObservableCollection<Leave>((from l in Helper.db.Leaves select l).ToList());
+           var leaves = new ObservableCollection<Leave>((from l in Helper.db.Leaves select l).ToList());
+            assignCollection(leaves);
+            return leaves;
         }
         public void DeleteLeave(Leave Leave)
         {

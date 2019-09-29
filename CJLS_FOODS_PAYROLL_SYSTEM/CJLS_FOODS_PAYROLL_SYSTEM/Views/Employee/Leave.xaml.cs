@@ -62,5 +62,16 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             Helper.db = new DatabaseDataContext();
             VM.GetEmployees();
         }
+
+        private void btn_previousPage_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Leaves = VM.moveToNextPage();
+        }
+
+        private void btn_nextPage_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Leaves = VM.moveToPreviousPage();
+
+        }
     }
 }
