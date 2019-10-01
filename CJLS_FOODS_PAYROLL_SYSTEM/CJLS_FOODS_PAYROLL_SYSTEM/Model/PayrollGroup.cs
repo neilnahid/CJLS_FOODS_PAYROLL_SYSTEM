@@ -23,6 +23,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                         if (String.IsNullOrEmpty(Name))
                             result = "Field must not be empty";
                         break;
+                    case "NumberOfDays":
+                        if (NumberOfDays <= 0)
+                            result = "Payroll Days must not be less than 0";
+                        break;
                 }
                 SendPropertyChanging();
                 if (result == null)

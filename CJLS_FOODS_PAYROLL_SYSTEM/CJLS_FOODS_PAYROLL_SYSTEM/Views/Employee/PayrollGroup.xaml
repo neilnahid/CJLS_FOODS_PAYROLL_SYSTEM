@@ -12,7 +12,7 @@
     DataContext="{StaticResource PayrollGroupViewModel}"
     mc:Ignorable="d">
 
-    <materialDesign:DialogHost x:Name="dialogHost">
+    <materialDesign:DialogHost x:Name="dialogHost" IsOpen="True">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="50">
                 <TextBlock
@@ -25,7 +25,11 @@
                     materialDesign:HintAssist.Hint="Group Name"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding PayrollGroup.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-
+                <TextBox
+                    materialDesign:HintAssist.Hint="Payroll Days"
+                    PreviewTextInput="NumberValidation"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    Text="{Binding PayrollGroup.NumberOfDays, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 <!--  SP for buttons  -->
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
