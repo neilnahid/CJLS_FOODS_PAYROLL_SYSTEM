@@ -12,7 +12,7 @@
     DataContext="{StaticResource PayrollGroupViewModel}"
     mc:Ignorable="d">
 
-    <materialDesign:DialogHost x:Name="dialogHost" IsOpen="True">
+    <materialDesign:DialogHost x:Name="dialogHost">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="50">
                 <TextBlock
