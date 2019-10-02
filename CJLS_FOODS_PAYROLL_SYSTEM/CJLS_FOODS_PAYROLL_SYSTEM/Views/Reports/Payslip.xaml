@@ -30,7 +30,7 @@
                             Height="100"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
-                            Source="/CJLS FOODS LOGO.jpg\CJLS FOODS LOGO.jpg"
+                            Source="/CJLS FOODS LOGO.jpg"
                             Stretch="Fill" />
                         <StackPanel>
                             <TextBlock>

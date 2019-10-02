@@ -21,10 +21,11 @@
                 Source="/CJLS FOODS LOGO.jpg" />
             <TextBlock HorizontalAlignment="Center" FontSize="25">CJLS FOODS PAYROLL SYSTEM</TextBlock>
             <Grid Margin="0,25,0,0">
-                <StackPanel HorizontalAlignment="Center">
+                <StackPanel Width="300" HorizontalAlignment="Center">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon VerticalAlignment="Bottom" Kind="Account" />
                         <TextBox
+                            Width="285"
                             materialDesign:HintAssist.Hint="Username"
                             FontSize="20"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -34,6 +35,7 @@
                         <materialDesign:PackIcon VerticalAlignment="Bottom" Kind="Key" />
                         <PasswordBox
                             x:Name="passwordBox"
+                            Width="285"
                             materialDesign:HintAssist.Foreground="Green"
                             materialDesign:HintAssist.Hint="Password"
                             materialDesign:TextFieldAssist.UnderlineBrush="Green"
