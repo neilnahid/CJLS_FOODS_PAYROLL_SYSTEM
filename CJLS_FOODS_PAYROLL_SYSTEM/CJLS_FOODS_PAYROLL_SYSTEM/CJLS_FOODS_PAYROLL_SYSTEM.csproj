@@ -128,7 +128,6 @@
     <Compile Include="Model\PayrollGroup.cs" />
     <Compile Include="Model\PayrollRange.cs" />
     <Compile Include="Model\Week.cs" />
-    <Compile Include="Paginator.cs" />
     <Compile Include="View Models\AttendanceViewModel.cs" />
     <Compile Include="View Models\BranchViewModel.cs" />
     <Compile Include="View Models\EmployeeTypeViewModel.cs" />

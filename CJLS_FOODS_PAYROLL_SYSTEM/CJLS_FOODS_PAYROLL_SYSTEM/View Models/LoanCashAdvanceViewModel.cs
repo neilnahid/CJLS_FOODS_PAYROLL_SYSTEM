@@ -15,6 +15,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public ObservableCollection<Loan> FilteredResult { get; set; }
 
         public int Page { get; set; }
+
+        [PropertyChanged.DependsOn("Page")]
+        public bool CanGoToNext { get { return (FilteredResult != null && (FilteredResult.Count) > ((Page + 1) * 10)) ? true : false; } }
+        [PropertyChanged.DependsOn("Page")]
+        public bool CanGoToPrevious { get { return Page > 0 ? true : false; } }
         public string Search { get; set; }
 
 
