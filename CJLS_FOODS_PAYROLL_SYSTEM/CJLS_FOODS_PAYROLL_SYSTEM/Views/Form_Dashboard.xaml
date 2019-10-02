@@ -37,7 +37,7 @@
         <materialDesign:DrawerHost
             x:Name="draweHost"
             Grid.RowSpan="2"
-            Margin="0,0,-0.4,0" >
+            Margin="0,0,-0.4,0">
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <StackPanel>
                     <TreeView x:Name="treeview" SelectedItemChanged="TreeView_SelectedItemChanged">

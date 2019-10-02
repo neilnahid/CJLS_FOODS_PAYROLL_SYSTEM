@@ -78,107 +78,101 @@
             </StackPanel>
         </materialDesign:DialogHost.DialogContent>
         <Grid>
-            <Grid Grid.Row="0" Margin="0,0.8,0,0">
-                <GroupBox
-                    Margin="0,10,0,0"
-                    FontSize="24"
-                    Header="Payroll List">
-                    <StackPanel>
-                        <TextBox
-                            materialDesign:HintAssist.Hint="Search"
-                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            Text="{Binding Search, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                            TextChanged="TextBox_TextChanged" />
-                        <DataGrid
-                            AutoGenerateColumns="False"
-                            CanUserAddRows="False"
-                            CanUserDeleteRows="false"
-                            CanUserResizeColumns="False"
-                            IsReadOnly="True"
-                            ItemsSource="{Binding Payrolls, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            SelectedItem="{Binding Payroll}">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding PayrollID}" Header="PayrollID" />
-                                <DataGridTextColumn Binding="{Binding PayrollGroup.Name}" Header="Type" />
-                                <DataGridTemplateColumn>
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Vertical">
-                                                <TextBlock>
-                                                    <Run>Date Created:</Run>
-                                                    <Run Text="{Binding DateCreated, StringFormat=d}" />
-                                                </TextBlock>
-                                                <TextBlock>
-                                                    <Run Text="{Binding StartDate, StringFormat=d}" />
-                                                    <Run>-</Run>
-                                                    <Run Text="{Binding EndDate, StringFormat=d}" />
-                                                </TextBlock>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTemplateColumn>
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Button
-                                                x:Name="btn_viewPayroll"
-                                                Click="Btn_viewPayroll_Click"
-                                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                                ToolTip="View Payroll">
-                                                <materialDesign:PackIcon
-                                                    Width="24"
-                                                    Height="24"
-                                                    Kind="Eye" />
-                                            </Button>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <Button
-                                materialDesign:HintAssist.Hint="Previous Page"
-                                Click="btn_previousPage_Click"
-                                IsEnabled="{Binding CanGoToPrevious, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                ToolTip="MaterialDesignFloatingActionMiniAccentButton">
-                                <materialDesign:PackIcon
-                                    Width="24"
-                                    Height="24"
-                                    Kind="ArrowLeft" />
-                            </Button>
-                            <Button
-                                Margin="25,0,0,0"
-                                materialDesign:HintAssist.Hint="Next Page"
-                                Click="btn_nextPage_Click"
-                                IsEnabled="{Binding CanGoToNext, UpdateSourceTrigger=PropertyChanged}"
-                                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                ToolTip="MaterialDesignFloatingActionMiniAccentButton">
-                                <materialDesign:PackIcon
-                                    Width="24"
-                                    Height="24"
-                                    Kind="ArrowRight" />
-                            </Button>
-                        </StackPanel>
+            <GroupBox FontSize="24" Header="Payroll List">
+                <StackPanel>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Search"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding Search, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        TextChanged="TextBox_TextChanged" />
+                    <DataGrid
+                        Height="Auto"
+                        MaxHeight="500"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding Payrolls, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding Payroll}"
+                        VerticalScrollBarVisibility="Auto">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding PayrollID}" Header="PayrollID" />
+                            <DataGridTextColumn Binding="{Binding PayrollGroup.Name}" Header="Type" />
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock>
+                                                <Run>Date Created:</Run>
+                                                <Run Text="{Binding DateCreated, StringFormat=d}" />
+                                            </TextBlock>
+                                            <TextBlock>
+                                                <Run Text="{Binding StartDate, StringFormat=d}" />
+                                                <Run>-</Run>
+                                                <Run Text="{Binding EndDate, StringFormat=d}" />
+                                            </TextBlock>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button
+                                            x:Name="btn_viewPayroll"
+                                            Click="Btn_viewPayroll_Click"
+                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                            ToolTip="View Payroll">
+                                            <materialDesign:PackIcon
+                                                Width="24"
+                                                Height="24"
+                                                Kind="Eye" />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                         <Button
-                            x:Name="btn_OpenDialogCreate"
-                            Grid.Row="1"
-                            Width="56"
-                            Height="55"
-                            HorizontalAlignment="Center"
-                            Click="Btn_OpenDialogCreate_Click"
-                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                            Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
-                            ToolTip="Create New Payroll">
+                            materialDesign:HintAssist.Hint="Previous Page"
+                            Click="btn_previousPage_Click"
+                            IsEnabled="{Binding CanGoToPrevious, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                            ToolTip="MaterialDesignFloatingActionMiniAccentButton">
                             <materialDesign:PackIcon
                                 Width="24"
                                 Height="24"
-                                Kind="Add" />
+                                Kind="ArrowLeft" />
+                        </Button>
+                        <Button
+                            Margin="25,0,0,0"
+                            materialDesign:HintAssist.Hint="Next Page"
+                            Click="btn_nextPage_Click"
+                            IsEnabled="{Binding CanGoToNext, UpdateSourceTrigger=PropertyChanged}"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                            ToolTip="MaterialDesignFloatingActionMiniAccentButton">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                Kind="ArrowRight" />
                         </Button>
                     </StackPanel>
-                </GroupBox>
-            </Grid>
-
+                    <Button
+                        x:Name="btn_OpenDialogCreate"
+                        Grid.Row="1"
+                        Width="56"
+                        Height="55"
+                        HorizontalAlignment="Center"
+                        Click="Btn_OpenDialogCreate_Click"
+                        Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                        Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                        ToolTip="Create New Payroll">
+                        <materialDesign:PackIcon
+                            Width="24"
+                            Height="24"
+                            Kind="Add" />
+                    </Button>
+                </StackPanel>
+            </GroupBox>
         </Grid>
     </materialDesign:DialogHost>
 </Page>

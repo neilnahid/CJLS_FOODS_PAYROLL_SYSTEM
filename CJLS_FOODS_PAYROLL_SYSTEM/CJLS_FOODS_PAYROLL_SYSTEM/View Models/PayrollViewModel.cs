@@ -30,7 +30,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         public int Page { get; set; }
 
         [PropertyChanged.DependsOn("Page")]
-        public bool CanGoToNext { get { return (FilteredResult != null && (FilteredResult.Count) > ((Page + 1) * 10)) ? true : false; } }
+        public bool CanGoToNext { get { return (FilteredResult != null && (FilteredResult.Count) > ((Page + 1) * 5)) ? true : false; } }
         [PropertyChanged.DependsOn("Page")]
         public bool CanGoToPrevious { get { return Page > 0 ? true : false; } }
         public string Search { get; set; }
@@ -40,10 +40,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
         #region methods/functions
         public ObservableCollection<Payroll> GetPagedResult()
         {
-            return new ObservableCollection<Payroll>(FilteredResult.Skip(Page * 10).Take(10));
+            return new ObservableCollection<Payroll>(FilteredResult.Skip(Page * 5).Take(5));
         }
         public ObservableCollection<Payroll> FetchPayrollList() {
-            return new ObservableCollection<Payroll>(((from p in Helper.db.Payrolls select p).ToList()));
+            return new ObservableCollection<Payroll>(((from p in Helper.db.Payrolls select p).ToList().OrderByDescending(pr=>pr.DateCreated)));
         }
         public void FetchPayrollGroups() {
             PayrollGroups = (from pg in Helper.db.PayrollGroups select pg).ToList();

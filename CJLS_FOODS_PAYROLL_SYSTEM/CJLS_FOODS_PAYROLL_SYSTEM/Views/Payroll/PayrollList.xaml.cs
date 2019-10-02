@@ -31,7 +31,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView
 
         private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e)
         {
-            VM.Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
+            VM.Payroll = new Payroll() { StartDate = VM.Payroll.LatestEndDate, EndDate = VM.Payroll.LatestEndDate };
             DialogHeader.Text = "Create New Payroll";
             btn_dialogConfirm.Content = "CREATE";
         }
@@ -69,7 +69,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            VM.Payroll.LatestEndDate = (from p in Helper.db.Payrolls where p.PayrollGroup.PayrollGroupID == VM.Payroll.PayrollGroupID select p.EndDate).FirstOrDefault();
+            VM.Payroll.LatestEndDate = (from p in Helper.db.Payrolls where p.PayrollGroup.PayrollGroupID == VM.Payroll.PayrollGroupID select p.EndDate).FirstOrDefault().AddDays(1);
         }
         private void btn_previousPage_Click(object sender, RoutedEventArgs e)
         {
@@ -87,10 +87,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView
             VM.Page = 0;
             string search = VM.Search.ToLower();
             if (!String.IsNullOrEmpty(search))
-                VM.FilteredResult = new ObservableCollection<Payroll>((from b in Helper.db.Payrolls where b.StartDate.Date.ToString().Contains(search) || b.EndDate.Date.ToString().Contains(search) || b.PayrollGroup.Name.Contains(search) || b.PayrollID.ToString().Contains(search) select b).ToList().Skip(VM.Page * 10).Take(10));
+                VM.FilteredResult = new ObservableCollection<Payroll>((from b in Helper.db.Payrolls where String.Format("MM/dd/yyyy", b.StartDate).Contains(search) || String.Format("MM/dd/yyyy", b.EndDate).Contains(search) || b.PayrollGroup.Name.Contains(search) || b.PayrollID.ToString().Contains(search) select b).ToList().Skip(VM.Page * 5).Take(5));
             else
                 VM.FilteredResult = VM.FetchPayrollList();
-            VM.Payrolls = new ObservableCollection<Payroll>(VM.FilteredResult.Skip(VM.Page * 10).Take(10));
+            VM.Payrolls = new ObservableCollection<Payroll>(VM.FilteredResult.Skip(VM.Page * 5).Take(5));
         }
     }
 }
