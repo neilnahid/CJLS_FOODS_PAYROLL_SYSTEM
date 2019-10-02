@@ -30,7 +30,7 @@
                             Height="100"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
-                            Source="C:\Users\Neil Francis Nahid\Documents\GitHub\CJLS_FOODS_PAYROLL_SYSTEM\CJLS_FOODS_PAYROLL_SYSTEM\CJLS_FOODS_PAYROLL_SYSTEM\CJLS FOODS LOGO.jpg"
+                            Source="/CJLS FOODS LOGO.jpg\CJLS FOODS LOGO.jpg"
                             Stretch="Fill" />
                         <StackPanel>
                             <TextBlock>
