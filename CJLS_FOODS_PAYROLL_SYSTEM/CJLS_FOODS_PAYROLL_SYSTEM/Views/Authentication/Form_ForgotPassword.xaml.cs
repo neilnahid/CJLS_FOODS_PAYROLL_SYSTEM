@@ -37,6 +37,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
             {
                 VM.ResetUserDefaultPassword();
                 MessageBox.Show("Successful. Password was reset to default 'admin'");
+                new Views.Login_Form().Show();
                 this.Close();
             }
             else
