@@ -9,6 +9,7 @@
     Title="Form_Dashboard"
     Width="800"
     Height="450"
+    Loaded="Window_Loaded"
     WindowState="Maximized"
     WindowStyle="None"
     mc:Ignorable="d">
@@ -17,20 +18,26 @@
             <StackPanel Margin="50,0,50,50" HorizontalAlignment="Center">
                 <Label FontSize="24">Default password detected.</Label>
                 <Label FontSize="24">You must change your password.</Label>
-                <PasswordBox FontSize="24" x:Name="pswrdbox_newPassword" materialDesign:HintAssist.Hint="New Password" />
-                <PasswordBox FontSize="24" x:Name="pswrdbox_confirmPassword" materialDesign:HintAssist.Hint="Password" />
+                <PasswordBox
+                    x:Name="pswrdbox_newPassword"
+                    materialDesign:HintAssist.Hint="New Password"
+                    FontSize="24" />
+                <PasswordBox
+                    x:Name="pswrdbox_confirmPassword"
+                    materialDesign:HintAssist.Hint="Password"
+                    FontSize="24" />
                 <Label x:Name="lbl_Error" />
                 <StackPanel
                     Margin="0,25,0,0"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
                     <Button
-                        FontSize="24"
                         x:Name="btn_Apply"
                         Width="120"
                         Height="40"
                         Click="btn_applyNewPassword_Click"
                         Content="Apply"
+                        FontSize="24"
                         Style="{StaticResource MaterialDesignRaisedButton}"
                         ToolTip="Resource name: MaterialDesignRaisedButton" />
                 </StackPanel>
@@ -43,17 +50,22 @@
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <StackPanel>
                     <TreeView x:Name="treeview" SelectedItemChanged="TreeView_SelectedItemChanged">
-                        <TreeViewItem Header="Master Files" FontSize="28">
-                            <TreeViewItem Header="Employee List"  FontSize="28"/>
-                            <TreeViewItem Header="Employee Groups" FontSize="28" />
-                            <TreeViewItem Header="Job Positions"  FontSize="28"/>
-                            <TreeViewItem Header="Branches"  FontSize="28"/>
-                            <TreeViewItem Header="Users"  FontSize="28"/>
+                        <TreeViewItem FontSize="28" Header="Master Files">
+                            <TreeViewItem FontSize="28" Header="Employee List" />
+                            <TreeViewItem FontSize="28" Header="Employee Groups" />
+                            <TreeViewItem FontSize="28" Header="Job Positions" />
+                            <TreeViewItem FontSize="28" Header="Branches" />
+                            <TreeViewItem
+                                x:Name="tvi_users"
+                                FontSize="28"
+                                Header="Users"
+                                Visibility="Collapsed" />
                         </TreeViewItem>
-                        <TreeViewItem Header="Process Payroll" FontSize="28"/>
-                        <TreeViewItem Header="Process Leave"  FontSize="28"/>
-                        <TreeViewItem Header="Process Loans/Cash Advance" FontSize="28"/>
-                        <TreeViewItem Header="Logout"  FontSize="28"/>
+                        <TreeViewItem FontSize="28" Header="Process Payroll" />
+                        <TreeViewItem FontSize="28" Header="Process Leave" />
+                        <TreeViewItem FontSize="28" Header="Process Loans/Cash Advance" />
+                        <TreeViewItem FontSize="28" Header="Account Settings" />
+                        <TreeViewItem FontSize="28" Header="Logout" />
                     </TreeView>
                 </StackPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>

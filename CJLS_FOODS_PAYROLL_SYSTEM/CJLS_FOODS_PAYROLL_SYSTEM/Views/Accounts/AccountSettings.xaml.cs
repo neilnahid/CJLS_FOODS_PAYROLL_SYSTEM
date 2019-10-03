@@ -17,16 +17,17 @@ using System.Windows.Shapes;
 namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts
 {
     /// <summary>
-    /// Interaction logic for UsersLIst.xaml
+    /// Interaction logic for AccountSettings.xaml
     /// </summary>
-
-    public partial class UserList : Page
+    public partial class AccountSettings : Page
     {
-        View_Models.UserAdminViewModel VM = new View_Models.UserAdminViewModel();
-        public UserList()
+        View_Models.UserAccountViewModel VM;
+        public AccountSettings()
         {
             InitializeComponent();
-            VM = (View_Models.UserAdminViewModel)DataContext;
+            VM = (View_Models.UserAccountViewModel)DataContext;
+            VM.Instantiate();
+            passwordBox.Password = VM.User.Password;
         }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
@@ -60,43 +61,20 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts
                 VM.User.PSendPropertyChanged("IsValidationPassed");
             }
         }
-        private void Btn_Edit_Click(object sender, RoutedEventArgs e)
-        {
-            passwordBox.Password = VM.User.Password;
-            DialogHeader.Text = "Update User";
-            btn_dialogConfirm.Content = "UPDATE";
-        }
 
         private void btn_DialogConfirm_Click(object sender, RoutedEventArgs e)
         {
-            if (btn_dialogConfirm.Content.ToString() == "UPDATE")
-            {
-                VM.UpdateUser();
-                MessageBox.Show("Successfully Updated User");
-            }
-            else if (btn_dialogConfirm.Content.ToString() == "CREATE")
-            {
-                VM.AddNewUser();
-                MessageBox.Show("Successfully Created User");
-            }
-            else if (btn_dialogConfirm.Content.ToString() == "DELETE")
-            {
-                VM.DeleteUser();
-            }
-
+            VM.UpdateUser();
         }
 
-        private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e)
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            VM.User = new User() { Status = "Active", UserType = "Payroll Officer" };
-            VM.User.Password = "";
-            DialogHeader.Text = "Create New User";
-            btn_dialogConfirm.Content = "CREATE";
+            VM.User = Helper.User;
         }
 
-        private void DialogHost_DialogClosing(object sender, MaterialDesignThemes.Wpf.DialogClosingEventArgs eventArgs)
+        private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
-            VM.Users = new System.Collections.ObjectModel.ObservableCollection<User>(VM.GetAllUsers());
+            VM.Instantiate();
         }
     }
 }

@@ -23,31 +23,38 @@
                     Text="Header" />
                 <StackPanel x:Name="sp_dialogFields">
                     <TextBox
-                        FontSize="24"
                         materialDesign:HintAssist.Hint="UserID"
+                        FontSize="24"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.UserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     <TextBox
-                        FontSize="24"
                         materialDesign:HintAssist.Hint="FullName"
+                        FontSize="24"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     <TextBox
-                        FontSize="24"
                         materialDesign:HintAssist.Hint="Username"
+                        FontSize="24"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     <PasswordBox
-                        FontSize="24"
                         x:Name="passwordBox"
                         materialDesign:HintAssist.Hint="Password"
+                        FontSize="24"
                         PasswordChanged="PasswordBox_PasswordChanged"
                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                    <ComboBox
+                        IsEditable="False"
+                        SelectedValue="{Binding User.UserType}"
+                        SelectedValuePath="Content">
+                        <ComboBoxItem>Payroll Officer</ComboBoxItem>
+                        <ComboBoxItem>Owner</ComboBoxItem>
+                    </ComboBox>
                     <TextBlock x:Name="txtblock_errors" Foreground="Red" />
                     <ComboBox
-                        FontSize="24"
                         materialDesign:HintAssist.Hint="Security Question"
+                        FontSize="24"
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                         Text="{Binding User.SecretQuestion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                         <ComboBoxItem Content="What is your mother's maiden name?" />
@@ -57,10 +64,17 @@
                         <ComboBoxItem Content="What was your childhood nickname?" />
                     </ComboBox>
                     <TextBox
-                        FontSize="24"
                         materialDesign:HintAssist.Hint="Secret Answer"
+                        FontSize="24"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.SecretAnswer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                    <ComboBox
+                        IsEditable="False"
+                        SelectedValue="{Binding User.Status}"
+                        SelectedValuePath="Content">
+                        <ComboBoxItem>Active</ComboBoxItem>
+                        <ComboBoxItem>Inactive</ComboBoxItem>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
@@ -109,8 +123,14 @@
                         ItemsSource="{Binding Users}"
                         SelectedItem="{Binding User}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn FontSize="24" Binding="{Binding FullName}" Header="Full Name" />
-                            <DataGridTextColumn FontSize="24" Binding="{Binding Username}" Header="Username" />
+                            <DataGridTextColumn
+                                Binding="{Binding FullName}"
+                                FontSize="24"
+                                Header="Full Name" />
+                            <DataGridTextColumn
+                                Binding="{Binding Username}"
+                                FontSize="24"
+                                Header="Username" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

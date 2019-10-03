@@ -13,35 +13,43 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
+namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
+{
     /// <summary>
     /// Interaction logic for Form_Dashboard.xaml
     /// </summary>
-    public partial class Form_Dashboard : Window {
-        public Form_Dashboard() {
+    public partial class Form_Dashboard : Window
+    {
+        public Form_Dashboard()
+        {
             InitializeComponent();
             Frame.Content = new Home();
             Helper.Title = Title;
             if (Helper.User != null & Helper.User.Password == "admin")
                 dg_changePassword.IsOpen = true;
         }
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e) {
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
         }
 
-        private void MenuToggleButton_Checked(object sender, RoutedEventArgs e) {
+        private void MenuToggleButton_Checked(object sender, RoutedEventArgs e)
+        {
 
         }
 
-        private void Btn_Payroll_Click(object sender, RoutedEventArgs e) {
+        private void Btn_Payroll_Click(object sender, RoutedEventArgs e)
+        {
             //Frame.Content = new Views.Employee.PayrollDetails();
             //Title.Text = "Payroll Details";
         }
 
-        private void Btn_Employee_Click(object sender, RoutedEventArgs e) {
+        private void Btn_Employee_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 
-        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
             TreeViewItem tvi = (TreeViewItem)((TreeView)sender).SelectedItem;
             if (tvi.Header.ToString() == "Employee List")
             {
@@ -91,6 +99,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
                 Frame.Content = new Views.Employee.LoanCashAdvance();
                 Title.Text = "Process Loans/Cash Advance";
             }
+            else if (tvi.Header.ToString() == "Account Settings")
+            {
+                draweHost.IsLeftDrawerOpen = false;
+                Frame.Content = new Views.Accounts.AccountSettings();
+                Title.Text = "User Account Settings";
+            }
             else if (tvi.Header.ToString() == "Logout")
             {
                 new Views.Login_Form().Show();
@@ -123,6 +137,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views {
             }
             else
                 lbl_Error.Content = "confirm password does not match.";
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Helper.User.UserType == "Owner")
+                tvi_users.Visibility = Visibility.Visible;
         }
     }
 }

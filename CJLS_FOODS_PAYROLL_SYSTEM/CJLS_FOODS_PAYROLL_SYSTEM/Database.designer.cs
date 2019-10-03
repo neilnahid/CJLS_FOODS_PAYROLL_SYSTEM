@@ -78,7 +78,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     #endregion
 		
 		public DatabaseDataContext() : 
-				base(global::CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings.Default.CJLSFOODSPAYROLLConnectionString2, mappingSource)
+				base(global::CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings.Default.CJLSFOODSPAYROLLConnectionString3, mappingSource)
 		{
 			OnCreated();
 		}
@@ -545,6 +545,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private string _SecretAnswer;
 		
+		private string _UserType;
+		
+		private string _Status;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -561,6 +565,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnSecretQuestionChanged();
     partial void OnSecretAnswerChanging(string value);
     partial void OnSecretAnswerChanged();
+    partial void OnUserTypeChanging(string value);
+    partial void OnUserTypeChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
     #endregion
 		
 		public User()
@@ -684,6 +692,46 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 					this._SecretAnswer = value;
 					this.SendPropertyChanged("SecretAnswer");
 					this.OnSecretAnswerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserType", DbType="VarChar(50)")]
+		public string UserType
+		{
+			get
+			{
+				return this._UserType;
+			}
+			set
+			{
+				if ((this._UserType != value))
+				{
+					this.OnUserTypeChanging(value);
+					this.SendPropertyChanging();
+					this._UserType = value;
+					this.SendPropertyChanged("UserType");
+					this.OnUserTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
 				}
 			}
 		}

@@ -142,8 +142,12 @@
     <Compile Include="View Models\PayrollSummaryViewModel.cs" />
     <Compile Include="View Models\PayrollViewModel.cs" />
     <Compile Include="View Models\PayslipViewModel.cs" />
+    <Compile Include="View Models\UserAccountViewModel.cs" />
     <Compile Include="View Models\UserAdminViewModel.cs" />
     <Compile Include="Model\User.cs" />
+    <Compile Include="Views\Accounts\AccountSettings.xaml.cs">
+      <DependentUpon>AccountSettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Accounts\UserList.xaml.cs">
       <DependentUpon>UserList.xaml</DependentUpon>
     </Compile>
@@ -171,6 +175,10 @@
     <Compile Include="Views\Reports\Payslip.xaml.cs">
       <DependentUpon>Payslip.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Accounts\AccountSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Accounts\UserList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
