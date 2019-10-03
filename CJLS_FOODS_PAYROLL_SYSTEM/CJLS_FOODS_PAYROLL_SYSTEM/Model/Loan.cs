@@ -11,6 +11,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     {
         public bool IsValidationPassed { get; set; }
         public string Error { get { return null; } }
+        public Employee CurrentEmployee { get; set; }
         public Dictionary<string, string> ErrorCollection { get; set; } = new Dictionary<string, string>();
         public string this[string name] {
             get {
@@ -18,23 +19,29 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                 switch (name)
                 {
                     case "Terms":
-                        if (!(Terms>0))
+                        if (!(Terms > 0))
                             result = "Terms must be greater than 0.";
                         break;
                     case "Amount":
-                        if(Employee != null)
+                        if (Employee != null)
                         {
                             if (Amount > Employee.MonthlySalary)
                                 result = $"Amount cannot be greater than Employee's monthly salary({Employee.MonthlySalary}).";
                         }
-                        if (!(Amount>0))
+                        if (!(Amount > 0))
                             result = "Amount must be greater than zero,";
                         break;
                     case "Employee":
                         if (Employee == null)
                             result = "You must select an Employee,";
                         else if ((from l in Employee.Loans where !(l.IsPaid != null ? l.IsPaid.Value : false) && l.LoanID != 0 select l).Count() > 0)
-                            result = $"{Employee.FullName} already has an existing loan that's unpaid.";
+                        {
+                            if (LoanID == 0)
+                                result = $"{Employee.FullName} already has an existing loan that's unpaid.";
+                            if (CurrentEmployee != null && CurrentEmployee != Employee)
+                                result = $"{Employee.FullName} already has an existing loan that's unpaid.";
+
+                        }
                         break;
                     case "LoanType":
                         if (LoanType == null)

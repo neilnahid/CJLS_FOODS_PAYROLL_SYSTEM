@@ -49,6 +49,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void Btn_Edit_Click(object sender, RoutedEventArgs e)
         {
+            VM.Loan.CurrentEmployee = VM.Loan.Employee;
             DialogHeader.Text = "Update Loan/Cash Advance";
             btn_dialogConfirm.Content = "UPDATE";
         }
@@ -98,6 +99,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             else
                 VM.FilteredResult = VM.GetLoans();
             VM.Loans = new ObservableCollection<Loan>(VM.FilteredResult.Skip(VM.Page * 10).Take(10));
+        }
+
+        private void btn_cancelDialog_Click(object sender, RoutedEventArgs e)
+        {
+            VM.Instantiate();
+            dialogHost.IsOpen = false;
         }
     }
 }

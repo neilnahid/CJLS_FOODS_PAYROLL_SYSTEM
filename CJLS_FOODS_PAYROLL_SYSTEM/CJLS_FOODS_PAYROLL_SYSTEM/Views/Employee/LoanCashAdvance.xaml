@@ -73,7 +73,7 @@
                         ACCEPT
                     </Button>
                     <Button
-                        Command="materialDesign:DialogHost.CloseDialogCommand"
+                        Click="btn_cancelDialog_Click"
                         FontSize="24"
                         IsCancel="True"
                         Style="{StaticResource MaterialDesignFlatButton}">
