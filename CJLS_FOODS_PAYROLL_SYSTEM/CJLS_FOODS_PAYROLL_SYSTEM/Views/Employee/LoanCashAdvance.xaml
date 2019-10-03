@@ -22,6 +22,7 @@
                     Style="{StaticResource MaterialDesignHeadlineTextBlock}"
                     Text="Header" />
                 <ComboBox
+                    FontSize="24"
                     Grid.Column="1"
                     materialDesign:HintAssist.Hint="Search Employee"
                     materialDesign:HintAssist.HintOpacity=".26"
@@ -32,11 +33,13 @@
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                     ToolTip="{Binding Loan.ErrorCollection[Employee]}" />
                 <TextBox
+                    FontSize="24"
                     materialDesign:HintAssist.Hint="Amount"
                     PreviewTextInput="FloatValidation"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding Loan.Amount, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox
+                    FontSize="24"
                     Grid.Column="1"
                     materialDesign:HintAssist.Hint="Loan Type"
                     materialDesign:HintAssist.HintOpacity=".26"
@@ -46,6 +49,7 @@
                     <ComboBoxItem>Cash Advance</ComboBoxItem>
                 </ComboBox>
                 <TextBox
+                    FontSize="24"
                     materialDesign:HintAssist.Hint="Terms(By Payroll)"
                     PreviewTextInput="NumberValidation"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -54,6 +58,7 @@
                 <!--  SP for buttons  -->
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
+                        FontSize="24"
                         x:Name="btn_dialogConfirm"
                         Click="Btn_dialogConfirm_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
@@ -68,6 +73,7 @@
                         ACCEPT
                     </Button>
                     <Button
+                        FontSize="24"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
                         IsCancel="True"
                         Style="{StaticResource MaterialDesignFlatButton}">
@@ -102,12 +108,12 @@
                         ItemsSource="{Binding Loans}"
                         SelectedItem="{Binding Loan}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Employee.FullName}" Header="Employee Name" />
-                            <DataGridTextColumn Binding="{Binding Amount}" Header="Amount" />
-                            <DataGridTextColumn Binding="{Binding LoanType}" Header="LoanType" />
-                            <DataGridTextColumn Binding="{Binding TermsRemaining}" Header="TermsRemaining" />
-                            <DataGridTextColumn Binding="{Binding AmountRemaining}" Header="RemainingAmount" />
-                            <DataGridTextColumn Binding="{Binding IsPaid}" Header="IsPaid" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding Employee.FullName}" Header="Employee Name" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding Amount}" Header="Amount" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding LoanType}" Header="LoanType" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding TermsRemaining}" Header="TermsRemaining" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding AmountRemaining}" Header="RemainingAmount" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding IsPaid}" Header="IsPaid" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -182,9 +188,9 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock>
-                                        <Run Text="{Binding PayrollDetail.Payroll.StartDate, StringFormat=d}" />
+                                        <Run FontSize="24" Text="{Binding PayrollDetail.Payroll.StartDate, StringFormat=d}" />
                                         <Run Text="-" />
-                                        <Run Text="{Binding PayrollDetail.Payroll.EndDate, StringFormat=d}" />
+                                        <Run FontSize="24" Text="{Binding PayrollDetail.Payroll.EndDate, StringFormat=d}" />
                                     </TextBlock>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

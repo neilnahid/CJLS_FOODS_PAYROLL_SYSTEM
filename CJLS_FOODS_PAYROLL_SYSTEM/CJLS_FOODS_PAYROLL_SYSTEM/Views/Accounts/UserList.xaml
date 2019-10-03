@@ -23,25 +23,30 @@
                     Text="Header" />
                 <StackPanel x:Name="sp_dialogFields">
                     <TextBox
+                        FontSize="24"
                         materialDesign:HintAssist.Hint="UserID"
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.UserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     <TextBox
+                        FontSize="24"
                         materialDesign:HintAssist.Hint="FullName"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     <TextBox
+                        FontSize="24"
                         materialDesign:HintAssist.Hint="Username"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     <PasswordBox
+                        FontSize="24"
                         x:Name="passwordBox"
                         materialDesign:HintAssist.Hint="Password"
                         PasswordChanged="PasswordBox_PasswordChanged"
                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
                     <TextBlock x:Name="txtblock_errors" Foreground="Red" />
                     <ComboBox
+                        FontSize="24"
                         materialDesign:HintAssist.Hint="Security Question"
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                         Text="{Binding User.SecretQuestion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
@@ -52,6 +57,7 @@
                         <ComboBoxItem Content="What was your childhood nickname?" />
                     </ComboBox>
                     <TextBox
+                        FontSize="24"
                         materialDesign:HintAssist.Hint="Secret Answer"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.SecretAnswer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
@@ -94,7 +100,7 @@
             <Grid Grid.Row="1" Margin="0,0.8,0,0">
                 <GroupBox
                     Margin="0,10,0,0"
-                    FontSize="24"
+                    FontSize="35"
                     Header="User List">
                     <DataGrid
                         AutoGenerateColumns="False"
@@ -103,8 +109,8 @@
                         ItemsSource="{Binding Users}"
                         SelectedItem="{Binding User}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding FullName}" Header="Full Name" />
-                            <DataGridTextColumn Binding="{Binding Username}" Header="Username" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding FullName}" Header="Full Name" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding Username}" Header="Username" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

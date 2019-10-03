@@ -87,9 +87,9 @@
                         ItemsSource="{Binding Leaves}"
                         SelectedItem="{Binding Leave}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Employee.FullName}" Header="First Name" />
-                            <DataGridTextColumn Binding="{Binding Employee.EmployeeType.Name}" Header="Job Position" />
-                            <DataGridTextColumn Binding="{Binding LeaveDate, StringFormat=d}" Header="Leave Date" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding Employee.FullName}" Header="First Name" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding Employee.EmployeeType.Name}" Header="Job Position" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding LeaveDate, StringFormat=d}" Header="Leave Date" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

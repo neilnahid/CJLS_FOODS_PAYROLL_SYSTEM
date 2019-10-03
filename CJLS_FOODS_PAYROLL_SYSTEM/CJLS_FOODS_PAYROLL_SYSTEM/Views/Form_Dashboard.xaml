@@ -15,18 +15,20 @@
     <materialDesign:DialogHost x:Name="dg_changePassword">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="50,0,50,50" HorizontalAlignment="Center">
-                <Label>Default password detected.</Label>
-                <Label>You must change your password.</Label>
-                <PasswordBox x:Name="pswrdbox_newPassword" materialDesign:HintAssist.Hint="New Password" />
-                <PasswordBox x:Name="pswrdbox_confirmPassword" materialDesign:HintAssist.Hint="Password" />
+                <Label FontSize="24">Default password detected.</Label>
+                <Label FontSize="24">You must change your password.</Label>
+                <PasswordBox FontSize="24" x:Name="pswrdbox_newPassword" materialDesign:HintAssist.Hint="New Password" />
+                <PasswordBox FontSize="24" x:Name="pswrdbox_confirmPassword" materialDesign:HintAssist.Hint="Password" />
                 <Label x:Name="lbl_Error" />
                 <StackPanel
                     Margin="0,25,0,0"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
                     <Button
+                        FontSize="24"
                         x:Name="btn_Apply"
-                        Width="100"
+                        Width="120"
+                        Height="40"
                         Click="btn_applyNewPassword_Click"
                         Content="Apply"
                         Style="{StaticResource MaterialDesignRaisedButton}"
@@ -41,17 +43,17 @@
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <StackPanel>
                     <TreeView x:Name="treeview" SelectedItemChanged="TreeView_SelectedItemChanged">
-                        <TreeViewItem Header="Master Files">
-                            <TreeViewItem Header="Employee List" />
-                            <TreeViewItem Header="Employee Groups" />
-                            <TreeViewItem Header="Job Positions" />
-                            <TreeViewItem Header="Branches" />
-                            <TreeViewItem Header="Users" />
+                        <TreeViewItem Header="Master Files" FontSize="28">
+                            <TreeViewItem Header="Employee List"  FontSize="28"/>
+                            <TreeViewItem Header="Employee Groups" FontSize="28" />
+                            <TreeViewItem Header="Job Positions"  FontSize="28"/>
+                            <TreeViewItem Header="Branches"  FontSize="28"/>
+                            <TreeViewItem Header="Users"  FontSize="28"/>
                         </TreeViewItem>
-                        <TreeViewItem Header="Process Payroll" />
-                        <TreeViewItem Header="Process Leave" />
-                        <TreeViewItem Header="Process Loans/Cash Advance" />
-                        <TreeViewItem Header="Logout" />
+                        <TreeViewItem Header="Process Payroll" FontSize="28"/>
+                        <TreeViewItem Header="Process Leave"  FontSize="28"/>
+                        <TreeViewItem Header="Process Loans/Cash Advance" FontSize="28"/>
+                        <TreeViewItem Header="Logout"  FontSize="28"/>
                     </TreeView>
                 </StackPanel>
             </materialDesign:DrawerHost.LeftDrawerContent>
@@ -73,8 +75,8 @@
                         CommandParameter="{x:Static Dock.Left}"
                         Style="{StaticResource MaterialDesignFloatingActionButton}">
                         <materialDesign:PackIcon
-                            Width="24"
-                            Height="24"
+                            Width="35"
+                            Height="35"
                             Background="Transparent"
                             BorderThickness="0"
                             Kind="HamburgerMenu" />

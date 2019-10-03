@@ -26,8 +26,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=NEIL\\SQLEXPRESS;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=" +
-            "True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PSYCHO;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True")]
         public string CJLSFOODSPAYROLLConnectionString {
             get {
                 return ((string)(this["CJLSFOODSPAYROLLConnectionString"]));

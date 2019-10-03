@@ -78,7 +78,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     #endregion
 		
 		public DatabaseDataContext() : 
-				base(global::CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings.Default.CJLSFOODSPAYROLLConnectionString, mappingSource)
+				base(global::CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings.Default.CJLSFOODSPAYROLLConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}

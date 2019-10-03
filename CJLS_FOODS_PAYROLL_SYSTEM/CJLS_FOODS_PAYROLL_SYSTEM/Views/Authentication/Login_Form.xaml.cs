@@ -42,5 +42,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
             this.Close();
 
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

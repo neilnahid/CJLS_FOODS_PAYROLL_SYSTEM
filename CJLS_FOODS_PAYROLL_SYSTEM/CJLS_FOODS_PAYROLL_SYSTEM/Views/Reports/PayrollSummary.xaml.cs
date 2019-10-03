@@ -31,5 +31,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Reports
         {
             VM.Print(fd_payrollSummary);
         }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

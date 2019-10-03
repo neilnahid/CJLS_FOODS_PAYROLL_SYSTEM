@@ -81,9 +81,9 @@
                         ItemsSource="{Binding PayrollGroups}"
                         SelectedItem="{Binding PayrollGroup}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding PayrollGroupID}" Header="PayrollGroupID" />
-                            <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
-                            <DataGridTextColumn Binding="{Binding NumberOfDays}" Header="Days Covered" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding PayrollGroupID}" Header="PayrollGroupID" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding Name}" Header="Name" />
+                            <DataGridTextColumn FontSize="24" Binding="{Binding NumberOfDays}" Header="Days Covered" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

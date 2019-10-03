@@ -21,17 +21,20 @@
                     Style="{StaticResource MaterialDesignHeadlineTextBlock}"
                     Text="Header" />
                 <TextBox
+                    FontSize="24"
                     materialDesign:HintAssist.Hint="Branch name"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding Branch.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 <StackPanel />
                 <CheckBox
+                    FontSize="24"
                     Content="IsActive"
                     IsChecked="{Binding Branch.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                     Style="{StaticResource MaterialDesignCheckBox}" />
                 <!--  SP for buttons  -->
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
+                        FontSize="24"
                         x:Name="btn_dialogConfirm"
                         Click="btn_dialogConfirm_Click"
                         IsDefault="True"
@@ -45,6 +48,7 @@
                         ACCEPT
                     </Button>
                     <Button
+                        FontSize="24"
                         Click="btn_cancel_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
                         IsCancel="True"
@@ -77,8 +81,8 @@
                             ItemsSource="{Binding Branches, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             SelectedItem="{Binding Branch}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding BranchID}" Header="BrnachID" />
-                                <DataGridTextColumn Binding="{Binding Name}" Header="Name" />
+                                <DataGridTextColumn FontSize="24" Binding="{Binding BranchID}" Header="BrnachID" />
+                                <DataGridTextColumn FontSize="24" Binding="{Binding Name}" Header="Name" />
                                 <DataGridCheckBoxColumn Binding="{Binding IsActive}" Header="IsActive" />
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
