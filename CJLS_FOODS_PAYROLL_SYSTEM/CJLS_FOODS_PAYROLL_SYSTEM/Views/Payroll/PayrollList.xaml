@@ -23,6 +23,7 @@
                     Text="Header" />
                 <StackPanel x:Name="sp_dateSelect">
                     <ComboBox
+                        Margin="0,25,0,0"
                         materialDesign:HintAssist.Hint="Payroll Group"
                         DisplayMemberPath="Name"
                         IsEditable="False"
@@ -32,12 +33,14 @@
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                         ToolTip="{Binding Payroll.ErrorCollection[PayrollGroup]}" />
                     <DatePicker
+                        Margin="0,25,0,0"
                         materialDesign:HintAssist.Hint="Start Date"
                         DisplayDateStart="{Binding Payroll.LatestEndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         SelectedDate="{Binding Payroll.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                         Text="{Binding Payroll.StartDateString, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     <DatePicker
+                        Margin="0,25,0,0"
                         materialDesign:HintAssist.Hint="End Date"
                         DisplayDateStart="{Binding Payroll.StartDate}"
                         SelectedDate="{Binding Payroll.EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"

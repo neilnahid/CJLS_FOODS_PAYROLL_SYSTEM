@@ -69,7 +69,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView
         }
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            VM.Payroll.LatestEndDate = (from p in Helper.db.Payrolls where p.PayrollGroup.PayrollGroupID == VM.Payroll.PayrollGroupID select p.EndDate).FirstOrDefault().AddDays(1);
+            if (VM.Payroll.PayrollGroup != null)
+            {
+                VM.Payroll.LatestEndDate = (from p in Helper.db.Payrolls where p.PayrollGroup.PayrollGroupID == VM.Payroll.PayrollGroupID select p.EndDate).FirstOrDefault().AddDays(1);
+                if (VM.Payroll.LatestEndDate.Date == new DateTime(0001, 01, 02))
+                    VM.Payroll.StartDate = DateTime.Now;
+                else
+                    VM.Payroll.StartDate = VM.Payroll.LatestEndDate;
+                VM.Payroll.EndDate = VM.Payroll.StartDate.AddDays(VM.Payroll.PayrollGroup.NumberOfDays);
+            }
         }
         private void btn_previousPage_Click(object sender, RoutedEventArgs e)
         {
@@ -91,6 +99,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView
             else
                 VM.FilteredResult = VM.FetchPayrollList();
             VM.Payrolls = new ObservableCollection<Payroll>(VM.FilteredResult.Skip(VM.Page * 5).Take(5));
+        }
+
+        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

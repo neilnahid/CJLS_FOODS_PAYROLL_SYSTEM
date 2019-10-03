@@ -13,13 +13,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
         public bool IsValidationPassed { get; set; }
         public string Error { get { return null; } }
 
+        [PropertyChanged.AlsoNotifyFor("StartDate")]
         public string StartDateString { get; set; }
-
-
+        [PropertyChanged.AlsoNotifyFor("EndDate")]
         public string EndDateString { get; set; }
 
         //the end date of the latest added payroll of given payroll group
         public DateTime LatestEndDate { get; set; }
+
         public DateTime EndDateRange { get; set; }
 
         public Dictionary<string, string> ErrorCollection { get; set; } = new Dictionary<string, string>();
@@ -31,6 +32,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                     case "PayrollGroup":
                         if (PayrollGroup == null)
                             result = "You must select a Payroll Group";
+                        if (StartDate < LatestEndDate)
+                            result = $"start date must not be less than {LatestEndDate.ToString("MM/dd/yyyy")}";
                         break;
                     case "StartDateString":
                         if (!Regex.IsMatch(StartDateString == null ? "" : StartDateString, "^[0-10-9]{1,2}/[0-10-9]{1,2}/[0-9]{4}$"))
@@ -43,7 +46,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 
                     case "EndDate":
                         if (StartDate > EndDate)
-                            result = "Startdate must not be greater than End Date.";
+                        {
+                            result = "Startdate must not be greater than or equals to End Date.";
+                        }
                         if (PayrollGroup != null)
                         {
                             if ((EndDate - StartDate).TotalDays > PayrollGroup.NumberOfDays)
@@ -53,7 +58,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 
                     case "StartDate":
                         if (StartDate > EndDate)
-                            result = "Startdate must not be greater than End Date.";
+                        {
+                            result = "Startdate must not be greater than or equals to End Date.";
+                        }
                         if (PayrollGroup != null)
                         {
                             if ((EndDate - StartDate).TotalDays > PayrollGroup.NumberOfDays)
@@ -72,6 +79,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                 IsValidationPassed = ErrorCollection.Count > 0 ? false : true;
                 SendPropertyChanged("ErrorCollection");
                 SendPropertyChanged("IsValidationPassed");
+                if (name == "EndDate")
+                    SendPropertyChanged("StartDate");
                 return result;
             }
         }
