@@ -44,6 +44,7 @@
                         FontSize="24"
                         PasswordChanged="PasswordBox_PasswordChanged"
                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                    <TextBlock x:Name="txtblock_errors" Foreground="Red" />
                     <ComboBox
                         IsEditable="False"
                         SelectedValue="{Binding User.UserType}"
@@ -51,7 +52,6 @@
                         <ComboBoxItem>Payroll Officer</ComboBoxItem>
                         <ComboBoxItem>Owner</ComboBoxItem>
                     </ComboBox>
-                    <TextBlock x:Name="txtblock_errors" Foreground="Red" />
                     <ComboBox
                         materialDesign:HintAssist.Hint="Security Question"
                         FontSize="24"
