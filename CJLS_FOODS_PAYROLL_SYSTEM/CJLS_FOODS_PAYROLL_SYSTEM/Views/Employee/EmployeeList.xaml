@@ -28,47 +28,47 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBox
-                            FontSize="24"
                             Grid.Column="0"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="First Name"
+                            FontSize="24"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="{Binding Employee.ErrorCollection[FirstName]}" />
                         <TextBox
-                            FontSize="24"
                             Grid.Column="1"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Middle Name"
+                            FontSize="24"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.MiddleName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="{Binding Employee.ErrorCollection[MiddleName]}" />
                         <TextBox
-                            FontSize="24"
                             Grid.Column="2"
                             materialDesign:HintAssist.Hint="Last Name"
+                            FontSize="24"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.LastName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="{Binding Employee.ErrorCollection[LastName]}" />
                     </Grid>
-                    <Grid>
+                    <Grid Margin="0,25,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <DatePicker
-                            FontSize="24"
                             Grid.Column="0"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Date Of Birth"
                             DisplayDateEnd="{Binding DateTimeNow, Mode=OneWay}"
+                            FontSize="24"
                             SelectedDate="{Binding Employee.DateOfBirth, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                             SelectedDateFormat="Short"
                             Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                         <ComboBox
-                            FontSize="24"
                             Grid.Column="1"
                             materialDesign:HintAssist.Hint="Gender"
+                            FontSize="24"
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                             Text="{Binding Employee.Gender, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="{Binding Employee.ErrorCollection[Gender]}">
@@ -77,18 +77,20 @@
                         </ComboBox>
                     </Grid>
                     <TextBox
-                        FontSize="24"
+                        Margin="0,25,0,0"
                         materialDesign:HintAssist.Hint="Address"
+                        FontSize="24"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding Employee.Address, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                         ToolTip="{Binding Employee.ErrorCollection[Address]}" />
                     <TextBox
-                        FontSize="24"
+                        Margin="0,25,0,0"
                         materialDesign:HintAssist.Hint="Contact Number"
+                        FontSize="24"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding Employee.ContactNumber, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                         ToolTip="{Binding Employee.ErrorCollection[ContactNumber]}" />
-                    <Grid>
+                    <Grid Margin="0,25,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -97,38 +99,38 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <ComboBox
-                            FontSize="24"
                             Grid.Column="0"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Job Position"
                             DisplayMemberPath="Name"
+                            FontSize="24"
                             ItemsSource="{Binding EmployeeTypes}"
                             SelectedItem="{Binding Employee.EmployeeType}"
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                             ToolTip="{Binding Employee.ErrorCollection[EmployeeType]}" />
                         <TextBox
-                            FontSize="24"
                             Grid.Column="1"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Salary Rate(Per hour)"
+                            FontSize="24"
                             PreviewTextInput="NumberValidation"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.HourlyRate, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="{Binding Employee.ErrorCollection[HourlyRate]}" />
                         <TextBox
-                            FontSize="24"
                             Grid.Column="2"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Daily Required Hours"
+                            FontSize="24"
                             PreviewTextInput="NumberValidation"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.DailyRequiredHours, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="{Binding Employee.ErrorCollection[DailyRequiredHours]}" />
                         <ComboBox
-                            FontSize="24"
                             Grid.Column="3"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Weekly Required Working Days"
+                            FontSize="24"
                             SelectedIndex="{Binding Employee.RequiredDaysAWeek, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                             ToolTip="{Binding Employee.ErrorCollection[RequiredDaysAWeek]}">
@@ -142,7 +144,7 @@
 
                         </ComboBox>
                     </Grid>
-                    <Grid>
+                    <Grid Margin="0,25,0,0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -150,36 +152,36 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <TextBox
-                            FontSize="24"
                             Grid.Column="0"
                             materialDesign:HintAssist.Hint="Available Leaves"
+                            FontSize="24"
                             PreviewTextInput="NumberValidation"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.AvailableLeaves, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                         <ComboBox
-                            FontSize="24"
                             Grid.Column="1"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Branch Assigned"
                             DisplayMemberPath="Name"
+                            FontSize="24"
                             IsEditable="False"
                             ItemsSource="{Binding Branches}"
                             SelectedItem="{Binding Employee.Branch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                         <ComboBox
-                            FontSize="24"
                             Grid.Column="2"
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Payroll Group"
                             DisplayMemberPath="Name"
+                            FontSize="24"
                             ItemsSource="{Binding PayrollGroups}"
                             SelectedItem="{Binding Employee.PayrollGroup}"
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                         <ComboBox
-                            FontSize="24"
                             x:Name="cmbbox_EmploymentStatus"
                             Grid.Column="3"
                             materialDesign:HintAssist.Hint="Employment Status"
+                            FontSize="24"
                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                             Text="{Binding Employee.Status, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}">
                             <ComboBoxItem Content="Active" />
@@ -188,75 +190,75 @@
                     </Grid>
 
                 </StackPanel>
-                <Grid>
+                <Grid Margin="0,25,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        FontSize="24"
                         Grid.Column="0"
                         materialDesign:HintAssist.Hint="SSS Id"
+                        FontSize="24"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding Employee.SSSID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                     <CheckBox
-                        FontSize="24"
                         Grid.Column="1"
                         Margin="0,20,0,0"
+                        FontSize="24"
                         IsChecked="{Binding Employee.IsSSSActive}">
                         Active
                     </CheckBox>
                 </Grid>
-                <Grid>
+                <Grid Margin="0,25,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        FontSize="24"
                         materialDesign:HintAssist.Hint="Pagibig Id"
+                        FontSize="24"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding Employee.PagIbigID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                     <CheckBox
-                        FontSize="24"
                         Grid.Column="1"
                         Margin="0,20,0,0"
+                        FontSize="24"
                         IsChecked="{Binding Employee.IsPagibigActive}">
                         Active
                     </CheckBox>
                 </Grid>
-                <Grid>
+                <Grid Margin="0,25,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        FontSize="24"
                         materialDesign:HintAssist.Hint="Philhealth Id"
+                        FontSize="24"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding Employee.PhilhealthID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                     <CheckBox
-                        FontSize="24"
                         Grid.Column="1"
                         Margin="0,20,0,0"
+                        FontSize="24"
                         IsChecked="{Binding Employee.IsPhilhealthActive}">
                         Active
                     </CheckBox>
                 </Grid>
-                <Grid>
+                <Grid Margin="0,25,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBox
-                        FontSize="24"
                         materialDesign:HintAssist.Hint="TIN Id"
+                        FontSize="24"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding Employee.TINID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                     <CheckBox
-                        FontSize="24"
                         Grid.Column="1"
                         Margin="0,20,0,0"
+                        FontSize="24"
                         IsChecked="{Binding Employee.IsIncomeTaxActive}">
                         Active
                     </CheckBox>
@@ -264,9 +266,9 @@
 
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
-                        FontSize="24"
                         x:Name="btn_dialogConfirm"
                         Click="btn_dialogConfirm_Click"
+                        FontSize="24"
                         IsDefault="True"
                         IsEnabled="{Binding Employee.IsValidationPassed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource MaterialDesignFlatButton}">
@@ -278,9 +280,9 @@
                         ACCEPT
                     </Button>
                     <Button
-                        FontSize="24"
                         Click="btn_dialogCancel_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
+                        FontSize="24"
                         IsCancel="True"
                         Style="{StaticResource MaterialDesignFlatButton}">
                         <Button.CommandParameter>
@@ -332,11 +334,26 @@
                                 SelectionMode="Single"
                                 SelectionUnit="FullRow">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn FontSize="24" Binding="{Binding Emp_ID}" Header="EmployeeID" />
-                                    <DataGridTextColumn FontSize="24" Binding="{Binding FirstName}" Header="First Name" />
-                                    <DataGridTextColumn FontSize="24" Binding="{Binding MiddleName}" Header="Middle Name" />
-                                    <DataGridTextColumn FontSize="24" Binding="{Binding LastName}" Header="Last Name" />
-                                    <DataGridTextColumn FontSize="24" Binding="{Binding EmployeeType.Name}" Header="Job Position" />
+                                    <DataGridTextColumn
+                                        Binding="{Binding Emp_ID}"
+                                        FontSize="24"
+                                        Header="EmployeeID" />
+                                    <DataGridTextColumn
+                                        Binding="{Binding FirstName}"
+                                        FontSize="24"
+                                        Header="First Name" />
+                                    <DataGridTextColumn
+                                        Binding="{Binding MiddleName}"
+                                        FontSize="24"
+                                        Header="Middle Name" />
+                                    <DataGridTextColumn
+                                        Binding="{Binding LastName}"
+                                        FontSize="24"
+                                        Header="Last Name" />
+                                    <DataGridTextColumn
+                                        Binding="{Binding EmployeeType.Name}"
+                                        FontSize="24"
+                                        Header="Job Position" />
                                 </DataGrid.Columns>
                             </DataGrid>
                             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
@@ -384,8 +401,8 @@
                         <StackPanel x:Name="sp_empInfo" TextElement.FontSize="24">
                             <StackPanel>
                                 <TextBox
-                                    FontSize="24"
                                     materialDesign:HintAssist.Hint="EmployeeID"
+                                    FontSize="24"
                                     IsReadOnly="True"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     Text="{Binding Employee.Emp_ID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
@@ -396,25 +413,25 @@
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <TextBox
-                                        FontSize="20"
                                         Grid.Column="0"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="First Name"
+                                        FontSize="20"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.FirstName, Mode=TwoWay, ValidatesOnDataErrors=True}"
                                         ToolTip="{Binding Employee.ErrorCollection[FirstName]}" />
                                     <TextBox
-                                        FontSize="20"
                                         Grid.Column="1"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Middle Name"
+                                        FontSize="20"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.MiddleName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                         ToolTip="{Binding Employee.ErrorCollection[MiddleName]}" />
                                     <TextBox
-                                        FontSize="20"
                                         Grid.Column="2"
                                         materialDesign:HintAssist.Hint="Last Name"
+                                        FontSize="20"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding F.LastName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
@@ -424,17 +441,17 @@
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <DatePicker
-                                        FontSize="20"
                                         Grid.Column="0"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Date Of Birth"
                                         DisplayDateEnd="{Binding DateTimeNow, Mode=OneWay}"
+                                        FontSize="20"
                                         SelectedDate="{Binding Employee.DateOfBirth, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                                     <ComboBox
-                                        FontSize="20"
                                         Grid.Column="1"
                                         materialDesign:HintAssist.Hint="Gender"
+                                        FontSize="20"
                                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                         Text="{Binding Employee.Gender, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                         ToolTip="{Binding Employee.ErrorCollection[Gender]}">
@@ -445,13 +462,13 @@
 
                                 </Grid>
                                 <TextBox
-                                    FontSize="20"
                                     materialDesign:HintAssist.Hint="Address"
+                                    FontSize="20"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     Text="{Binding Employee.Address, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                 <TextBox
-                                    FontSize="24"
                                     materialDesign:HintAssist.Hint="Contact Number"
+                                    FontSize="24"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     Text="{Binding Employee.ContactNumber, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                 <Grid>
@@ -463,36 +480,36 @@
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <ComboBox
-                                        FontSize="24"
                                         Grid.Column="0"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Job Position"
                                         DisplayMemberPath="Name"
+                                        FontSize="24"
                                         IsEditable="False"
                                         ItemsSource="{Binding EmployeeTypes}"
                                         SelectedItem="{Binding Employee.EmployeeType, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                         Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                                     <TextBox
-                                        FontSize="24"
                                         Grid.Column="1"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Salary Rate(Per hour)"
+                                        FontSize="24"
                                         PreviewTextInput="NumberValidation"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.HourlyRate, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                     <TextBox
-                                        FontSize="24"
                                         Grid.Column="2"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Daily Required Hours"
+                                        FontSize="24"
                                         PreviewTextInput="NumberValidation"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.DailyRequiredHours, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                     <ComboBox
-                                        FontSize="24"
                                         Grid.Column="3"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Required Days A Week"
+                                        FontSize="24"
                                         SelectedIndex="{Binding Employee.RequiredDaysAWeek, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                         Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                                         <ComboBoxItem Visibility="Collapsed" />
@@ -505,9 +522,9 @@
 
                                     </ComboBox>
                                     <TextBox
-                                        FontSize="24"
                                         Grid.Column="4"
                                         materialDesign:HintAssist.Hint="Monthly Salary (Read Only)"
+                                        FontSize="24"
                                         IsReadOnly="True"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.MonthlySalary, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
@@ -520,35 +537,35 @@
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <TextBox
-                                        FontSize="24"
                                         Grid.Column="0"
                                         materialDesign:HintAssist.Hint="Available Leaves"
+                                        FontSize="24"
                                         PreviewTextInput="NumberValidation"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.AvailableLeaves, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                     <ComboBox
-                                        FontSize="24"
                                         Grid.Column="1"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Branch Assigned"
                                         DisplayMemberPath="Name"
+                                        FontSize="24"
                                         IsEditable="False"
                                         ItemsSource="{Binding Branches}"
                                         SelectedItem="{Binding Employee.Branch, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                         Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                                     <ComboBox
-                                        FontSize="24"
                                         Grid.Column="2"
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Payroll Group"
                                         DisplayMemberPath="Name"
+                                        FontSize="24"
                                         ItemsSource="{Binding PayrollGroups}"
                                         SelectedItem="{Binding Employee.PayrollGroup, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
                                         Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                                     <ComboBox
-                                        FontSize="24"
                                         Grid.Column="3"
                                         materialDesign:HintAssist.Hint="Employment Status"
+                                        FontSize="24"
                                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                                         Text="{Binding Employee.Status, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}">
                                         <ComboBoxItem Content="Active" />
@@ -560,27 +577,30 @@
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBox
-                                        FontSize="24"
                                         Width="150"
                                         materialDesign:HintAssist.Hint="SSS Id"
+                                        FontSize="24"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.SSSID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
-                                    <CheckBox FontSize="24" Margin="0,20,0,0" IsChecked="{Binding Employee.IsSSSActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                                    <CheckBox
+                                        Margin="0,20,0,0"
+                                        FontSize="24"
+                                        IsChecked="{Binding Employee.IsSSSActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                                         Active
                                     </CheckBox>
                                 </StackPanel>
                                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                                     <TextBox
-                                        FontSize="24"
                                         Width="150"
                                         Margin="25,0,0,0"
                                         materialDesign:HintAssist.Hint="Pagibig Id"
+                                        FontSize="24"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.PagIbigID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                     <CheckBox
-                                        FontSize="24"
                                         Grid.Column="1"
                                         Margin="0,20,0,0"
+                                        FontSize="24"
                                         IsChecked="{Binding Employee.IsPagibigActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                                         Active
                                     </CheckBox>
@@ -589,9 +609,9 @@
                             <StackPanel Orientation="Horizontal">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBox
-                                        FontSize="24"
                                         Width="150"
                                         materialDesign:HintAssist.Hint="Philhealth Id"
+                                        FontSize="24"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.PhilhealthID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                     <CheckBox Margin="0,20,0,0" IsChecked="{Binding Employee.IsPhilhealthActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
@@ -600,13 +620,16 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBox
-                                        FontSize="24"
                                         Width="150"
                                         Margin="25,0,0,0"
                                         materialDesign:HintAssist.Hint="TIN Id"
+                                        FontSize="24"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.TINID, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
-                                    <CheckBox FontSize="24" Margin="0,20,0,0" IsChecked="{Binding Employee.IsIncomeTaxActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                                    <CheckBox
+                                        Margin="0,20,0,0"
+                                        FontSize="24"
+                                        IsChecked="{Binding Employee.IsIncomeTaxActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
                                         Active
                                     </CheckBox>
                                 </StackPanel>
@@ -616,11 +639,17 @@
                                 HorizontalAlignment="Center"
                                 Orientation="Horizontal">
                                 <Button
-                                    FontSize="24"
+                                    Height="54"
                                     Click="btn_updateEmployee_Click"
                                     Content="Update"
-                                    IsEnabled="{Binding Employee.IsValidationPassed, UpdateSourceTrigger=PropertyChanged}" Height="54" />
-                                <Button FontSize="24" Click="btn_cancelUpdate_Click" Content="Cancel" Height="54" Width="119" />
+                                    FontSize="24"
+                                    IsEnabled="{Binding Employee.IsValidationPassed, UpdateSourceTrigger=PropertyChanged}" />
+                                <Button
+                                    Width="119"
+                                    Height="54"
+                                    Click="btn_cancelUpdate_Click"
+                                    Content="Cancel"
+                                    FontSize="24" />
                             </StackPanel>
 
 
