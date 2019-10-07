@@ -12,7 +12,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.2.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -61,6 +61,17 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Properties {
         public string CJLSFOODSPAYROLLConnectionString3 {
             get {
                 return ((string)(this["CJLSFOODSPAYROLLConnectionString3"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-G3UC9K4;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=" +
+            "True")]
+        public string CJLSFOODSPAYROLLConnectionString4 {
+            get {
+                return ((string)(this["CJLSFOODSPAYROLLConnectionString4"]));
             }
         }
     }

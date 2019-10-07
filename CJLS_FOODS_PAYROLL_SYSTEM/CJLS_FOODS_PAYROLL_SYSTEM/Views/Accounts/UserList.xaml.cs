@@ -27,6 +27,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts
         {
             InitializeComponent();
             VM = (View_Models.UserAdminViewModel)DataContext;
+            VM.Instantiate();
         }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
