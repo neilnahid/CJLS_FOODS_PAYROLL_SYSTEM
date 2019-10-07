@@ -33,9 +33,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void InsertAttendance(Attendance instance);
     partial void UpdateAttendance(Attendance instance);
     partial void DeleteAttendance(Attendance instance);
-    partial void InsertUser(User instance);
-    partial void UpdateUser(User instance);
-    partial void DeleteUser(User instance);
+    partial void InsertPayrollGroup(PayrollGroup instance);
+    partial void UpdatePayrollGroup(PayrollGroup instance);
+    partial void DeletePayrollGroup(PayrollGroup instance);
     partial void InsertBranch(Branch instance);
     partial void UpdateBranch(Branch instance);
     partial void DeleteBranch(Branch instance);
@@ -72,9 +72,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void InsertPayrollDetail(PayrollDetail instance);
     partial void UpdatePayrollDetail(PayrollDetail instance);
     partial void DeletePayrollDetail(PayrollDetail instance);
-    partial void InsertPayrollGroup(PayrollGroup instance);
-    partial void UpdatePayrollGroup(PayrollGroup instance);
-    partial void DeletePayrollGroup(PayrollGroup instance);
+    partial void InsertUser(User instance);
+    partial void UpdateUser(User instance);
+    partial void DeleteUser(User instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -115,11 +115,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		public System.Data.Linq.Table<User> Users
+		public System.Data.Linq.Table<PayrollGroup> PayrollGroups
 		{
 			get
 			{
-				return this.GetTable<User>();
+				return this.GetTable<PayrollGroup>();
 			}
 		}
 		
@@ -219,11 +219,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		public System.Data.Linq.Table<PayrollGroup> PayrollGroups
+		public System.Data.Linq.Table<User> Users
 		{
 			get
 			{
-				return this.GetTable<PayrollGroup>();
+				return this.GetTable<User>();
 			}
 		}
 	}
@@ -250,6 +250,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private System.Nullable<double> _OvertimePay;
 		
+		private System.Nullable<double> _Total;
+		
 		private EntitySet<Deduction> _Deductions;
 		
 		private EntityRef<PayrollDetail> _PayrollDetail;
@@ -274,6 +276,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void OnRegularPayChanged();
     partial void OnOvertimePayChanging(System.Nullable<double> value);
     partial void OnOvertimePayChanged();
+    partial void OnTotalChanging(System.Nullable<double> value);
+    partial void OnTotalChanged();
     #endregion
 		
 		public Attendance()
@@ -447,6 +451,26 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Total", AutoSync=AutoSync.Always, DbType="Float", IsDbGenerated=true, UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<double> Total
+		{
+			get
+			{
+				return this._Total;
+			}
+			set
+			{
+				if ((this._Total != value))
+				{
+					this.OnTotalChanging(value);
+					this.SendPropertyChanging();
+					this._Total = value;
+					this.SendPropertyChanged("Total");
+					this.OnTotalChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Attendance_Deduction", Storage="_Deductions", ThisKey="AttendanceID", OtherKey="AttendanceID")]
 		public EntitySet<Deduction> Deductions
 		{
@@ -527,212 +551,124 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
-	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PayrollGroup")]
+	public partial class PayrollGroup : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _UserId;
+		private int _PayrollGroupID;
 		
-		private string _FullName;
+		private string _Name;
 		
-		private string _Username;
+		private int _NumberOfDays;
 		
-		private string _Password;
+		private EntitySet<Employee> _Employees;
 		
-		private string _SecretQuestion;
-		
-		private string _SecretAnswer;
-		
-		private string _UserType;
-		
-		private string _Status;
+		private EntitySet<Payroll> _Payrolls;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnUserIdChanging(int value);
-    partial void OnUserIdChanged();
-    partial void OnFullNameChanging(string value);
-    partial void OnFullNameChanged();
-    partial void OnUsernameChanging(string value);
-    partial void OnUsernameChanged();
-    partial void OnPasswordChanging(string value);
-    partial void OnPasswordChanged();
-    partial void OnSecretQuestionChanging(string value);
-    partial void OnSecretQuestionChanged();
-    partial void OnSecretAnswerChanging(string value);
-    partial void OnSecretAnswerChanged();
-    partial void OnUserTypeChanging(string value);
-    partial void OnUserTypeChanged();
-    partial void OnStatusChanging(string value);
-    partial void OnStatusChanged();
+    partial void OnPayrollGroupIDChanging(int value);
+    partial void OnPayrollGroupIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnNumberOfDaysChanging(int value);
+    partial void OnNumberOfDaysChanged();
     #endregion
 		
-		public User()
+		public PayrollGroup()
 		{
+			this._Employees = new EntitySet<Employee>(new Action<Employee>(this.attach_Employees), new Action<Employee>(this.detach_Employees));
+			this._Payrolls = new EntitySet<Payroll>(new Action<Payroll>(this.attach_Payrolls), new Action<Payroll>(this.detach_Payrolls));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int UserId
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayrollGroupID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int PayrollGroupID
 		{
 			get
 			{
-				return this._UserId;
+				return this._PayrollGroupID;
 			}
 			set
 			{
-				if ((this._UserId != value))
+				if ((this._PayrollGroupID != value))
 				{
-					this.OnUserIdChanging(value);
+					this.OnPayrollGroupIDChanging(value);
 					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
+					this._PayrollGroupID = value;
+					this.SendPropertyChanged("PayrollGroupID");
+					this.OnPayrollGroupIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="VarChar(50)")]
-		public string FullName
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
 		{
 			get
 			{
-				return this._FullName;
+				return this._Name;
 			}
 			set
 			{
-				if ((this._FullName != value))
+				if ((this._Name != value))
 				{
-					this.OnFullNameChanging(value);
+					this.OnNameChanging(value);
 					this.SendPropertyChanging();
-					this._FullName = value;
-					this.SendPropertyChanged("FullName");
-					this.OnFullNameChanged();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(50)")]
-		public string Username
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberOfDays", DbType="Int NOT NULL")]
+		public int NumberOfDays
 		{
 			get
 			{
-				return this._Username;
+				return this._NumberOfDays;
 			}
 			set
 			{
-				if ((this._Username != value))
+				if ((this._NumberOfDays != value))
 				{
-					this.OnUsernameChanging(value);
+					this.OnNumberOfDaysChanging(value);
 					this.SendPropertyChanging();
-					this._Username = value;
-					this.SendPropertyChanged("Username");
-					this.OnUsernameChanged();
+					this._NumberOfDays = value;
+					this.SendPropertyChanged("NumberOfDays");
+					this.OnNumberOfDaysChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(50)")]
-		public string Password
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollGroup_Employee", Storage="_Employees", ThisKey="PayrollGroupID", OtherKey="PayrollGroupID")]
+		public EntitySet<Employee> Employees
 		{
 			get
 			{
-				return this._Password;
+				return this._Employees;
 			}
 			set
 			{
-				if ((this._Password != value))
-				{
-					this.OnPasswordChanging(value);
-					this.SendPropertyChanging();
-					this._Password = value;
-					this.SendPropertyChanged("Password");
-					this.OnPasswordChanged();
-				}
+				this._Employees.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SecretQuestion", DbType="VarChar(50)")]
-		public string SecretQuestion
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollGroup_Payroll", Storage="_Payrolls", ThisKey="PayrollGroupID", OtherKey="PayrollGroupID")]
+		public EntitySet<Payroll> Payrolls
 		{
 			get
 			{
-				return this._SecretQuestion;
+				return this._Payrolls;
 			}
 			set
 			{
-				if ((this._SecretQuestion != value))
-				{
-					this.OnSecretQuestionChanging(value);
-					this.SendPropertyChanging();
-					this._SecretQuestion = value;
-					this.SendPropertyChanged("SecretQuestion");
-					this.OnSecretQuestionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SecretAnswer", DbType="VarChar(50)")]
-		public string SecretAnswer
-		{
-			get
-			{
-				return this._SecretAnswer;
-			}
-			set
-			{
-				if ((this._SecretAnswer != value))
-				{
-					this.OnSecretAnswerChanging(value);
-					this.SendPropertyChanging();
-					this._SecretAnswer = value;
-					this.SendPropertyChanged("SecretAnswer");
-					this.OnSecretAnswerChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserType", DbType="VarChar(50)")]
-		public string UserType
-		{
-			get
-			{
-				return this._UserType;
-			}
-			set
-			{
-				if ((this._UserType != value))
-				{
-					this.OnUserTypeChanging(value);
-					this.SendPropertyChanging();
-					this._UserType = value;
-					this.SendPropertyChanged("UserType");
-					this.OnUserTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50)")]
-		public string Status
-		{
-			get
-			{
-				return this._Status;
-			}
-			set
-			{
-				if ((this._Status != value))
-				{
-					this.OnStatusChanging(value);
-					this.SendPropertyChanging();
-					this._Status = value;
-					this.SendPropertyChanged("Status");
-					this.OnStatusChanged();
-				}
+				this._Payrolls.Assign(value);
 			}
 		}
 		
@@ -754,6 +690,30 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Employees(Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.PayrollGroup = this;
+		}
+		
+		private void detach_Employees(Employee entity)
+		{
+			this.SendPropertyChanging();
+			entity.PayrollGroup = null;
+		}
+		
+		private void attach_Payrolls(Payroll entity)
+		{
+			this.SendPropertyChanging();
+			entity.PayrollGroup = this;
+		}
+		
+		private void detach_Payrolls(Payroll entity)
+		{
+			this.SendPropertyChanging();
+			entity.PayrollGroup = null;
 		}
 	}
 	
@@ -1677,9 +1637,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		
 		private EntityRef<Branch> _Branch;
 		
-		private EntityRef<EmployeeType> _EmployeeType;
-		
 		private EntityRef<PayrollGroup> _PayrollGroup;
+		
+		private EntityRef<EmployeeType> _EmployeeType;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1753,8 +1713,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			this._Loans = new EntitySet<Loan>(new Action<Loan>(this.attach_Loans), new Action<Loan>(this.detach_Loans));
 			this._PayrollDetails = new EntitySet<PayrollDetail>(new Action<PayrollDetail>(this.attach_PayrollDetails), new Action<PayrollDetail>(this.detach_PayrollDetails));
 			this._Branch = default(EntityRef<Branch>);
-			this._EmployeeType = default(EntityRef<EmployeeType>);
 			this._PayrollGroup = default(EntityRef<PayrollGroup>);
+			this._EmployeeType = default(EntityRef<EmployeeType>);
 			OnCreated();
 		}
 		
@@ -2443,40 +2403,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EmployeeType_Employee", Storage="_EmployeeType", ThisKey="EmployeeTypeID", OtherKey="EmployeeTypeID", IsForeignKey=true)]
-		public EmployeeType EmployeeType
-		{
-			get
-			{
-				return this._EmployeeType.Entity;
-			}
-			set
-			{
-				EmployeeType previousValue = this._EmployeeType.Entity;
-				if (((previousValue != value) 
-							|| (this._EmployeeType.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._EmployeeType.Entity = null;
-						previousValue.Employees.Remove(this);
-					}
-					this._EmployeeType.Entity = value;
-					if ((value != null))
-					{
-						value.Employees.Add(this);
-						this._EmployeeTypeID = value.EmployeeTypeID;
-					}
-					else
-					{
-						this._EmployeeTypeID = default(int);
-					}
-					this.SendPropertyChanged("EmployeeType");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollGroup_Employee", Storage="_PayrollGroup", ThisKey="PayrollGroupID", OtherKey="PayrollGroupID", IsForeignKey=true)]
 		public PayrollGroup PayrollGroup
 		{
@@ -2507,6 +2433,40 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 						this._PayrollGroupID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("PayrollGroup");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="EmployeeType_Employee", Storage="_EmployeeType", ThisKey="EmployeeTypeID", OtherKey="EmployeeTypeID", IsForeignKey=true)]
+		public EmployeeType EmployeeType
+		{
+			get
+			{
+				return this._EmployeeType.Entity;
+			}
+			set
+			{
+				EmployeeType previousValue = this._EmployeeType.Entity;
+				if (((previousValue != value) 
+							|| (this._EmployeeType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._EmployeeType.Entity = null;
+						previousValue.Employees.Remove(this);
+					}
+					this._EmployeeType.Entity = value;
+					if ((value != null))
+					{
+						value.Employees.Add(this);
+						this._EmployeeTypeID = value.EmployeeTypeID;
+					}
+					else
+					{
+						this._EmployeeTypeID = default(int);
+					}
+					this.SendPropertyChanged("EmployeeType");
 				}
 			}
 		}
@@ -4139,124 +4099,212 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.PayrollGroup")]
-	public partial class PayrollGroup : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Users")]
+	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _PayrollGroupID;
+		private int _UserId;
 		
-		private string _Name;
+		private string _FullName;
 		
-		private int _NumberOfDays;
+		private string _Username;
 		
-		private EntitySet<Employee> _Employees;
+		private string _Password;
 		
-		private EntitySet<Payroll> _Payrolls;
+		private string _SecretQuestion;
+		
+		private string _SecretAnswer;
+		
+		private string _UserType;
+		
+		private string _Status;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnPayrollGroupIDChanging(int value);
-    partial void OnPayrollGroupIDChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
-    partial void OnNumberOfDaysChanging(int value);
-    partial void OnNumberOfDaysChanged();
+    partial void OnUserIdChanging(int value);
+    partial void OnUserIdChanged();
+    partial void OnFullNameChanging(string value);
+    partial void OnFullNameChanged();
+    partial void OnUsernameChanging(string value);
+    partial void OnUsernameChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnSecretQuestionChanging(string value);
+    partial void OnSecretQuestionChanged();
+    partial void OnSecretAnswerChanging(string value);
+    partial void OnSecretAnswerChanged();
+    partial void OnUserTypeChanging(string value);
+    partial void OnUserTypeChanged();
+    partial void OnStatusChanging(string value);
+    partial void OnStatusChanged();
     #endregion
 		
-		public PayrollGroup()
+		public User()
 		{
-			this._Employees = new EntitySet<Employee>(new Action<Employee>(this.attach_Employees), new Action<Employee>(this.detach_Employees));
-			this._Payrolls = new EntitySet<Payroll>(new Action<Payroll>(this.attach_Payrolls), new Action<Payroll>(this.detach_Payrolls));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PayrollGroupID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int PayrollGroupID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int UserId
 		{
 			get
 			{
-				return this._PayrollGroupID;
+				return this._UserId;
 			}
 			set
 			{
-				if ((this._PayrollGroupID != value))
+				if ((this._UserId != value))
 				{
-					this.OnPayrollGroupIDChanging(value);
+					this.OnUserIdChanging(value);
 					this.SendPropertyChanging();
-					this._PayrollGroupID = value;
-					this.SendPropertyChanged("PayrollGroupID");
-					this.OnPayrollGroupIDChanged();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string Name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FullName", DbType="VarChar(50)")]
+		public string FullName
 		{
 			get
 			{
-				return this._Name;
+				return this._FullName;
 			}
 			set
 			{
-				if ((this._Name != value))
+				if ((this._FullName != value))
 				{
-					this.OnNameChanging(value);
+					this.OnFullNameChanging(value);
 					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
+					this._FullName = value;
+					this.SendPropertyChanged("FullName");
+					this.OnFullNameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumberOfDays", DbType="Int NOT NULL")]
-		public int NumberOfDays
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Username", DbType="VarChar(50)")]
+		public string Username
 		{
 			get
 			{
-				return this._NumberOfDays;
+				return this._Username;
 			}
 			set
 			{
-				if ((this._NumberOfDays != value))
+				if ((this._Username != value))
 				{
-					this.OnNumberOfDaysChanging(value);
+					this.OnUsernameChanging(value);
 					this.SendPropertyChanging();
-					this._NumberOfDays = value;
-					this.SendPropertyChanged("NumberOfDays");
-					this.OnNumberOfDaysChanged();
+					this._Username = value;
+					this.SendPropertyChanged("Username");
+					this.OnUsernameChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollGroup_Employee", Storage="_Employees", ThisKey="PayrollGroupID", OtherKey="PayrollGroupID")]
-		public EntitySet<Employee> Employees
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="VarChar(50)")]
+		public string Password
 		{
 			get
 			{
-				return this._Employees;
+				return this._Password;
 			}
 			set
 			{
-				this._Employees.Assign(value);
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="PayrollGroup_Payroll", Storage="_Payrolls", ThisKey="PayrollGroupID", OtherKey="PayrollGroupID")]
-		public EntitySet<Payroll> Payrolls
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SecretQuestion", DbType="VarChar(50)")]
+		public string SecretQuestion
 		{
 			get
 			{
-				return this._Payrolls;
+				return this._SecretQuestion;
 			}
 			set
 			{
-				this._Payrolls.Assign(value);
+				if ((this._SecretQuestion != value))
+				{
+					this.OnSecretQuestionChanging(value);
+					this.SendPropertyChanging();
+					this._SecretQuestion = value;
+					this.SendPropertyChanged("SecretQuestion");
+					this.OnSecretQuestionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SecretAnswer", DbType="VarChar(50)")]
+		public string SecretAnswer
+		{
+			get
+			{
+				return this._SecretAnswer;
+			}
+			set
+			{
+				if ((this._SecretAnswer != value))
+				{
+					this.OnSecretAnswerChanging(value);
+					this.SendPropertyChanging();
+					this._SecretAnswer = value;
+					this.SendPropertyChanged("SecretAnswer");
+					this.OnSecretAnswerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserType", DbType="VarChar(50)")]
+		public string UserType
+		{
+			get
+			{
+				return this._UserType;
+			}
+			set
+			{
+				if ((this._UserType != value))
+				{
+					this.OnUserTypeChanging(value);
+					this.SendPropertyChanging();
+					this._UserType = value;
+					this.SendPropertyChanged("UserType");
+					this.OnUserTypeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(50)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this.OnStatusChanging(value);
+					this.SendPropertyChanging();
+					this._Status = value;
+					this.SendPropertyChanged("Status");
+					this.OnStatusChanged();
+				}
 			}
 		}
 		
@@ -4278,30 +4326,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Employees(Employee entity)
-		{
-			this.SendPropertyChanging();
-			entity.PayrollGroup = this;
-		}
-		
-		private void detach_Employees(Employee entity)
-		{
-			this.SendPropertyChanging();
-			entity.PayrollGroup = null;
-		}
-		
-		private void attach_Payrolls(Payroll entity)
-		{
-			this.SendPropertyChanging();
-			entity.PayrollGroup = this;
-		}
-		
-		private void detach_Payrolls(Payroll entity)
-		{
-			this.SendPropertyChanging();
-			entity.PayrollGroup = null;
 		}
 	}
 }

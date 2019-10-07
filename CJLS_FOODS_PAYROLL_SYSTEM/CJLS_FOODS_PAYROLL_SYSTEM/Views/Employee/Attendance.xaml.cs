@@ -94,11 +94,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             VM.BPContributionsPanel = Visibility.Collapsed;
             VM.BPLoanCashAdvancePanel = Visibility.Collapsed;
             VM.BPTDaytoDayPanel = Visibility.Collapsed;
+            VM.BPGrossPayPanel = Visibility.Collapsed;
             switch (btn.Tag)
             {
                 case "DaytoDay": VM.BPTDaytoDayPanel = Visibility.Visible; break;
                 case "Loans/Cash Advance": VM.BPLoanCashAdvancePanel = Visibility.Visible; break;
                 case "Contributions": VM.BPContributionsPanel = Visibility.Visible; break;
+                case "GrossPay": VM.BPGrossPayPanel = Visibility.Visible; break;
             }
         }
 
@@ -123,6 +125,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 var colIndex = DataGridCalendar.CurrentCell.Column.DisplayIndex;
                 VM.Attendance = VM.SelectedWeek.Days[colIndex];
             }
+            if(VM.Attendance != null)
             grpbox_attendanceDetails.IsEnabled = VM.Attendance.AttendanceDate.HasValue ? true : false;
         }
 

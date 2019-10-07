@@ -65,6 +65,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public Visibility BPTDaytoDayPanel { get; set; }
         public Visibility BPLoanCashAdvancePanel { get; set; }
         public Visibility BPContributionsPanel { get; set; }
+        public Visibility BPGrossPayPanel { get; set; }
         #endregion
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -223,9 +224,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public void populateBreakdownItems()
         {
             BreakdownItems = new List<BreakdownItem>();
-            BreakdownItems.Add(new BreakdownItem { Name = "DaytoDay", Amount = getDaytoDayDeductionAmount() });
-            BreakdownItems.Add(new BreakdownItem { Name = "Loans/Cash Advance", Amount = Math.Round((from lp in PayrollDetail.LoanPayments select lp.AmountPaid).Sum().Value,2) });
-            BreakdownItems.Add(new BreakdownItem { Name = "Contributions", Amount = getContributionsAmount() });
+            BreakdownItems.Add(new BreakdownItem { Name = "DaytoDay Deductions", Amount = getDaytoDayDeductionAmount() });
+            BreakdownItems.Add(new BreakdownItem { Name = "Loans/Cash Advance Deductions", Amount = Math.Round((from lp in PayrollDetail.LoanPayments select lp.AmountPaid).Sum().Value,2) });
+            BreakdownItems.Add(new BreakdownItem { Name = "Contributions Deductions", Amount = getContributionsAmount() });
+            BreakdownItems.Add(new BreakdownItem { Name = "GrossPay", Amount = Math.Round((from a in PayrollDetail.Attendances select a.Total).Sum().Value, 2) });
         }
         public void getAllDeducions()
         {

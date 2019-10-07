@@ -61,6 +61,22 @@
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
+                            <StackPanel x:Name="GrossPay" Visibility="{Binding BPGrossPayPanel}">
+                                <DataGrid
+                                    AutoGenerateColumns="False"
+                                    IsReadOnly="True"
+                                    ItemsSource="{Binding PayrollDetail.Attendances, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Binding="{Binding AttendanceDate, StringFormat=d}" Header="Date" />
+                                        <DataGridTextColumn Binding="{Binding PayrollDetail.Employee.HourlyRate}" Header="Hourly rate" />
+                                        <DataGridTextColumn Binding="{Binding RegularHoursWorked}" Header="Regular Hours" />
+                                        <DataGridTextColumn Binding="{Binding RegularPay}" Header="Regular Pay" />
+                                        <DataGridTextColumn Binding="{Binding OverTimeHoursWorked}" Header="Regular Pay" />
+                                        <DataGridTextColumn Binding="{Binding DayType}" Header="Day type" />
+                                        <DataGridTextColumn Binding="{Binding Total}" Header="Total" />
+                                    </DataGrid.Columns>                       
+                                </DataGrid>
+                            </StackPanel>
                             <Button
                                 Command="materialDesign:DialogHost.CloseDialogCommand"
                                 IsCancel="True"
@@ -107,7 +123,7 @@
                             Margin="50"
                             Visibility="{Binding BreakdownPanel}">
                             <Grid>
-                                <GroupBox Header="Deductions">
+                                <GroupBox Header="Breakdowns">
                                     <DataGrid
                                         AutoGenerateColumns="False"
                                         CanUserAddRows="False"

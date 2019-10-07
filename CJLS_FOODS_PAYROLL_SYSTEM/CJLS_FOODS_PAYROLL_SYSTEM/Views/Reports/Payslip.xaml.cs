@@ -23,12 +23,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Reports
     public partial class Payslip : Window
     {
         View_Models.PayslipViewModel VM;
+        List<PayrollDetail> PayrollDetails;
         public Payslip(List<PayrollDetail> payrollDetails)
         {
             InitializeComponent();
-            VM = (View_Models.PayslipViewModel)DataContext;
-            VM.Instantiate(payrollDetails);
-            populateFlowDocuments();
+            PayrollDetails = payrollDetails;
         }
 
         private void btn_printPayslip_Click(object sender, RoutedEventArgs e)
@@ -36,7 +35,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Reports
             VM.PrintPaySlip(fd_Payslip);
             this.Close();
         }
-        private void populateFlowDocuments()    
+        private void populateFlowDocuments()
         {
             foreach (var payslip in VM.Payslips)
             {
@@ -62,7 +61,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Reports
             mgr.XamlWriterMode = XamlWriterMode.Expression;
             // THERE WERE MAGIC!!!
 
-            XamlWriter.Save(block, mgr); 
+            XamlWriter.Save(block, mgr);
 
             StringReader stringReader = new StringReader(sb.ToString());
             XmlReader xmlReader = XmlReader.Create(stringReader);
@@ -78,9 +77,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Reports
             ((Label)payslipContainer.FindName("GrossPay")).Content = payslip.PayrollDetail.GrossPay.ToString();
             ((Label)payslipContainer.FindName("RegularPay")).Content = payslip.PayrollDetail.RegularPay.ToString();
             ((Label)payslipContainer.FindName("OvertimePay")).Content = payslip.PayrollDetail.OvertimePay.ToString();
-            ((Run)payslipContainer.FindName("NetPay")).Text= payslip.PayrollDetail.NetPay.ToString();
-            var dataGrid = (DataGrid)payslipContainer.FindName("DataGrid");
-            dataGrid.ItemsSource = payslip.PayrollDeductions;
+            ((Run)payslipContainer.FindName("NetPay")).Text = payslip.PayrollDetail.NetPay.ToString();
+            ((DataGrid)payslipContainer.FindName("DataGrid")).ItemsSource = payslip.PayrollDeductions;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            VM = (View_Models.PayslipViewModel)DataContext;
+            VM.Instantiate(PayrollDetails);
+            populateFlowDocuments();
         }
     }
 
