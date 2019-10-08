@@ -74,5 +74,15 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Properties {
                 return ((string)(this["CJLSFOODSPAYROLLConnectionString4"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=NEIL;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True")]
+        public string CJLSFOODSPAYROLLConnectionString5 {
+            get {
+                return ((string)(this["CJLSFOODSPAYROLLConnectionString5"]));
+            }
+        }
     }
 }

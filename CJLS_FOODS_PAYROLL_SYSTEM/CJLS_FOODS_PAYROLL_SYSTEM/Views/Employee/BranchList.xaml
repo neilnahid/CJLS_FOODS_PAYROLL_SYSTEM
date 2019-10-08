@@ -67,7 +67,7 @@
             <StackPanel Grid.Row="0">
                 <GroupBox FontSize="24" Header="Branches">
                     <StackPanel>
-                        <TextBox
+                         <TextBox
                             materialDesign:HintAssist.Hint="Search"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Search, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"

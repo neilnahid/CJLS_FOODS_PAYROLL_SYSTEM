@@ -55,6 +55,7 @@
                             <TreeViewItem FontSize="28" Header="Employee Groups" />
                             <TreeViewItem FontSize="28" Header="Job Positions" />
                             <TreeViewItem FontSize="28" Header="Branches" />
+                            <TreeViewItem FontSize="28" Header="Contributions" />
                             <TreeViewItem
                                 x:Name="tvi_users"
                                 FontSize="28"

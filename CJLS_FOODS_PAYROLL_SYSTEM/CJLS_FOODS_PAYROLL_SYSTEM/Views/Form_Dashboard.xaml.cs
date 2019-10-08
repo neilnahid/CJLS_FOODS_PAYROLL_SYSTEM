@@ -105,6 +105,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
                 Frame.Content = new Views.Accounts.AccountSettings();
                 Title.Text = "User Account Settings";
             }
+            else if (tvi.Header.ToString() == "Contributions")
+            {
+                draweHost.IsLeftDrawerOpen = false;
+                Frame.Content = new Views.Employee.ContributionsView();
+                Title.Text = "Contributions";
+            }
             else if (tvi.Header.ToString() == "Logout")
             {
                 new Views.Login_Form().Show();

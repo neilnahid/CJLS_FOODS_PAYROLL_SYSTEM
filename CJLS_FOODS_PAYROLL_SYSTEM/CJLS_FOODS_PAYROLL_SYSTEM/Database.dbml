@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CJLSFOODSPAYROLL" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-G3UC9K4;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True" SettingsObjectName="CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings" SettingsPropertyName="CJLSFOODSPAYROLLConnectionString4" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=NEIL;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True" SettingsObjectName="CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings" SettingsPropertyName="CJLSFOODSPAYROLLConnectionString5" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Attendance" Member="Attendances">
     <Type Name="Attendance">
       <Column Name="AttendanceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

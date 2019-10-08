@@ -125,11 +125,13 @@
     <Compile Include="Model\EmployeeType.cs" />
     <Compile Include="Model\Loan.cs" />
     <Compile Include="Model\Payroll.cs" />
+    <Compile Include="Model\PayrollDetail.cs" />
     <Compile Include="Model\PayrollGroup.cs" />
     <Compile Include="Model\PayrollRange.cs" />
     <Compile Include="Model\Week.cs" />
     <Compile Include="View Models\AttendanceViewModel.cs" />
     <Compile Include="View Models\BranchViewModel.cs" />
+    <Compile Include="View Models\ContributionsViewModel.cs" />
     <Compile Include="View Models\EmployeeTypeViewModel.cs" />
     <Compile Include="View Models\ForgotPassordViewModel.cs" />
     <Compile Include="View Models\HomeViewModel.cs" />
@@ -156,6 +158,9 @@
     </Compile>
     <Compile Include="Views\Employee\BranchList.xaml.cs">
       <DependentUpon>BranchList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Employee\ContributionsView.xaml.cs">
+      <DependentUpon>ContributionsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Employee\EmployeeList.xaml.cs">
       <DependentUpon>EmployeeList.xaml</DependentUpon>
@@ -188,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Employee\BranchList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Employee\ContributionsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

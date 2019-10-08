@@ -1,0 +1,87 @@
+﻿<Page
+    x:Class="CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee.ContributionsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:VM="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.View_Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ContributionsView"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
+    <Page.DataContext>
+        <VM:ContributionsViewModel />
+    </Page.DataContext>
+    <Grid>
+        <StackPanel>
+            <TextBox
+                materialDesign:HintAssist.Hint="Search"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                Text="{Binding Search, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                TextChanged="TextBox_TextChanged" />
+            <StackPanel Orientation="Horizontal">
+                <DataGrid
+                    AutoGenerateColumns="False"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding Employees}"
+                    SelectedItem="{Binding Employee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    SelectionChanged="DataGrid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Emp_ID}" Header="EmployeeID" />
+                        <DataGridTextColumn Binding="{Binding FullName}" Header="Fullname" />
+                        <DataGridTextColumn Binding="{Binding EmployeeType.Name}" Header="Job Position" />
+                    </DataGrid.Columns>
+                </DataGrid>
+                <DataGrid
+                    Margin="100,0,0,0"
+                    AutoGenerateColumns="False"
+                    IsReadOnly="True"
+                    ItemsSource="{Binding Employee.PayrollDetails}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn Header="Payroll Range">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock>
+                                        <Run Text="{Binding Payroll.StartDate, StringFormat=d}" />
+                                        <Run Text=" - " />
+                                        <Run Text="{Binding Payroll.EndDate, StringFormat=d}" />
+                                    </TextBlock>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTextColumn Binding="{Binding SSSTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="SSS" />
+                        <DataGridTextColumn Binding="{Binding PagibigTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Pagibig" />
+                        <DataGridTextColumn Binding="{Binding TaxTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Tax" />
+                        <DataGridTextColumn Binding="{Binding PhilhealthTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Philhealth" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Button
+                    materialDesign:HintAssist.Hint="Previous Page"
+                    Click="btn_previousPage_Click"
+                    IsEnabled="{Binding CanGoToPrevious, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                    ToolTip="MaterialDesignFloatingActionMiniAccentButton">
+                    <materialDesign:PackIcon
+                        Width="24"
+                        Height="24"
+                        Kind="ArrowLeft" />
+                </Button>
+                <Button
+                    Margin="25,0,0,0"
+                    materialDesign:HintAssist.Hint="Next Page"
+                    Click="btn_nextPage_Click"
+                    IsEnabled="{Binding CanGoToNext, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                    ToolTip="MaterialDesignFloatingActionMiniAccentButton">
+                    <materialDesign:PackIcon
+                        Width="24"
+                        Height="24"
+                        Kind="ArrowRight" />
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>
