@@ -13,5 +13,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
         public double? PhilhealthTotal { get { return (from c in Contributions where c.ContributionType.Name == "PhilHealth" select c.Amount).FirstOrDefault(); } }
         public double? PagibigTotal { get { return (from c in Contributions where c.ContributionType.Name == "Pagibig" select c.Amount).FirstOrDefault(); } }
         public double? TaxTotal { get { return (from c in Contributions where c.ContributionType.Name == "Tax" select c.Amount).FirstOrDefault(); } }
+
     }
 }

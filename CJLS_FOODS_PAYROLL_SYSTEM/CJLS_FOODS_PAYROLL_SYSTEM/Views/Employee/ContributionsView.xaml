@@ -34,7 +34,6 @@
                     </DataGrid.Columns>
                 </DataGrid>
                 <DataGrid
-                    Margin="100,0,0,0"
                     AutoGenerateColumns="False"
                     IsReadOnly="True"
                     ItemsSource="{Binding Employee.PayrollDetails}">
