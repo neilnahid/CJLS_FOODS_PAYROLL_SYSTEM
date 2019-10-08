@@ -13,7 +13,7 @@
     <Page.DataContext>
         <VM:ContributionsViewModel />
     </Page.DataContext>
-    <Grid>
+    <StackPanel Orientation="Horizontal">
         <StackPanel>
             <TextBox
                 materialDesign:HintAssist.Hint="Search"
@@ -23,6 +23,7 @@
             <StackPanel Orientation="Horizontal">
                 <DataGrid
                     AutoGenerateColumns="False"
+                    FontSize="24"
                     IsReadOnly="True"
                     ItemsSource="{Binding Employees}"
                     SelectedItem="{Binding Employee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -35,6 +36,7 @@
                 </DataGrid>
                 <DataGrid
                     AutoGenerateColumns="False"
+                    FontSize="24"
                     IsReadOnly="True"
                     ItemsSource="{Binding Employee.PayrollDetails}">
                     <DataGrid.Columns>
@@ -82,5 +84,25 @@
                 </Button>
             </StackPanel>
         </StackPanel>
-    </Grid>
+        <StackPanel>
+            <Label FontFamily="30">Whole year contribution</Label>
+            <TextBlock FontSize="24">
+                <Run Text="Total Income Tax: " />
+                <Run Text="{Binding TotalIncomeTax, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            </TextBlock>
+            <TextBlock FontSize="24">
+                <Run Text="Total SSS: " />
+                <Run Text="{Binding TotalSSS, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            </TextBlock>
+            <TextBlock FontSize="24">
+                <Run Text="Total Philhealth: " />
+                <Run Text="{Binding TotalPhilHealth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            </TextBlock>
+            <TextBlock FontSize="24">
+                <Run Text="Total Pagibig: " />
+                <Run Text="{Binding TotalPagibig, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+            </TextBlock>
+        </StackPanel>
+    </StackPanel>
+
 </Page>
