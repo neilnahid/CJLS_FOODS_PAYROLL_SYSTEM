@@ -21,42 +21,66 @@
                 Text="{Binding Search, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                 TextChanged="TextBox_TextChanged" />
             <StackPanel Orientation="Horizontal">
-                <DataGrid
-                    AutoGenerateColumns="False"
-                    FontSize="24"
-                    IsReadOnly="True"
-                    ItemsSource="{Binding Employees}"
-                    SelectedItem="{Binding Employee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    SelectionChanged="DataGrid_SelectionChanged">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding Emp_ID}" Header="EmployeeID" />
-                        <DataGridTextColumn Binding="{Binding FullName}" Header="Fullname" />
-                        <DataGridTextColumn Binding="{Binding EmployeeType.Name}" Header="Job Position" />
-                    </DataGrid.Columns>
-                </DataGrid>
-                <DataGrid
-                    AutoGenerateColumns="False"
-                    FontSize="24"
-                    IsReadOnly="True"
-                    ItemsSource="{Binding Employee.PayrollDetails}">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Payroll Range">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBlock>
-                                        <Run Text="{Binding Payroll.StartDate, StringFormat=d}" />
-                                        <Run Text=" - " />
-                                        <Run Text="{Binding Payroll.EndDate, StringFormat=d}" />
-                                    </TextBlock>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                        <DataGridTextColumn Binding="{Binding SSSTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="SSS" />
-                        <DataGridTextColumn Binding="{Binding PagibigTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Pagibig" />
-                        <DataGridTextColumn Binding="{Binding TaxTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Tax" />
-                        <DataGridTextColumn Binding="{Binding PhilhealthTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Philhealth" />
-                    </DataGrid.Columns>
-                </DataGrid>
+                <GroupBox Header="Employees">
+                    <DataGrid
+                        AutoGenerateColumns="False"
+                        FontSize="24"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding Employees}"
+                        SelectedItem="{Binding Employee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        SelectionChanged="DataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Emp_ID}" Header="EmployeeID" />
+                            <DataGridTextColumn Binding="{Binding FullName}" Header="Fullname" />
+                            <DataGridTextColumn Binding="{Binding EmployeeType.Name}" Header="Job Position" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+                <GroupBox Margin="50,0,0,0" Header="Contributions for this year.">
+                    <DataGrid
+                        AutoGenerateColumns="False"
+                        FontSize="24"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding Employee.PayrollDetails}">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header="Payroll Range">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <Run Text="{Binding Payroll.StartDate, StringFormat=d}" />
+                                            <Run Text=" - " />
+                                            <Run Text="{Binding Payroll.EndDate, StringFormat=d}" />
+                                        </TextBlock>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Binding="{Binding SSSTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="SSS" />
+                            <DataGridTextColumn Binding="{Binding PagibigTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Pagibig" />
+                            <DataGridTextColumn Binding="{Binding TaxTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Tax" />
+                            <DataGridTextColumn Binding="{Binding PhilhealthTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Philhealth" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </GroupBox>
+                <GroupBox Margin="50,0,0,0" Header="Total Contributions this year">
+                    <StackPanel>
+                        <TextBlock FontSize="24">
+                            <Run Text="Total Income Tax: " />
+                            <Run Text="{Binding TotalIncomeTax, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </TextBlock>
+                        <TextBlock FontSize="24">
+                            <Run Text="Total SSS: " />
+                            <Run Text="{Binding TotalSSS, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </TextBlock>
+                        <TextBlock FontSize="24">
+                            <Run Text="Total Philhealth: " />
+                            <Run Text="{Binding TotalPhilHealth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </TextBlock>
+                        <TextBlock FontSize="24">
+                            <Run Text="Total Pagibig: " />
+                            <Run Text="{Binding TotalPagibig, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </TextBlock>
+                    </StackPanel>
+                </GroupBox>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                 <Button
@@ -83,26 +107,10 @@
                         Kind="ArrowRight" />
                 </Button>
             </StackPanel>
+
         </StackPanel>
-        <StackPanel>
-            <Label FontFamily="30">Whole year contribution</Label>
-            <TextBlock FontSize="24">
-                <Run Text="Total Income Tax: " />
-                <Run Text="{Binding TotalIncomeTax, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-            </TextBlock>
-            <TextBlock FontSize="24">
-                <Run Text="Total SSS: " />
-                <Run Text="{Binding TotalSSS, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-            </TextBlock>
-            <TextBlock FontSize="24">
-                <Run Text="Total Philhealth: " />
-                <Run Text="{Binding TotalPhilHealth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-            </TextBlock>
-            <TextBlock FontSize="24">
-                <Run Text="Total Pagibig: " />
-                <Run Text="{Binding TotalPagibig, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-            </TextBlock>
-        </StackPanel>
+
+
     </StackPanel>
 
 </Page>
