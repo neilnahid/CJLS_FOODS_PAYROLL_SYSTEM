@@ -56,5 +56,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             Helper.db = new DatabaseDataContext();
             VM.GetPayrollGroups();
         }
+        public void LetterValidation(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text.All(c => char.IsWhiteSpace(c) || char.IsLetter(c)))
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
     }
 }

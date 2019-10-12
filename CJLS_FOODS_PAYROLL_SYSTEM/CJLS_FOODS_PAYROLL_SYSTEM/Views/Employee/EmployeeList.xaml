@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:root="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM"
     Title="EmployeeCreateNewEmployee"
     d:DesignHeight="900"
     d:DesignWidth="1600"
@@ -32,6 +33,7 @@
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="First Name"
                             FontSize="24"
+                            PreviewTextInput="LetterValidation"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="{Binding Employee.ErrorCollection[FirstName]}" />
@@ -40,6 +42,7 @@
                             Margin="0,0,15,0"
                             materialDesign:HintAssist.Hint="Middle Name"
                             FontSize="24"
+                            PreviewTextInput="LetterValidation"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.MiddleName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="{Binding Employee.ErrorCollection[MiddleName]}" />
@@ -47,6 +50,7 @@
                             Grid.Column="2"
                             materialDesign:HintAssist.Hint="Last Name"
                             FontSize="24"
+                            PreviewTextInput="LetterValidation"
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                             Text="{Binding Employee.LastName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                             ToolTip="{Binding Employee.ErrorCollection[LastName]}" />
@@ -417,6 +421,7 @@
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="First Name"
                                         FontSize="20"
+                                        PreviewTextInput="LetterValidation"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.FirstName, Mode=TwoWay, ValidatesOnDataErrors=True}"
                                         ToolTip="{Binding Employee.ErrorCollection[FirstName]}" />
@@ -425,6 +430,7 @@
                                         Margin="0,0,15,0"
                                         materialDesign:HintAssist.Hint="Middle Name"
                                         FontSize="20"
+                                        PreviewTextInput="LetterValidation"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                         Text="{Binding Employee.MiddleName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                         ToolTip="{Binding Employee.ErrorCollection[MiddleName]}" />
@@ -432,8 +438,9 @@
                                         Grid.Column="2"
                                         materialDesign:HintAssist.Hint="Last Name"
                                         FontSize="20"
+                                        PreviewTextInput="LetterValidation"
                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                        Text="{Binding F.LastName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
+                                        Text="{Binding Employee.LastName, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
@@ -633,6 +640,7 @@
                                         Active
                                     </CheckBox>
                                 </StackPanel>
+                                <TextBlock Foreground="Red" Text="{Binding Employee.ErrorCollection[CompleteFullName], UpdateSourceTrigger=PropertyChanged}" />
                             </StackPanel>
                             <StackPanel
                                 Margin="0,25,0,0"

@@ -23,6 +23,7 @@
                     Text="Header" />
                 <TextBox
                     materialDesign:HintAssist.Hint="Group Name"
+                    PreviewTextInput="LetterValidation"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding PayrollGroup.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 <TextBox
@@ -81,9 +82,18 @@
                         ItemsSource="{Binding PayrollGroups}"
                         SelectedItem="{Binding PayrollGroup}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn FontSize="24" Binding="{Binding PayrollGroupID}" Header="PayrollGroupID" />
-                            <DataGridTextColumn FontSize="24" Binding="{Binding Name}" Header="Name" />
-                            <DataGridTextColumn FontSize="24" Binding="{Binding NumberOfDays}" Header="Days Covered" />
+                            <DataGridTextColumn
+                                Binding="{Binding PayrollGroupID}"
+                                FontSize="24"
+                                Header="PayrollGroupID" />
+                            <DataGridTextColumn
+                                Binding="{Binding Name}"
+                                FontSize="24"
+                                Header="Name" />
+                            <DataGridTextColumn
+                                Binding="{Binding NumberOfDays}"
+                                FontSize="24"
+                                Header="Days Covered" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

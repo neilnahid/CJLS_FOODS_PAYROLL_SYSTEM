@@ -72,7 +72,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 Employees.Add(Employee);
                 Helper.db.SubmitChanges();
                 MessageBox.Show("Successfully created new employee");
-                Helper.db.SubmitChanges();
                 return true;
             }
             else

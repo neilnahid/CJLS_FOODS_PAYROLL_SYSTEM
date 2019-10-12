@@ -13,6 +13,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public bool IsValidationPassed { get; set; }
         public string DateOfBirthString { get; set; }
+
+        public string CompleteFullName { get { return $"{FirstName} {MiddleName} {LastName}"; } }
         public string this[string name] {
             get {
                 string result = null;
@@ -24,18 +26,57 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                             goto case "stringEmpty";
                         else if (!Regex.IsMatch(FirstName, "^[a-z A-Z]*$"))
                             goto case "onlychars";
+                        else if (EmployeeID == 0)
+                        {
+                            if ((from e in Helper.db.Employees where e.FullName.ToLower() == this.CompleteFullName.ToLower() select e).Count() > 0)
+                                result = $"{CompleteFullName} already exists in the database.";
+                        }
+                        else
+                        {
+                            foreach (var e in Helper.db.Employees)
+                            {
+                                if (e.FullName.ToLower() == this.CompleteFullName.ToLower() && e.Emp_ID != this.Emp_ID)
+                                    result = $"{CompleteFullName} already exists in the database.";
+                            }
+                        }
                         break;
                     case "MiddleName":
                         if (String.IsNullOrEmpty(MiddleName))
                             goto case "stringEmpty";
                         else if (!Regex.IsMatch(FirstName, "^[a-z A-Z]*$"))
                             goto case "onlychars";
+                        else if (EmployeeID == 0)
+                        {
+                            if ((from e in Helper.db.Employees where e.FullName.ToLower() == this.CompleteFullName.ToLower() select e).Count() > 0)
+                                result = $"{CompleteFullName} already exists in the database.";
+                        }
+                        else
+                        {
+                            foreach (var e in Helper.db.Employees)
+                            {
+                                if (e.FullName.ToLower() == this.CompleteFullName.ToLower() && e.Emp_ID != this.Emp_ID)
+                                    result = $"{CompleteFullName} already exists in the database.";
+                            }
+                        }
                         break;
                     case "LastName":
                         if (String.IsNullOrEmpty(LastName))
                             goto case "stringEmpty";
                         else if (!Regex.IsMatch(LastName, "^[a-z A-Z]*$"))
                             goto case "onlychars";
+                        else if (EmployeeID == 0)
+                        {
+                            if ((from e in Helper.db.Employees where e.FullName.ToLower() == this.CompleteFullName.ToLower() select e).Count() > 0)
+                                result = $"{CompleteFullName} already exists in the database.";
+                        }
+                        else
+                        {
+                            foreach (var e in Helper.db.Employees)
+                            {
+                                if (e.FullName.ToLower() == this.CompleteFullName.ToLower() && e.Emp_ID != this.Emp_ID)
+                                    result = $"{CompleteFullName} already exists in the database.";
+                            }
+                        }
                         break;
                     case "Gender":
                         if (String.IsNullOrEmpty(Gender))
@@ -62,7 +103,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                             goto case "stringEmpty";
                         break;
                     case "Branch":
-                        if(Branch == null)
+                        if (Branch == null)
                             result = "You must select a branch.";
                         break;
                     case "DateOfBirth":
@@ -103,16 +144,16 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                             result = "You must provide an SSS-ID since it's active.";
                         break;
                     case "IsSSSActive":
-                            SendPropertyChanged("SSSID");
+                        SendPropertyChanged("SSSID");
                         break;
                     case "IsPagibigActive":
-                            SendPropertyChanged("PagIbigID");
+                        SendPropertyChanged("PagIbigID");
                         break;
                     case "IsPhilhealthActive":
-                            SendPropertyChanged("PhilhealthID");
+                        SendPropertyChanged("PhilhealthID");
                         break;
                     case "IsIncomeTaxActive":
-                            SendPropertyChanged("TINID");
+                        SendPropertyChanged("TINID");
                         break;
                     case "RequiredDaysAWeek":
                         if (Double.IsNaN(RequiredDaysAWeek))

@@ -101,7 +101,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void btn_dialogCancel_Click(object sender, RoutedEventArgs e)
         {
-            VM.Employee = VM.Employees.FirstOrDefault();
+            VM.Instantiate();
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -134,6 +134,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         private void btn_nextPage_Click(object sender, RoutedEventArgs e)
         {
             VM.Employees = new ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>((from emp in VM.FilteredEmployees select emp).ToList().Skip(10 * ++VM.Page).Take(10));
+        }
+        public void LetterValidation(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text.All(c => char.IsWhiteSpace(c) || char.IsLetter(c)))
+                e.Handled = false;
+            else
+                e.Handled = true;
         }
     }
 }
