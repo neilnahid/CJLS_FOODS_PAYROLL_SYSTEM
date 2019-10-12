@@ -45,9 +45,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         }
         private void Btn_createNewLeave_Click(object sender, RoutedEventArgs e)
         {
+            VM.Leave = new CJLS_FOODS_PAYROLL_SYSTEM.Leave() { LeaveDate = DateTime.Now };
             DialogHeader.Text = "Create New Leave";
             btn_dialogConfirm.Content = "CREATE";
-            VM.Leave = new CJLS_FOODS_PAYROLL_SYSTEM.Leave() { LeaveDate = DateTime.Now };
         }
 
         private void Btn_deleteLeave_Click(object sender, RoutedEventArgs e)
@@ -59,8 +59,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void btn_cancel_Click(object sender, RoutedEventArgs e)
         {
-            Helper.db = new DatabaseDataContext();
-            VM.GetEmployees();
+            VM.Instantiate();
         }
     }
 }

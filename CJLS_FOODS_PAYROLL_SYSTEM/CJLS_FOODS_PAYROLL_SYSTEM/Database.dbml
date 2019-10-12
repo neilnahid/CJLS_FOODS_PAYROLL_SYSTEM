@@ -25,6 +25,8 @@
       <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="UserType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Employee_User" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Branch" Member="Branches">
@@ -103,6 +105,7 @@
       <Column Name="DateAdded" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="BranchID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="FullName" Type="System.String" DbType="VarChar(152) NOT NULL" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Employee_User" Member="Users" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="User" />
       <Association Name="Employee_Leave" Member="Leaves" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Leave" />
       <Association Name="Employee_Loan" Member="Loans" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Loan" />
       <Association Name="Employee_PayrollDetail" Member="PayrollDetails" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="PayrollDetail" />
