@@ -22,18 +22,19 @@
                     Style="{StaticResource MaterialDesignHeadlineTextBlock}"
                     Text="Header" />
                 <TextBox
-                    FontSize="24"
                     materialDesign:HintAssist.Hint="Job Position"
+                    FontSize="24"
+                    PreviewTextInput="LetterValidation"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding EmployeeType.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
                 <!--  SP for buttons  -->
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <Button
-                        FontSize="24"
                         x:Name="btn_dialogConfirm"
                         Click="btn_dialogConfirm_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
+                        FontSize="24"
                         IsDefault="True"
                         IsEnabled="{Binding EmployeeType.IsValidationPassed, UpdateSourceTrigger=PropertyChanged}"
                         Style="{StaticResource MaterialDesignFlatButton}">
@@ -45,9 +46,9 @@
                         ACCEPT
                     </Button>
                     <Button
-                        FontSize="24"
                         Click="btn_cancel_Click"
                         Command="materialDesign:DialogHost.CloseDialogCommand"
+                        FontSize="24"
                         IsCancel="True"
                         Style="{StaticResource MaterialDesignFlatButton}">
                         <Button.CommandParameter>
@@ -86,8 +87,14 @@
                             ItemsSource="{Binding EmployeeTypes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             SelectedItem="{Binding EmployeeType}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn FontSize="24" Binding="{Binding EmployeeTypeID}" Header="EmployeeTypeID" />
-                                <DataGridTextColumn FontSize="24" Binding="{Binding Name}" Header="Name" />
+                                <DataGridTextColumn
+                                    Binding="{Binding EmployeeTypeID}"
+                                    FontSize="24"
+                                    Header="EmployeeTypeID" />
+                                <DataGridTextColumn
+                                    Binding="{Binding Name}"
+                                    FontSize="24"
+                                    Header="Name" />
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

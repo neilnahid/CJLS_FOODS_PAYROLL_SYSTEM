@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System;
 using System.Linq;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 {
@@ -71,6 +72,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             else
                 VM.FilteredResult = VM.FetchEmployeeTypes();
             VM.EmployeeTypes = new ObservableCollection<EmployeeType>(VM.FilteredResult.Skip(VM.Page * 10).Take(10));
+        }
+        public void LetterValidation(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text.All(c => char.IsWhiteSpace(c) || char.IsLetter(c)))
+                e.Handled = false;
+            else
+                e.Handled = true;
         }
     }
 }

@@ -97,5 +97,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 VM.FilteredBranches = VM.GetBranches();
             VM.Branches = new ObservableCollection<Branch>(VM.FilteredBranches.Skip(VM.Page * 10).Take(10));
         }
+        public void LetterValidation(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text.All(c => char.IsWhiteSpace(c) || char.IsLetter(c)))
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
     }
 }
