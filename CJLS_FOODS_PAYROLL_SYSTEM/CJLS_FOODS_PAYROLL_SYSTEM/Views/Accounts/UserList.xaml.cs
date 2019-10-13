@@ -30,40 +30,39 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts
             VM.Instantiate();
         }
 
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            VM.User.Password = passwordBox.Password.ToString();
-            string result = null;
-            if (!Regex.IsMatch(VM.User.Password == null ? "" : VM.User.Password, "(?=.{8,})^.*$"))
-                result = "must contain at least 8 characters";
-            if (!Regex.IsMatch(VM.User.Password == null ? "" : VM.User.Password, "(?=.*[0-9])^.*$"))
-                result = "must contain atleast 1 number";
-            if (!Regex.IsMatch(VM.User.Password == null ? "" : VM.User.Password, "(?=.*[A-Z])^.*$"))
-                result = "must contain atleast 1 upper case letter";
-            if (!Regex.IsMatch(VM.User.Password == null ? "" : VM.User.Password, "(?=.*[!@#$%^&*()\\-_=+{};:,<.>])^.*$"))
-                result = "must contain atleast 1 special character";
-            if (result == null)
-            {
-                txtblock_errors.Text = "";
-                if (VM.User.ErrorCollection.ContainsKey("Password"))
-                    VM.User.ErrorCollection.Remove("Password");
-                VM.User.IsValidationPassed = VM.User.ErrorCollection.Count > 0 ? false : true;
-                VM.User.PSendPropertyChanged("ErrorCollection");
-                VM.User.PSendPropertyChanged("IsValidationPassed");
-                return;
-            }
-            else
-            {
-                txtblock_errors.Text = result;
-                VM.User.ErrorCollection["Password"] = result;
-                VM.User.IsValidationPassed = VM.User.ErrorCollection.Count > 0 ? false : true;
-                VM.User.PSendPropertyChanged("ErrorCollection");
-                VM.User.PSendPropertyChanged("IsValidationPassed");
-            }
-        }
+        //private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        //{
+        //    VM.User.Password = passwordBox.Password.ToString();
+        //    string result = null;
+        //    if (!Regex.IsMatch(VM.User.Password == null ? "" : VM.User.Password, "(?=.{8,})^.*$"))
+        //        result = "must contain at least 8 characters";
+        //    if (!Regex.IsMatch(VM.User.Password == null ? "" : VM.User.Password, "(?=.*[0-9])^.*$"))
+        //        result = "must contain atleast 1 number";
+        //    if (!Regex.IsMatch(VM.User.Password == null ? "" : VM.User.Password, "(?=.*[A-Z])^.*$"))
+        //        result = "must contain atleast 1 upper case letter";
+        //    if (!Regex.IsMatch(VM.User.Password == null ? "" : VM.User.Password, "(?=.*[!@#$%^&*()\\-_=+{};:,<.>])^.*$"))
+        //        result = "must contain atleast 1 special character";
+        //    if (result == null)
+        //    {
+        //        txtblock_errors.Text = "";
+        //        if (VM.User.ErrorCollection.ContainsKey("Password"))
+        //            VM.User.ErrorCollection.Remove("Password");
+        //        VM.User.IsValidationPassed = VM.User.ErrorCollection.Count > 0 ? false : true;
+        //        VM.User.PSendPropertyChanged("ErrorCollection");
+        //        VM.User.PSendPropertyChanged("IsValidationPassed");
+        //        return;
+        //    }
+        //    else
+        //    {
+        //        txtblock_errors.Text = result;
+        //        VM.User.ErrorCollection["Password"] = result;
+        //        VM.User.IsValidationPassed = VM.User.ErrorCollection.Count > 0 ? false : true;
+        //        VM.User.PSendPropertyChanged("ErrorCollection");
+        //        VM.User.PSendPropertyChanged("IsValidationPassed");
+        //    }
+        //}
         private void Btn_Edit_Click(object sender, RoutedEventArgs e)
         {
-            passwordBox.Password = VM.User.Password;
             DialogHeader.Text = "Update User";
             btn_dialogConfirm.Content = "UPDATE";
         }
@@ -89,8 +88,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts
 
         private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e)
         {
-            VM.User = new User() { Status = "Active", UserType = "Payroll Officer" };
-            VM.User.Password = "";
+            VM.User = new User() { Status = "Active", UserType = "Payroll Officer", Password = "cjlsfoods" };
             DialogHeader.Text = "Create New User";
             btn_dialogConfirm.Content = "CREATE";
         }

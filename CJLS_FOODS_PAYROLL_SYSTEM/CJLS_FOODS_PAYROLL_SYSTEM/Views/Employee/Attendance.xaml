@@ -74,7 +74,7 @@
                                         <DataGridTextColumn Binding="{Binding OverTimeHoursWorked}" Header="Regular Pay" />
                                         <DataGridTextColumn Binding="{Binding DayType}" Header="Day type" />
                                         <DataGridTextColumn Binding="{Binding Total}" Header="Total" />
-                                    </DataGrid.Columns>                       
+                                    </DataGrid.Columns>
                                 </DataGrid>
                             </StackPanel>
                             <Button
@@ -112,6 +112,7 @@
                                     Style="{StaticResource MaterialDesignFloatingHintComboBox}" />
                                 <TextBox
                                     materialDesign:HintAssist.Hint="Amount"
+                                    PreviewTextInput="NumberValidation"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     Text="{Binding Deduction.Amount}" />
                                 <TextBlock />
@@ -608,12 +609,14 @@
                                 <TextBox
                                     Name="txtbox_regularHours"
                                     materialDesign:HintAssist.Hint="Regular Hours Worked"
+                                    PreviewTextInput="NumberValidation"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     Text="{Binding Attendance.RegularHoursWorked, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                     TextChanged="Txtbox_regularHours_TextChanged" />
                                 <TextBox
                                     Name="txtbox_overtimeHours"
                                     materialDesign:HintAssist.Hint="Overtime Hours Worked"
+                                    PreviewTextInput="NumberValidation"
                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                     Text="{Binding Attendance.OverTimeHoursWorked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     TextChanged="Txtbox_overtimeHours_TextChanged" />

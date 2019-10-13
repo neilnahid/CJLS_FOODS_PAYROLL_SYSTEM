@@ -20,6 +20,16 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                     case "Username":
                         if (String.IsNullOrEmpty(Username))
                             result = "Field must not be empty.";
+                        if(UserId != 0)
+                        {
+                            if ((from u in Helper.db.Users where u.Username == Username && u.UserId != UserId select u).Count() > 0)
+                                result = "username already exists in database.";
+                        }
+                        else
+                        {
+                            if ((from u in Helper.db.Users where u.Username == Username select u).Count() > 0)
+                                result = "username already exists in the database.";
+                        }
                         break;
                     case "Employee":
                         if (Employee == null)

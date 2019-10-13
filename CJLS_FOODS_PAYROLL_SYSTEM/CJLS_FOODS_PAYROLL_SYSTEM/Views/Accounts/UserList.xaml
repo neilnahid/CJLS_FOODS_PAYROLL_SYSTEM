@@ -38,36 +38,7 @@
                         FontSize="24"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                    <PasswordBox
-                        x:Name="passwordBox"
-                        materialDesign:HintAssist.Hint="Password"
-                        FontSize="24"
-                        PasswordChanged="PasswordBox_PasswordChanged"
-                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
                     <TextBlock x:Name="txtblock_errors" Foreground="Red" />
-                    <ComboBox
-                        IsEditable="False"
-                        SelectedValue="{Binding User.UserType}"
-                        SelectedValuePath="Content">
-                        <ComboBoxItem>Payroll Officer</ComboBoxItem>
-                        <ComboBoxItem>Owner</ComboBoxItem>
-                    </ComboBox>
-                    <ComboBox
-                        materialDesign:HintAssist.Hint="Security Question"
-                        FontSize="24"
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                        Text="{Binding User.SecretQuestion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
-                        <ComboBoxItem Content="What is your mother's maiden name?" />
-                        <ComboBoxItem Content="What primary school did you attend?" />
-                        <ComboBoxItem Content="In what town or city was your first full time job?" />
-                        <ComboBoxItem Content="In what city does your nearest sibling live?" />
-                        <ComboBoxItem Content="What was your childhood nickname?" />
-                    </ComboBox>
-                    <TextBox
-                        materialDesign:HintAssist.Hint="Secret Answer"
-                        FontSize="24"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding User.SecretAnswer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     <ComboBox
                         FontSize="24    "
                         IsEditable="False"
@@ -125,7 +96,7 @@
                         SelectedItem="{Binding User}">
                         <DataGrid.Columns>
                             <DataGridTextColumn
-                                Binding="{Binding FullName}"
+                                Binding="{Binding Employee.FullName}"
                                 FontSize="24"
                                 Header="Full Name" />
                             <DataGridTextColumn

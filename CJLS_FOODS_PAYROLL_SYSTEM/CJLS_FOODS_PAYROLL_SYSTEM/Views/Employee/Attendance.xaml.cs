@@ -97,9 +97,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             VM.BPGrossPayPanel = Visibility.Collapsed;
             switch (btn.Tag)
             {
-                case "DaytoDay": VM.BPTDaytoDayPanel = Visibility.Visible; break;
-                case "Loans/Cash Advance": VM.BPLoanCashAdvancePanel = Visibility.Visible; break;
-                case "Contributions": VM.BPContributionsPanel = Visibility.Visible; break;
+                case "DaytoDay Deductions": VM.BPTDaytoDayPanel = Visibility.Visible; break;
+                case "Loans/Cash Advance Deductions": VM.BPLoanCashAdvancePanel = Visibility.Visible; break;
+                case "Contributions Deductions": VM.BPContributionsPanel = Visibility.Visible; break;
                 case "GrossPay": VM.BPGrossPayPanel = Visibility.Visible; break;
             }
         }
@@ -134,6 +134,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
             Helper.db = new DatabaseDataContext();
             VM = (View_Models.AttendanceViewModel)DataContext;
             VM.InstantiateViewModel(Helper.CurrentPayroll, Helper.CurrentPayrollDetail);
+        }
+        private void NumberValidation(object sender, TextCompositionEventArgs e)
+        {
+            int num;
+            e.Handled = !int.TryParse(e.Text, out num);
         }
     }
 }

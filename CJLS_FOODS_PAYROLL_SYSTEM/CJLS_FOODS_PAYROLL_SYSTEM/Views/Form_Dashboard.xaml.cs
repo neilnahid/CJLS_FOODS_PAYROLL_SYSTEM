@@ -20,12 +20,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
     /// </summary>
     public partial class Form_Dashboard : Window
     {
+        public User User { get; set; } = Helper.User;
         public Form_Dashboard()
         {
             InitializeComponent();
             Frame.Content = new Home();
             Helper.Title = Title;
-            if (Helper.User != null & Helper.User.Password == "admin")
+            if (Helper.User != null & Helper.User.Password == "cjlsfoods")
                 dg_changePassword.IsOpen = true;
         }
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
@@ -149,6 +150,37 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
         {
             if (Helper.User.UserType == "Owner")
                 tvi_users.Visibility = Visibility.Visible;
+        }
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            User.Password = pswrdbox_newPassword.Password.ToString();
+            string result = null;
+            if (!Regex.IsMatch(User.Password == null ? "" : User.Password, "(?=.{8,})^.*$"))
+                result = "must contain at least 8 characters";
+            if (!Regex.IsMatch(User.Password == null ? "" : User.Password, "(?=.*[0-9])^.*$"))
+                result = "must contain atleast 1 number";
+            if (!Regex.IsMatch(User.Password == null ? "" : User.Password, "(?=.*[A-Z])^.*$"))
+                result = "must contain atleast 1 upper case letter";
+            if (!Regex.IsMatch(User.Password == null ? "" : User.Password, "(?=.*[!@#$%^&*()\\-_=+{};:,<.>])^.*$"))
+                result = "must contain atleast 1 special character";
+            if (result == null)
+            {
+                lbl_Error.Content = "";
+                if (User.ErrorCollection.ContainsKey("Password"))
+                    User.ErrorCollection.Remove("Password");
+                User.IsValidationPassed = User.ErrorCollection.Count > 0 ? false : true;
+                User.PSendPropertyChanged("ErrorCollection");
+                User.PSendPropertyChanged("IsValidationPassed");
+                return;
+            }
+            else
+            {
+                lbl_Error.Content = result;
+                User.ErrorCollection["Password"] = result;
+                User.IsValidationPassed = User.ErrorCollection.Count > 0 ? false : true;
+                User.PSendPropertyChanged("ErrorCollection");
+                User.PSendPropertyChanged("IsValidationPassed");
+            }
         }
     }
 }
