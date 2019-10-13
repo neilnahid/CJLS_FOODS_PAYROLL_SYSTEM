@@ -11,7 +11,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 {
     public partial class Employee : IDataErrorInfo
     {
-      
+
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public bool IsValidationPassed { get; set; }
         public string DateOfBirthString { get; set; }
@@ -43,9 +43,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                         }
                         break;
                     case "MiddleName":
-                        if (String.IsNullOrEmpty(MiddleName))
-                            goto case "stringEmpty";
-                        else if (!Regex.IsMatch(FirstName, "^[a-z A-Z]*$"))
+                        if (!Regex.IsMatch(FirstName, "^[a-z A-Z]*$"))
                             goto case "onlychars";
                         else if (EmployeeID == 0)
                         {
@@ -80,7 +78,20 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                             }
                         }
                         break;
+                    case "DailyRequiredHours":
+                        if (DailyRequiredHours > 8)
+                            result = "daily required hours must exceed 8.";
+                        if (DailyRequiredHours <= 0)
+                            result = "must not be less than or equal to 0";
+                        break;
+                    case "AvailableLeaves":
+                        if (AvailableLeaves > 5)
+                            result = "only maximum of 5 leaves allowed.";
+                        if (AvailableLeaves < 0)
+                            result = "must not be negative.";
+                        break;
                     case "Gender":
+
                         if (String.IsNullOrEmpty(Gender))
                             goto case "stringEmpty";
                         else if (!Regex.IsMatch(Gender, "^[a-z A-Z]*$"))

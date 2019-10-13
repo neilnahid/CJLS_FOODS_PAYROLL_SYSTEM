@@ -32,6 +32,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void Btn_createNewLoan_Click(object sender, RoutedEventArgs e)
         {
+            cbLoans.IsEnabled = true;
             DialogHeader.Text = "Create new Loan/Cash Advance";
             btn_dialogConfirm.Content = "CREATE";
             VM.Loan = new Loan();
@@ -49,6 +50,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void Btn_Edit_Click(object sender, RoutedEventArgs e)
         {
+            cbLoans.IsEnabled = false;
             VM.Loan.CurrentEmployee = VM.Loan.Employee;
             DialogHeader.Text = "Update Loan/Cash Advance";
             btn_dialogConfirm.Content = "UPDATE";

@@ -20,6 +20,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                     case "LeaveDate":
                         if (LeaveDate == null)
                             result = "Field must not be empty";
+                        else if (LeaveDate <= DateTime.Now)
+                            result = "Leave date must not be earlier than current date";    
                         break;
                     case "Employee":
                         if (Employee == null)

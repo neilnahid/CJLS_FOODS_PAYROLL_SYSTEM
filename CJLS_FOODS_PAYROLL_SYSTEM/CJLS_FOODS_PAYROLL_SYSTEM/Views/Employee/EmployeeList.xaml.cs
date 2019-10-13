@@ -38,13 +38,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 case "CREATE":
                     if (VM.CreateNewEmployee())
                     {
-                        Helper.db = new DatabaseDataContext();
-                        VM.FilteredEmployees = VM.GetEmployeeList();
-                        VM.Page = 0;
-                        VM.Employees = new ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Employee>((from emp in VM.FilteredEmployees select emp).ToList().Skip(10 * VM.Page).Take(10));
+                        VM.Instantiate();
                     }
-                    else
-                        return;
                     break;
                 default: MessageBox.Show("command invalid"); break;
             }

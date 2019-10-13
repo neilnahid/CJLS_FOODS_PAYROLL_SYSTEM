@@ -23,6 +23,7 @@
                     Text="Header" />
                 <ComboBox
                     Grid.Column="1"
+                    x:Name="cbLoans"
                     materialDesign:HintAssist.Hint="Search Employee"
                     materialDesign:HintAssist.HintOpacity=".26"
                     DisplayMemberPath="FullName"

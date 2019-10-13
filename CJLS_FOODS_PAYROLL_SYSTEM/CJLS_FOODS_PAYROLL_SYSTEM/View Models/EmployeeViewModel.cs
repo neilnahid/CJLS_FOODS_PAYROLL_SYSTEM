@@ -51,7 +51,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         #region methods/functions
         public List<Branch> GetBranches()
         {
-            return (from b in Helper.db.Branches select b).ToList();
+            return (from b in Helper.db.Branches where b.IsActive select b).ToList();
         }
         public ObservableCollection<Employee> GetEmployeeList()
         {

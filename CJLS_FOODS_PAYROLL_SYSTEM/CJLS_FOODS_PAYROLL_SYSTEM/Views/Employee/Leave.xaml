@@ -21,6 +21,7 @@
                     Style="{StaticResource MaterialDesignHeadlineTextBlock}"
                     Text="Process Leave" />
                 <ComboBox
+                    x:Name="cbLeave"
                     Grid.Column="1"
                     materialDesign:HintAssist.Hint="Search"
                     materialDesign:HintAssist.HintOpacity=".26"

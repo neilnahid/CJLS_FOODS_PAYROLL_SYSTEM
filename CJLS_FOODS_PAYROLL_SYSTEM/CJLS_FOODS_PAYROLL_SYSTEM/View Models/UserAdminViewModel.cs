@@ -28,7 +28,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 
         public List<Employee> GetEmployees()
         {
-            return Helper.db.Employees.ToList();
+            return (from e in Helper.db.Employees where e.EmployeeType.Name == "Payroll Officer" select e).ToList();
         }
         public List<User> GetAllUsers()
         {

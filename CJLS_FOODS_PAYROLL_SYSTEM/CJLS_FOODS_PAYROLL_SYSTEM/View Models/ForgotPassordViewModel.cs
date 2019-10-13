@@ -29,7 +29,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public void ResetUserDefaultPassword()
         {
             //default password is admin
-            User.Password = "admin";
+            User.Password = "cjlsfoods";
             Helper.db.SubmitChanges();
         }
     }
