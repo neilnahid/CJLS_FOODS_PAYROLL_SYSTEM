@@ -10,22 +10,49 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 {
     public class ContributionsViewModel : INotifyPropertyChanged
     {
+        public class YearlyContribution : INotifyPropertyChanged
+        {
+            public string Name { get; set; }
+            public double RequiredYearlyContribution { get; set; }
+            public double CurrentTotalPaid { get; set; }
+            public double RunningBalance { get; set; }
 
+            public event PropertyChangedEventHandler PropertyChanged;
+
+        }
+        public ObservableCollection<YearlyContribution> YearlyContributions { get { return GetYearlyContributions(); } }
+        public ObservableCollection<YearlyContribution> GetYearlyContributions()
+        {
+            if(Employee != null)
+            {
+
+            ObservableCollection<YearlyContribution > yc = new ObservableCollection<YearlyContribution>();
+            if(Employee.IsPagibigActive)
+            yc.Add(new YearlyContribution { Name = "Pagibig", CurrentTotalPaid = TotalPagibig.Value, RequiredYearlyContribution = getAnnualPagibig(), RunningBalance = (getAnnualPagibig() - TotalPagibig.Value) });
+            if(Employee.IsPhilhealthActive)
+            yc.Add(new YearlyContribution { Name = "Philhealth", CurrentTotalPaid = TotalPhilHealth.Value, RequiredYearlyContribution = getAnnualPhilhealth(), RunningBalance = (getAnnualPhilhealth() - TotalPhilHealth.Value) });
+            if(Employee.IsSSSActive)
+            yc.Add(new YearlyContribution { Name = "SSS", CurrentTotalPaid = TotalSSS.Value, RequiredYearlyContribution = getAnnualSSS(), RunningBalance = (getAnnualSSS() - TotalSSS.Value) });
+            return yc;
+            }
+            return null;
+        }
         public ObservableCollection<Employee> Employees { get; set; }
         public ObservableCollection<Employee> FilteredEmployees { get; set; }
-        public double? TotalIncomeTax {
-            get {
-                if (Employee != null)
-                {
-                    var total = Employee.PayrollDetails.Where(pd => pd.Payroll.StartDate.Year == DateTime.Now.Year).Sum(pd => pd.TaxTotal);
-                    return total.HasValue ? total : 0;
-                }
-                return 0;
-            }
-        }
-
-        public double? TotalPagibig {
-            get {
+        //public double? TotalIncomeTax {
+        //    get {
+        //        if (Employee != null)
+        //        {
+        //            var total = Employee.PayrollDetails.Where(pd => pd.Payroll.StartDate.Year == DateTime.Now.Year).Sum(pd => pd.TaxTotal);
+        //            return total.HasValue ? total : 0;
+        //        }
+        //        return 0;
+        //    }
+        //}
+        private double? TotalPagibig
+        {
+            get
+            {
                 if (Employee != null)
                 {
                     var total = Employee.PayrollDetails.Where(pd => pd.Payroll.StartDate.Year == DateTime.Now.Year).Sum(pd => pd.PagibigTotal);
@@ -34,8 +61,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 return 0;
             }
         }
-        public double? TotalSSS {
-            get {
+        public double? TotalSSS
+        {
+            get
+            {
                 if (Employee != null)
                 {
                     var total = Employee.PayrollDetails.Where(pd => pd.Payroll.StartDate.Year == DateTime.Now.Year).Sum(pd => pd.SSSTotal);
@@ -44,8 +73,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 return 0;
             }
         }
-        public double? TotalPhilHealth {
-            get {
+        public double? TotalPhilHealth
+        {
+            get
+            {
                 if (Employee != null)
                 {
                     var total = Employee.PayrollDetails.Where(pd => pd.Payroll.StartDate.Year == DateTime.Now.Year).Sum(pd => pd.PhilhealthTotal);
@@ -54,30 +85,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 return 0;
             }
         }
-        public double? TotalCurrentContributions {
-            get {
+        public double? TotalCurrentContributions
+        {
+            get
+            {
                 if (Employee != null)
                 {
-                    var total = TotalPhilHealth + TotalSSS + TotalPagibig + TotalIncomeTax;
+                    var total = TotalPhilHealth + TotalSSS + TotalPagibig;
                     return total.HasValue ? total : 0;
-                }
-                return 0;
-            }
-        }
-        public double? RunningBalance {
-            get {
-                return YearlyContribution.Value - TotalCurrentContributions.Value;
-            }
-        }
-        public double? YearlyContribution {
-            get {
-                if (Employee != null)
-                {
-                    double philhealthyearly = ((Employee.MonthlySalary.Value < 10000 ? 10000 : Employee.MonthlySalary.Value > 40000 ? 40000 : Employee.MonthlySalary.Value) * .01375) * 12;
-                    var tax = getAnnualTax();
-                    var sss = getAnnualSSS();
-                    var pagibig = (Employee.MonthlySalary < 1500 ? 1500 * 0.01 : Employee.MonthlySalary > 5000 ? 5000 * 0.02 : Employee.MonthlySalary * 0.02) * 12;
-                    return Math.Round((philhealthyearly + tax + sss + pagibig).Value,2);
                 }
                 return 0;
             }
@@ -93,6 +108,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
                 msc = Math.Round(Employee.MonthlySalary.Value / 500, 0) * 500;
 
             return Math.Round(msc * .04, 2) * 12;
+        }
+        private double getAnnualPagibig()
+        {
+            return (Employee.MonthlySalary.Value < 1500 ? 1500 * 0.01 : Employee.MonthlySalary.Value > 5000 ? 5000 * 0.02 : Employee.MonthlySalary.Value * 0.02) * 12;
+        }
+        private double getAnnualPhilhealth()
+        {
+            return ((Employee.MonthlySalary.Value < 10000 ? 10000 : Employee.MonthlySalary.Value > 40000 ? 40000 : Employee.MonthlySalary.Value) * .01375) * 12;
         }
         private double getAnnualTax()
         {
@@ -136,7 +159,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             }
             return ((Employee.MonthlySalary.Value - clAmount) * rate + total) * 12;
         }
-        [PropertyChanged.AlsoNotifyFor("TotalIncomeTax", "TotalPagibig", "TotalSSS", "TotalPhilHealth")]
+        [PropertyChanged.AlsoNotifyFor("TotalPagibig", "TotalSSS", "TotalPhilHealth","YearlyContributions")]
         public Employee Employee { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public int Page { get; set; }

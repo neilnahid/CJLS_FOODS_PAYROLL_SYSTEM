@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 {
     public partial class Employee : IDataErrorInfo
     {
+      
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
         public bool IsValidationPassed { get; set; }
         public string DateOfBirthString { get; set; }

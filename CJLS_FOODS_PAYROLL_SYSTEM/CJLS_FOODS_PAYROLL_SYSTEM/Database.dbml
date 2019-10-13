@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CJLSFOODSPAYROLL" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=NEIL;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True" SettingsObjectName="CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings" SettingsPropertyName="CJLSFOODSPAYROLLConnectionString5" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=PSYCHO;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True" SettingsObjectName="CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings" SettingsPropertyName="CJLSFOODSPAYROLLConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Attendance" Member="Attendances">
     <Type Name="Attendance">
       <Column Name="AttendanceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -15,13 +15,16 @@
       <Association Name="PayrollDetail_Attendance" Member="PayrollDetail" ThisKey="PayrollDetailsID" OtherKey="PayrollDetailID" Type="PayrollDetail" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
-  <Table Name="dbo.PayrollGroup" Member="PayrollGroups">
-    <Type Name="PayrollGroup">
-      <Column Name="PayrollGroupID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="NumberOfDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="PayrollGroup_Employee" Member="Employees" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Employee" />
-      <Association Name="PayrollGroup_Payroll" Member="Payrolls" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Payroll" />
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="UserType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Branch" Member="Branches">
@@ -104,8 +107,8 @@
       <Association Name="Employee_Loan" Member="Loans" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Loan" />
       <Association Name="Employee_PayrollDetail" Member="PayrollDetails" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="PayrollDetail" />
       <Association Name="Branch_Employee" Member="Branch" ThisKey="BranchID" OtherKey="BranchID" Type="Branch" IsForeignKey="true" />
-      <Association Name="PayrollGroup_Employee" Member="PayrollGroup" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="PayrollGroup" IsForeignKey="true" />
       <Association Name="EmployeeType_Employee" Member="EmployeeType" ThisKey="EmployeeTypeID" OtherKey="EmployeeTypeID" Type="EmployeeType" IsForeignKey="true" />
+      <Association Name="PayrollGroup_Employee" Member="PayrollGroup" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="PayrollGroup" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.EmployeeType" Member="EmployeeTypes">
@@ -182,16 +185,13 @@
       <Association Name="Payroll_PayrollDetail" Member="Payroll" ThisKey="PayrollID" OtherKey="PayrollID" Type="Payroll" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
-  <Table Name="dbo.Users" Member="Users">
-    <Type Name="User">
-      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="FullName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Username" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Password" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SecretQuestion" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="UserType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+  <Table Name="dbo.PayrollGroup" Member="PayrollGroups">
+    <Type Name="PayrollGroup">
+      <Column Name="PayrollGroupID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="NumberOfDays" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="PayrollGroup_Employee" Member="Employees" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Employee" />
+      <Association Name="PayrollGroup_Payroll" Member="Payrolls" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Payroll" />
     </Type>
   </Table>
 </Database>

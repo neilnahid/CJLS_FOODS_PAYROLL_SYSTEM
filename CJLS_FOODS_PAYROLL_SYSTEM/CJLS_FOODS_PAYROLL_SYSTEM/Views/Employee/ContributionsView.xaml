@@ -20,7 +20,7 @@
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 Text="{Binding Search, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                 TextChanged="TextBox_TextChanged" />
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <GroupBox Header="Employees">
                     <DataGrid
                         AutoGenerateColumns="False"
@@ -56,46 +56,13 @@
                             </DataGridTemplateColumn>
                             <DataGridTextColumn Binding="{Binding SSSTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="SSS" />
                             <DataGridTextColumn Binding="{Binding PagibigTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Pagibig" />
-                            <DataGridTextColumn Binding="{Binding TaxTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Tax" />
                             <DataGridTextColumn Binding="{Binding PhilhealthTotal, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Header="Philhealth" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </GroupBox>
-                <GroupBox Margin="50,0,0,0" Header="Total Contributions this year">
-                    <StackPanel>
-                        <TextBlock FontSize="24">
-                            <Run Text="Total Income Tax: " />
-                            <Run Text="{Binding TotalIncomeTax, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </TextBlock>
-                        <TextBlock FontSize="24">
-                            <Run Text="Total SSS: " />
-                            <Run Text="{Binding TotalSSS, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </TextBlock>
-                        <TextBlock FontSize="24">
-                            <Run Text="Total Philhealth: " />
-                            <Run Text="{Binding TotalPhilHealth, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </TextBlock>
-                        <TextBlock FontSize="24">
-                            <Run Text="Total Pagibig: " />
-                            <Run Text="{Binding TotalPagibig, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </TextBlock>
-                    </StackPanel>
-                </GroupBox>
-                <GroupBox Margin="50,0,0,0" Header="Running Balance">
-                    <StackPanel>
-                        <TextBlock FontSize="24">
-                            <Run Text="Yearly Contribution: " />
-                            <Run Text="{Binding YearlyContribution, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </TextBlock>
-                        <TextBlock FontSize="24">
-                            <Run Text="Current Total Contribution: " />
-                            <Run Text="{Binding TotalCurrentContributions, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </TextBlock>
-                        <TextBlock FontSize="24">
-                            <Run Text="Running Balance: " />
-                            <Run Text="{Binding RunningBalance, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
-                        </TextBlock>
-                    </StackPanel>
+                <GroupBox Header="Contributions">
+                    <DataGrid ItemsSource="{Binding YearlyContributions}" IsReadOnly="True">
+                    </DataGrid>
                 </GroupBox>
             </StackPanel>
             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
