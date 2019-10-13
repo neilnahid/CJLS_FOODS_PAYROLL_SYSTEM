@@ -52,7 +52,7 @@
                     <TreeView x:Name="treeview" SelectedItemChanged="TreeView_SelectedItemChanged">
                         <TreeViewItem FontSize="28" Header="Master Files">
                             <TreeViewItem FontSize="28" Header="Employee List" />
-                            <TreeViewItem FontSize="28" Header="Employee Groups" />
+                            <TreeViewItem FontSize="28" Header="Payroll Groups" />
                             <TreeViewItem FontSize="28" Header="Job Positions" />
                             <TreeViewItem FontSize="28" Header="Branches" />
                             <TreeViewItem FontSize="28" Header="Contributions" />

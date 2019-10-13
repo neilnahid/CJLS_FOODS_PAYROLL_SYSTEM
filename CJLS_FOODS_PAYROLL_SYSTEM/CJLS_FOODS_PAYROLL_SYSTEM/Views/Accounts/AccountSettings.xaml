@@ -23,11 +23,6 @@
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                     Text="{Binding User.UserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 <TextBox
-                    materialDesign:HintAssist.Hint="FullName"
-                    FontSize="24"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding User.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                <TextBox
                     materialDesign:HintAssist.Hint="Username"
                     FontSize="24"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"

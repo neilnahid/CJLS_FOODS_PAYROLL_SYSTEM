@@ -21,9 +21,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                         if (String.IsNullOrEmpty(Username))
                             result = "Field must not be empty.";
                         break;
-                    case "FullName":
-                        if (String.IsNullOrEmpty(FullName))
-                            result = "Field must not be empty.";
+                    case "Employee":
+                        if (Employee == null)
+                            result = "Employee must not be empty.";
                         break;
                     case "SecretQuestion":
                         if (String.IsNullOrEmpty(SecretQuestion))

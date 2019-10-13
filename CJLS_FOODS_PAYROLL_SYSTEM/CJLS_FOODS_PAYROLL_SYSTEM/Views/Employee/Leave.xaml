@@ -33,8 +33,8 @@
                     Grid.Column="0"
                     Margin="0,0,15,0"
                     materialDesign:HintAssist.Hint="Leave Date"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                    Text="{Binding Leave.LeaveDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                    SelectedDate="{Binding Leave.LeaveDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                 <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
                     <Label Content="Paid_Leave" />
                     <CheckBox IsChecked="{Binding Leave.IsPaidLeave}" />
@@ -87,9 +87,18 @@
                         ItemsSource="{Binding Leaves}"
                         SelectedItem="{Binding Leave}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn FontSize="24" Binding="{Binding Employee.FullName}" Header="First Name" />
-                            <DataGridTextColumn FontSize="24" Binding="{Binding Employee.EmployeeType.Name}" Header="Job Position" />
-                            <DataGridTextColumn FontSize="24" Binding="{Binding LeaveDate, StringFormat=d}" Header="Leave Date" />
+                            <DataGridTextColumn
+                                Binding="{Binding Employee.FullName}"
+                                FontSize="24"
+                                Header="First Name" />
+                            <DataGridTextColumn
+                                Binding="{Binding Employee.EmployeeType.Name}"
+                                FontSize="24"
+                                Header="Job Position" />
+                            <DataGridTextColumn
+                                Binding="{Binding LeaveDate, StringFormat=d}"
+                                FontSize="24"
+                                Header="Leave Date" />
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

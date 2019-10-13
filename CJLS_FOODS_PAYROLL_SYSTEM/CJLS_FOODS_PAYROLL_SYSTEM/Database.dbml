@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="CJLSFOODSPAYROLL" Class="DatabaseDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=PSYCHO;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True" SettingsObjectName="CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings" SettingsPropertyName="CJLSFOODSPAYROLLConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=NEIL;Initial Catalog=CJLSFOODSPAYROLL;Integrated Security=True" SettingsObjectName="CJLS_FOODS_PAYROLL_SYSTEM.Properties.Settings" SettingsPropertyName="CJLSFOODSPAYROLLConnectionString5" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Attendance" Member="Attendances">
     <Type Name="Attendance">
       <Column Name="AttendanceID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -25,6 +25,8 @@
       <Column Name="SecretAnswer" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="UserType" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="Status" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EmployeeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Employee_User" Member="Employee" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Employee" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Branch" Member="Branches">
@@ -77,7 +79,6 @@
       <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="MiddleName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="FullName" Type="System.String" DbType="VarChar(101) NOT NULL" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
       <Column Name="Gender" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
       <Column Name="DateOfBirth" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Age" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
@@ -103,6 +104,8 @@
       <Column Name="PayrollGroupID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="DateAdded" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="BranchID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="VarChar(152) NOT NULL" IsDbGenerated="true" CanBeNull="false" UpdateCheck="Never" />
+      <Association Name="Employee_User" Member="Users" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="User" />
       <Association Name="Employee_Leave" Member="Leaves" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Leave" />
       <Association Name="Employee_Loan" Member="Loans" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="Loan" />
       <Association Name="Employee_PayrollDetail" Member="PayrollDetails" ThisKey="EmployeeID" OtherKey="EmployeeID" Type="PayrollDetail" />

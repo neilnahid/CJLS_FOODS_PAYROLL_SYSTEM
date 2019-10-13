@@ -14,6 +14,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 
         //properties
         public ObservableCollection<User> Users { get; set; }
+        public List<Employee> Employees { get; set; }
         public User User { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -22,6 +23,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             Helper.db = new DatabaseDataContext();
             Users = new ObservableCollection<User>(GetAllUsers());
             User = new User();
+            Employees = GetEmployees();
+        }
+
+        public List<Employee> GetEmployees()
+        {
+            return Helper.db.Employees.ToList();
         }
         public List<User> GetAllUsers()
         {

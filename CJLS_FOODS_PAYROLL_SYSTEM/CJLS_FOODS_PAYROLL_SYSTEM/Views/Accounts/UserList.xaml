@@ -11,7 +11,6 @@
     d:DesignWidth="800"
     DataContext="{StaticResource UserAdminViewModel}"
     mc:Ignorable="d">
-
     <materialDesign:DialogHost x:Name="dialogHost" DialogClosing="DialogHost_DialogClosing">
         <materialDesign:DialogHost.DialogContent>
             <StackPanel Margin="50">
@@ -28,11 +27,12 @@
                         IsReadOnly="True"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.UserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
-                    <TextBox
-                        materialDesign:HintAssist.Hint="FullName"
+                    <ComboBox
+                        materialDesign:HintAssist.Hint="Employee"
+                        DisplayMemberPath="FullName"
                         FontSize="24"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding User.FullName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        ItemsSource="{Binding Employees}"
+                        SelectedItem="{Binding User.Employee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     <TextBox
                         materialDesign:HintAssist.Hint="Username"
                         FontSize="24"
@@ -69,6 +69,7 @@
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.SecretAnswer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     <ComboBox
+                        FontSize="24    "
                         IsEditable="False"
                         SelectedValue="{Binding User.Status}"
                         SelectedValuePath="Content">
@@ -162,7 +163,7 @@
                 Click="Btn_OpenDialogCreate_Click"
                 Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
                 Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
-                ToolTip="Add New Employee">
+                ToolTip="Add New User">
                 <materialDesign:PackIcon
                     Width="24"
                     Height="24"

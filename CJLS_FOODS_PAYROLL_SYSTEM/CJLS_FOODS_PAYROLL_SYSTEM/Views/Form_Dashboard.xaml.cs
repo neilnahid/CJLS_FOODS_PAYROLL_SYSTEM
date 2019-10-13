@@ -57,11 +57,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
                 Frame.Content = new Views.Employee.EmployeeList();
                 Title.Text = "Employee List";
             }
-            else if (tvi.Header.ToString() == "Employee Groups")
+            else if (tvi.Header.ToString() == "Payroll Groups")
             {
                 draweHost.IsLeftDrawerOpen = false;
                 Frame.Content = new Views.Employee.PayrollGroup();
-                Title.Text = "Employee Groups";
+                Title.Text = "Payroll Groups";
             }
             else if (tvi.Header.ToString() == "Job Positions")
             {
