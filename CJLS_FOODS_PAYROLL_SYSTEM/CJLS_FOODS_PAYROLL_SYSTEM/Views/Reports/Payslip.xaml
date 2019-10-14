@@ -38,9 +38,9 @@
                                 <Run Text="Date Printed: " />
                                 <Run Text="{Binding DateNow, StringFormat=d}" />
                             </TextBlock>
-                            <TextBlock>
+                            <TextBlock> 
                                 <Run Text="Printed By: " />
-                                <Run Text="{Binding User.FullName}" />
+                                <Run Text="{Binding User.Employee.FullName}" />
                             </TextBlock>
                             <TextBlock>
                                 <Run Text="Company Name: " />

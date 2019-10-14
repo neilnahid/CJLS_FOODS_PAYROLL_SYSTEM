@@ -31,13 +31,19 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         {
             try
             {
-                Helper.db.Leaves.InsertOnSubmit(Leave);
-                Leaves.Add(Leave);
-                Helper.db.SubmitChanges();
-                Helper.db = new DatabaseDataContext();
-                Leaves = GetLeaves();
+                if ((from l in Helper.db.Leaves where l.LeaveDate == Leave.LeaveDate && Leave.EmployeeID == l.EmployeeID select l).Count() > 0)
+                    MessageBox.Show("leave date already exists for this employee");
+                else
+                {
+                    Helper.db.Leaves.InsertOnSubmit(Leave);
+                    Leaves.Add(Leave);
+                    Helper.db.SubmitChanges();
+                    Helper.db = new DatabaseDataContext();
+                    Leaves = GetLeaves();
+                }
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -48,7 +54,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         }
         private ObservableCollection<Leave> GetLeaves()
         {
-           return new ObservableCollection<Leave>((from l in Helper.db.Leaves select l).ToList());
+            return new ObservableCollection<Leave>((from l in Helper.db.Leaves select l).ToList());
         }
         public void DeleteLeave(Leave Leave)
         {

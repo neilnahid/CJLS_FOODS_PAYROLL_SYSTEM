@@ -46,7 +46,7 @@
                     <BlockUIContainer>
                         <StackPanel HorizontalAlignment="Right">
                             <TextBlock Width="327" HorizontalAlignment="Right"><Run Text="Date Printed: " /><Run Text=" " /><Run Text="{Binding DateNow, StringFormat=d}" /></TextBlock>
-                            <TextBlock Width="325" HorizontalAlignment="Right"><Run Text="Printed By: " /><Run Text=" " /><Run Text="{Binding User.FullName}" /></TextBlock>
+                            <TextBlock Width="325" HorizontalAlignment="Right"><Run Text="Printed By: " /><Run Text=" " /><Run Text="{Binding User.Employee.FullName}" /></TextBlock>
                         </StackPanel>
                     </BlockUIContainer>
                     <BlockUIContainer>
