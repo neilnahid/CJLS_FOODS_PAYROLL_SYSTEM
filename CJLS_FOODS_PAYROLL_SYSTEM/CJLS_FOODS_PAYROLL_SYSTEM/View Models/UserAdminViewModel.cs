@@ -28,11 +28,11 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 
         public List<Employee> GetEmployees()
         {
-            return (from e in Helper.db.Employees where e.EmployeeType.Name == "Payroll Officer" select e).ToList();
+            return (from e in Helper.db.Employees where e.EmployeeType.Name == "Payroll Officer" && e.Status == "Active" select e).ToList();
         }
         public List<User> GetAllUsers()
         {
-            return (from u in Helper.db.Users select u).ToList();
+            return (from u in Helper.db.Users where u.Status == "Active" && u.UserType != "Owner" select u).ToList();
         }
         public void AddNewUser()
         {

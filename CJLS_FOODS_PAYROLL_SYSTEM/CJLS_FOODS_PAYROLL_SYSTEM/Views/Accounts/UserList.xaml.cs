@@ -84,6 +84,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts
             {
                 VM.DeleteUser();
             }
+            VM.Instantiate();
 
         }
 
