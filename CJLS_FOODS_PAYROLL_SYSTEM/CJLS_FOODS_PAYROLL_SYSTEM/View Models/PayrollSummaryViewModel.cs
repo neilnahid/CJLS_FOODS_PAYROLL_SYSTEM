@@ -26,7 +26,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public void Print(FlowDocument fd)
         {
             var pd = new PrintDialog();
-            if (pd.ShowDialog().Value)
+            pd.PrintTicket.PageOrientation = PageOrientation.Landscape;
+            pd.PrintTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.NorthAmericaGermanLegalFanfold);
+            if (pd.ShowDialog().Value);
             {
                 IDocumentPaginatorSource idocument = fd as IDocumentPaginatorSource;
                 try

@@ -13,7 +13,10 @@
     mc:Ignorable="d">
     <Grid>
         <StackPanel>
-            <FlowDocumentReader ViewingMode="Page" Margin="100,50,100,0" Height="713">
+            <FlowDocumentReader
+                Height="713"
+                Margin="100,50,100,0"
+                ViewingMode="Page">
                 <FlowDocument
                     x:Name="fd_payrollSummary"
                     ColumnWidth="13in"
@@ -21,68 +24,65 @@
                     PagePadding="0"
                     PageWidth="13in">
                     <BlockUIContainer>
-                        <Grid Height="191">
+                        <StackPanel
+                            Margin="0,25,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
                             <Image
-                                Width="220"
-                                Height="135"
+                                VerticalAlignment="Top"
                                 Source="/CJLS FOODS LOGO.jpg"
-                                Stretch="None" 
-                                VerticalAlignment="Top" Margin="514,0"/>
+                                Stretch="None" />
                             <StackPanel VerticalAlignment="Bottom">
-                                
+
                                 <TextBlock HorizontalAlignment="Center"><Run Text="0221 J. Solon Drive Kamagong, Lahug Cebu City" /></TextBlock>
-                                <TextBlock HorizontalAlignment="Center"><Run Text="Contact No: " /><Run Text=" "/><Run Text="870-3295" /></TextBlock>
-                                <TextBlock  HorizontalAlignment="Center"><Run Text="TIN No:" /><Run Text=" "/><Run Text="0-0-00000-000" /></TextBlock>
+                                <TextBlock HorizontalAlignment="Center"><Run Text="Contact No: " /><Run Text=" " /><Run Text="236-2491" /></TextBlock>
+                                <TextBlock HorizontalAlignment="Center"><Run Text="TIN No:" /><Run Text=" " /><Run Text="221-157-374-000" /></TextBlock>
                             </StackPanel>
-                        </Grid>
+                        </StackPanel>
                     </BlockUIContainer>
                     <Paragraph FontSize="30" TextAlignment="Center">
-                        <Run Text="Payroll Summary"/>
+                        <Run Text="Payroll Summary" />
                     </Paragraph>
-                    <BlockUIContainer >
-                        <StackPanel
-                            HorizontalAlignment="Right">
-                            <TextBlock HorizontalAlignment="Right" Width="327"><Run Text="Date Printed: " /><Run Text=" "/><Run Text="{Binding DateNow, StringFormat=d}" /></TextBlock>
-                            <TextBlock HorizontalAlignment="Right" Width="325"><Run Text="Printed By: " /><Run Text=" "/><Run Text="{Binding User.FullName}" /></TextBlock>
+                    <BlockUIContainer>
+                        <StackPanel HorizontalAlignment="Right">
+                            <TextBlock Width="327" HorizontalAlignment="Right"><Run Text="Date Printed: " /><Run Text=" " /><Run Text="{Binding DateNow, StringFormat=d}" /></TextBlock>
+                            <TextBlock Width="325" HorizontalAlignment="Right"><Run Text="Printed By: " /><Run Text=" " /><Run Text="{Binding User.FullName}" /></TextBlock>
                         </StackPanel>
                     </BlockUIContainer>
                     <BlockUIContainer>
                         <DataGrid
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
                             AutoGenerateColumns="False"
-                            ColumnWidth="auto"
                             IsReadOnly="True"
-                            ItemsSource="{Binding Payroll.PayrollDetails}" Width="1231" SelectionChanged="DataGrid_SelectionChanged" RenderTransformOrigin="0.5,0.5">
-                            <DataGrid.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="-0.034"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </DataGrid.RenderTransform>
+                            ItemsSource="{Binding Payroll.PayrollDetails}"
+                            SelectionChanged="DataGrid_SelectionChanged">
                             <DataGrid.Columns>
                                 <DataGridTemplateColumn Width="180" Header="Name">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock><Run Text="{Binding Employee.LastName}" /><Run Text=" "/><Run Text=" " /><Run Text=" "/><Run Text="{Binding Employee.FirstName}" /></TextBlock>
+                                            <TextBlock><Run Text="{Binding Employee.LastName}" /><Run Text=" " /><Run Text=" " /><Run Text=" " /><Run Text="{Binding Employee.FirstName}" /></TextBlock>
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn >
-                                <DataGridTextColumn Width="90" Binding="{Binding Employee.EmployeeType.Name}" Header="Position" />
-                                <DataGridTextColumn Width="57" Binding="{Binding Employee.DailyRate}" Header="Rate" />
-                                <DataGridTextColumn Width="140" Binding="{Binding TotalRegularHours}" Header="Total Regular Hours" />
-                                <DataGridTextColumn Width="100" Binding="{Binding TotalDays}" Header="No. of Days" />
-                                <DataGridTextColumn Width="150" Binding="{Binding TotalOverTimeHours}" Header="Total Overtime Hours" />
-                                <DataGridTextColumn Width="81" Binding="{Binding OvertimePay}" Header="Overtime" />
-                                <DataGridTextColumn Width="100" Binding="{Binding GrossPay}" Header="Gross Pay" />
-                                <DataGridTextColumn Width="90" Binding="{Binding TotalDeductions}" Header="Deduction" />
-                                <DataGridTextColumn Width="100" Binding="{Binding NetPay}" Header="Net Payroll" />
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Binding="{Binding Employee.EmployeeType.Name}" Header="Position" />
+                                <DataGridTextColumn Binding="{Binding Employee.DailyRate}" Header="Rate" />
+                                <DataGridTextColumn Binding="{Binding TotalRegularHours}" Header="Total Reg. Hrs." />
+                                <DataGridTextColumn Binding="{Binding TotalDays}" Header="No. of Days" />
+                                <DataGridTextColumn Binding="{Binding TotalOverTimeHours}" Header="Total O.T Hrs" />
+                                <DataGridTextColumn Binding="{Binding OvertimePay}" Header="Overtime" />
+                                <DataGridTextColumn Binding="{Binding GrossPay}" Header="Gross Pay" />
+                                <DataGridTextColumn Binding="{Binding TotalDeductions}" Header="Deduction" />
+                                <DataGridTextColumn Binding="{Binding NetPay}" Header="Net Payroll" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </BlockUIContainer>
                 </FlowDocument>
             </FlowDocumentReader>
-            <Button Click="btn_print_Click" Margin="43,0,71,0" Content="Print"/>
+            <Button
+                Margin="43,0,71,0"
+                Click="btn_print_Click"
+                Content="Print" />
         </StackPanel>
     </Grid>
 

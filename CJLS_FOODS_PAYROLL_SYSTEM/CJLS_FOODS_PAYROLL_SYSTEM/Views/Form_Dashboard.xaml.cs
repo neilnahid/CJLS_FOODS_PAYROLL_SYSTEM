@@ -27,7 +27,13 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
             Frame.Content = new Home();
             Helper.Title = Title;
             if (Helper.User != null & Helper.User.Password == "cjlsfoods")
+            {
+                if (Helper.User.SecretQuestion == null || Helper.User.SecretAnswer == null)
+                    sp_securityPanel.Visibility = Visibility.Visible;
+                else
+                    sp_securityPanel.Visibility = Visibility.Collapsed;
                 dg_changePassword.IsOpen = true;
+            }
         }
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {

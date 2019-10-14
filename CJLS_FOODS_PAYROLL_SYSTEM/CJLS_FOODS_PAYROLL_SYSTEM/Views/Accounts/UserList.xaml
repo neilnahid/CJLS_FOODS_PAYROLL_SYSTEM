@@ -28,6 +28,7 @@
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                         Text="{Binding User.UserId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     <ComboBox
+                        x:Name="cb_employee"
                         materialDesign:HintAssist.Hint="Employee"
                         DisplayMemberPath="FullName"
                         FontSize="24"

@@ -43,7 +43,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                         }
                         break;
                     case "MiddleName":
-                        if (!Regex.IsMatch(FirstName, "^[a-z A-Z]*$"))
+                        if (!String.IsNullOrEmpty(MiddleName) && !Regex.IsMatch(MiddleName, "^[a-z A-Z]*$"))
                             goto case "onlychars";
                         else if (EmployeeID == 0)
                         {

@@ -19,22 +19,24 @@
             <StackPanel Margin="50,0,50,50" HorizontalAlignment="Center">
                 <Label FontSize="24">Default password detected.</Label>
                 <Label FontSize="24">You must change your password.</Label>
-                <ComboBox
-                    materialDesign:HintAssist.Hint="Security Question"
-                    FontSize="24"
-                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                    Text="{Binding User.SecretQuestion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
-                    <ComboBoxItem Content="What is your mother's maiden name?" />
-                    <ComboBoxItem Content="What primary school did you attend?" />
-                    <ComboBoxItem Content="In what town or city was your first full time job?" />
-                    <ComboBoxItem Content="In what city does your nearest sibling live?" />
-                    <ComboBoxItem Content="What was your childhood nickname?" />
-                </ComboBox>
-                <TextBox
-                    materialDesign:HintAssist.Hint="Secret Answer"
-                    FontSize="24"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                    Text="{Binding User.SecretAnswer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                <StackPanel x:Name="sp_securityPanel">
+                    <ComboBox
+                        materialDesign:HintAssist.Hint="Security Question"
+                        FontSize="24"
+                        Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                        Text="{Binding User.SecretQuestion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}">
+                        <ComboBoxItem Content="What is your mother's maiden name?" />
+                        <ComboBoxItem Content="What primary school did you attend?" />
+                        <ComboBoxItem Content="In what town or city was your first full time job?" />
+                        <ComboBoxItem Content="In what city does your nearest sibling live?" />
+                        <ComboBoxItem Content="What was your childhood nickname?" />
+                    </ComboBox>
+                    <TextBox
+                        materialDesign:HintAssist.Hint="Secret Answer"
+                        FontSize="24"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                        Text="{Binding User.SecretAnswer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                </StackPanel>
                 <PasswordBox
                     x:Name="pswrdbox_newPassword"
                     materialDesign:HintAssist.Hint="New Password"

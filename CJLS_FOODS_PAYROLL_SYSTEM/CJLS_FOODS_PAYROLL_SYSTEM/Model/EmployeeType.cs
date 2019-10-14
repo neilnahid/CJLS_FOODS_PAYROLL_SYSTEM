@@ -23,10 +23,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                         else if (EmployeeTypeID != 0)
                         {
                             if ((from b in Helper.db.EmployeeTypes where b.Name == Name select b).Count() > 0)
-                                result = "branch name already exists in database";
+                                result = "job position already exists in database";
                         }
                         else if ((from b in Helper.db.EmployeeTypes where b.Name == Name && b.EmployeeTypeID != EmployeeTypeID select b).Count() > 0)
-                            result = "branch name already exists in database";
+                            result = "job position already exists in database";
                         break;
                 }
                 SendPropertyChanging();

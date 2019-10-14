@@ -26,6 +26,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
             InitializeComponent();
             VM = (View_Models.HomeViewModel)DataContext;
             VM.Instantiate();
+            if (VM.User.UserType == "Owner")
+                txt_welcome_name.Text = "Owner";
         }
     }
 }

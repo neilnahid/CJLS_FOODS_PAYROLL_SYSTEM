@@ -63,6 +63,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts
         //}
         private void Btn_Edit_Click(object sender, RoutedEventArgs e)
         {
+            cb_employee.IsEnabled = false;
             DialogHeader.Text = "Update User";
             btn_dialogConfirm.Content = "UPDATE";
         }
@@ -88,6 +89,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts
 
         private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e)
         {
+            cb_employee.IsEnabled = true;
+
             VM.User = new User() { Status = "Active", UserType = "Payroll Officer", Password = "cjlsfoods" };
             DialogHeader.Text = "Create New User";
             btn_dialogConfirm.Content = "CREATE";

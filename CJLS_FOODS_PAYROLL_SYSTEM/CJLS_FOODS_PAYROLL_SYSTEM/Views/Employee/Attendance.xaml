@@ -71,7 +71,8 @@
                                         <DataGridTextColumn Binding="{Binding PayrollDetail.Employee.HourlyRate}" Header="Hourly rate" />
                                         <DataGridTextColumn Binding="{Binding RegularHoursWorked}" Header="Regular Hours" />
                                         <DataGridTextColumn Binding="{Binding RegularPay}" Header="Regular Pay" />
-                                        <DataGridTextColumn Binding="{Binding OverTimeHoursWorked}" Header="Regular Pay" />
+                                        <DataGridTextColumn Binding="{Binding OverTimeHoursWorked}" Header="Overtime Hours" />
+                                        <DataGridTextColumn Binding="{Binding OvertimePay}" Header="Overtime Pay" />
                                         <DataGridTextColumn Binding="{Binding DayType}" Header="Day type" />
                                         <DataGridTextColumn Binding="{Binding Total}" Header="Total" />
                                     </DataGrid.Columns>
@@ -572,7 +573,7 @@
                                 Fill="Black" />
                             <TextBlock>
                                 <Run Text=" - " />
-                                <Run Text=" Absent " />
+                                <Run Text=" Absent/Day off " />
                             </TextBlock>
                         </StackPanel>
                     </StackPanel>
