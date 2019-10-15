@@ -46,7 +46,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             return new ObservableCollection<Payroll>(((from p in Helper.db.Payrolls select p).ToList().OrderByDescending(pr=>pr.DateCreated)));
         }
         public void FetchPayrollGroups() {
-            PayrollGroups = (from pg in Helper.db.PayrollGroups select pg).ToList();
+            PayrollGroups = (from pg in Helper.db.PayrollGroups where pg.Employees.Count>0 select pg).ToList();
         }
 
         public void CreateEmployeePayrollDetails()
@@ -77,7 +77,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             if (pd.Employee.IsPagibigActive)
                 pd.Contributions.Add(new Contribution { ContributionTypeID = 3, PayrollDetailID = pd.PayrollDetailID });
             if (pd.Employee.IsIncomeTaxActive)
-                    
                 pd.Contributions.Add(new Contribution { ContributionTypeID = 4, PayrollDetailID = pd.PayrollDetailID });
         }
         public void UpdatePayroll()

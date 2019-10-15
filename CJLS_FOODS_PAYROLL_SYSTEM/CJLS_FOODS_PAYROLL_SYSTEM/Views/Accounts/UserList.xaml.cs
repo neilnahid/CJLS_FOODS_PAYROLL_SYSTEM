@@ -78,7 +78,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts
             else if (btn_dialogConfirm.Content.ToString() == "CREATE")
             {
                 VM.AddNewUser();
-                MessageBox.Show("Successfully Created User");
+                MessageBox.Show("Successfully Created User, default password is 'cjlsfoods' ");
             }
             else if (btn_dialogConfirm.Content.ToString() == "DELETE")
             {
@@ -107,6 +107,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts
                 e.Handled = false;
             else
                 e.Handled = true;
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(VM.User.Employee != null)
+            VM.User.Username = VM.User.Employee.FullName.ToLower().Replace(' ','_'); 
         }
     }
 }

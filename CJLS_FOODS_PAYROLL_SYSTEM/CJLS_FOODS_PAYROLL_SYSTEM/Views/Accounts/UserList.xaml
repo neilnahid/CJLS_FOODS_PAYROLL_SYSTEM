@@ -33,7 +33,8 @@
                         DisplayMemberPath="FullName"
                         FontSize="24"
                         ItemsSource="{Binding Employees}"
-                        SelectedItem="{Binding User.Employee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
+                        SelectedItem="{Binding User.Employee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                        SelectionChanged="ComboBox_SelectionChanged" />
                     <TextBox
                         materialDesign:HintAssist.Hint="Username"
                         FontSize="24"
@@ -41,7 +42,7 @@
                         Text="{Binding User.Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                     <TextBlock x:Name="txtblock_errors" Foreground="Red" />
                     <ComboBox
-                        FontSize="24    "
+                        FontSize="24"
                         IsEditable="False"
                         SelectedValue="{Binding User.Status}"
                         SelectedValuePath="Content">

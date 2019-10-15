@@ -30,7 +30,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView
 
         private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e)
         {
-            VM.Payroll = new CJLS_FOODS_PAYROLL_SYSTEM.Payroll() { StartDate = VM.Payroll.LatestEndDate, EndDate = VM.Payroll.LatestEndDate };
+            if (VM.Payroll != null)
+                VM.Payroll = new CJLS_FOODS_PAYROLL_SYSTEM.Payroll() { StartDate = VM.Payroll.LatestEndDate, EndDate = VM.Payroll.LatestEndDate };
+            else
+                VM.Payroll = new CJLS_FOODS_PAYROLL_SYSTEM.Payroll();
             DialogHeader.Text = "Create New Payroll";
             btn_dialogConfirm.Content = "CREATE";
         }
