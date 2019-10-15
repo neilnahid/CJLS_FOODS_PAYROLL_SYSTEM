@@ -136,6 +136,7 @@
     <Compile Include="View Models\ContributionsViewModel.cs" />
     <Compile Include="View Models\EmployeeTypeViewModel.cs" />
     <Compile Include="View Models\ForgotPassordViewModel.cs" />
+    <Compile Include="View Models\GovernContributionRatesViewModel.cs" />
     <Compile Include="View Models\HomeViewModel.cs" />
     <Compile Include="View Models\LeaveViewModel.cs" />
     <Compile Include="View Models\LoanCashAdvanceViewModel.cs" />
@@ -175,6 +176,9 @@
     </Compile>
     <Compile Include="Views\Authentication\Login_Form.xaml.cs">
       <DependentUpon>Login_Form.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Payroll\GovernmentContributionRates.xaml.cs">
+      <DependentUpon>GovernmentContributionRates.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Reports\PayrollSummary.xaml.cs">
       <DependentUpon>PayrollSummary.xaml</DependentUpon>
@@ -231,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Authentication\Login_Form.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Payroll\GovernmentContributionRates.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

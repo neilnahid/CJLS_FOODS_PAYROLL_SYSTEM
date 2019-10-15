@@ -77,7 +77,7 @@
     <Type Name="Employee">
       <Column Name="EmployeeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="FirstName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="MiddleName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="MiddleName" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
       <Column Name="LastName" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="Gender" Type="System.String" DbType="VarChar(25) NOT NULL" CanBeNull="false" />
       <Column Name="DateOfBirth" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
@@ -197,4 +197,107 @@
       <Association Name="PayrollGroup_Payroll" Member="Payrolls" ThisKey="PayrollGroupID" OtherKey="PayrollGroupID" Type="Payroll" />
     </Type>
   </Table>
+  <Table Name="dbo.TaxRate" Member="TaxRates">
+    <Type Name="TaxRate">
+      <Column Name="TaxRateID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="PercentRate" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.computeAttendanceGrossPay" Method="computeAttendanceGrossPay" IsComposable="true">
+    <Parameter Name="attendanceid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.GetTotalDaysOf" Method="GetTotalDaysOf" IsComposable="true">
+    <Parameter Name="PayrollDetailsID" Parameter="payrollDetailsID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ComputeAttendanceOvertimePay" Method="ComputeAttendanceOvertimePay" IsComposable="true">
+    <Parameter Name="PayrollDetailID" Parameter="payrollDetailID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="OvertimeHoursWorked" Parameter="overtimeHoursWorked" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DayType" Parameter="dayType" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.ComputeAttendanceRegularPay" Method="ComputeAttendanceRegularPay" IsComposable="true">
+    <Parameter Name="PayrollDetailID" Parameter="payrollDetailID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="RegularHoursWorked" Parameter="regularHoursWorked" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DayType" Parameter="dayType" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.ComputeContribution" Method="ComputeContribution" IsComposable="true">
+    <Parameter Name="ContributionTypeID" Parameter="contributionTypeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PayrollDetailID" Parameter="payrollDetailID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.ComputeGrossPay" Method="ComputeGrossPay" IsComposable="true">
+    <Parameter Name="PayrollDetailID" Parameter="payrollDetailID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.ComputeNetPay" Method="ComputeNetPay" IsComposable="true">
+    <Parameter Name="PayrollDetailID" Parameter="payrollDetailID" Type="System.Double" DbType="Float" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.ComputeOverTime" Method="ComputeOverTime" IsComposable="true">
+    <Parameter Name="PayrollDetailID" Parameter="payrollDetailID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.ComputePagIBIG" Method="ComputePagIBIG" IsComposable="true">
+    <Parameter Name="MonthlySalary" Parameter="monthlySalary" Type="System.Double" DbType="Float" />
+    <Parameter Name="AverageWorkDaysAMonth" Parameter="averageWorkDaysAMonth" Type="System.Double" DbType="Float" />
+    <Parameter Name="TotalDays" Parameter="totalDays" Type="System.Double" DbType="Float" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.computePayment" Method="computePayment" IsComposable="true">
+    <Parameter Name="LoanID" Parameter="loanID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.ComputePhilHealth" Method="ComputePhilHealth" IsComposable="true">
+    <Parameter Name="MonthlySalary" Parameter="monthlySalary" Type="System.Double" DbType="Float" />
+    <Parameter Name="AverageWorkDaysAMonth" Parameter="averageWorkDaysAMonth" Type="System.Double" DbType="Float" />
+    <Parameter Name="TotalDays" Parameter="totalDays" Type="System.Double" DbType="Float" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.computeRegularPay" Method="computeRegularPay" IsComposable="true">
+    <Parameter Name="PayrollDetailID" Parameter="payrollDetailID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.ComputeSSS" Method="ComputeSSS" IsComposable="true">
+    <Parameter Name="MonthlySalary" Parameter="monthlySalary" Type="System.Double" DbType="Float" />
+    <Parameter Name="AverageWorkDaysAMonth" Parameter="averageWorkDaysAMonth" Type="System.Double" DbType="Float" />
+    <Parameter Name="TotalDays" Parameter="totalDays" Type="System.Double" DbType="Float" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.ComputeTax" Method="ComputeTax" IsComposable="true">
+    <Parameter Name="DeductedMonthlySalary" Parameter="deductedMonthlySalary" Type="System.Double" DbType="Float" />
+    <Parameter Name="AverageWorkDaysAMonth" Parameter="averageWorkDaysAMonth" Type="System.Double" DbType="Float" />
+    <Parameter Name="TotalDays" Parameter="totalDays" Type="System.Double" DbType="Float" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.computeTermsRemaining" Method="computeTermsRemaining" IsComposable="true">
+    <Parameter Name="LoanID" Parameter="loanID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Terms" Parameter="terms" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.ComputeTotalContributions" Method="ComputeTotalContributions" IsComposable="true">
+    <Parameter Name="EmployeeID" Parameter="employeeID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PayrollDetailID" Parameter="payrollDetailID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="PayrollID" Parameter="payrollID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.ComputeTotalDeductions" Method="ComputeTotalDeductions" IsComposable="true">
+    <Parameter Name="PayrollDetailID" Parameter="payrollDetailID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.ComputeTotalOverTimeHours" Method="ComputeTotalOverTimeHours" IsComposable="true">
+    <Parameter Name="PayrollDetailID" Parameter="payrollDetailID" Type="System.Double" DbType="Float" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.ComputeTotalRegularHours" Method="ComputeTotalRegularHours" IsComposable="true">
+    <Parameter Name="PayrollDetailID" Parameter="payrollDetailID" Type="System.Double" DbType="Float" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.getFormattedEmpID" Method="getFormattedEmpID" IsComposable="true">
+    <Parameter Name="EmployeeID" Parameter="employeeID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
 </Database>

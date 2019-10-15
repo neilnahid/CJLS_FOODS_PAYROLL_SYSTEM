@@ -118,6 +118,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
                 Frame.Content = new Views.Employee.ContributionsView();
                 Title.Text = "Contributions";
             }
+            else if (tvi.Header.ToString() == "Government Contribution Rates")
+            {
+                draweHost.IsLeftDrawerOpen = false;
+                Frame.Content = new Views.Payroll.GovernmentContributionRates();
+                Title.Text = "Contributions";
+            }
             else if (tvi.Header.ToString() == "Logout")
             {
                 new Views.Login_Form().Show();

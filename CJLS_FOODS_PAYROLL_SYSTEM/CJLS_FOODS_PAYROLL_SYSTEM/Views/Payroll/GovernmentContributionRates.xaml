@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="CJLS_FOODS_PAYROLL_SYSTEM.Views.Payroll.GovernmentContributionRates"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:CJLS_FOODS_PAYROLL_SYSTEM.Views.Payroll"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="GovernmentContributionRates"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    DataContext="{StaticResource GovernContributionRatesViewModel}"
+    mc:Ignorable="d">
+    <StackPanel>
+        <DataGrid
+            AutoGenerateColumns="False"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            ColumnWidth="1*"
+            ItemsSource="{Binding ContributionTypes}">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Binding="{Binding Name}"
+                    Header="Name"
+                    IsReadOnly="True" />
+                <DataGridTextColumn
+                    Binding="{Binding PercentageRate}"
+                    Header="PercentageRate"
+                    IsReadOnly="False" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Click="Button_Click">Update Values</Button>
+    </StackPanel>
+</Page>

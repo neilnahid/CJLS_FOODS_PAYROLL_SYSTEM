@@ -12,23 +12,25 @@ using System.Xml;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 {
-   public  class PayrollSummaryViewModel : INotifyPropertyChanged
+    public class PayrollSummaryViewModel : INotifyPropertyChanged
     {
         public Payroll Payroll { get; set; }
         public DateTime DateNow { get; set; } = DateTime.Now;
+        public double? TotalGrossPay { get; set; }
         public User User { get; set; } = Helper.User;
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize(int PayrollID)
         {
             Helper.db = new DatabaseDataContext();
             Payroll = (from p in Helper.db.Payrolls where p.PayrollID == PayrollID select p).First();
+            TotalGrossPay = Payroll.PayrollDetails.Sum(pd => pd.GrossPay);
         }
         public void Print(FlowDocument fd)
         {
             var pd = new PrintDialog();
             pd.PrintTicket.PageOrientation = PageOrientation.Landscape;
             pd.PrintTicket.PageMediaSize = new PageMediaSize(PageMediaSizeName.NorthAmericaGermanLegalFanfold);
-            if (pd.ShowDialog().Value);
+            if (pd.ShowDialog().Value) ;
             {
                 IDocumentPaginatorSource idocument = fd as IDocumentPaginatorSource;
                 try

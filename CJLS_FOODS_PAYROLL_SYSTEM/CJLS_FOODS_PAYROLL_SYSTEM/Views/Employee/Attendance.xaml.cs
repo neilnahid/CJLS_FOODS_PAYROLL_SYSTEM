@@ -21,7 +21,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
     public partial class Attendance : Page
     {
         View_Models.AttendanceViewModel VM = new View_Models.AttendanceViewModel();
-        public Attendance(Payroll payroll, PayrollDetail selectedPayrolLDetail)
+        public Attendance(CJLS_FOODS_PAYROLL_SYSTEM.Payroll payroll, PayrollDetail selectedPayrolLDetail)
         {
             Helper.CurrentPayrollDetail = selectedPayrolLDetail;
             InitializeComponent();

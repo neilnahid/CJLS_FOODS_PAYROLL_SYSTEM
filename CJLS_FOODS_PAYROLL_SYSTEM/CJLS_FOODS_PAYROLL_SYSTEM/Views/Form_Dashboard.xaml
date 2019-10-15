@@ -87,6 +87,7 @@
                         <TreeViewItem FontSize="28" Header="Process Leave" />
                         <TreeViewItem FontSize="28" Header="Process Loans/Cash Advance" />
                         <TreeViewItem FontSize="28" Header="Account Settings" />
+                        <TreeViewItem FontSize="28" Header="Government Contribution Rates" />
                         <TreeViewItem FontSize="28" Header="Logout" />
                     </TreeView>
                 </StackPanel>

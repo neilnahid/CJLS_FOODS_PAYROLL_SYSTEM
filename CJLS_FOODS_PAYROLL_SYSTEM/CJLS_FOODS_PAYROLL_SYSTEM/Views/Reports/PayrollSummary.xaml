@@ -50,32 +50,38 @@
                         </StackPanel>
                     </BlockUIContainer>
                     <BlockUIContainer>
-                        <DataGrid
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            AutoGenerateColumns="False"
-                            IsReadOnly="True"
-                            ItemsSource="{Binding Payroll.PayrollDetails}"
-                            SelectionChanged="DataGrid_SelectionChanged">
-                            <DataGrid.Columns>
-                                <DataGridTemplateColumn Width="180" Header="Name">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock><Run Text="{Binding Employee.LastName}" /><Run Text=" " /><Run Text=" " /><Run Text=" " /><Run Text="{Binding Employee.FirstName}" /></TextBlock>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <DataGridTextColumn Binding="{Binding Employee.EmployeeType.Name}" Header="Position" />
-                                <DataGridTextColumn Binding="{Binding Employee.DailyRate}" Header="Rate" />
-                                <DataGridTextColumn Binding="{Binding TotalRegularHours}" Header="Total Reg. Hrs." />
-                                <DataGridTextColumn Binding="{Binding TotalDays}" Header="No. of Days" />
-                                <DataGridTextColumn Binding="{Binding TotalOverTimeHours}" Header="Total O.T Hrs" />
-                                <DataGridTextColumn Binding="{Binding OvertimePay}" Header="Overtime" />
-                                <DataGridTextColumn Binding="{Binding GrossPay}" Header="Gross Pay" />
-                                <DataGridTextColumn Binding="{Binding TotalDeductions}" Header="Deduction" />
-                                <DataGridTextColumn Binding="{Binding NetPay}" Header="Net Payroll" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <StackPanel>
+                            <DataGrid
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                AutoGenerateColumns="False"
+                                IsReadOnly="True"
+                                ItemsSource="{Binding Payroll.PayrollDetails}"
+                                SelectionChanged="DataGrid_SelectionChanged">
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Width="180" Header="Name">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock><Run Text="{Binding Employee.LastName}" /><Run Text=" " /><Run Text=" " /><Run Text=" " /><Run Text="{Binding Employee.FirstName}" /></TextBlock>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Binding="{Binding Employee.EmployeeType.Name}" Header="Position" />
+                                    <DataGridTextColumn Binding="{Binding Employee.DailyRate}" Header="Rate" />
+                                    <DataGridTextColumn Binding="{Binding TotalRegularHours}" Header="Total Reg. Hrs." />
+                                    <DataGridTextColumn Binding="{Binding TotalDays}" Header="No. of Days" />
+                                    <DataGridTextColumn Binding="{Binding TotalOverTimeHours}" Header="Total O.T Hrs" />
+                                    <DataGridTextColumn Binding="{Binding OvertimePay}" Header="Overtime" />
+                                    <DataGridTextColumn Binding="{Binding GrossPay}" Header="Gross Pay" />
+                                    <DataGridTextColumn Binding="{Binding TotalDeductions}" Header="Deduction" />
+                                    <DataGridTextColumn Binding="{Binding NetPay}" Header="Net Payroll" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <TextBlock Margin="0,100,130,0" HorizontalAlignment="Right">
+                                <Run Text="Total GrossPay: " />
+                                <Run Text="{Binding TotalGrossPay}" />
+                            </TextBlock>
+                        </StackPanel>
                     </BlockUIContainer>
                 </FlowDocument>
             </FlowDocumentReader>

@@ -77,6 +77,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models {
             if (pd.Employee.IsPagibigActive)
                 pd.Contributions.Add(new Contribution { ContributionTypeID = 3, PayrollDetailID = pd.PayrollDetailID });
             if (pd.Employee.IsIncomeTaxActive)
+                    
                 pd.Contributions.Add(new Contribution { ContributionTypeID = 4, PayrollDetailID = pd.PayrollDetailID });
         }
         public void UpdatePayroll()

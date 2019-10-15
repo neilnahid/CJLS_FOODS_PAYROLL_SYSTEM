@@ -20,7 +20,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Reports
     public partial class PayrollSummary : Window
     {
         View_Models.PayrollSummaryViewModel VM;
-        public PayrollSummary(Payroll payroll)
+        public PayrollSummary(CJLS_FOODS_PAYROLL_SYSTEM.Payroll payroll)
         {
             InitializeComponent();
             VM = (View_Models.PayrollSummaryViewModel)DataContext;

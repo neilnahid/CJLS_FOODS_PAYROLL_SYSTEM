@@ -75,6 +75,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
     partial void InsertPayrollGroup(PayrollGroup instance);
     partial void UpdatePayrollGroup(PayrollGroup instance);
     partial void DeletePayrollGroup(PayrollGroup instance);
+    partial void InsertTaxRate(TaxRate instance);
+    partial void UpdateTaxRate(TaxRate instance);
+    partial void DeleteTaxRate(TaxRate instance);
     #endregion
 		
 		public DatabaseDataContext() : 
@@ -225,6 +228,134 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			{
 				return this.GetTable<PayrollGroup>();
 			}
+		}
+		
+		public System.Data.Linq.Table<TaxRate> TaxRates
+		{
+			get
+			{
+				return this.GetTable<TaxRate>();
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.computeAttendanceGrossPay", IsComposable=true)]
+		public System.Nullable<double> computeAttendanceGrossPay([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> attendanceid)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), attendanceid).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.GetTotalDaysOf", IsComposable=true)]
+		public System.Nullable<int> GetTotalDaysOf([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollDetailsID", DbType="Int")] System.Nullable<int> payrollDetailsID)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), payrollDetailsID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputeAttendanceOvertimePay", IsComposable=true)]
+		public System.Nullable<double> ComputeAttendanceOvertimePay([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollDetailID", DbType="Int")] System.Nullable<int> payrollDetailID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="OvertimeHoursWorked", DbType="Int")] System.Nullable<int> overtimeHoursWorked, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DayType", DbType="VarChar(50)")] string dayType)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), payrollDetailID, overtimeHoursWorked, dayType).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputeAttendanceRegularPay", IsComposable=true)]
+		public System.Nullable<double> ComputeAttendanceRegularPay([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollDetailID", DbType="Int")] System.Nullable<int> payrollDetailID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="RegularHoursWorked", DbType="Int")] System.Nullable<int> regularHoursWorked, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="DayType", DbType="VarChar(50)")] string dayType)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), payrollDetailID, regularHoursWorked, dayType).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputeContribution", IsComposable=true)]
+		public System.Nullable<double> ComputeContribution([global::System.Data.Linq.Mapping.ParameterAttribute(Name="ContributionTypeID", DbType="Int")] System.Nullable<int> contributionTypeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollDetailID", DbType="Int")] System.Nullable<int> payrollDetailID)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), contributionTypeID, payrollDetailID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputeGrossPay", IsComposable=true)]
+		public System.Nullable<double> ComputeGrossPay([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollDetailID", DbType="Int")] System.Nullable<int> payrollDetailID)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), payrollDetailID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputeNetPay", IsComposable=true)]
+		public System.Nullable<double> ComputeNetPay([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollDetailID", DbType="Float")] System.Nullable<double> payrollDetailID)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), payrollDetailID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputeOverTime", IsComposable=true)]
+		public System.Nullable<double> ComputeOverTime([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollDetailID", DbType="Int")] System.Nullable<int> payrollDetailID)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), payrollDetailID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputePagIBIG", IsComposable=true)]
+		public System.Nullable<double> ComputePagIBIG([global::System.Data.Linq.Mapping.ParameterAttribute(Name="MonthlySalary", DbType="Float")] System.Nullable<double> monthlySalary, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AverageWorkDaysAMonth", DbType="Float")] System.Nullable<double> averageWorkDaysAMonth, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalDays", DbType="Float")] System.Nullable<double> totalDays)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), monthlySalary, averageWorkDaysAMonth, totalDays).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.computePayment", IsComposable=true)]
+		public System.Nullable<double> computePayment([global::System.Data.Linq.Mapping.ParameterAttribute(Name="LoanID", DbType="Int")] System.Nullable<int> loanID)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), loanID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputePhilHealth", IsComposable=true)]
+		public System.Nullable<double> ComputePhilHealth([global::System.Data.Linq.Mapping.ParameterAttribute(Name="MonthlySalary", DbType="Float")] System.Nullable<double> monthlySalary, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AverageWorkDaysAMonth", DbType="Float")] System.Nullable<double> averageWorkDaysAMonth, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalDays", DbType="Float")] System.Nullable<double> totalDays)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), monthlySalary, averageWorkDaysAMonth, totalDays).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.computeRegularPay", IsComposable=true)]
+		public System.Nullable<double> computeRegularPay([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollDetailID", DbType="Int")] System.Nullable<int> payrollDetailID)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), payrollDetailID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputeSSS", IsComposable=true)]
+		public System.Nullable<double> ComputeSSS([global::System.Data.Linq.Mapping.ParameterAttribute(Name="MonthlySalary", DbType="Float")] System.Nullable<double> monthlySalary, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AverageWorkDaysAMonth", DbType="Float")] System.Nullable<double> averageWorkDaysAMonth, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalDays", DbType="Float")] System.Nullable<double> totalDays)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), monthlySalary, averageWorkDaysAMonth, totalDays).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputeTax", IsComposable=true)]
+		public System.Nullable<double> ComputeTax([global::System.Data.Linq.Mapping.ParameterAttribute(Name="DeductedMonthlySalary", DbType="Float")] System.Nullable<double> deductedMonthlySalary, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AverageWorkDaysAMonth", DbType="Float")] System.Nullable<double> averageWorkDaysAMonth, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="TotalDays", DbType="Float")] System.Nullable<double> totalDays)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), deductedMonthlySalary, averageWorkDaysAMonth, totalDays).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.computeTermsRemaining", IsComposable=true)]
+		public System.Nullable<int> computeTermsRemaining([global::System.Data.Linq.Mapping.ParameterAttribute(Name="LoanID", DbType="Int")] System.Nullable<int> loanID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Terms", DbType="Int")] System.Nullable<int> terms)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), loanID, terms).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputeTotalContributions", IsComposable=true)]
+		public System.Nullable<double> ComputeTotalContributions([global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollDetailID", DbType="Int")] System.Nullable<int> payrollDetailID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollID", DbType="Int")] System.Nullable<int> payrollID)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), employeeID, payrollDetailID, payrollID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputeTotalDeductions", IsComposable=true)]
+		public System.Nullable<double> ComputeTotalDeductions([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollDetailID", DbType="Int")] System.Nullable<int> payrollDetailID)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), payrollDetailID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputeTotalOverTimeHours", IsComposable=true)]
+		public System.Nullable<double> ComputeTotalOverTimeHours([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollDetailID", DbType="Float")] System.Nullable<double> payrollDetailID)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), payrollDetailID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ComputeTotalRegularHours", IsComposable=true)]
+		public System.Nullable<double> ComputeTotalRegularHours([global::System.Data.Linq.Mapping.ParameterAttribute(Name="PayrollDetailID", DbType="Float")] System.Nullable<double> payrollDetailID)
+		{
+			return ((System.Nullable<double>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), payrollDetailID).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getFormattedEmpID", IsComposable=true)]
+		public string getFormattedEmpID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="EmployeeID", DbType="Int")] System.Nullable<int> employeeID)
+		{
+			return ((string)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), employeeID).ReturnValue));
 		}
 	}
 	
@@ -1890,7 +2021,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MiddleName", DbType="VarChar(50)")]
 		public string MiddleName
 		{
 			get
@@ -4419,6 +4550,116 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
 		{
 			this.SendPropertyChanging();
 			entity.PayrollGroup = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TaxRate")]
+	public partial class TaxRate : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TaxRateID;
+		
+		private string _Name;
+		
+		private System.Nullable<double> _PercentRate;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTaxRateIDChanging(int value);
+    partial void OnTaxRateIDChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnPercentRateChanging(System.Nullable<double> value);
+    partial void OnPercentRateChanged();
+    #endregion
+		
+		public TaxRate()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TaxRateID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int TaxRateID
+		{
+			get
+			{
+				return this._TaxRateID;
+			}
+			set
+			{
+				if ((this._TaxRateID != value))
+				{
+					this.OnTaxRateIDChanging(value);
+					this.SendPropertyChanging();
+					this._TaxRateID = value;
+					this.SendPropertyChanged("TaxRateID");
+					this.OnTaxRateIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="VarChar(50)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PercentRate", DbType="Float")]
+		public System.Nullable<double> PercentRate
+		{
+			get
+			{
+				return this._PercentRate;
+			}
+			set
+			{
+				if ((this._PercentRate != value))
+				{
+					this.OnPercentRateChanging(value);
+					this.SendPropertyChanging();
+					this._PercentRate = value;
+					this.SendPropertyChanged("PercentRate");
+					this.OnPercentRateChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

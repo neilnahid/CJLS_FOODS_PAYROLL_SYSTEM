@@ -44,8 +44,6 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
             FilteredEmployees = new ObservableCollection<Employee>((from e in Helper.db.Employees select e).ToList());
             Page = 0;
             Employees = new ObservableCollection<Employee>(FilteredEmployees.Skip(Page*10).Take(10));
-            if(Employees.Count>0)
-            Employee = Employees[0];
         }
         #endregion
         #region methods/functions

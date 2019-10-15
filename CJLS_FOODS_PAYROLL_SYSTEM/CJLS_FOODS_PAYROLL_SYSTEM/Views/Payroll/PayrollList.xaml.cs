@@ -13,7 +13,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView
 {
     /// <summary>
@@ -31,7 +30,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView
 
         private void Btn_OpenDialogCreate_Click(object sender, RoutedEventArgs e)
         {
-            VM.Payroll = new Payroll() { StartDate = VM.Payroll.LatestEndDate, EndDate = VM.Payroll.LatestEndDate };
+            VM.Payroll = new CJLS_FOODS_PAYROLL_SYSTEM.Payroll() { StartDate = VM.Payroll.LatestEndDate, EndDate = VM.Payroll.LatestEndDate };
             DialogHeader.Text = "Create New Payroll";
             btn_dialogConfirm.Content = "CREATE";
         }
@@ -45,14 +44,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView
             Helper.db.Refresh(System.Data.Linq.RefreshMode.OverwriteCurrentValues, VM.Payroll);
             Helper.Title.Text = "Payroll Details";
             NavigationService.Navigate(new Views.PayrollView.PayrollDetails(VM.Payroll));
-            VM.Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
+            VM.Payroll = new CJLS_FOODS_PAYROLL_SYSTEM.Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
         }
 
         private void Btn_viewPayroll_Click(object sender, RoutedEventArgs e)
         {
             Helper.Title.Text = "Payroll Details";
             NavigationService.Navigate(new Views.PayrollView.PayrollDetails(VM.Payroll));
-            VM.Payroll = new Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
+            VM.Payroll = new CJLS_FOODS_PAYROLL_SYSTEM.Payroll() { StartDate = DateTime.Now, EndDate = DateTime.Now };
         }
 
         private void btn_deletePayroll_Click(object sender, RoutedEventArgs e)
@@ -95,10 +94,10 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView
             VM.Page = 0;
             string search = VM.Search.ToLower();
             if (!String.IsNullOrEmpty(search))
-                VM.FilteredResult = new ObservableCollection<Payroll>((from b in Helper.db.Payrolls where String.Format("MM/dd/yyyy", b.StartDate).Contains(search) || String.Format("MM/dd/yyyy", b.EndDate).Contains(search) || b.PayrollGroup.Name.Contains(search) || b.PayrollID.ToString().Contains(search) select b).ToList().Skip(VM.Page * 5).Take(5));
+                VM.FilteredResult = new ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Payroll>((from b in Helper.db.Payrolls where String.Format("MM/dd/yyyy", b.StartDate).Contains(search) || String.Format("MM/dd/yyyy", b.EndDate).Contains(search) || b.PayrollGroup.Name.Contains(search) || b.PayrollID.ToString().Contains(search) select b).ToList().Skip(VM.Page * 5).Take(5));
             else
                 VM.FilteredResult = VM.FetchPayrollList();
-            VM.Payrolls = new ObservableCollection<Payroll>(VM.FilteredResult.Skip(VM.Page * 5).Take(5));
+            VM.Payrolls = new ObservableCollection<CJLS_FOODS_PAYROLL_SYSTEM.Payroll>(VM.FilteredResult.Skip(VM.Page * 5).Take(5));
         }
 
         private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)

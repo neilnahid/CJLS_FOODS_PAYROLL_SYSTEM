@@ -333,7 +333,7 @@
                                 AutoGenerateColumns="False"
                                 CanUserResizeColumns="False"
                                 IsReadOnly="True"
-                                ItemsSource="{Binding Employees, Mode=OneWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
+                                ItemsSource="{Binding Employees, Mode=TwoWay, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
                                 SelectedItem="{Binding Employee, Mode=TwoWay}"
                                 SelectionMode="Single"
                                 SelectionUnit="FullRow">
