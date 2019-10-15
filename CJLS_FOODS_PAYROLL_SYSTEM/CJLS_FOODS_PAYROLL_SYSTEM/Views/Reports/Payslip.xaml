@@ -13,13 +13,13 @@
     Loaded="Window_Loaded"
     mc:Ignorable="d">
     <Grid>
-        <FlowDocumentPageViewer>
+        <FlowDocumentReader ViewingMode="Scroll">
             <FlowDocument
                 x:Name="fd_Payslip"
-                ColumnWidth="8.5in"
+                ColumnWidth="8.2in"
                 PageHeight="11in"
                 PageWidth="8.5in" />
-        </FlowDocumentPageViewer>
+        </FlowDocumentReader>
         <Button VerticalAlignment="Bottom" Click="btn_printPayslip_Click">Print</Button>
         <!--  Code below is merely used as templates for the flowdocumentReader above  -->
         <FlowDocumentReader Visibility="Collapsed">
@@ -38,7 +38,7 @@
                                 <Run Text="Date Printed: " />
                                 <Run Text="{Binding DateNow, StringFormat=d}" />
                             </TextBlock>
-                            <TextBlock> 
+                            <TextBlock>
                                 <Run Text="Printed By: " />
                                 <Run Text="{Binding User.Employee.FullName}" />
                             </TextBlock>
