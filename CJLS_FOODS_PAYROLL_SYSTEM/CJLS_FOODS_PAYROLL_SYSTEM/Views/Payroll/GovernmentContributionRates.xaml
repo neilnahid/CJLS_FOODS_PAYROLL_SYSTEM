@@ -12,23 +12,48 @@
     DataContext="{StaticResource GovernContributionRatesViewModel}"
     mc:Ignorable="d">
     <StackPanel>
-        <DataGrid
-            AutoGenerateColumns="False"
-            CanUserAddRows="False"
-            CanUserDeleteRows="False"
-            ColumnWidth="1*"
-            ItemsSource="{Binding ContributionTypes}">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                    Binding="{Binding Name}"
-                    Header="Name"
-                    IsReadOnly="True" />
-                <DataGridTextColumn
-                    Binding="{Binding PercentageRate}"
-                    Header="PercentageRate"
-                    IsReadOnly="False" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Click="Button_Click">Update Values</Button>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <DataGrid
+                Grid.Column="0"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                ColumnWidth="1*"
+                ItemsSource="{Binding ContributionTypes}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Binding="{Binding Name}"
+                        Header="Name"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Binding="{Binding PercentageRate}"
+                        Header="PercentageRate"
+                        IsReadOnly="False" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid
+                Grid.Column="1"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                ColumnWidth="1*"
+                ItemsSource="{Binding TaxRates}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Binding="{Binding Name}"
+                        Header="Name"
+                        IsReadOnly="True" />
+                    <DataGridTextColumn
+                        Binding="{Binding PercentRate}"
+                        Header="Percentage Rate"
+                        IsReadOnly="False" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Button Click="Button_Click" Content="Update" />
     </StackPanel>
 </Page>

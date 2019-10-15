@@ -26,12 +26,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Payroll
             InitializeComponent();
             VM = (View_Models.GovernContributionRatesViewModel)DataContext;
             VM.Instantiate();
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             VM.Update();
+            MessageBox.Show("Successfully updated.");
         }
     }
 }
