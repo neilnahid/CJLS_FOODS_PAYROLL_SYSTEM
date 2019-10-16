@@ -51,7 +51,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                         }
                         if (PayrollGroup != null)
                         {
-                            if ((EndDate - StartDate).TotalDays > PayrollGroup.NumberOfDays)
+                            if ((EndDate - StartDate).TotalDays+1 > PayrollGroup.NumberOfDays)
                                 result = $"Payroll Range exceeds the payroll group's days coverage which is {PayrollGroup.NumberOfDays}";
                         }
                         break;
@@ -63,7 +63,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                         }
                         if (PayrollGroup != null)
                         {
-                            if ((EndDate - StartDate).TotalDays > PayrollGroup.NumberOfDays)
+                            if ((EndDate - StartDate).TotalDays+1 > PayrollGroup.NumberOfDays)
                                 result = $"Payroll Range exceeds the payroll group's days coverage which is {PayrollGroup.NumberOfDays}";
                         }
                         break;

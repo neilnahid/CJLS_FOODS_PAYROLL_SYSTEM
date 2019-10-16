@@ -28,9 +28,11 @@
                     Text="{Binding Branch.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
                 <StackPanel />
                 <CheckBox
+                    x:Name="checkbox_isactive"
                     Content="IsActive"
                     FontSize="24"
                     IsChecked="{Binding Branch.IsActive, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    IsEnabled="{Binding Branch.CanSetInactive, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                     Style="{StaticResource MaterialDesignCheckBox}" />
                 <!--  SP for buttons  -->
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">

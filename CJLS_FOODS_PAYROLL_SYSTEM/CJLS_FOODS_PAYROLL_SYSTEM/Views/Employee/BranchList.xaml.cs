@@ -38,7 +38,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
 
         private void btn_createNewBranch_Click(object sender, RoutedEventArgs e)
         {
-            VM.Branch = new Branch();
+            VM.Branch = new Branch() { IsActive = true };
             DialogHeader.Text = "Create New Branch";
             btn_dialogConfirm.Content = "CREATE";
         }
@@ -50,7 +50,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
                 case "UPDATE": Helper.db.SubmitChanges(); MessageBox.Show("Successfully Updated Branch"); break;
                 case "CREATE":
                     var result = VM.AddBranch(VM.Branch);
-                    if (String.IsNullOrEmpty(result)) 
+                    if (String.IsNullOrEmpty(result))
                         MessageBox.Show("Successfully Added Branch");
                     else
                     {

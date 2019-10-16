@@ -35,13 +35,13 @@
                     Margin="0,0,15,0"
                     materialDesign:HintAssist.Hint="Leave Date"
                     SelectedDate="{Binding Leave.LeaveDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
-                <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                    <Label Content="Paid_Leave" />
-                    <CheckBox IsChecked="{Binding Leave.IsPaidLeave}" />
-                </StackPanel>
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                    ToolTip="{Binding Leave.ErrorCollection[LeaveDate]}" />
                 <!--  SP for buttons  -->
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <StackPanel
+                    Margin="0,25,0,0"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
                     <Button
                         x:Name="btn_dialogConfirm"
                         Click="btn_dialogConfirm_Click"

@@ -12,6 +12,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
         public bool IsValidationPassed { get; set; }
         public string Error { get { return null; } }
         public Employee CurrentEmployee { get; set; }
+
         public Dictionary<string, string> ErrorCollection { get; set; } = new Dictionary<string, string>();
         public string this[string name] {
             get {
@@ -21,12 +22,14 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                     case "Terms":
                         if (!(Terms > 0))
                             result = "Terms must be greater than 0.";
+                        if (Terms != 1 && LoanType == "Cash Advance")
+                            result = "Cash advances can only be set 1 term";
                         break;
                     case "Amount":
                         if (Employee != null)
                         {
-                            if (Amount > Employee.MonthlySalary)
-                                result = $"Amount cannot be greater than Employee's monthly salary({Employee.MonthlySalary}).";
+                            if (Amount > ((Employee.MonthlySalary / 30 * Employee.PayrollGroup.NumberOfDays) / 2))
+                                result = $"Amount must not exceed half the average payroll of employee ({((Employee.MonthlySalary / 30 * Employee.PayrollGroup.NumberOfDays) / 2)})";
                         }
                         if (!(Amount > 0))
                             result = "Amount must be greater than zero,";
@@ -57,6 +60,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                     ErrorCollection.Add(name, result);
                 IsValidationPassed = ErrorCollection.Count > 0 ? false : true;
                 SendPropertyChanged("ErrorCollection");
+                if (name == "LoanType")
+                    SendPropertyChanged("Terms");
                 SendPropertyChanged("IsValidationPassed");
                 return result;
             }

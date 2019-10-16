@@ -28,7 +28,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 
         public List<Employee> GetEmployees()
         {
-            return (from e in Helper.db.Employees where e.EmployeeType.Name == "Payroll Officer" && e.Status == "Active" && e.Users.Count == 0 select e).ToList();
+            return (from e in Helper.db.Employees where e.EmployeeType.Name == "Payroll Officer" || e.EmployeeType.Name == "Administrator" && e.Status == "Active" && e.Users.Count == 0 select e).ToList();
         }
         public List<User> GetAllUsers()
         {
@@ -36,6 +36,8 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         }
         public void AddNewUser()
         {
+            if (User.Employee.EmployeeType.Name == "Administrator")
+                User.UserType = "Owner";
             Helper.db.Users.InsertOnSubmit(User);
             Users.Add(User);
             Helper.db.SubmitChanges();

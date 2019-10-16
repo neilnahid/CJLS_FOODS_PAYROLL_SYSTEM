@@ -47,7 +47,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Employee
         private void Btn_createNewLeave_Click(object sender, RoutedEventArgs e)
         {
             cbLeave.IsEnabled = true;
-            VM.Leave = new CJLS_FOODS_PAYROLL_SYSTEM.Leave() { LeaveDate = DateTime.Now };
+            VM.Leave = new CJLS_FOODS_PAYROLL_SYSTEM.Leave() { LeaveDate = DateTime.Now, IsPaidLeave = true };
             DialogHeader.Text = "Create New Leave";
             btn_dialogConfirm.Content = "CREATE";
         }

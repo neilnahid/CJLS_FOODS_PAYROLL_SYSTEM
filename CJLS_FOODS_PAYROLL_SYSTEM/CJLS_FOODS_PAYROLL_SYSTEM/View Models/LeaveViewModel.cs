@@ -29,24 +29,12 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
 
         public void CreateNewLeave()
         {
-            try
-            {
-                if ((from l in Helper.db.Leaves where l.LeaveDate == Leave.LeaveDate && Leave.EmployeeID == l.EmployeeID select l).Count() > 0)
-                    MessageBox.Show("leave date already exists for this employee");
-                else
-                {
-                    Helper.db.Leaves.InsertOnSubmit(Leave);
-                    Leaves.Add(Leave);
-                    Helper.db.SubmitChanges();
-                    Helper.db = new DatabaseDataContext();
-                    Leaves = GetLeaves();
-                }
+            Helper.db.Leaves.InsertOnSubmit(Leave); 
+            Leave.Employee.AvailableLeaves--;
+            Helper.db.SubmitChanges();
+            Helper.db = new DatabaseDataContext();
+            Instantiate();
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
         public void UpdateLeave()
         {

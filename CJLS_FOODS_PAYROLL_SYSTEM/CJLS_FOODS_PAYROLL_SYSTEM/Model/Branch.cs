@@ -7,10 +7,10 @@ using System.ComponentModel;
 
 namespace CJLS_FOODS_PAYROLL_SYSTEM
 {
-    public partial class Branch : IDataErrorInfo
+    public partial class Branch : IDataErrorInfo, INotifyPropertyChanged
     {
         public bool IsValidationPassed { get; set; }
-
+        public bool CanSetInactive { get { return (Employees.Count > 0 && BranchID != 0) || BranchID == 0 ? false : true; } }
         public Dictionary<string, string> ErrorCollection { get; set; } = new Dictionary<string, string>();
         public string this[string name] {
             get {

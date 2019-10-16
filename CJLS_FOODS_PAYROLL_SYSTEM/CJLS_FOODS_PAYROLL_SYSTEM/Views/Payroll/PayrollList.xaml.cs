@@ -78,7 +78,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.PayrollView
                     VM.Payroll.StartDate = DateTime.Now;
                 else
                     VM.Payroll.StartDate = VM.Payroll.LatestEndDate;
-                VM.Payroll.EndDate = VM.Payroll.StartDate.AddDays(VM.Payroll.PayrollGroup.NumberOfDays);
+                VM.Payroll.EndDate = VM.Payroll.StartDate.AddDays(VM.Payroll.PayrollGroup.NumberOfDays-1);
             }
         }
         private void btn_previousPage_Click(object sender, RoutedEventArgs e)

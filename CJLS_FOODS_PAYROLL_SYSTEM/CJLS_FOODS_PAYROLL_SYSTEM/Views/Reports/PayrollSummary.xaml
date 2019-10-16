@@ -56,13 +56,14 @@
                                 VerticalAlignment="Center"
                                 AutoGenerateColumns="False"
                                 IsReadOnly="True"
-                                ItemsSource="{Binding Payroll.PayrollDetails}"
+                                ItemsSource="{Binding OrderedList}"
                                 SelectionChanged="DataGrid_SelectionChanged">
                                 <DataGrid.Columns>
+                                    <DataGridTextColumn Binding="{Binding Employee.Branch.Name}" Header="Branch" />
                                     <DataGridTemplateColumn Width="180" Header="Name">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock><Run Text="{Binding Employee.LastName}" /><Run Text=" " /><Run Text=" " /><Run Text=" " /><Run Text="{Binding Employee.FirstName}" /></TextBlock>
+                                                <TextBlock><Run Text="{Binding Employee.FullName}" /></TextBlock>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -80,6 +81,14 @@
                             <TextBlock Margin="0,100,130,0" HorizontalAlignment="Right">
                                 <Run Text="Total GrossPay: " />
                                 <Run Text="{Binding TotalGrossPay}" />
+                            </TextBlock>
+                            <TextBlock Margin="0,0,130,0" HorizontalAlignment="Right">
+                                <Run Text="Total Deductions: " />
+                                <Run Text="{Binding TotalDeductions}" />
+                            </TextBlock>
+                            <TextBlock Margin="0,0,130,0" HorizontalAlignment="Right">
+                                <Run Text="Total Netpay: " />
+                                <Run Text="{Binding TotalNetPay}" />
                             </TextBlock>
                         </StackPanel>
                     </BlockUIContainer>

@@ -111,8 +111,9 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(VM.User.Employee != null)
-            VM.User.Username = VM.User.Employee.FullName.ToLower().Replace(' ','_');
+            if (VM.User.Employee != null && VM.User != null)
+                VM.User.Username = (VM.User.Employee.FirstName.ToLower() + "_" + (String.IsNullOrWhiteSpace(VM.User.Employee.MiddleName) ? "" : VM.User.Employee.MiddleName + "_") + VM.User.Employee.LastName).ToLower().Replace(' ', '_');
+
         }
     }
 }

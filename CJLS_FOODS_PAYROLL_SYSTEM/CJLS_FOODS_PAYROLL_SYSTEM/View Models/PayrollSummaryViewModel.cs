@@ -17,13 +17,19 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.View_Models
         public Payroll Payroll { get; set; }
         public DateTime DateNow { get; set; } = DateTime.Now;
         public double? TotalGrossPay { get; set; }
+        public double? TotalDeductions { get; set; }
+        public double? TotalNetPay { get; set; }
+        public List<PayrollDetail> OrderedList { get; set; }
         public User User { get; set; } = Helper.User;
         public event PropertyChangedEventHandler PropertyChanged;
         public void Initialize(int PayrollID)
         {
             Helper.db = new DatabaseDataContext();
             Payroll = (from p in Helper.db.Payrolls where p.PayrollID == PayrollID select p).First();
+            OrderedList = Payroll.PayrollDetails.OrderBy(p => p.Employee.Branch.Name).ThenBy(p => p.Employee.FullName).ToList();
             TotalGrossPay = Payroll.PayrollDetails.Sum(pd => pd.GrossPay);
+            TotalDeductions = Payroll.PayrollDetails.Sum(pd => pd.TotalDeductions);
+            TotalNetPay = Payroll.PayrollDetails.Sum(pd => pd.NetPay);
         }
         public void Print(FlowDocument fd)
         {
