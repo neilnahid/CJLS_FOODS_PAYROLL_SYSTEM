@@ -122,7 +122,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views
             {
                 draweHost.IsLeftDrawerOpen = false;
                 Frame.Content = new Views.Payroll.GovernmentContributionRates();
-                Title.Text = "Contributions";
+                Title.Text = "Government Contribution Rates";
             }
             else if (tvi.Header.ToString() == "Logout")
             {

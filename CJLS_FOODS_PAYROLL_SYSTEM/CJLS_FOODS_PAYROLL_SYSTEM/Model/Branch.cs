@@ -20,7 +20,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                     case "Name":
                         if (String.IsNullOrEmpty(Name))
                             result = "Field must not be empty";
-                        else if (BranchID != 0)
+                        else if (BranchID == 0)
                         {
                             if ((from b in Helper.db.Branches where b.Name == Name select b).Count() > 0)
                                 result = "branch name already exists in database";

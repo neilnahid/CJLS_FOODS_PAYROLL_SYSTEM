@@ -112,7 +112,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM.Views.Accounts
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(VM.User.Employee != null)
-            VM.User.Username = VM.User.Employee.FullName.ToLower().Replace(' ','_'); 
+            VM.User.Username = VM.User.Employee.FullName.ToLower().Replace(' ','_');
         }
     }
 }

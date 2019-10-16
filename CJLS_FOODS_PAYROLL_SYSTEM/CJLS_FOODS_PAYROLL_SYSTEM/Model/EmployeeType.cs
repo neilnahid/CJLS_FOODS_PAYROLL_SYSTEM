@@ -20,7 +20,7 @@ namespace CJLS_FOODS_PAYROLL_SYSTEM
                     case "Name":
                         if (String.IsNullOrEmpty(Name))
                             result = "Field must not be empty";
-                        else if (EmployeeTypeID != 0)
+                        else if (EmployeeTypeID == 0)
                         {
                             if ((from b in Helper.db.EmployeeTypes where b.Name == Name select b).Count() > 0)
                                 result = "job position already exists in database";
