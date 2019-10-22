@@ -337,6 +337,18 @@
                                 SelectedItem="{Binding Employee, Mode=TwoWay}"
                                 SelectionMode="Single"
                                 SelectionUnit="FullRow">
+                                <DataGrid.RowStyle>
+                                    <Style TargetType="DataGridRow">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Status}" Value="Active">
+                                                <Setter Property="Background" Value="Red" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding State}" Value="State2">
+                                                <Setter Property="Background" Value="Green" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.RowStyle>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn
                                         Binding="{Binding Emp_ID}"
